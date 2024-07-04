@@ -1,4 +1,5 @@
 ﻿<UserControl
+    Padding="-30"
     x:Class="Hollow.Views.Pages.Home"
     x:DataType="pages:HomeViewModel"
     xmlns="https://github.com/avaloniaui"

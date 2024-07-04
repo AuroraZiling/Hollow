@@ -8,6 +8,7 @@ using Avalonia.Platform;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Hollow.Core.MiHoYoLauncher.Models;
+using Hollow.Helpers;
 using Hollow.Services.MiHoYoLauncherService;
 using Hollow.Services.NavigationService;
 
@@ -43,11 +44,8 @@ public partial class MainWindowViewModel : ViewModelBase
         _navigationService.CurrentViewChanged += OnNavigating;
         
         // Load game icon
-        GameIcon = new Bitmap(AssetLoader.Open(new Uri("avares://Hollow/Assets/ZZZ_Logo.jpg")));
-        using var memory = new MemoryStream();
-        GameIcon.Save(memory, 100);
-        memory.Position = 0;
-        GameIcon = Bitmap.DecodeToHeight(memory, 100, BitmapInterpolationMode.HighQuality);
+        GameIcon = BitmapOperations.Decode(new Bitmap(AssetLoader.Open(new Uri("avares://Hollow/Assets/ZZZ_Logo.jpg"))),
+            100);
 
         _ = LoadOnlineResources();
     }
@@ -74,9 +72,5 @@ public partial class MainWindowViewModel : ViewModelBase
     }
     
     [RelayCommand]
-    private void Navigate(string destination)
-    {
-        _navigationService.Navigate(destination);
-        OnNavigating();
-    }
+    private void Navigate(string destination) => _navigationService.Navigate(destination);
 }

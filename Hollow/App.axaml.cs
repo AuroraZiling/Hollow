@@ -5,6 +5,7 @@ using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using Hollow.Services.ConfigurationService;
+using Hollow.Services.GameService;
 using Hollow.Services.MiHoYoLauncherService;
 using Hollow.Services.NavigationService;
 using Hollow.ViewModels;
@@ -54,19 +55,12 @@ public partial class App : Application
         services.AddSingleton<INavigationService, NavigationService>();
         services.AddSingleton<IMiHoYoLauncherService, MiHoYoLauncherService>();
         services.AddSingleton<IConfigurationService, ConfigurationService>();
+        services.AddSingleton<IGameService, GameService>();
 
         return services.BuildServiceProvider();
     }
     
     public static T GetService<T>() where T : notnull => _provider!.GetRequiredService<T>();
-
-    public static T GetPage<T>() where T: notnull
-    {
-        var page = _provider!.GetRequiredService<T>();
-        if (page is ViewModelBase vm)
-            vm.Navigated();
-        return page;
-    }
 
     public override void OnFrameworkInitializationCompleted()
     {

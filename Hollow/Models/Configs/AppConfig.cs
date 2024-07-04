@@ -19,8 +19,8 @@ public class AppConfig
 
 public class GameConfig
 {
-    [JsonPropertyName("path")]
-    public string Path { get; set; } = "";
+    [JsonPropertyName("directory")]
+    public string Directory { get; set; } = "";
     
     [JsonPropertyName("arguments")]
     public string Arguments { get; set; } = "";

@@ -1,6 +1,10 @@
-﻿namespace Hollow.ViewModels.Pages;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 
-public class SignalSearchViewModel: ViewModelBase
+namespace Hollow.ViewModels.Pages;
+
+public class SignalSearchViewModel: ViewModelBase, IViewModelBase
 {
-    
+    public void Navigated()
+    {
+    }
 }

@@ -1,0 +1,33 @@
+<ResourceDictionary
+    xmlns="https://github.com/avaloniaui"
+    xmlns:controls="clr-namespace:Hollow.Controls"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ControlTheme TargetType="controls:HollowHost" x:Key="HollowHostTheme">
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Panel>
+                    <Panel Name="PART_ContentContainer">
+                        <ContentPresenter Content="{TemplateBinding Content}" />
+                    </Panel>
+
+                    <ItemsControl
+                        HorizontalAlignment="Stretch"
+                        ItemsSource="{TemplateBinding ToastsCollection}"
+                        Margin="5,5"
+                        Name="PART_ToastPresenter"
+                        VerticalAlignment="Bottom">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <DockPanel LastChildFill="True" VerticalAlignment="Bottom" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+                </Panel>
+            </ControlTemplate>
+        </Setter>
+    </ControlTheme>
+    <ControlTheme
+        BasedOn="{StaticResource HollowHostTheme}"
+        TargetType="controls:HollowHost"
+        x:Key="{x:Type controls:HollowHost}" />
+</ResourceDictionary>

@@ -14,117 +14,124 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:acrylic="clr-namespace:Hollow.Controls.Acrylic"
     xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
+    xmlns:controls="clr-namespace:Hollow.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:markupExtensions="clr-namespace:FluentIcons.Avalonia.MarkupExtensions;assembly=FluentIcons.Avalonia"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:Hollow.ViewModels"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <Panel>
-        <Image
-            IsHitTestVisible="False"
-            Stretch="UniformToFill"
-            asyncImageLoader:ImageLoader.Source="{Binding BackgroundUrl}" />
-        <!--  <Image  -->
-        <!--  Effect="{Binding BackgroundImageEffect}"  -->
-        <!--  IsHitTestVisible="False"  -->
-        <!--  Stretch="UniformToFill"  -->
-        <!--  asyncImageLoader:ImageLoader.Source="{Binding BackgroundUrl}" />  -->
+    <VisualLayerManager IsHitTestVisible="True" Name="PART_VisualLayerManager">
+        <VisualLayerManager.ChromeOverlayLayer>
+            <controls:HollowHost />
+        </VisualLayerManager.ChromeOverlayLayer>
+        <Panel>
+            <Image
+                IsHitTestVisible="False"
+                Stretch="UniformToFill"
+                asyncImageLoader:ImageLoader.Source="{Binding BackgroundUrl}" />
+            <!--  <Image  -->
+            <!--  Effect="{Binding BackgroundImageEffect}"  -->
+            <!--  IsHitTestVisible="False"  -->
+            <!--  Stretch="UniformToFill"  -->
+            <!--  asyncImageLoader:ImageLoader.Source="{Binding BackgroundUrl}" />  -->
 
-        <!--  Navigation View  -->
-        <Grid ColumnDefinitions="70, *">
-            <acrylic:Acrylic
-                Blur="{Binding Blur}"
-                Grid.Column="0"
-                Grid.ColumnSpan="2"
-                Opacity="{Binding CoverageOpacity}">
-                <acrylic:Acrylic.Transitions>
-                    <Transitions>
-                        <IntegerTransition Duration="0:0:0.125" Property="Blur" />
-                    </Transitions>
-                </acrylic:Acrylic.Transitions>
-            </acrylic:Acrylic>
-            <Panel Grid.Column="0">
-                <Panel.Styles>
-                    <Style Selector="RadioButton">
-                        <Setter Property="Command" Value="{Binding NavigateCommand}" />
-                        <Setter Property="GroupName" Value="NavigationViewButtons" />
-                    </Style>
-                </Panel.Styles>
-                <acrylic:Acrylic Blur="20" Opacity="{Binding NavigationOpacity}">
+            <!--  Navigation View  -->
+            <Grid ColumnDefinitions="70, *">
+                <acrylic:Acrylic
+                    Blur="{Binding Blur}"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Opacity="{Binding CoverageOpacity}">
                     <acrylic:Acrylic.Transitions>
                         <Transitions>
                             <IntegerTransition Duration="0:0:0.125" Property="Blur" />
                         </Transitions>
                     </acrylic:Acrylic.Transitions>
                 </acrylic:Acrylic>
-                <StackPanel Margin="10" Spacing="10">
+                <Panel Grid.Column="0">
+                    <Panel.Styles>
+                        <Style Selector="RadioButton">
+                            <Setter Property="Command" Value="{Binding NavigateCommand}" />
+                            <Setter Property="GroupName" Value="NavigationViewButtons" />
+                        </Style>
+                    </Panel.Styles>
+                    <acrylic:Acrylic Blur="20" Opacity="{Binding NavigationOpacity}">
+                        <acrylic:Acrylic.Transitions>
+                            <Transitions>
+                                <IntegerTransition Duration="0:0:0.125" Property="Blur" />
+                            </Transitions>
+                        </acrylic:Acrylic.Transitions>
+                    </acrylic:Acrylic>
+                    <StackPanel Margin="10,12,10,0" Spacing="12">
+                        <RadioButton
+                            Classes="GameIcon"
+                            CommandParameter="Home"
+                            HorizontalAlignment="Center"
+                            IsChecked="{Binding DisplayHome}">
+                            <Image Source="{Binding GameIcon}" Stretch="UniformToFill" />
+                        </RadioButton>
+                        <RadioButton
+                            BorderBrush="{StaticResource ZzzPrimaryColorBrush}"
+                            Classes="Navigation"
+                            CommandParameter="GameSettings"
+                            Content="{markupExtensions:SymbolIcon Symbol=Games,
+                                                                  FontSize=35}"
+                            IsChecked="{Binding DisplayGameSettings}" />
+                        <RadioButton
+                            BorderBrush="{StaticResource ZzzSecondaryColorBrush}"
+                            Classes="Navigation"
+                            CommandParameter="SignalSearch"
+                            Content="{markupExtensions:SymbolIcon Symbol=DataPie,
+                                                                  FontSize=35}"
+                            IsChecked="{Binding DisplaySignalSearch}" />
+                        <RadioButton
+                            BorderBrush="MediumPurple"
+                            Classes="Navigation"
+                            CommandParameter="Screenshots"
+                            Content="{markupExtensions:SymbolIcon Symbol=Screenshot,
+                                                                  FontSize=35}"
+                            IsChecked="{Binding DisplayScreenshots}" />
+                    </StackPanel>
+
                     <RadioButton
-                        Classes="GameIcon"
-                        CommandParameter="Home"
-                        IsChecked="{Binding DisplayHome}">
-                        <Image Source="{Binding GameIcon}" Stretch="UniformToFill" />
-                    </RadioButton>
-                    <RadioButton
-                        BorderBrush="{StaticResource ZzzPrimaryColor}"
+                        BorderBrush="White"
                         Classes="Navigation"
-                        CommandParameter="GameSettings"
-                        Content="{markupExtensions:SymbolIcon Symbol=Games,
+                        CommandParameter="Settings"
+                        Content="{markupExtensions:SymbolIcon Symbol=Settings,
                                                               FontSize=35}"
-                        IsChecked="{Binding DisplayGameSettings}" />
-                    <RadioButton
-                        BorderBrush="{StaticResource ZzzSecondaryColor}"
-                        Classes="Navigation"
-                        CommandParameter="SignalSearch"
-                        Content="{markupExtensions:SymbolIcon Symbol=DataPie,
-                                                              FontSize=35}"
-                        IsChecked="{Binding DisplaySignalSearch}" />
-                    <RadioButton
-                        BorderBrush="MediumPurple"
-                        Classes="Navigation"
-                        CommandParameter="Screenshots"
-                        Content="{markupExtensions:SymbolIcon Symbol=Screenshot,
-                                                              FontSize=35}"
-                        IsChecked="{Binding DisplayScreenshots}" />
-                </StackPanel>
+                        IsChecked="{Binding DisplaySettings}"
+                        Margin="10"
+                        VerticalAlignment="Bottom" />
+                </Panel>
 
-                <RadioButton
-                    BorderBrush="White"
-                    Classes="Navigation"
-                    CommandParameter="Settings"
-                    Content="{markupExtensions:SymbolIcon Symbol=Settings,
-                                                          FontSize=35}"
-                    IsChecked="{Binding DisplaySettings}"
-                    Margin="10"
-                    VerticalAlignment="Bottom" />
-            </Panel>
-
-            <!--  Page  -->
-            <TransitioningContentControl
-                Content="{Binding CurrentView}"
-                Grid.Column="1"
-                Margin="30" />
-        </Grid>
+                <!--  Page  -->
+                <TransitioningContentControl
+                    Content="{Binding CurrentView}"
+                    Grid.Column="1"
+                    Margin="30" />
+            </Grid>
 
 
-        <!--  Window Title - Decorations  -->
-        <StackPanel
-            HorizontalAlignment="Right"
-            Margin="0,7,15,0"
-            Orientation="Horizontal"
-            Spacing="12"
-            VerticalAlignment="Top">
-            <Button
-                Classes="Icon"
-                Click="MinimizeButton_OnClick"
-                Content="{markupExtensions:SymbolIcon Symbol=ArrowMinimize,
-                                                      FontSize=22}" />
-            <Button
-                Classes="Icon"
-                Click="CloseButton_OnClick"
-                Content="{markupExtensions:SymbolIcon Symbol=Dismiss,
-                                                      FontSize=22}" />
-        </StackPanel>
+            <!--  Window Title - Decorations  -->
+            <StackPanel
+                HorizontalAlignment="Right"
+                Margin="0,7,15,0"
+                Orientation="Horizontal"
+                Spacing="12"
+                VerticalAlignment="Top">
+                <Button
+                    Classes="Icon"
+                    Click="MinimizeButton_OnClick"
+                    Content="{markupExtensions:SymbolIcon Symbol=ArrowMinimize,
+                                                          FontSize=22}" />
+                <Button
+                    Classes="Icon"
+                    Click="CloseButton_OnClick"
+                    Content="{markupExtensions:SymbolIcon Symbol=Dismiss,
+                                                          FontSize=22}" />
+            </StackPanel>
 
-    </Panel>
+        </Panel>
+    </VisualLayerManager>
 </Window>

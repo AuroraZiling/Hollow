@@ -17,6 +17,8 @@
 
                 <ResourceInclude Source="Controls/StartGameButton.axaml" />
                 <ResourceInclude Source="Controls/Acrylic/Acrylic.axaml" />
+                <ResourceInclude Source="Controls/HollowHost.axaml" />
+                <ResourceInclude Source="Controls/Toast/Toast.axaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
 

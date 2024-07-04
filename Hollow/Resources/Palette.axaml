@@ -7,9 +7,22 @@
         Color="Black"
         Opacity="0.2"
         x:Key="CoverageBackground" />
+    <SolidColorBrush
+        Color="Black"
+        Opacity="0.8"
+        x:Key="ToastBackground" />
+    <SolidColorBrush
+        Color="White"
+        Opacity="0.9"
+        x:Key="ToastTextForeground" />
 
-    <SolidColorBrush Color="#FFDB29" x:Key="ZzzPrimaryColor" />
-    <SolidColorBrush Color="#B0D700" x:Key="ZzzSecondaryColor" />
-    <SolidColorBrush Color="#92B900" x:Key="ZzzSecondaryDarkColor" />
-    <SolidColorBrush Color="#171717" x:Key="ZzzBlackColor" />
+    <Color x:Key="ZzzPrimaryColor">#FFDB29</Color>
+    <Color x:Key="ZzzSecondaryColor">#B0D700</Color>
+    <Color x:Key="ZzzSecondaryDarkColor">#92B900</Color>
+    <Color x:Key="ZzzBlackColor">#171717</Color>
+
+    <SolidColorBrush Color="{StaticResource ZzzPrimaryColor}" x:Key="ZzzPrimaryColorBrush" />
+    <SolidColorBrush Color="{StaticResource ZzzSecondaryColor}" x:Key="ZzzSecondaryColorBrush" />
+    <SolidColorBrush Color="{StaticResource ZzzSecondaryDarkColor}" x:Key="ZzzSecondaryDarkColorBrush" />
+    <SolidColorBrush Color="{StaticResource ZzzBlackColor}" x:Key="ZzzBlackColorBrush" />
 </ResourceDictionary>

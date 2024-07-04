@@ -9,10 +9,11 @@ using Hollow.Core.MiHoYoLauncher.Models;
 using Hollow.Helpers;
 using Hollow.Models.Pages.Home;
 using Hollow.Services.MiHoYoLauncherService;
+using Hollow.Services.NavigationService;
 
 namespace Hollow.ViewModels.Pages;
 
-public partial class HomeViewModel: ViewModelBase
+public partial class HomeViewModel: ViewModelBase, IViewModelBase
 {
     [ObservableProperty] private ObservableCollection<BannerModel> _banners = [];
     [ObservableProperty] private ObservableCollection<ZzzGameContentDataContentPost> _activities = [];
@@ -26,6 +27,7 @@ public partial class HomeViewModel: ViewModelBase
     {
         _miHoYoLauncherService = miHoYoLauncherService;
         _httpClient = httpClient;
+        
         _ = LoadContents();
     }
     
@@ -50,7 +52,7 @@ public partial class HomeViewModel: ViewModelBase
         foreach (var banner in banners)
         {
             using var stream = await _httpClient.GetAsync(banner.Image.Url);
-            Banners.Add(new BannerModel {Link = banner.Image.Link, Image = StreamToBitmap.Convert(await stream.Content.ReadAsStreamAsync(), 320)});
+            Banners.Add(new BannerModel {Link = banner.Image.Link, Image = BitmapOperations.Convert(await stream.Content.ReadAsStreamAsync(), 320)});
         }
         
         // Posts
@@ -73,5 +75,9 @@ public partial class HomeViewModel: ViewModelBase
                     break;
             }
         }
+    }
+
+    public void Navigated()
+    {
     }
 }

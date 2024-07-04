@@ -1,5 +1,4 @@
 ﻿<UserControl
-    Padding="25"
     x:Class="Hollow.Views.Pages.GameSettings"
     x:DataType="pages:GameSettingsViewModel"
     xmlns="https://github.com/avaloniaui"
@@ -8,5 +7,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Panel>
         <TextBlock Classes="PageTitle" Text="{I18N {x:Static languages:LangKeys.GameSettings_Title}}" />
+        <StackPanel>
+            <Button Command="{Binding ChangeLanguageCommand}">A</Button>
+        </StackPanel>
     </Panel>
 </UserControl>

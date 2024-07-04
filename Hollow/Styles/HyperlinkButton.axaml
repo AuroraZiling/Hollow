@@ -1,6 +1,6 @@
 ﻿<Styles xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Style Selector="HyperlinkButton.Default">
-        <Setter Property="Foreground" Value="{StaticResource ZzzSecondaryDarkColor}" />
+        <Setter Property="Foreground" Value="{StaticResource ZzzSecondaryDarkColorBrush}" />
         <Setter Property="TextBlock.TextDecorations" Value="" />
         <Setter Property="Template">
             <ControlTemplate>
@@ -22,7 +22,7 @@
         </Setter>
 
         <Style Selector="^:pointerover">
-            <Setter Property="Foreground" Value="{StaticResource ZzzSecondaryColor}" />
+            <Setter Property="Foreground" Value="{StaticResource ZzzSecondaryColorBrush}" />
         </Style>
 
 

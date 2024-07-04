@@ -22,13 +22,13 @@
                     Margin="0,0,30,50"
                     Padding="0"
                     VerticalAlignment="Bottom">
-                    <Border Background="{StaticResource ZzzPrimaryColor}" CornerRadius="7">
+                    <Border Background="{StaticResource ZzzPrimaryColorBrush}" CornerRadius="7">
                         <Panel Margin="20,10,30,10">
                             <StackPanel Orientation="Horizontal" Spacing="15">
                                 <Panel>
                                     <avalonia:SymbolIcon
                                         FontSize="48"
-                                        Foreground="{StaticResource ZzzBlackColor}"
+                                        Foreground="{StaticResource ZzzBlackColorBrush}"
                                         Height="40"
                                         Name="PART_DefaultIcon"
                                         Symbol="PlayCircleHint">
@@ -44,7 +44,7 @@
                                     </avalonia:SymbolIcon>
                                     <avalonia:SymbolIcon
                                         FontSize="48"
-                                        Foreground="{StaticResource ZzzBlackColor}"
+                                        Foreground="{StaticResource ZzzBlackColorBrush}"
                                         Height="40"
                                         Name="PART_HoveredIcon"
                                         Opacity="0"
@@ -64,7 +64,7 @@
                                     <TextBlock
                                         FontSize="26"
                                         FontWeight="Heavy"
-                                        Foreground="{StaticResource ZzzBlackColor}"
+                                        Foreground="{StaticResource ZzzBlackColorBrush}"
                                         Name="PART_Title"
                                         Text="{TemplateBinding Title}">
                                         <TextBlock.Transitions>
@@ -78,7 +78,7 @@
                                     </TextBlock>
                                     <TextBlock
                                         FontSize="16"
-                                        Foreground="{StaticResource ZzzBlackColor}"
+                                        Foreground="{StaticResource ZzzBlackColorBrush}"
                                         Margin="0,-3,0,0"
                                         Name="PART_Message"
                                         Text="{TemplateBinding Message}">
@@ -107,11 +107,11 @@
         </Setter>
 
         <Style Selector="^ /template/ Border:pointerover">
-            <Setter Property="Background" Value="{StaticResource ZzzSecondaryColor}" />
+            <Setter Property="Background" Value="{StaticResource ZzzSecondaryColorBrush}" />
         </Style>
 
         <Style Selector="^ /template/ Button:pressed Border">
-            <Setter Property="Background" Value="{StaticResource ZzzSecondaryDarkColor}" />
+            <Setter Property="Background" Value="{StaticResource ZzzSecondaryDarkColorBrush}" />
         </Style>
 
         <Style Selector="^[IsEnabled=False] /template/ Button Border">

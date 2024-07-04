@@ -1,5 +1,4 @@
 ﻿<UserControl
-    Padding="25"
     x:Class="Hollow.Views.Pages.Screenshots"
     xmlns="https://github.com/avaloniaui"
     xmlns:languages="clr-namespace:Hollow.Languages"

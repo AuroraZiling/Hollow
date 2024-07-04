@@ -23,7 +23,7 @@
     </Application.Resources>
 
     <Application.Styles>
-        <SimpleTheme />
+        <FluentTheme DensityStyle="Normal" />
         <avalonia:MaterialIconStyles />
 
         <StyleInclude Source="Styles/Button.axaml" />

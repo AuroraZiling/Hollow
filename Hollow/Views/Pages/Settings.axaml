@@ -12,6 +12,12 @@
         <ScrollViewer Grid.Column="0">
             <StackPanel>
                 <TextBlock Classes="PageTitle" Text="{I18N {x:Static languages:LangKeys.Settings_Title}}" />
+                <TextBlock Classes="PageSubtitle" Text="语言" />
+                <ComboBox>
+                    <ComboBoxItem>
+                        <TextBlock>aaa</TextBlock>
+                    </ComboBoxItem>
+                </ComboBox>
             </StackPanel>
         </ScrollViewer>
         <Border

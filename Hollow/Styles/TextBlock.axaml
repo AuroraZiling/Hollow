@@ -7,4 +7,9 @@
         <Setter Property="Margin" Value="0, 0, 0, 30" />
         <Setter Property="FontFamily" Value="{StaticResource MediumFont}" />
     </Style>
+    <Style Selector="TextBlock.PageSubtitle">
+        <Setter Property="FontSize" Value="26" />
+        <Setter Property="Margin" Value="0, 0, 0, 10" />
+        <Setter Property="FontFamily" Value="{StaticResource MediumFont}" />
+    </Style>
 </Styles>

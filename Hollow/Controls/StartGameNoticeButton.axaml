@@ -1,0 +1,81 @@
+﻿<ResourceDictionary
+    xmlns="https://github.com/avaloniaui"
+    xmlns:avalonia="clr-namespace:FluentIcons.Avalonia;assembly=FluentIcons.Avalonia"
+    xmlns:controls="clr-namespace:Hollow.Controls"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Design.PreviewWith>
+        <controls:StartGameNoticeButton
+            FontFamily="avares://Hollow/Assets/Fonts#MiSans"
+            Message="aaa"
+            Title="启动游戏" />
+
+    </Design.PreviewWith>
+    <ControlTheme TargetType="controls:StartGameNoticeButton" x:Key="StartGameNoticeButtonStyle">
+        <Setter Property="Width" Value="200" />
+        <Setter Property="Height" Value="70" />
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border
+                    ClipToBounds="True"
+                    CornerRadius="20"
+                    Padding="7">
+                    <Border.Background>
+                        <SolidColorBrush Color="Red" Opacity="0.7" />
+                    </Border.Background>
+                    <Panel>
+                        <TextBlock
+                            FontSize="18"
+                            HorizontalAlignment="Center"
+                            Name="PART_Title"
+                            Text="{TemplateBinding Title}">
+                            <TextBlock.Transitions>
+                                <Transitions>
+                                    <TransformOperationsTransition
+                                        Duration="0:0:0.2"
+                                        Easing="CubicEaseInOut"
+                                        Property="RenderTransform" />
+                                </Transitions>
+                            </TextBlock.Transitions>
+                        </TextBlock>
+                        <Button
+                            Command="{TemplateBinding Command}"
+                            Height="35"
+                            HorizontalAlignment="Stretch"
+                            Margin="-8"
+                            Name="PART_PopUpButton"
+                            VerticalAlignment="Bottom">
+                            <Button.Transitions>
+                                <Transitions>
+                                    <TransformOperationsTransition
+                                        Duration="0:0:0.2"
+                                        Easing="CubicEaseInOut"
+                                        Property="RenderTransform" />
+                                </Transitions>
+                            </Button.Transitions>
+                            <TextBlock
+                                HorizontalAlignment="Center"
+                                Margin="0,3,0,0"
+                                Text="{TemplateBinding Message}" />
+                        </Button>
+                    </Panel>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+
+        <Style Selector="^ /template/ Border:pointerover avalonia|SymbolIcon#PART_HoveredIcon">
+            <Setter Property="Opacity" Value="1" />
+        </Style>
+
+        <Style Selector="^ /template/ Border:pointerover TextBlock#PART_Title">
+            <Setter Property="RenderTransform" Value="translateY(34px)" />
+        </Style>
+
+        <Style Selector="^ /template/ Border:pointerover Button#PART_PopUpButton">
+            <Setter Property="RenderTransform" Value="translateY(-37px)" />
+        </Style>
+    </ControlTheme>
+    <ControlTheme
+        BasedOn="{StaticResource StartGameNoticeButtonStyle}"
+        TargetType="controls:StartGameNoticeButton"
+        x:Key="{x:Type controls:StartGameNoticeButton}" />
+</ResourceDictionary>

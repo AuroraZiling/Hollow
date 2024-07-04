@@ -18,10 +18,8 @@
                     BorderThickness="0"
                     Command="{TemplateBinding Command}"
                     CornerRadius="10"
-                    HorizontalAlignment="Right"
-                    Margin="0,0,30,50"
-                    Padding="0"
-                    VerticalAlignment="Bottom">
+                    Focusable="{TemplateBinding IsEnabled}"
+                    Padding="0">
                     <Border Background="{StaticResource ZzzPrimaryColorBrush}" CornerRadius="7">
                         <Panel Margin="20,10,30,10">
                             <StackPanel Orientation="Horizontal" Spacing="15">

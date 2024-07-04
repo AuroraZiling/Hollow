@@ -21,7 +21,7 @@
     xmlns:vm="using:Hollow.ViewModels"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <VisualLayerManager IsHitTestVisible="True" Name="PART_VisualLayerManager">
+    <VisualLayerManager>
         <VisualLayerManager.ChromeOverlayLayer>
             <controls:HollowHost />
         </VisualLayerManager.ChromeOverlayLayer>
@@ -30,12 +30,6 @@
                 IsHitTestVisible="False"
                 Stretch="UniformToFill"
                 asyncImageLoader:ImageLoader.Source="{Binding BackgroundUrl}" />
-            <!--  <Image  -->
-            <!--  Effect="{Binding BackgroundImageEffect}"  -->
-            <!--  IsHitTestVisible="False"  -->
-            <!--  Stretch="UniformToFill"  -->
-            <!--  asyncImageLoader:ImageLoader.Source="{Binding BackgroundUrl}" />  -->
-
             <!--  Navigation View  -->
             <Grid ColumnDefinitions="70, *">
                 <acrylic:Acrylic

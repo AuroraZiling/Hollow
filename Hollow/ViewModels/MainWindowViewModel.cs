@@ -20,6 +20,7 @@ public partial class MainWindowViewModel : ViewModelBase
     private UserControl _currentView;
 
     [ObservableProperty] private bool _displayHome = true;
+    [ObservableProperty] private bool _displayAnnouncements;
     [ObservableProperty] private bool _displayGameSettings;
     [ObservableProperty] private bool _displaySignalSearch;
     [ObservableProperty] private bool _displayScreenshots;
@@ -61,6 +62,7 @@ public partial class MainWindowViewModel : ViewModelBase
     {
         CurrentView = _navigationService.CurrentView;
         DisplayHome = _navigationService.CurrentViewName == "Home";
+        DisplayAnnouncements = _navigationService.CurrentViewName == "Announcements";
         DisplayGameSettings = _navigationService.CurrentViewName == "GameSettings";
         DisplaySignalSearch = _navigationService.CurrentViewName == "SignalSearch";
         DisplayScreenshots = _navigationService.CurrentViewName == "Screenshots";

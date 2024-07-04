@@ -34,7 +34,6 @@
                     Spacing="7">
                     <TextBlock Text="参数" VerticalAlignment="Center" />
                     <TextBox
-                        Focusable="True"
                         MaxWidth="400"
                         MinWidth="350"
                         Name="GameArgumentsTextBox"
@@ -64,6 +63,16 @@
                         </EventTriggerBehavior>
                     </Interaction.Behaviors>
                 </ComboBox>
+
+                <!--  Folders  -->
+                <TextBlock
+                    Classes="PageSubtitle"
+                    Margin="0,30,0,10"
+                    Text="文件管理" />
+                <StackPanel Spacing="5">
+                    <Button Command="{Binding OpenAppDirectoryCommand}" Content="App 文件夹" />
+                    <Button Command="{Binding OpenLogDirectoryCommand}" Content="日志文件夹" />
+                </StackPanel>
             </StackPanel>
         </ScrollViewer>
         <Border

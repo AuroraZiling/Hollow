@@ -72,6 +72,13 @@
                             <Image Source="{Binding GameIcon}" Stretch="UniformToFill" />
                         </RadioButton>
                         <RadioButton
+                            BorderBrush="IndianRed"
+                            Classes="Navigation"
+                            CommandParameter="Announcements"
+                            Content="{markupExtensions:SymbolIcon Symbol=Megaphone,
+                                                                  FontSize=35}"
+                            IsChecked="{Binding DisplayAnnouncements}" />
+                        <RadioButton
                             BorderBrush="{StaticResource ZzzPrimaryColorBrush}"
                             Classes="Navigation"
                             CommandParameter="GameSettings"

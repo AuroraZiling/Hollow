@@ -11,6 +11,9 @@ public class ConfigurationService: IConfigurationService
     
     public static AppConfig LoadConfiguration()
     {
+        Directory.CreateDirectory(AppInfo.CrushesDir);
+        Directory.CreateDirectory(AppInfo.LogDir);
+        Directory.CreateDirectory(AppInfo.CachesDir);
         if (!File.Exists(AppInfo.ConfigPath))
         {
             File.WriteAllText(AppInfo.ConfigPath, JsonSerializer.Serialize(new AppConfig(), new JsonSerializerOptions { WriteIndented = true }));

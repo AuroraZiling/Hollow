@@ -15,6 +15,7 @@ using HarfBuzzSharp;
 using Hollow.Controls;
 using Hollow.Helpers;
 using Hollow.Languages;
+using Hollow.Models;
 using Hollow.Services.ConfigurationService;
 using Hollow.Services.GameService;
 using Hollow.Services.NavigationService;
@@ -106,6 +107,28 @@ public partial class SettingsViewModel : ViewModelBase, IViewModelBase
         I18NExtension.Culture = language != "Auto" ? new CultureInfo(language) : CultureInfo.CurrentCulture;
         _configurationService.AppConfig.Language = Language != "Auto" ? GetLanguage.LanguageList[Language] : "Auto";
         _configurationService.Save();
+    }
+
+    #endregion
+
+    #region File Management
+
+    [RelayCommand]
+    private void OpenAppDirectory()
+    {
+        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+        {
+            StorageHelper.OpenFolderInExplorer(Environment.CurrentDirectory);
+        }
+    }
+    
+    [RelayCommand]
+    private void OpenLogDirectory()
+    {
+        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+        {
+            StorageHelper.OpenFolderInExplorer(AppInfo.LogDir);
+        }
     }
 
     #endregion

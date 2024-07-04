@@ -17,6 +17,7 @@ public class NavigationService: INavigationService
         CurrentView = destination switch
         {
             "Home" => App.GetService<Home>(),
+            "Announcements" => App.GetService<Announcements>(),
             "GameSettings" => App.GetService<GameSettings>(),
             "SignalSearch" => App.GetService<SignalSearch>(),
             "Screenshots" => App.GetService<Screenshots>(),

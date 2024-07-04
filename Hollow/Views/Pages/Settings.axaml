@@ -33,7 +33,18 @@
                     Orientation="Horizontal"
                     Spacing="7">
                     <TextBlock Text="参数" VerticalAlignment="Center" />
-                    <TextBox MaxWidth="400" MinWidth="350" />
+                    <TextBox
+                        Focusable="True"
+                        MaxWidth="400"
+                        MinWidth="350"
+                        Name="GameArgumentsTextBox"
+                        Text="{Binding GameArguments, Mode=TwoWay}">
+                        <Interaction.Behaviors>
+                            <EventTriggerBehavior EventName="TextChanged" SourceObject="GameArgumentsTextBox">
+                                <InvokeCommandAction Command="{Binding SaveGameArgumentsCommand}" />
+                            </EventTriggerBehavior>
+                        </Interaction.Behaviors>
+                    </TextBox>
                 </StackPanel>
 
                 <!--  Language  -->

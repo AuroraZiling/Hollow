@@ -85,6 +85,13 @@ public partial class SettingsViewModel : ViewModelBase, IViewModelBase
         }
     }
 
+    [RelayCommand]
+    private void SaveGameArguments()
+    {
+        _configurationService.AppConfig.Game.Arguments = GameArguments;
+        _configurationService.Save();
+    }
+
     #endregion
 
     #region Language

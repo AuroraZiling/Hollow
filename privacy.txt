@@ -1,0 +1,3 @@
+Hollow 的数据处理和存储为本地，不会收集任何用户数据
+
+Hollow's data is processed and stored locally and no user data is collected.

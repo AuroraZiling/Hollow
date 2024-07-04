@@ -6,6 +6,7 @@
             <ControlTemplate>
                 <StackPanel>
                     <TextBlock
+                        FontFamily="{StaticResource MediumFont}"
                         FontSize="18"
                         Foreground="{TemplateBinding Foreground}"
                         Text="{TemplateBinding Header}" />

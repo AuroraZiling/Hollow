@@ -8,7 +8,7 @@
     xmlns:languages="clr-namespace:Hollow.Languages"
     xmlns:pages="clr-namespace:Hollow.ViewModels.Pages"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <Grid ColumnDefinitions="*, 0.35*">
+    <Grid ColumnDefinitions="*, 270">
         <ScrollViewer Grid.Column="0">
             <StackPanel>
                 <TextBlock Classes="PageTitle" Text="{I18N {x:Static languages:LangKeys.Settings_Title}}" />
@@ -18,17 +18,35 @@
             CornerRadius="10"
             Grid.Column="1"
             Padding="10">
-            <StackPanel Spacing="5">
-
+            <StackPanel Spacing="7">
                 <Image
                     Height="160"
                     Source="avares://Hollow/Assets/Icons/logo.png"
                     Width="160" />
-                <TextBlock HorizontalAlignment="Right" Text="当前版本: Alpha" />
-                <TextBlock
-                    FontSize="14"
-                    HorizontalAlignment="Right"
-                    Text="@2024 AuroraZiling. All Rights Reserved." />
+                <Border
+                    Background="{StaticResource CoverageBackground}"
+                    CornerRadius="10"
+                    Padding="12">
+                    <StackPanel Spacing="5">
+                        <TextBlock HorizontalAlignment="Right" Text="当前版本: Alpha" />
+                        <TextBlock HorizontalAlignment="Right" Text="Copyright (c) 2024 Mccree Lee" />
+                        <HyperlinkButton
+                            Classes="Default"
+                            Content="Github Repo"
+                            HorizontalAlignment="Right"
+                            NavigateUri="https://github.com/AuroraZiling/Hollow" />
+                        <HyperlinkButton
+                            Classes="Default"
+                            Content="Issue Report"
+                            HorizontalAlignment="Right"
+                            NavigateUri="https://github.com/AuroraZiling/Hollow/issues" />
+                        <HyperlinkButton
+                            Classes="Default"
+                            Content="Privacy Policy"
+                            HorizontalAlignment="Right"
+                            NavigateUri="https://github.com/AuroraZiling/Hollow/privacy.txt" />
+                    </StackPanel>
+                </Border>
             </StackPanel>
         </Border>
     </Grid>

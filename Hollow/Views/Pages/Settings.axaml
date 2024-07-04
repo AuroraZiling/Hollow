@@ -4,7 +4,6 @@
     x:Class="Hollow.Views.Pages.Settings"
     x:DataType="pages:SettingsViewModel"
     xmlns="https://github.com/avaloniaui"
-    xmlns:controls="clr-namespace:Hollow.Controls"
     xmlns:languages="clr-namespace:Hollow.Languages"
     xmlns:pages="clr-namespace:Hollow.ViewModels.Pages"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
@@ -13,10 +12,17 @@
             <StackPanel>
                 <TextBlock Classes="PageTitle" Text="{I18N {x:Static languages:LangKeys.Settings_Title}}" />
                 <TextBlock Classes="PageSubtitle" Text="语言" />
-                <ComboBox>
-                    <ComboBoxItem>
-                        <TextBlock>aaa</TextBlock>
-                    </ComboBoxItem>
+                <ComboBox
+                    Focusable="False"
+                    ItemsSource="{Binding Languages}"
+                    SelectedItem="{Binding Language, Mode=TwoWay}"
+                    Width="200"
+                    x:Name="LanguageComboBox">
+                    <Interaction.Behaviors>
+                        <EventTriggerBehavior EventName="SelectionChanged" SourceObject="LanguageComboBox">
+                            <InvokeCommandAction Command="{Binding ChangeLanguageCommand}" />
+                        </EventTriggerBehavior>
+                    </Interaction.Behaviors>
                 </ComboBox>
             </StackPanel>
         </ScrollViewer>

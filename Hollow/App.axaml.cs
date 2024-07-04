@@ -60,6 +60,14 @@ public partial class App : Application
     
     public static T GetService<T>() where T : notnull => _provider!.GetRequiredService<T>();
 
+    public static T GetPage<T>() where T: notnull
+    {
+        var page = _provider!.GetRequiredService<T>();
+        if (page is ViewModelBase vm)
+            vm.Navigated();
+        return page;
+    }
+
     public override void OnFrameworkInitializationCompleted()
     {
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)

@@ -13,8 +13,8 @@
     x:DataType="vm:MainWindowViewModel"
     xmlns="https://github.com/avaloniaui"
     xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
-    xmlns:avalonia="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:markupExtensions="clr-namespace:FluentIcons.Avalonia.MarkupExtensions;assembly=FluentIcons.Avalonia"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:Hollow.ViewModels"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
@@ -53,22 +53,22 @@
                         BorderBrush="{StaticResource ZzzPrimaryColor}"
                         Classes="Navigation"
                         CommandParameter="GameSettings"
-                        Content="{avalonia:MaterialIconExt Kind=GamepadVariantOutline,
-                                                           Size=35}"
+                        Content="{markupExtensions:SymbolIcon Symbol=Games,
+                                                              FontSize=35}"
                         IsChecked="{Binding DisplayGameSettings}" />
                     <RadioButton
                         BorderBrush="{StaticResource ZzzSecondaryColor}"
                         Classes="Navigation"
                         CommandParameter="SignalSearch"
-                        Content="{avalonia:MaterialIconExt Kind=Poll,
-                                                           Size=35}"
+                        Content="{markupExtensions:SymbolIcon Symbol=DataPie,
+                                                              FontSize=35}"
                         IsChecked="{Binding DisplaySignalSearch}" />
                     <RadioButton
                         BorderBrush="MediumPurple"
                         Classes="Navigation"
                         CommandParameter="Screenshots"
-                        Content="{avalonia:MaterialIconExt Kind=ImageOutline,
-                                                           Size=35}"
+                        Content="{markupExtensions:SymbolIcon Symbol=Screenshot,
+                                                              FontSize=35}"
                         IsChecked="{Binding DisplayScreenshots}" />
                 </StackPanel>
 
@@ -76,8 +76,8 @@
                     BorderBrush="White"
                     Classes="Navigation"
                     CommandParameter="Settings"
-                    Content="{avalonia:MaterialIconExt Kind=Settings,
-                                                       Size=35}"
+                    Content="{markupExtensions:SymbolIcon Symbol=Settings,
+                                                          FontSize=35}"
                     IsChecked="{Binding DisplaySettings}"
                     Margin="10"
                     VerticalAlignment="Bottom" />
@@ -116,13 +116,13 @@
             <Button
                 Classes="Icon"
                 Click="MinimizeButton_OnClick"
-                Content="{avalonia:MaterialIconExt Kind=Minus,
-                                                   Size=22}" />
+                Content="{markupExtensions:SymbolIcon Symbol=ArrowMinimize,
+                                                      FontSize=22}" />
             <Button
                 Classes="Icon"
                 Click="CloseButton_OnClick"
-                Content="{avalonia:MaterialIconExt Kind=Close,
-                                                   Size=20}" />
+                Content="{markupExtensions:SymbolIcon Symbol=Dismiss,
+                                                      FontSize=22}" />
         </StackPanel>
 
     </Panel>

@@ -1,6 +1,6 @@
 ﻿<ResourceDictionary
     xmlns="https://github.com/avaloniaui"
-    xmlns:avalonia="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+    xmlns:avalonia="clr-namespace:FluentIcons.Avalonia;assembly=FluentIcons.Avalonia"
     xmlns:controls="clr-namespace:Hollow.Controls"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Design.PreviewWith>
@@ -25,20 +25,41 @@
                     <Border Background="{StaticResource ZzzPrimaryColor}" CornerRadius="7">
                         <Panel Margin="20,10,30,10">
                             <StackPanel Orientation="Horizontal" Spacing="15">
-                                <avalonia:MaterialIcon
-                                    Foreground="{StaticResource ZzzBlackColor}"
-                                    Height="48"
-                                    Kind="Gamepad"
-                                    Width="48">
-                                    <avalonia:MaterialIcon.Transitions>
-                                        <Transitions>
-                                            <TransformOperationsTransition
-                                                Duration="0:0:0.2"
-                                                Easing="SineEaseInOut"
-                                                Property="RenderTransform" />
-                                        </Transitions>
-                                    </avalonia:MaterialIcon.Transitions>
-                                </avalonia:MaterialIcon>
+                                <Panel>
+                                    <avalonia:SymbolIcon
+                                        FontSize="48"
+                                        Foreground="{StaticResource ZzzBlackColor}"
+                                        Height="40"
+                                        Name="PART_DefaultIcon"
+                                        Symbol="PlayCircleHint">
+                                        <avalonia:SymbolIcon.Transitions>
+                                            <Transitions>
+                                                <TransformOperationsTransition
+                                                    Duration="0:0:0.2"
+                                                    Easing="SineEaseInOut"
+                                                    Property="RenderTransform" />
+                                                <DoubleTransition Duration="0:0:0.2" Property="Opacity" />
+                                            </Transitions>
+                                        </avalonia:SymbolIcon.Transitions>
+                                    </avalonia:SymbolIcon>
+                                    <avalonia:SymbolIcon
+                                        FontSize="48"
+                                        Foreground="{StaticResource ZzzBlackColor}"
+                                        Height="40"
+                                        Name="PART_HoveredIcon"
+                                        Opacity="0"
+                                        Symbol="PlayCircle">
+                                        <avalonia:SymbolIcon.Transitions>
+                                            <Transitions>
+                                                <TransformOperationsTransition
+                                                    Duration="0:0:0.2"
+                                                    Easing="SineEaseInOut"
+                                                    Property="RenderTransform" />
+                                            </Transitions>
+                                            <DoubleTransition Duration="0:0:0.2" Property="Opacity" />
+                                        </avalonia:SymbolIcon.Transitions>
+                                    </avalonia:SymbolIcon>
+                                </Panel>
                                 <StackPanel>
                                     <TextBlock
                                         FontSize="26"
@@ -102,10 +123,8 @@
                 <Setter Property="Opacity" Value="0" />
             </Style>
         </Style>
-
-        <Style Selector="^ /template/ Border:pointerover avalonia|MaterialIcon">
-            <Setter Property="RenderTransform" Value="rotate(90deg)" />
-            <Setter Property="Kind" Value="GamepadOutline" />
+        <Style Selector="^ /template/ Border:pointerover avalonia|SymbolIcon#PART_HoveredIcon">
+            <Setter Property="Opacity" Value="1" />
         </Style>
 
         <Style Selector="^ /template/ Border:pointerover TextBlock#PART_Title">

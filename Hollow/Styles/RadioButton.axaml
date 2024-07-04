@@ -1,15 +1,4 @@
-﻿<Styles
-    xmlns="https://github.com/avaloniaui"
-    xmlns:avalonia="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <Design.PreviewWith>
-        <Border Background="Black" Padding="20">
-            <StackPanel Orientation="Horizontal">
-                <RadioButton Classes="Navigation" Content="{avalonia:MaterialIconExt Kind=Abacus, Size=30}" />
-                <RadioButton Classes="Navigation" Content="{avalonia:MaterialIconExt Kind=Abacus, Size=30}" />
-            </StackPanel>
-        </Border>
-    </Design.PreviewWith>
+﻿<Styles xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <!--  Navigation  -->
     <Style Selector="RadioButton.Navigation">

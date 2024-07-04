@@ -2,9 +2,9 @@
     x:Class="Hollow.Views.Pages.Home"
     x:DataType="pages:HomeViewModel"
     xmlns="https://github.com/avaloniaui"
-    xmlns:avalonia="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
     xmlns:controls="clr-namespace:Hollow.Controls"
     xmlns:languages="clr-namespace:Hollow.Languages"
+    xmlns:markupExtensions="clr-namespace:FluentIcons.Avalonia.MarkupExtensions;assembly=FluentIcons.Avalonia"
     xmlns:models="clr-namespace:Hollow.Core.MiHoYoLauncher.Models;assembly=Hollow.Core"
     xmlns:pages="clr-namespace:Hollow.ViewModels.Pages"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
@@ -69,16 +69,16 @@
                         <Button
                             Classes="BannerSwitch"
                             Click="PreviousBanner"
-                            Content="{avalonia:MaterialIconExt Kind=ChevronLeft,
-                                                               Size=22}"
+                            Content="{markupExtensions:SymbolIcon Symbol=ChevronLeft,
+                                                                  FontSize=24}"
                             HorizontalAlignment="Left"
                             IsVisible="{Binding $parent[Panel].IsPointerOver}"
                             Margin="3,0,0,0" />
                         <Button
                             Classes="BannerSwitch"
                             Click="NextBanner"
-                            Content="{avalonia:MaterialIconExt Kind=ChevronRight,
-                                                               Size=22}"
+                            Content="{markupExtensions:SymbolIcon Symbol=ChevronRight,
+                                                                  FontSize=22}"
                             HorizontalAlignment="Right"
                             IsVisible="{Binding $parent[Panel].IsPointerOver}"
                             Margin="0,0,3,0" />

@@ -4,7 +4,7 @@ namespace Hollow.Services.ConfigurationService;
 
 public interface IConfigurationService
 {
-    public AppConfig? AppConfig { get; set; }
+    public AppConfig AppConfig { get; set; }
 
     public void Save();
 }

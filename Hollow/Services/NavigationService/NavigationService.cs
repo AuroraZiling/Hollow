@@ -16,11 +16,11 @@ public class NavigationService: INavigationService
     {
         CurrentView = destination switch
         {
-            "Home" => App.GetService<Home>(),
-            "GameSettings" => App.GetService<GameSettings>(),
-            "SignalSearch" => App.GetService<SignalSearch>(),
-            "Screenshots" => App.GetService<Screenshots>(),
-            "Settings" => App.GetService<Settings>(),
+            "Home" => App.GetPage<Home>(),
+            "GameSettings" => App.GetPage<GameSettings>(),
+            "SignalSearch" => App.GetPage<SignalSearch>(),
+            "Screenshots" => App.GetPage<Screenshots>(),
+            "Settings" => App.GetPage<Settings>(),
             _ => throw new ArgumentException("Invalid destination")
         };
         CurrentViewName = destination;

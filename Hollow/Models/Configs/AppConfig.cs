@@ -11,7 +11,7 @@ public class AppConfig
     public AfterExecutingConfig AfterExecuting { get; set; } = new();
     
     [JsonPropertyName("language")]
-    public string Language { get; set; } = "auto";
+    public string Language { get; set; } = "Auto";
     
     [JsonPropertyName("check_updates")]
     public bool CheckUpdates { get; set; }

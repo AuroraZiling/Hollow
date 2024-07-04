@@ -1,8 +1,8 @@
-﻿using Material.Icons;
+﻿using FluentIcons.Common;
 
 namespace Hollow.Models;
 
 public class NavigationViewItemModel
 {
-    MaterialIconKind Icon { get; set; }
+    Symbol Icon { get; set; }
 }

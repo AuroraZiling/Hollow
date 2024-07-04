@@ -4,4 +4,8 @@ namespace Hollow.ViewModels;
 
 public class ViewModelBase : ObservableObject
 {
+    public void Navigated()
+    {
+        
+    }
 }

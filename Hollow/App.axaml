@@ -2,7 +2,6 @@
     RequestedThemeVariant="Dark"
     x:Class="Hollow.App"
     xmlns="https://github.com/avaloniaui"
-    xmlns:avalonia="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
     xmlns:local="using:Hollow"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
@@ -24,7 +23,6 @@
 
     <Application.Styles>
         <FluentTheme DensityStyle="Normal" />
-        <avalonia:MaterialIconStyles />
 
         <StyleInclude Source="Styles/Button.axaml" />
         <StyleInclude Source="Styles/RadioButton.axaml" />

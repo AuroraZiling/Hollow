@@ -7,6 +7,7 @@
         <controls:StartGameButton
             FontFamily="avares://Hollow/Assets/Fonts#MiSans"
             Message="1.0.0"
+            StartingTitle="正在启动"
             Title="启动游戏" />
 
     </Design.PreviewWith>
@@ -59,21 +60,39 @@
                                     </avalonia:SymbolIcon>
                                 </Panel>
                                 <StackPanel>
-                                    <TextBlock
-                                        FontSize="26"
-                                        FontWeight="Heavy"
-                                        Foreground="{StaticResource ZzzBlackColorBrush}"
-                                        Name="PART_Title"
-                                        Text="{TemplateBinding Title}">
-                                        <TextBlock.Transitions>
-                                            <Transitions>
-                                                <TransformOperationsTransition
-                                                    Duration="0:0:0.2"
-                                                    Easing="CubicEaseInOut"
-                                                    Property="RenderTransform" />
-                                            </Transitions>
-                                        </TextBlock.Transitions>
-                                    </TextBlock>
+                                    <Panel>
+                                        <TextBlock
+                                            FontSize="26"
+                                            FontWeight="Heavy"
+                                            Foreground="{StaticResource ZzzBlackColorBrush}"
+                                            Name="PART_Title"
+                                            Text="{TemplateBinding Title}">
+                                            <TextBlock.Transitions>
+                                                <Transitions>
+                                                    <TransformOperationsTransition
+                                                        Duration="0:0:0.2"
+                                                        Easing="CubicEaseInOut"
+                                                        Property="RenderTransform" />
+                                                </Transitions>
+                                            </TextBlock.Transitions>
+                                        </TextBlock>
+                                        <TextBlock
+                                            FontSize="26"
+                                            FontWeight="Heavy"
+                                            Foreground="{StaticResource ZzzBlackColorBrush}"
+                                            IsVisible="{TemplateBinding GameStarting}"
+                                            Name="PART_StartingTitle"
+                                            Text="{TemplateBinding StartingTitle}">
+                                            <TextBlock.Transitions>
+                                                <Transitions>
+                                                    <TransformOperationsTransition
+                                                        Duration="0:0:0.2"
+                                                        Easing="CubicEaseInOut"
+                                                        Property="RenderTransform" />
+                                                </Transitions>
+                                            </TextBlock.Transitions>
+                                        </TextBlock>
+                                    </Panel>
                                     <TextBlock
                                         FontSize="16"
                                         Foreground="{StaticResource ZzzBlackColorBrush}"
@@ -112,9 +131,14 @@
             <Setter Property="Background" Value="{StaticResource ZzzSecondaryDarkColorBrush}" />
         </Style>
 
+        <Style Selector="^[GameStarting=True] /template/ Border TextBlock#PART_StartingTitle">
+            <Setter Property="RenderTransform" Value="translateY(9px) scale(1.1)" />
+
+        </Style>
+
         <Style Selector="^[IsEnabled=False] /template/ Button Border">
             <Setter Property="Background" Value="Gray" />
-            <Style Selector="^  TextBlock#PART_Title">
+            <Style Selector="^ TextBlock#PART_Title">
                 <Setter Property="RenderTransform" Value="translateY(9px) scale(1.1)" />
             </Style>
             <Style Selector="^ TextBlock#PART_Message">

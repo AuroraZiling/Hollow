@@ -35,6 +35,8 @@ public partial class MainWindowViewModel : ViewModelBase
     
     private readonly INavigationService _navigationService;
     private readonly IMiHoYoLauncherService _miHoYoLauncherService;
+    
+    public static Action? NavigatedToHome { get; set; }
 
     public MainWindowViewModel(INavigationService navigationService, IMiHoYoLauncherService miHoYoLauncherService)
     {
@@ -71,6 +73,9 @@ public partial class MainWindowViewModel : ViewModelBase
         Blur = DisplayHome ? 1 : 20;
         CoverageOpacity = DisplayHome ? 0 : 1;
         NavigationOpacity = DisplayHome ? 1 : 0;
+        
+        if (DisplayHome)
+            NavigatedToHome?.Invoke();
     }
     
     [RelayCommand]

@@ -28,23 +28,25 @@
     </UserControl.DataTemplates>
 
     <Panel>
-        <Panel
+        <StackPanel
             HorizontalAlignment="Right"
-            Margin="0,0,30,15"
+            Margin="0,0,30,50"
             VerticalAlignment="Bottom">
 
             <controls:StartGameNoticeButton
-                Margin="0,0,0,70"
-                Message="前往设置页面"
+                Command="{Binding NavigateToSettingsCommand}"
+                Message="前往设置"
+                Opacity="{Binding StartGameNoticeOpacity}"
                 Title="未检测到游戏" />
 
             <controls:StartGameButton
                 Command="{Binding StartGameCommand}"
-                IsEnabled="{Binding !IsGameRunning}"
-                Message="1.0.0"
+                GameStarting="{Binding IsGameStarting}"
+                IsEnabled="{Binding IsGameStartButtonEnabled}"
+                Message="{Binding GameVersion}"
                 Title="启动游戏" />
 
-        </Panel>
+        </StackPanel>
         <!--  Banner  -->
         <Border
             CornerRadius="10"

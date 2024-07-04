@@ -17,6 +17,24 @@ public class StartGameButton : ContentControl
         get => GetValue(TitleProperty);
         set => SetValue(TitleProperty, value);
     }
+    
+    public static readonly StyledProperty<string> StartingTitleProperty =
+        AvaloniaProperty.Register<StartGameButton, string>(nameof(StartingTitle), string.Empty);
+
+    public string StartingTitle
+    {
+        get => GetValue(StartingTitleProperty);
+        set => SetValue(StartingTitleProperty, value);
+    }
+    
+    public static readonly StyledProperty<bool> GameStartingProperty =
+        AvaloniaProperty.Register<StartGameButton, bool>(nameof(GameStarting));
+
+    public bool GameStarting
+    {
+        get => GetValue(GameStartingProperty);
+        set => SetValue(GameStartingProperty, value);
+    }
 
     public static readonly StyledProperty<string> MessageProperty =
         AvaloniaProperty.Register<StartGameButton, string>(nameof(Message), string.Empty);

@@ -19,6 +19,7 @@ using Hollow.Services.ConfigurationService;
 using Hollow.Services.GameService;
 using Hollow.Services.NavigationService;
 using Hollow.Views.Pages;
+using NotificationType = Hollow.Enums.NotificationType;
 
 namespace Hollow.ViewModels.Pages;
 
@@ -69,12 +70,15 @@ public partial class SettingsViewModel : ViewModelBase, IViewModelBase
             _configurationService.AppConfig.Game.Directory = GameDirectory;
             _configurationService.Save();
         }
+        else
+        {
+            await HollowHost.ShowToast("Invalid Game Directory", "Please select a valid game directory", NotificationType.Error);
+        }
     }
     
     [RelayCommand]
     private void OpenGameDirectory()
     {
-        HollowHost.ShowToast("Opening Game Directory", "Opening Game Directory in Explorer");
         if (!string.IsNullOrWhiteSpace(GameDirectory) && RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
         {
             StorageHelper.OpenFolderInExplorer(GameDirectory);

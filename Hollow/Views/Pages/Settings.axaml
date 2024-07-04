@@ -19,11 +19,12 @@
                         IsReadOnly="True"
                         MaxWidth="400"
                         MinWidth="350"
+                        Name="GamePathTextBox"
                         Text="{Binding GameDirectory}" />
                     <Button Command="{Binding BrowseGameDirectoryCommand}">
                         <avalonia:SymbolIcon FontSize="24" Symbol="FolderSearch" />
                     </Button>
-                    <Button Command="{Binding OpenGameDirectoryCommand}">
+                    <Button Command="{Binding OpenGameDirectoryCommand}" IsEnabled="{Binding ElementName=GamePathTextBox, Path=Text, Converter={x:Static StringConverters.IsNotNullOrEmpty}}">
                         <avalonia:SymbolIcon FontSize="24" Symbol="Open" />
                     </Button>
                 </StackPanel>

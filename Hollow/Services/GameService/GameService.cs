@@ -8,7 +8,7 @@ public class GameService: IGameService
     public static bool ValidateGameDirectory(string directoryPath)
     {
         var files = Directory.GetFiles(directoryPath);
-        if (files.All(file => file != "config.ini") || files.All(file => file != "ZenlessZoneZero.exe"))
+        if (files.All(file => !file.EndsWith("config.ini")) || files.All(file => !file.EndsWith("ZenlessZoneZero.exe")))
         {
             return false;
         }

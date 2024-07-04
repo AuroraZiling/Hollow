@@ -1,0 +1,63 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>net8.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
+        <ApplicationManifest>app.manifest</ApplicationManifest>
+        <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+        <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+        <TieredPGO>true</TieredPGO>
+        <TieredCompilationQuickJitForLoops>true</TieredCompilationQuickJitForLoops>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+        <DebugType>embedded</DebugType>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <DebugType>embedded</DebugType>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <AvaloniaResource Include="Assets\**"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Antelcat.I18N.Avalonia" Version="1.0.3" />
+        <PackageReference Include="AsyncImageLoader.Avalonia" Version="3.2.1" />
+        <PackageReference Include="Avalonia" Version="11.1.0-rc2" />
+        <PackageReference Include="Avalonia.Desktop" Version="11.1.0-rc2" />
+        <PackageReference Include="Avalonia.Fonts.Inter" Version="11.1.0-rc2" />
+        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.1.0-rc2" />
+        <PackageReference Include="Avalonia.Themes.Simple" Version="11.1.0-rc2" />
+        <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+        <PackageReference Include="Material.Icons.Avalonia" Version="2.1.10" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Update="Languages\Lang.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Lang.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Languages\Lang.zh-cn.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Lang.zh-cn.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Languages\Lang.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Lang.resx</DependentUpon>
+      </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Hollow.Core\Hollow.Core.csproj" />
+    </ItemGroup>
+</Project>

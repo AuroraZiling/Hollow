@@ -1,0 +1,109 @@
+﻿<UserControl
+    x:Class="Hollow.Views.Pages.Home"
+    x:DataType="pages:HomeViewModel"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:avalonia="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+    xmlns:controls="clr-namespace:Hollow.Controls"
+    xmlns:languages="clr-namespace:Hollow.Languages"
+    xmlns:models="clr-namespace:Hollow.Core.MiHoYoLauncher.Models;assembly=Hollow.Core"
+    xmlns:pages="clr-namespace:Hollow.ViewModels.Pages"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <UserControl.DataTemplates>
+        <!--  Banner Data Template  -->
+        <DataTemplate DataType="models:ZzzGameContentDataContentPost">
+            <Panel Margin="0,0,0,8">
+                <HyperlinkButton
+                    Classes="Banner"
+                    Content="{Binding Title}"
+                    HorizontalAlignment="Left"
+                    NavigateUri="{Binding Link}"
+                    Width="320" />
+                <TextBlock
+                    FontSize="15"
+                    HorizontalAlignment="Right"
+                    Text="{Binding Date}" />
+            </Panel>
+        </DataTemplate>
+    </UserControl.DataTemplates>
+
+    <Panel>
+        <controls:StartGameButton
+            Command="{Binding StartGameCommand}"
+            IsEnabled="{Binding !IsGameRunning}"
+            Message="1.0.0"
+            Title="启动游戏" />
+
+        <!--  Banner  -->
+        <Border
+            CornerRadius="10"
+            Height="320"
+            HorizontalAlignment="Left"
+            Margin="30,0,0,50"
+            VerticalAlignment="Bottom"
+            Width="400">
+            <Border.Background>
+                <SolidColorBrush Color="Black" Opacity="0.5" />
+            </Border.Background>
+            <Grid RowDefinitions="195, *">
+                <Border
+                    ClipToBounds="True"
+                    CornerRadius="10"
+                    Grid.Row="0"
+                    VerticalAlignment="Top">
+                    <Panel>
+                        <Carousel ItemsSource="{Binding Banners}" Name="Banners">
+                            <Carousel.PageTransition>
+                                <PageSlide Duration="0:0:0.3" Orientation="Horizontal" />
+                            </Carousel.PageTransition>
+                            <Carousel.ItemTemplate>
+                                <DataTemplate>
+                                    <HyperlinkButton
+                                        BorderThickness="0"
+                                        NavigateUri="{Binding Link}"
+                                        Padding="0">
+                                        <Image Source="{Binding Image}" />
+                                    </HyperlinkButton>
+                                </DataTemplate>
+                            </Carousel.ItemTemplate>
+                        </Carousel>
+                        <Button
+                            Classes="BannerSwitch"
+                            Click="PreviousBanner"
+                            Content="{avalonia:MaterialIconExt Kind=ChevronLeft,
+                                                               Size=22}"
+                            HorizontalAlignment="Left"
+                            IsVisible="{Binding $parent[Panel].IsPointerOver}"
+                            Margin="3,0,0,0" />
+                        <Button
+                            Classes="BannerSwitch"
+                            Click="NextBanner"
+                            Content="{avalonia:MaterialIconExt Kind=ChevronRight,
+                                                               Size=22}"
+                            HorizontalAlignment="Right"
+                            IsVisible="{Binding $parent[Panel].IsPointerOver}"
+                            Margin="0,0,3,0" />
+                    </Panel>
+                </Border>
+
+                <TabControl Grid.Row="1" Margin="12,0,0,0">
+                    <TabItem Classes="Banner" Header="{I18N {x:Static languages:LangKeys.Home_Banners_Activity_Title}}">
+                        <ScrollViewer Padding="0,5,10,0">
+                            <ItemsControl ItemsSource="{Binding Activities}" />
+                        </ScrollViewer>
+                    </TabItem>
+                    <TabItem Classes="Banner" Header="{I18N {x:Static languages:LangKeys.Home_Banners_Notice_Title}}">
+                        <ScrollViewer Padding="0,5,10,0">
+                            <ItemsControl ItemsSource="{Binding Notices}" />
+                        </ScrollViewer>
+                    </TabItem>
+                    <TabItem Classes="Banner" Header="{I18N {x:Static languages:LangKeys.Home_Banners_Info_Title}}">
+                        <ScrollViewer Padding="0,5,10,0">
+                            <ItemsControl ItemsSource="{Binding Info}" />
+                        </ScrollViewer>
+                    </TabItem>
+                </TabControl>
+            </Grid>
+
+        </Border>
+    </Panel>
+</UserControl>

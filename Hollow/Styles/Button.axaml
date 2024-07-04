@@ -1,0 +1,56 @@
+﻿<Styles xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Style Selector="Button.Icon">
+        <Setter Property="Background">
+            <SolidColorBrush Color="LightGray" Opacity="0" />
+        </Setter>
+        <Setter Property="CornerRadius" Value="5" />
+        <Setter Property="Height" Value="30" />
+        <Setter Property="Width" Value="30" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Transitions">
+            <Transitions>
+                <BrushTransition Duration="0:0:0.1" Property="Background" />
+            </Transitions>
+        </Setter>
+
+        <Style Selector="^:pointerover">
+            <Setter Property="Background">
+                <SolidColorBrush Color="LightGray" Opacity="0.4" />
+            </Setter>
+        </Style>
+
+        <Style Selector="^:pressed /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background">
+                <SolidColorBrush Color="LightGray" Opacity="0.5" />
+            </Setter>
+        </Style>
+    </Style>
+
+    <Style Selector="Button.BannerSwitch">
+        <Setter Property="Background">
+            <SolidColorBrush Color="Gray" Opacity="0.3" />
+        </Setter>
+        <Setter Property="CornerRadius" Value="5" />
+        <Setter Property="Height" Value="30" />
+        <Setter Property="Width" Value="30" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Transitions">
+            <Transitions>
+                <BrushTransition Duration="0:0:0.1" Property="Background" />
+            </Transitions>
+        </Setter>
+
+        <Style Selector="^:pointerover">
+            <Setter Property="Background">
+                <SolidColorBrush Color="Gray" Opacity="0.4" />
+            </Setter>
+        </Style>
+
+        <Style Selector="^:pressed /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background">
+                <SolidColorBrush Color="Gray" Opacity="0.5" />
+            </Setter>
+        </Style>
+    </Style>
+</Styles>

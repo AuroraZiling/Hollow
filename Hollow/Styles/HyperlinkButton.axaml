@@ -1,0 +1,28 @@
+﻿<Styles xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style Selector="HyperlinkButton.Banner">
+        <Setter Property="Foreground" Value="LightGray" />
+        <Setter Property="TextBlock.TextDecorations" Value="" />
+        <Setter Property="Template">
+            <ControlTemplate>
+                <TextBlock
+                    FontSize="15"
+                    Foreground="{TemplateBinding Foreground}"
+                    Text="{TemplateBinding Content}"
+                    TextTrimming="CharacterEllipsis"
+                    TextWrapping="NoWrap"
+                    VerticalAlignment="Center" />
+            </ControlTemplate>
+        </Setter>
+        <Setter Property="Transitions">
+            <Transitions>
+                <BrushTransition Duration="0:0:0.1" Property="Foreground" />
+            </Transitions>
+        </Setter>
+
+        <Style Selector="^:pointerover">
+            <Setter Property="Foreground">
+                <SolidColorBrush Color="White" />
+            </Setter>
+        </Style>
+    </Style>
+</Styles>

@@ -1,0 +1,129 @@
+﻿<Styles
+    xmlns="https://github.com/avaloniaui"
+    xmlns:avalonia="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Design.PreviewWith>
+        <Border Background="Black" Padding="20">
+            <StackPanel Orientation="Horizontal">
+                <RadioButton Classes="Navigation" Content="{avalonia:MaterialIconExt Kind=Abacus, Size=30}" />
+                <RadioButton Classes="Navigation" Content="{avalonia:MaterialIconExt Kind=Abacus, Size=30}" />
+            </StackPanel>
+        </Border>
+    </Design.PreviewWith>
+
+    <!--  Navigation  -->
+    <Style Selector="RadioButton.Navigation">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="2" />
+        <Setter Property="CornerRadius" Value="10" />
+        <Setter Property="Width" Value="50" />
+        <Setter Property="Height" Value="50" />
+        <Setter Property="Opacity" Value="0.9" />
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Panel>
+                    <Border
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="Transparent"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}">
+                        <StackPanel
+                            HorizontalAlignment="Center"
+                            Orientation="Horizontal"
+                            VerticalAlignment="Center">
+
+                            <ContentPresenter
+                                Content="{TemplateBinding Content}"
+                                ContentTemplate="{TemplateBinding ContentTemplate}"
+                                Foreground="LightGray"
+                                HorizontalAlignment="Center"
+                                HorizontalContentAlignment="Center"
+                                Name="PART_ContentPresenter"
+                                RecognizesAccessKey="True"
+                                VerticalAlignment="Center">
+                                <ContentPresenter.Transitions>
+                                    <Transitions>
+                                        <BrushTransition Duration="00:00:0.2" Property="Foreground" />
+                                    </Transitions>
+                                </ContentPresenter.Transitions>
+                            </ContentPresenter>
+                        </StackPanel>
+                        <Border.Transitions>
+                            <Transitions>
+                                <BrushTransition Duration="00:00:0.2" Property="BorderBrush" />
+                            </Transitions>
+                        </Border.Transitions>
+                    </Border>
+                </Panel>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <Style Selector="RadioButton.Navigation:pointerover /template/ ContentPresenter">
+        <Setter Property="Foreground" Value="LightGray" />
+    </Style>
+
+    <Style Selector="RadioButton.Navigation:pointerover /template/ Border">
+        <Setter Property="BorderBrush" Value="DarkGray" />
+    </Style>
+
+    <Style Selector="RadioButton.Navigation:checked /template/ ContentPresenter">
+        <Setter Property="Foreground" Value="{TemplateBinding BorderBrush}" />
+    </Style>
+
+    <Style Selector="RadioButton.Navigation:checked /template/ Border">
+        <Setter Property="BorderBrush" Value="{TemplateBinding BorderBrush}" />
+    </Style>
+
+    <!--  GameIcon  -->
+    <Style Selector="RadioButton.GameIcon">
+        <Setter Property="CornerRadius" Value="10" />
+        <Setter Property="Width" Value="45" />
+        <Setter Property="Height" Value="45" />
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border ClipToBounds="True" CornerRadius="{TemplateBinding CornerRadius}">
+                    <Panel>
+
+                        <ContentPresenter
+                            Content="{TemplateBinding Content}"
+                            ContentTemplate="{TemplateBinding ContentTemplate}"
+                            Height="45"
+                            HorizontalAlignment="Center"
+                            HorizontalContentAlignment="Center"
+                            Name="PART_ContentPresenter"
+                            RecognizesAccessKey="True"
+                            VerticalAlignment="Center"
+                            Width="45" />
+                        <Panel Name="PART_ContentPresenterCoverage">
+                            <Panel.Background>
+                                <SolidColorBrush Color="Black" Opacity="0.3" />
+                            </Panel.Background>
+
+                            <Panel.Transitions>
+                                <Transitions>
+                                    <BrushTransition Duration="00:00:0.2" Property="Background" />
+                                </Transitions>
+                            </Panel.Transitions>
+                        </Panel>
+                    </Panel>
+
+
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <Style Selector="RadioButton.GameIcon:pointerover /template/ Panel#PART_ContentPresenterCoverage">
+        <Setter Property="Background">
+            <SolidColorBrush Color="Black" Opacity="0.2" />
+        </Setter>
+    </Style>
+
+    <Style Selector="RadioButton.GameIcon:checked /template/ Panel#PART_ContentPresenterCoverage">
+        <Setter Property="Background">
+            <SolidColorBrush Color="Black" Opacity="0" />
+        </Setter>
+    </Style>
+</Styles>

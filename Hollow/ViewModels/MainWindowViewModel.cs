@@ -24,8 +24,9 @@ public partial class MainWindowViewModel : ViewModelBase
     [ObservableProperty] private bool _displayScreenshots;
     [ObservableProperty] private bool _displaySettings;
     
-    [ObservableProperty] private string? _backgroundImageEffect = "";
-    [ObservableProperty] private double _dragAreaOpacity;
+    [ObservableProperty] private int _blur;
+    [ObservableProperty] private double _coverageOpacity;
+    [ObservableProperty] private double _navigationOpacity = 1;
 
     [ObservableProperty] private Bitmap _gameIcon;
     [ObservableProperty] private string? _backgroundUrl = "avares://Hollow/Assets/default_bg.webp";
@@ -67,8 +68,9 @@ public partial class MainWindowViewModel : ViewModelBase
         DisplayScreenshots = _navigationService.CurrentViewName == "Screenshots";
         DisplaySettings = _navigationService.CurrentViewName == "Settings";
         
-        DragAreaOpacity = DisplayHome ? 0 : 1;
-        BackgroundImageEffect = DisplayHome ? "": "blur(40)";
+        Blur = DisplayHome ? 1 : 20;
+        CoverageOpacity = DisplayHome ? 0 : 1;
+        NavigationOpacity = DisplayHome ? 1 : 0;
     }
     
     [RelayCommand]

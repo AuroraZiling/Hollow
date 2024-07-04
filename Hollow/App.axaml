@@ -16,6 +16,7 @@
                 <ResourceInclude Source="Resources/Fonts.axaml" />
 
                 <ResourceInclude Source="Controls/StartGameButton.axaml" />
+                <ResourceInclude Source="Controls/Acrylic/Acrylic.axaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
 

@@ -1,5 +1,4 @@
 ﻿<UserControl
-    Background="{StaticResource CoverageBackground}"
     Padding="25"
     x:Class="Hollow.Views.Pages.SignalSearch"
     xmlns="https://github.com/avaloniaui"

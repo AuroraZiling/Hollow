@@ -1,7 +1,7 @@
 <Window
     CanResize="False"
     ExtendClientAreaChromeHints="NoChrome"
-    ExtendClientAreaTitleBarHeightHint="50"
+    ExtendClientAreaTitleBarHeightHint="-1"
     ExtendClientAreaToDecorationsHint="True"
     FontFamily="avares://Hollow/Assets/Fonts/#MiSans"
     Height="700"
@@ -12,6 +12,7 @@
     x:Class="Hollow.Views.MainWindow"
     x:DataType="vm:MainWindowViewModel"
     xmlns="https://github.com/avaloniaui"
+    xmlns:acrylic="clr-namespace:Hollow.Controls.Acrylic"
     xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:markupExtensions="clr-namespace:FluentIcons.Avalonia.MarkupExtensions;assembly=FluentIcons.Avalonia"
@@ -24,24 +25,39 @@
             IsHitTestVisible="False"
             Stretch="UniformToFill"
             asyncImageLoader:ImageLoader.Source="{Binding BackgroundUrl}" />
-        <Image
-            Effect="{Binding BackgroundImageEffect}"
-            IsHitTestVisible="False"
-            Stretch="UniformToFill"
-            asyncImageLoader:ImageLoader.Source="{Binding BackgroundUrl}" />
+        <!--  <Image  -->
+        <!--  Effect="{Binding BackgroundImageEffect}"  -->
+        <!--  IsHitTestVisible="False"  -->
+        <!--  Stretch="UniformToFill"  -->
+        <!--  asyncImageLoader:ImageLoader.Source="{Binding BackgroundUrl}" />  -->
 
         <!--  Navigation View  -->
-        <Grid ColumnDefinitions="70, *" RowDefinitions="50, *">
-            <Panel
-                Background="{StaticResource CoverageBackground}"
+        <Grid ColumnDefinitions="70, *">
+            <acrylic:Acrylic
+                Blur="{Binding Blur}"
                 Grid.Column="0"
-                Grid.RowSpan="2">
+                Grid.ColumnSpan="2"
+                Opacity="{Binding CoverageOpacity}">
+                <acrylic:Acrylic.Transitions>
+                    <Transitions>
+                        <IntegerTransition Duration="0:0:0.125" Property="Blur" />
+                    </Transitions>
+                </acrylic:Acrylic.Transitions>
+            </acrylic:Acrylic>
+            <Panel Grid.Column="0">
                 <Panel.Styles>
                     <Style Selector="RadioButton">
                         <Setter Property="Command" Value="{Binding NavigateCommand}" />
                         <Setter Property="GroupName" Value="NavigationViewButtons" />
                     </Style>
                 </Panel.Styles>
+                <acrylic:Acrylic Blur="20" Opacity="{Binding NavigationOpacity}">
+                    <acrylic:Acrylic.Transitions>
+                        <Transitions>
+                            <IntegerTransition Duration="0:0:0.125" Property="Blur" />
+                        </Transitions>
+                    </acrylic:Acrylic.Transitions>
+                </acrylic:Acrylic>
                 <StackPanel Margin="10" Spacing="10">
                     <RadioButton
                         Classes="GameIcon"
@@ -87,22 +103,7 @@
             <TransitioningContentControl
                 Content="{Binding CurrentView}"
                 Grid.Column="1"
-                Grid.Row="1" />
-
-            <!--  Drag Area Workaround  -->
-            <Panel
-                Background="{StaticResource CoverageBackground}"
-                Grid.Column="1"
-                Grid.Row="0"
-                IsHitTestVisible="False"
-                Opacity="{Binding DragAreaOpacity}">
-                <Panel.Transitions>
-                    <Transitions>
-                        <DoubleTransition Duration="0:0:0.125" Property="Opacity" />
-                    </Transitions>
-                </Panel.Transitions>
-            </Panel>
-
+                Margin="30" />
         </Grid>
 
 

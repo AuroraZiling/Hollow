@@ -1,5 +1,4 @@
 ﻿<UserControl
-    Background="{StaticResource CoverageBackground}"
     Padding="25"
     x:Class="Hollow.Views.Pages.Screenshots"
     xmlns="https://github.com/avaloniaui"

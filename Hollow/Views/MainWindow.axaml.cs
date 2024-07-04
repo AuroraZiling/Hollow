@@ -1,4 +1,5 @@
 using Avalonia.Controls;
+using Avalonia.Input;
 using Avalonia.Interactivity;
 
 namespace Hollow.Views;
@@ -18,5 +19,12 @@ public partial class MainWindow : Window
     private void CloseButton_OnClick(object? sender, RoutedEventArgs e)
     {
         Close();
+    }
+
+    protected override void OnPointerPressed(PointerPressedEventArgs e)
+    {
+        base.OnPointerPressed(e);
+        if(e.GetCurrentPoint(this).Position.Y <= 40)
+            BeginMoveDrag(e);
     }
 }

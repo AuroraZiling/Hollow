@@ -1,7 +1,6 @@
-﻿using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Markup.Xaml;
+﻿using Avalonia.Controls;
 using Hollow.ViewModels.Pages;
+using WebViewControl;
 
 namespace Hollow.Views.Pages;
 
@@ -11,5 +10,9 @@ public partial class Announcements : UserControl
     {
         InitializeComponent();
         DataContext = announcementsViewModel;
+
+        GlobalGameAnnouncementWebView = GameAnnouncementWebView;
     }
+
+    public static WebView? GlobalGameAnnouncementWebView { get; set; }
 }

@@ -20,9 +20,11 @@
     <Color x:Key="ZzzSecondaryColor">#B0D700</Color>
     <Color x:Key="ZzzSecondaryDarkColor">#92B900</Color>
     <Color x:Key="ZzzBlackColor">#171717</Color>
+    <Color x:Key="ZzzGrayColor">#313131</Color>
 
     <SolidColorBrush Color="{StaticResource ZzzPrimaryColor}" x:Key="ZzzPrimaryColorBrush" />
     <SolidColorBrush Color="{StaticResource ZzzSecondaryColor}" x:Key="ZzzSecondaryColorBrush" />
     <SolidColorBrush Color="{StaticResource ZzzSecondaryDarkColor}" x:Key="ZzzSecondaryDarkColorBrush" />
     <SolidColorBrush Color="{StaticResource ZzzBlackColor}" x:Key="ZzzBlackColorBrush" />
+    <SolidColorBrush Color="{StaticResource ZzzGrayColor}" x:Key="ZzzGrayColorBrush" />
 </ResourceDictionary>

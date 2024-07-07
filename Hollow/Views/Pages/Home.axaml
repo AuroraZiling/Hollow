@@ -30,7 +30,6 @@
 
     <Panel>
         <!--  Version News  -->
-
         <HyperlinkButton
             Classes="PointerOverProhibited"
             HorizontalAlignment="Left"
@@ -60,8 +59,8 @@
                 IsEnabled="{Binding IsGameStartButtonEnabled}"
                 Message="{Binding GameVersion}"
                 Title="启动游戏" />
-
         </StackPanel>
+
         <!--  Banner  -->
         <Border
             CornerRadius="10"

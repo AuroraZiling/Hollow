@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Hollow.Core.MiHoYoLauncher;
 using Hollow.Core.MiHoYoLauncher.Models;
 using Hollow.Helpers;
+using Hollow.Helpers.Announcement;
 using Hollow.Models.Pages.Announcement;
 using Hollow.Services.ConfigurationService;
 
@@ -80,10 +81,10 @@ public class MiHoYoLauncherService(HttpClient httpClient, IConfigurationService 
                 announcementResult[announcementListInType.TypeId].Add(new AnnouncementModel
                 {
                     Id = announcementItem.Id,
-                    Title = announcementItem.Title,
-                    Subtitle = HtmlFilter.FilterBr(announcementItem.Subtitle),
+                    Title = HtmlFilter.RemoveP(announcementItem.Title),
+                    Subtitle = HtmlFilter.RemoveBr(announcementItem.Subtitle),
                     BannerUrl = announcementItem.BannerUrl,
-                    Content = announcementContentPair[announcementItem.Id],
+                    Content = HtmlHelper.GetHtml(announcementContentPair[announcementItem.Id]),
                     TagLabel = announcementItem.TagLabel,
                     TagIconUrl = announcementItem.TagIconUrl,
                     TagIconHoverUrl = announcementItem.TagIconHoverUrl,

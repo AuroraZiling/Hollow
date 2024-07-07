@@ -19,6 +19,9 @@ namespace Hollow.ViewModels.Pages;
 
 public partial class HomeViewModel: ViewModelBase, IViewModelBase
 {
+    [ObservableProperty] private string _versionNewsImageUrl = "";
+    [ObservableProperty] private string _versionNewsUrl = "";
+
     [ObservableProperty] private ObservableCollection<BannerModel> _banners = [];
     [ObservableProperty] private ObservableCollection<ZzzGameContentDataContentPost> _activities = [];
     [ObservableProperty] private ObservableCollection<ZzzGameContentDataContentPost> _notices = [];
@@ -72,6 +75,11 @@ public partial class HomeViewModel: ViewModelBase, IViewModelBase
     private async Task LoadContents()
     {
         var gameContent = await _miHoYoLauncherService.GetGameContent();
+        var allGameBasicInfo = await _miHoYoLauncherService.GetAllGameBasicInfo();
+
+        // Version News
+        VersionNewsImageUrl = allGameBasicInfo?.Data.GameInfo[0].Backgrounds[0].Icon.Url ?? "";
+        VersionNewsUrl = allGameBasicInfo?.Data.GameInfo[0].Backgrounds[0].Icon.Link ?? "";
 
         // Banners
         var banners = gameContent?.Data.Content.Banners;

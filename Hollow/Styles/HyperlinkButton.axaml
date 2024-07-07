@@ -24,10 +24,13 @@
         <Style Selector="^:pointerover">
             <Setter Property="Foreground" Value="{StaticResource ZzzSecondaryColorBrush}" />
         </Style>
-
-
     </Style>
 
+    <Style Selector="HyperlinkButton.PointerOverProhibited">
+        <Style Selector="^:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="Transparent" />
+        </Style>
+    </Style>
 
 
     <Style Selector="HyperlinkButton.Banner">

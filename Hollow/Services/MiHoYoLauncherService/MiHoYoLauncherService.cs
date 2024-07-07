@@ -22,11 +22,17 @@ public class MiHoYoLauncherService(HttpClient httpClient, IConfigurationService 
     }
     
     private const string AllGameBasicInfoUrl = $"https://hyp-api.mihoyo.com/hyp/hyp-connect/api/getAllGameBasicInfo?launcher_id={LauncherId.CnOfficial}&game_id={GameId.Zzz}";
+    private ZzzAllGameBasicInfo? _cachedAllGameBasicInfo;
 
     public async Task<ZzzAllGameBasicInfo?> GetAllGameBasicInfo()
     {
+        if (_cachedAllGameBasicInfo is not null)
+        {
+            return _cachedAllGameBasicInfo;
+        }
         var response = await httpClient.GetStringAsync(AllGameBasicInfoUrl);
-        return JsonSerializer.Deserialize<ZzzAllGameBasicInfo>(response);
+        _cachedAllGameBasicInfo = JsonSerializer.Deserialize<ZzzAllGameBasicInfo>(response);
+        return _cachedAllGameBasicInfo;
     }
     
     private const string GameContentUrl = $"https://hyp-api.mihoyo.com/hyp/hyp-connect/api/getGameContent?launcher_id={LauncherId.CnOfficial}&game_id={GameId.Zzz}";

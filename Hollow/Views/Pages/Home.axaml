@@ -3,6 +3,7 @@
     x:Class="Hollow.Views.Pages.Home"
     x:DataType="pages:HomeViewModel"
     xmlns="https://github.com/avaloniaui"
+    xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
     xmlns:controls="clr-namespace:Hollow.Controls"
     xmlns:languages="clr-namespace:Hollow.Languages"
     xmlns:markupExtensions="clr-namespace:FluentIcons.Avalonia.MarkupExtensions;assembly=FluentIcons.Avalonia"
@@ -28,6 +29,20 @@
     </UserControl.DataTemplates>
 
     <Panel>
+        <!--  Version News  -->
+
+        <HyperlinkButton
+            Classes="PointerOverProhibited"
+            HorizontalAlignment="Left"
+            Margin="30,280,0,0"
+            NavigateUri="{Binding VersionNewsUrl}"
+            Padding="0"
+            VerticalAlignment="Top"
+            Width="100">
+            <Image Stretch="Uniform" asyncImageLoader:ImageLoader.Source="{Binding VersionNewsImageUrl}" />
+        </HyperlinkButton>
+
+        <!--  Start Game  -->
         <StackPanel
             HorizontalAlignment="Right"
             Margin="0,0,30,50"

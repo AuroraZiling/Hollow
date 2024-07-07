@@ -25,4 +25,7 @@ public class ZzzAllGameBasicInfoEachDataBackgroundModel
 {
     [JsonPropertyName("background")]
     public required ImageModel Image { get; set; }
+    
+    [JsonPropertyName("icon")]
+    public required ImageModel Icon { get; set; }
 }

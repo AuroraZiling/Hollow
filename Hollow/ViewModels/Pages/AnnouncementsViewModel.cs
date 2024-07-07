@@ -1,50 +1,15 @@
-﻿using System.Collections.ObjectModel;
-using System.Threading.Tasks;
-using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using Hollow.Models.Pages.Announcement;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using Hollow.Services.MiHoYoLauncherService;
-using static Hollow.Views.Pages.Announcements;
 
 namespace Hollow.ViewModels.Pages;
 
-public partial class AnnouncementsViewModel : ViewModelBase, IViewModelBase
+public partial class AnnouncementsViewModel(IMiHoYoLauncherService miHoYoLauncherService)
+    : ViewModelBase, IViewModelBase
 {
     public void Navigated()
     {
     }
 
-    private readonly IMiHoYoLauncherService _miHoYoLauncherService;
-
-    [ObservableProperty] private ObservableCollection<AnnouncementModel> _gameAnnouncements = [];
-    [ObservableProperty] private AnnouncementModel? _selectedGameAnnouncement;
-    
-    [ObservableProperty] private ObservableCollection<AnnouncementModel> _activityAnnouncements = [];
-    [ObservableProperty] private AnnouncementModel? _selectedActivityAnnouncement;
-    
-    public AnnouncementsViewModel(IMiHoYoLauncherService miHoYoLauncherService)
-    {
-        _miHoYoLauncherService = miHoYoLauncherService;
-
-        _ = LoadAnnouncements();
-    }
-
-    private async Task LoadAnnouncements()
-    {
-        var announcements = await _miHoYoLauncherService.GetAnnouncement();
-        if (announcements is null)
-        {
-            return;
-        }
-        GameAnnouncements = new ObservableCollection<AnnouncementModel>(announcements[3]);
-        SelectedGameAnnouncement = GameAnnouncements[0];
-        ActivityAnnouncements = new ObservableCollection<AnnouncementModel>(announcements[4]);
-        SelectedActivityAnnouncement = ActivityAnnouncements[0];
-    }
-    
-    [RelayCommand]
-    private void ChangeGameAnnouncement()
-    {
-        GlobalGameAnnouncementWebView?.LoadHtml(SelectedGameAnnouncement!.Content);
-    }
+    [ObservableProperty] private string _announcementUrl =
+        "https://sdk.mihoyo.com/nap/announcement/index.html?auth_appid=announcement&authkey_ver=1&bundle_id=nap_cn&channel_id=1&game=nap&game_biz=nap_cn&lang=zh-cn&level=60&platform=pc&region=prod_gf_cn&sdk_presentation_style=fullscreen&sdk_screen_transparent=true&sign_type=2&uid=100000000&version=2.27#/";
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Platform.Storage;
@@ -14,14 +15,18 @@ public static class StorageHelper
         return dialog.Count == 0 ? string.Empty : Uri.UnescapeDataString(dialog[0].Path.AbsolutePath);
     }
 
+    //TODO: Platform specific
     public static void OpenFolderInExplorer(string directoryPath)
     {
-        var directory = new Uri(directoryPath);
-        var process = Process.Start(new ProcessStartInfo
+        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
         {
-            FileName = "explorer",
-            Arguments = directory.LocalPath
-        });
-        process?.WaitForExit();
+            var directory = new Uri(directoryPath);
+            var process = Process.Start(new ProcessStartInfo
+            {
+                FileName = "explorer",
+                Arguments = directory.LocalPath
+            });
+            process?.WaitForExit();
+        }
     }
 }

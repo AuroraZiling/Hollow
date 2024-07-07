@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Avalonia.Media.Imaging;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Hollow.Controls;
 using Hollow.Core.MiHoYoLauncher.Models;
-using Hollow.Enums;
 using Hollow.Helpers;
 using Hollow.Models.Pages.Home;
 using Hollow.Services.ConfigurationService;

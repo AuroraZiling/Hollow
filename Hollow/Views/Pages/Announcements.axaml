@@ -2,122 +2,13 @@
     x:Class="Hollow.Views.Pages.Announcements"
     x:DataType="pages:AnnouncementsViewModel"
     xmlns="https://github.com/avaloniaui"
-    xmlns:announcement="clr-namespace:Hollow.Models.Pages.Announcement"
-    xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
-    xmlns:languages="clr-namespace:Hollow.Languages"
     xmlns:pages="clr-namespace:Hollow.ViewModels.Pages"
     xmlns:webViewControl="clr-namespace:WebViewControl;assembly=WebViewControl.Avalonia"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <UserControl.DataTemplates>
-        <DataTemplate DataType="announcement:AnnouncementModel">
-            <Border CornerRadius="5" Height="40">
-                <Grid
-                    ColumnDefinitions="20, *"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Center">
-                    <Image
-                        Grid.Column="0"
-                        Name="TagIcon"
-                        Width="18"
-                        asyncImageLoader:ImageLoader.Source="{Binding TagIconUrl}" />
+    <webViewControl:WebView
+        Address="{Binding AnnouncementUrl}"
+        Margin="-180"
+        Name="GameAnnouncementWebView"
+        Navigated="GameAnnouncementWebView_OnNavigated" />
 
-                    <TextBlock
-                        FontSize="14"
-                        FontWeight="Bold"
-                        Grid.Column="1"
-                        Margin="10,0,20,0"
-                        Text="{Binding Subtitle}"
-                        TextWrapping="Wrap" />
-                </Grid>
-            </Border>
-        </DataTemplate>
-    </UserControl.DataTemplates>
-    <UserControl.Styles>
-        <Style Selector="ListBoxItem /template/ ContentPresenter#PART_ContentPresenter">
-            <Setter Property="Transitions">
-                <Transitions>
-                    <BrushTransition Duration="0:0:0.1" Property="Background" />
-                    <BrushTransition Duration="0:0:0.1" Property="Foreground" />
-                </Transitions>
-            </Setter>
-        </Style>
-        <Style Selector="ListBoxItem[IsSelected=True] /template/ ContentPresenter#PART_ContentPresenter">
-            <Setter Property="Background" Value="{StaticResource ZzzSecondaryDarkColorBrush}" />
-        </Style>
-    </UserControl.Styles>
-
-    <Panel>
-        <Panel.Background>
-            <ImageBrush Source="avares://Hollow/Assets/Zzz/zzz_annbg.png" Stretch="Uniform" />
-        </Panel.Background>
-
-        <Border ClipToBounds="True" Margin="0,80,0,45">
-            <TabControl>
-                <TabItem
-                    Classes="Announcement"
-                    Header="{I18N {x:Static languages:LangKeys.Announcement_GameAnnouncement_Header}}"
-                    Margin="30,0,0,0">
-                    <Grid ColumnDefinitions="0.32*, *" Margin="15">
-                        <ListBox
-                            Background="Transparent"
-                            CornerRadius="7"
-                            Grid.Column="0"
-                            ItemsSource="{Binding GameAnnouncements}"
-                            Name="GameAnnouncementListBox"
-                            SelectedItem="{Binding SelectedGameAnnouncement, Mode=TwoWay}">
-                            <Interaction.Behaviors>
-                                <EventTriggerBehavior EventName="SelectionChanged" SourceObject="GameAnnouncementListBox">
-                                    <InvokeCommandAction Command="{Binding ChangeGameAnnouncementCommand}" />
-                                </EventTriggerBehavior>
-                            </Interaction.Behaviors>
-                        </ListBox>
-                        <Border
-                            ClipToBounds="True"
-                            CornerRadius="7"
-                            Grid.Column="1"
-                            IsVisible="{Binding ElementName=GameAnnouncementListBox, Path=SelectedItem, Converter={x:Static ObjectConverters.IsNotNull}}"
-                            Margin="15,0,0,0"
-                            Padding="10">
-                            <Grid RowDefinitions="40, *">
-                                <Border
-                                    Background="{StaticResource ZzzGrayColorBrush}"
-                                    CornerRadius="10"
-                                    Grid.Row="0"
-                                    Padding="10,0,0,0">
-                                    <TextBlock
-                                        FontWeight="Heavy"
-                                        HorizontalAlignment="Left"
-                                        Margin="5,0,0,0"
-                                        Text="{Binding SelectedGameAnnouncement.Title}"
-                                        VerticalAlignment="Center" />
-                                </Border>
-                                <webViewControl:WebView Grid.Row="1" Name="GameAnnouncementWebView" />
-                            </Grid>
-                        </Border>
-                    </Grid>
-                </TabItem>
-                <TabItem
-                    Classes="Announcement"
-                    Header="{I18N {x:Static languages:LangKeys.Announcement_ActivityAnnouncement_Header}}"
-                    Margin="20,0,0,0">
-                    <Grid ColumnDefinitions="0.32*, *" Margin="15">
-                        <ListBox
-                            Background="Transparent"
-                            CornerRadius="7"
-                            Grid.Column="0"
-                            ItemsSource="{Binding ActivityAnnouncements}"
-                            Name="ActivityAnnouncementListBox"
-                            SelectedIndex="0" />
-                        <Border
-                            ClipToBounds="True"
-                            CornerRadius="7"
-                            Grid.Column="1"
-                            Margin="15,0,0,0">
-                            <Panel Background="Red" />
-                        </Border>
-                    </Grid>
-                </TabItem>
-            </TabControl>
-        </Border>
-    </Panel>
 </UserControl>

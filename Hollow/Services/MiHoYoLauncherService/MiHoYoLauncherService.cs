@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Hollow.Core.MiHoYoLauncher;
 using Hollow.Core.MiHoYoLauncher.Models;
+using Hollow.Helpers;
 using Hollow.Models.Pages.Announcement;
 using Hollow.Services.ConfigurationService;
 
@@ -39,7 +41,7 @@ public class MiHoYoLauncherService(HttpClient httpClient, IConfigurationService 
     private const string AnnouncementUrl = "https://announcement-api.mihoyo.com/common/nap_cn/announcement/api/getAnnList?game=nap&game_biz=nap_cn&lang=zh-cn&bundle_id=nap_cn&channel_id=1&platform=pc&region=prod_gf_cn&uid=10000000";
     private const string AnnouncementContentUrl = "https://announcement-static.mihoyo.com/common/nap_cn/announcement/api/getAnnContent?game=nap&game_biz=nap_cn&lang=zh-cn&bundle_id=nap_cn&platform=pc&region=prod_gf_cn&level=60&uid=10000000";
 
-    public async Task<Dictionary<string, List<AnnouncementModel>>?> GetAnnouncement()
+    public async Task<Dictionary<int, List<AnnouncementModel>>?> GetAnnouncement()
     {
         var announcement = JsonSerializer.Deserialize<ZzzAnnouncement>(await httpClient.GetStringAsync(AnnouncementUrl));
         var announcementContent = JsonSerializer.Deserialize<ZzzAnnouncementContent>(await httpClient.GetStringAsync(AnnouncementContentUrl));
@@ -49,20 +51,40 @@ public class MiHoYoLauncherService(HttpClient httpClient, IConfigurationService 
             return null;
         }
 
-        var announcementResult = new Dictionary<string, List<AnnouncementModel>>();
+        var announcementResult = new Dictionary<int, List<AnnouncementModel>>
+        {
+            { 3, [] },
+            { 4, [] }
+        };
         
-        
+        var announcementContentPair = announcementContent.Data.List.ToDictionary(
+            item => item.Id,
+            item => item.Content
+        );
         var announcementList = announcement.Data.List;
-        var announcementContentList = announcementContent.Data.List;
 
         foreach (var announcementListInType in announcementList)
         {
-            if (announcementListInType.TypeId == 3)
+            if(announcementListInType.TypeId != 3 && announcementListInType.TypeId != 4)
             {
-                
-            }else if (announcementListInType.TypeId == 4)
+                continue;
+            }
+            foreach (var announcementItem in announcementListInType.AnnouncementList)
             {
-                
+                announcementResult[announcementListInType.TypeId].Add(new AnnouncementModel
+                {
+                    Id = announcementItem.Id,
+                    Title = announcementItem.Title,
+                    Subtitle = HtmlFilter.FilterBr(announcementItem.Subtitle),
+                    BannerUrl = announcementItem.BannerUrl,
+                    Content = announcementContentPair[announcementItem.Id],
+                    TagLabel = announcementItem.TagLabel,
+                    TagIconUrl = announcementItem.TagIconUrl,
+                    TagIconHoverUrl = announcementItem.TagIconHoverUrl,
+                    StartTime = announcementItem.StartTime,
+                    EndTime = announcementItem.EndTime,
+                    HasContent = announcementItem.HasContent
+                });
             }
         }
 

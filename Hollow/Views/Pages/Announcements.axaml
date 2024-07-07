@@ -2,6 +2,8 @@
     x:Class="Hollow.Views.Pages.Announcements"
     x:DataType="pages:AnnouncementsViewModel"
     xmlns="https://github.com/avaloniaui"
+    xmlns:announcement="clr-namespace:Hollow.Models.Pages.Announcement"
+    xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
     xmlns:languages="clr-namespace:Hollow.Languages"
     xmlns:pages="clr-namespace:Hollow.ViewModels.Pages"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
@@ -14,29 +16,65 @@
             <TabControl>
                 <TabItem
                     Classes="Announcement"
-                    Header="游戏公告"
+                    Header="{I18N {x:Static languages:LangKeys.Announcement_GameAnnouncement_Header}}"
                     Margin="30,0,0,0">
-                    <Grid ColumnDefinitions="0.3*, *">
-                        <ListBox CornerRadius="0, 0, 0, 22" Grid.Column="0">
-                            <ListBoxItem Content="A" />
-                            <ListBoxItem Content="A" />
-                            <ListBoxItem Content="A" />
-                            <ListBoxItem Content="A" />
-                            <ListBoxItem Content="A" />
-                            <ListBoxItem Content="A" />
-                            <ListBoxItem Content="A" />
+                    <Grid ColumnDefinitions="0.32*, *" Margin="15">
+                        <ListBox
+                            Background="Transparent"
+                            CornerRadius="7"
+                            Grid.Column="0"
+                            ItemsSource="{Binding GameAnnouncements}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate DataType="announcement:AnnouncementModel">
+                                    <Border CornerRadius="5" Height="40">
+                                        <Grid
+                                            ColumnDefinitions="20, *"
+                                            HorizontalAlignment="Left"
+                                            VerticalAlignment="Center">
+                                            <Image
+                                                Grid.Column="0"
+                                                Name="TagIcon"
+                                                Width="18"
+                                                asyncImageLoader:ImageLoader.Source="{Binding TagIconUrl}" />
+
+                                            <TextBlock
+                                                FontSize="14"
+                                                FontWeight="Bold"
+                                                Grid.Column="1"
+                                                Margin="10,0,20,0"
+                                                Text="{Binding Subtitle}"
+                                                TextWrapping="Wrap" />
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                            <ListBox.Styles>
+                                <Style Selector="ListBoxItem /template/ ContentPresenter#PART_ContentPresenter">
+                                    <Setter Property="Transitions">
+                                        <Transitions>
+                                            <BrushTransition Duration="0:0:0.1" Property="Background" />
+                                            <BrushTransition Duration="0:0:0.1" Property="Foreground" />
+                                        </Transitions>
+                                    </Setter>
+                                </Style>
+                                <Style Selector="ListBoxItem[IsSelected=True] /template/ ContentPresenter#PART_ContentPresenter">
+                                    <Setter Property="Background" Value="{StaticResource ZzzSecondaryDarkColorBrush}" />
+                                </Style>
+
+                            </ListBox.Styles>
                         </ListBox>
                         <Border
                             ClipToBounds="True"
-                            CornerRadius="0, 0, 22, 0"
-                            Grid.Column="1">
+                            CornerRadius="7"
+                            Grid.Column="1"
+                            Margin="15,0,0,0">
                             <Panel Background="Red" />
                         </Border>
                     </Grid>
                 </TabItem>
                 <TabItem
                     Classes="Announcement"
-                    Header="活动公告"
+                    Header="{I18N {x:Static languages:LangKeys.Announcement_ActivityAnnouncement_Header}}"
                     Margin="20,0,0,0" />
             </TabControl>
         </Border>

@@ -39,4 +39,10 @@
     <data name="Home_Banners_Info_Title" xml:space="preserve">
         <value>资讯</value>
     </data>
+    <data name="Announcement_GameAnnouncement_Header" xml:space="preserve">
+        <value>游戏公告</value>
+    </data>
+    <data name="Announcement_ActivityAnnouncement_Header" xml:space="preserve">
+        <value>活动公告</value>
+    </data>
 </root>

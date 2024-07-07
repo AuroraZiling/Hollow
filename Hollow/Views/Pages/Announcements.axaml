@@ -6,6 +6,39 @@
     xmlns:pages="clr-namespace:Hollow.ViewModels.Pages"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Panel>
-        <TextBlock Classes="PageTitle" Text="{I18N {x:Static languages:LangKeys.Screenshots_Title}}" />
+        <Panel.Background>
+            <ImageBrush Source="avares://Hollow/Assets/Zzz/zzz_annbg.png" Stretch="Uniform" />
+        </Panel.Background>
+
+        <Border ClipToBounds="True" Margin="0,80,0,45">
+            <TabControl>
+                <TabItem
+                    Classes="Announcement"
+                    Header="游戏公告"
+                    Margin="30,0,0,0">
+                    <Grid ColumnDefinitions="0.3*, *">
+                        <ListBox CornerRadius="0, 0, 0, 22" Grid.Column="0">
+                            <ListBoxItem Content="A" />
+                            <ListBoxItem Content="A" />
+                            <ListBoxItem Content="A" />
+                            <ListBoxItem Content="A" />
+                            <ListBoxItem Content="A" />
+                            <ListBoxItem Content="A" />
+                            <ListBoxItem Content="A" />
+                        </ListBox>
+                        <Border
+                            ClipToBounds="True"
+                            CornerRadius="0, 0, 22, 0"
+                            Grid.Column="1">
+                            <Panel Background="Red" />
+                        </Border>
+                    </Grid>
+                </TabItem>
+                <TabItem
+                    Classes="Announcement"
+                    Header="活动公告"
+                    Margin="20,0,0,0" />
+            </TabControl>
+        </Border>
     </Panel>
 </UserControl>

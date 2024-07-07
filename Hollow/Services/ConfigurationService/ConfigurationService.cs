@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Globalization;
+using System.IO;
 using System.Text.Json;
 using Hollow.Models;
 using Hollow.Models.Configs;
@@ -7,7 +8,15 @@ namespace Hollow.Services.ConfigurationService;
 
 public class ConfigurationService: IConfigurationService
 {
-    public AppConfig AppConfig { get; set; } = LoadConfiguration();
+    public ConfigurationService()
+    {
+        AppConfig = LoadConfiguration();
+        CurrentLanguage = AppConfig.Language == "Auto" ? CultureInfo.CurrentCulture.Name : AppConfig.Language;
+    }
+
+    public AppConfig AppConfig { get; set; }
+    
+    public string CurrentLanguage { get; set; } // auto -> en-US, zh-CN
     
     public static AppConfig LoadConfiguration()
     {

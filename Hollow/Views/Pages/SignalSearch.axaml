@@ -5,5 +5,11 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Panel>
         <TextBlock Classes="PageTitle" Text="{I18N {x:Static languages:LangKeys.SignalSearch_Title}}" />
+        <TabControl Margin="0,50,0,0">
+            <TabItem Header="Overview" />
+            <TabItem Header="Standard Channel" />
+            <TabItem Header="Exclusive Channel" />
+            <TabItem Header="W-Engine Channel" />
+        </TabControl>
     </Panel>
 </UserControl>

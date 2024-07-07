@@ -106,6 +106,7 @@ public partial class SettingsViewModel : ViewModelBase, IViewModelBase
         var language = Language != "Auto" ? GetLanguage.LanguageList[Language] : "Auto";
         I18NExtension.Culture = language != "Auto" ? new CultureInfo(language) : CultureInfo.CurrentCulture;
         _configurationService.AppConfig.Language = Language != "Auto" ? GetLanguage.LanguageList[Language] : "Auto";
+        _configurationService.CurrentLanguage = language != "Auto" ? language : CultureInfo.CurrentCulture.Name;
         _configurationService.Save();
     }
 

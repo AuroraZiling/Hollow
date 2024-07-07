@@ -114,7 +114,7 @@ namespace Hollow.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Signal Search.
+        ///   Looks up a localized string similar to Signal Search Records.
         /// </summary>
         internal static string SignalSearch_Title {
             get {

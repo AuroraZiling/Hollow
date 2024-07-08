@@ -72,14 +72,10 @@ public static class GachaAnalyser
         
         // Analyze
         var total = analyzedCommonGachaRecordItems.Count;
-        var totalAverage = 0d;
         var totalS = 0;
-        var SPercentage = 0d;
         var totalA = 0;
-        var APercentage = 0d;
         var totalB = 0;
-        var BPercentage = 0d;
-        
+
         // Calculate 1st
         var guaranteeCounter = 0;
         for (var gachaItemIndex = total - 1; gachaItemIndex >= 0; gachaItemIndex--)
@@ -114,10 +110,17 @@ public static class GachaAnalyser
             gachaItemIndex -= 9;
         }
         
-        totalAverage = total / (double)totalS;
-        SPercentage = totalS / (double)total * 100;
-        APercentage = totalA / (double)total * 100;
-        BPercentage = totalB / (double)total * 100;
+        var totalAverage = total / (double)totalS;
+        var sPercentage = Math.Round(totalS / (double)total * 100, 2);
+        var aPercentage = Math.Round(totalA / (double)total * 100, 2);
+        var bPercentage = Math.Round(totalB / (double)total * 100, 2);
+            
+        var timeRange = "Unknown";
+        if (total > 0)
+        {
+            timeRange = $"{analyzedCommonGachaRecordItems.Last().Time} - {analyzedCommonGachaRecordItems.First().Time}";
+        }
+        
         return new AnalyzedCommonGachaRecord
         {
             BasicInfo = new AnalyzedCommonBasicGachaRecord
@@ -125,11 +128,12 @@ public static class GachaAnalyser
                 Total = total,
                 TotalAverage = totalAverage,
                 TotalS = totalS,
-                SPercentage = SPercentage,
+                SPercentage = sPercentage,
                 TotalA = totalA,
-                APercentage = APercentage,
+                APercentage = aPercentage,
                 TotalB = totalB,
-                BPercentage = BPercentage
+                BPercentage = bPercentage,
+                TimeRange = timeRange
             },
             Items = analyzedCommonGachaRecordItems
         };

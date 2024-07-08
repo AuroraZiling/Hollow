@@ -70,7 +70,7 @@
                     SAverage="{Binding SelectedAnalyzedGachaRecords.StandardGachaRecords.BasicInfo.TotalAverage}"
                     SSingals="{Binding SelectedAnalyzedGachaRecords.StandardGachaRecords.BasicInfo.TotalS}"
                     SSingalsPercentage="{Binding SelectedAnalyzedGachaRecords.StandardGachaRecords.BasicInfo.SPercentage}"
-                    TimeRange="2024/07/04 09:19:17 -2024/07/08 12:44:19"
+                    TimeRange="{Binding SelectedAnalyzedGachaRecords.StandardGachaRecords.BasicInfo.TimeRange}"
                     Total="{Binding SelectedAnalyzedGachaRecords.StandardGachaRecords.BasicInfo.Total}" />
             </TabItem>
             <TabItem Classes="SignalSearch" Header="Standard Channel" />

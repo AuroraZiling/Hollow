@@ -23,6 +23,8 @@ public class AnalyzedCommonBasicGachaRecord
     
     public int TotalB { get; set; }
     public double BPercentage { get; set; }
+    
+    public required string TimeRange { get; set; }
 }
 
 public class AnalyzedCommonGachaRecordItem

@@ -1,9 +1,11 @@
 ﻿<UserControl
     x:Class="Hollow.Views.Pages.Screenshots"
     xmlns="https://github.com/avaloniaui"
+    xmlns:controls="clr-namespace:Hollow.Controls"
     xmlns:languages="clr-namespace:Hollow.Languages"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Panel>
         <TextBlock Classes="PageTitle" Text="{I18N {x:Static languages:LangKeys.Screenshots_Title}}" />
+        <controls:ProhibitedCoverage Margin="30,50,30,30" Text="该功能尚未实现" />
     </Panel>
 </UserControl>

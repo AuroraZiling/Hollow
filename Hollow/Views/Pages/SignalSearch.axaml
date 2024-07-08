@@ -1,8 +1,10 @@
 ﻿<UserControl
     x:Class="Hollow.Views.Pages.SignalSearch"
+    x:DataType="pages:SignalSearchViewModel"
     xmlns="https://github.com/avaloniaui"
     xmlns:avalonia="clr-namespace:FluentIcons.Avalonia;assembly=FluentIcons.Avalonia"
     xmlns:languages="clr-namespace:Hollow.Languages"
+    xmlns:pages="clr-namespace:Hollow.ViewModels.Pages"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Grid RowDefinitions="40, *">
         <Panel Grid.Row="0" VerticalAlignment="Center">
@@ -12,17 +14,19 @@
                 Text="{I18N {x:Static languages:LangKeys.SignalSearch_Title}}" />
             <StackPanel
                 HorizontalAlignment="Right"
+                IsEnabled="{Binding ControlEnabled}"
                 Margin="0,5,15,0"
                 Orientation="Horizontal"
                 Spacing="15"
                 VerticalAlignment="Center">
-                <ComboBox Width="150">
-                    <ComboBoxItem Content="11754143" />
-                </ComboBox>
+                <ComboBox
+                    ItemsSource="{Binding UidList}"
+                    SelectedItem="{Binding SelectedUid, Mode=TwoWay}"
+                    Width="150" />
                 <SplitButton Width="125">
                     <SplitButton.Flyout>
                         <MenuFlyout Placement="Bottom">
-                            <MenuItem Header="Web Cache" IsEnabled="False" />
+                            <MenuItem Command="{Binding UpdateByWebCachesCommand}" Header="Web Caches" />
                             <MenuItem Header="Import" IsEnabled="False" />
                             <MenuItem Header="Url" />
                         </MenuFlyout>
@@ -48,29 +52,55 @@
                         <TextBlock Text="Export" />
                     </StackPanel>
                 </Button>
-                <Button VerticalAlignment="Stretch">
-                    <StackPanel Orientation="Horizontal" Spacing="10">
-                        <avalonia:SymbolIcon
-                            FontSize="18"
-                            Foreground="White"
-                            Height="15"
-                            Symbol="Settings"
-                            Width="15" />
-                        <TextBlock Text="Settings" />
-                    </StackPanel>
-                    <Button.Flyout>
-                        <Flyout>This is the button flyout.</Flyout>
-                    </Button.Flyout>
-                </Button>
             </StackPanel>
         </Panel>
 
-        <TabControl Grid.Row="1" Margin="0,15,0,0">
+        <TabControl
+            Grid.Row="1"
+            Margin="0,15,0,0"
+            Opacity="{Binding GachaTabViewOpacity}">
             <TabItem Classes="SignalSearch" Header="Overview" />
             <TabItem Classes="SignalSearch" Header="Standard Channel" />
             <TabItem Classes="SignalSearch" Header="Exclusive Channel" />
             <TabItem Classes="SignalSearch" Header="W-Engine Channel" />
             <TabItem Classes="SignalSearch" Header="Bangboo Channel" />
+            <TabControl.Transitions>
+                <Transitions>
+                    <DoubleTransition Duration="0:0:0.3" Property="Opacity" />
+                </Transitions>
+            </TabControl.Transitions>
         </TabControl>
+
+        <Panel
+            Grid.Row="1"
+            IsHitTestVisible="False"
+            Margin="0,15,0,0"
+            Opacity="{Binding GetGachaLogCoverageOpacity}">
+            <Image Source="avares://Hollow/Assets/Zzz/zzz_sdkbg.png" />
+            <Border Background="{StaticResource CoverageBackground}" CornerRadius="10" />
+            <TextBlock
+                FontSize="56"
+                Foreground="Gray"
+                Opacity="0.3"
+                Text="{Binding GetGachaLogMessage}"
+                TextWrapping="WrapWithOverflow" />
+            <StackPanel
+                HorizontalAlignment="Center"
+                Orientation="Horizontal"
+                Spacing="20"
+                VerticalAlignment="Center">
+                <avalonia:SymbolIcon FontSize="96" Symbol="GlobeArrowUp" />
+                <StackPanel VerticalAlignment="Center">
+                    <TextBlock FontSize="34" Text="{Binding GetGachaLogTitle}" />
+                    <TextBlock FontSize="24" Text="{Binding GetGachaLogShortMessage}" />
+                </StackPanel>
+            </StackPanel>
+            <Panel.Transitions>
+                <Transitions>
+                    <DoubleTransition Duration="0:0:0.3" Property="Opacity" />
+                </Transitions>
+            </Panel.Transitions>
+        </Panel>
+
     </Grid>
 </UserControl>

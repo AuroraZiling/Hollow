@@ -51,6 +51,15 @@ public class Toast : ContentControl
         set => SetValue(TitleProperty, value);
     }
     
+    public static readonly StyledProperty<string> MessageProperty =
+        AvaloniaProperty.Register<Toast, string>(nameof(Message));
+
+    public string Message
+    {
+        get => GetValue(MessageProperty);
+        set => SetValue(MessageProperty, value);
+    }
+    
     public static readonly StyledProperty<bool> ShowActionButtonProperty =
         AvaloniaProperty.Register<Toast, bool>(nameof(ShowActionButton));
 
@@ -97,7 +106,7 @@ public class Toast : ContentControl
     {
         Host = host;
         Title = model.Title;
-        Content = model.Content;
+        Message = model.Content;
         if (model.ActionButtonContent != null || model.ActionButton != null)
         {
             ShowActionButton = true;

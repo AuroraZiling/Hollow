@@ -7,6 +7,7 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using Hollow.Models;
 using Hollow.Services.ConfigurationService;
+using Hollow.Services.GachaService;
 using Hollow.Services.GameService;
 using Hollow.Services.MiHoYoLauncherService;
 using Hollow.Services.NavigationService;
@@ -69,6 +70,7 @@ public partial class App : Application
         services.AddSingleton<IMiHoYoLauncherService, MiHoYoLauncherService>();
         services.AddSingleton<IConfigurationService, ConfigurationService>();
         services.AddSingleton<IGameService, GameService>();
+        services.AddSingleton<IGachaService, GachaService>();
 
         return services.BuildServiceProvider();
     }

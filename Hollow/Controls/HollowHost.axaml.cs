@@ -103,19 +103,19 @@ public class HollowHost : ContentControl
     public static Task ShowToast(ToastModel model) => 
         ShowToast(_mainWindow!, model);
 
-    public static Task ShowToast(string title, object content, NotificationType? type = NotificationType.Info, TimeSpan? duration = null, Action? onClicked = null) =>
+    public static Task ShowToast(string title, string content, NotificationType? type = NotificationType.Info, TimeSpan? duration = null, Action? onClicked = null) =>
         ShowToast(new ToastModel(
             title,
-            content as Control ?? TryBuild(content),
+            content,
             type ?? NotificationType.Info,
             duration ?? TimeSpan.FromSeconds(4),
             onClicked));
 
-    public static Task ShowToast(Window window, string title, object content, NotificationType? type = NotificationType.Info, TimeSpan? duration = null,
+    public static Task ShowToast(Window window, string title, string content, NotificationType? type = NotificationType.Info, TimeSpan? duration = null,
         Action? onClicked = null) =>
         ShowToast(window, new ToastModel(
             title,
-            content as Control ?? TryBuild(content),
+            content,
             type ?? NotificationType.Info,
             duration ?? TimeSpan.FromSeconds(4),
             onClicked));

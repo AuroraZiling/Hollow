@@ -71,7 +71,7 @@ public partial class SettingsViewModel : ViewModelBase, IViewModelBase
             _configurationService.AppConfig.Game.Directory = GameDirectory;
             _configurationService.Save();
         }
-        else
+        else if (!string.IsNullOrWhiteSpace(directory))
         {
             await HollowHost.ShowToast("Invalid Game Directory", "Please select a valid game directory", NotificationType.Error);
         }

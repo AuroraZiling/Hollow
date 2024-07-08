@@ -44,10 +44,10 @@
                                             Margin="0,14,0,0"
                                             Name="ButtonAction"
                                             Padding="14,6" />
-                                        <ContentPresenter
-                                            Content="{TemplateBinding Content}"
+                                        <TextBlock
                                             Foreground="{StaticResource ToastTextForeground}"
                                             Margin="12,7,0,0"
+                                            Text="{TemplateBinding Message}"
                                             TextWrapping="Wrap" />
 
                                     </DockPanel>

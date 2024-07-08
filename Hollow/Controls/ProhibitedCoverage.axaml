@@ -1,0 +1,28 @@
+﻿<ResourceDictionary
+    xmlns="https://github.com/avaloniaui"
+    xmlns:avalonia="clr-namespace:FluentIcons.Avalonia;assembly=FluentIcons.Avalonia"
+    xmlns:controls="clr-namespace:Hollow.Controls"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ControlTheme TargetType="controls:ProhibitedCoverage" x:Key="ProhibitedCoverageTheme">
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="#252525" CornerRadius="10">
+                    <StackPanel
+                        HorizontalAlignment="Center"
+                        Spacing="10"
+                        VerticalAlignment="Center">
+                        <avalonia:SymbolIcon
+                            FontSize="24"
+                            HorizontalAlignment="Center"
+                            Symbol="Warning" />
+                        <TextBlock FontFamily="18" Text="{TemplateBinding Text}" />
+                    </StackPanel>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </ControlTheme>
+    <ControlTheme
+        BasedOn="{StaticResource ProhibitedCoverageTheme}"
+        TargetType="controls:ProhibitedCoverage"
+        x:Key="{x:Type controls:ProhibitedCoverage}" />
+</ResourceDictionary>

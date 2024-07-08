@@ -33,7 +33,7 @@
         <HyperlinkButton
             Classes="PointerOverProhibited"
             HorizontalAlignment="Left"
-            Margin="30,280,0,0"
+            Margin="30,270,0,0"
             NavigateUri="{Binding VersionNewsUrl}"
             Padding="0"
             VerticalAlignment="Top"

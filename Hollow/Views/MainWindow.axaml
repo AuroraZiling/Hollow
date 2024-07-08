@@ -110,7 +110,8 @@
                 <TransitioningContentControl
                     Content="{Binding CurrentView}"
                     Grid.Column="1"
-                    Margin="30" />
+                    Margin="30"
+                    Padding="0,20,0,0" />
             </Grid>
 
 

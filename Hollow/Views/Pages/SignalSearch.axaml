@@ -5,14 +5,14 @@
     xmlns:languages="clr-namespace:Hollow.Languages"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Grid RowDefinitions="40, *">
-        <StackPanel
-            Grid.Row="0"
-            HorizontalAlignment="Left"
-            Orientation="Horizontal"
-            VerticalAlignment="Center">
-            <TextBlock Classes="PageTitle" Text="{I18N {x:Static languages:LangKeys.SignalSearch_Title}}" />
+        <Panel Grid.Row="0" VerticalAlignment="Center">
+            <TextBlock
+                Classes="PageTitle"
+                HorizontalAlignment="Left"
+                Text="{I18N {x:Static languages:LangKeys.SignalSearch_Title}}" />
             <StackPanel
-                Margin="40,5,0,0"
+                HorizontalAlignment="Right"
+                Margin="0,5,15,0"
                 Orientation="Horizontal"
                 Spacing="15"
                 VerticalAlignment="Center">
@@ -63,7 +63,7 @@
                     </Button.Flyout>
                 </Button>
             </StackPanel>
-        </StackPanel>
+        </Panel>
 
         <TabControl Grid.Row="1" Margin="0,15,0,0">
             <TabItem Classes="SignalSearch" Header="Overview" />

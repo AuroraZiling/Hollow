@@ -33,7 +33,7 @@
         <PackageReference Include="Avalonia.Fonts.Inter" Version="11.1.0-rc2" />
         <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.1.0-rc2" />
         <PackageReference Include="Avalonia.Themes.Fluent" Version="11.1.0-rc2" />
-        <PackageReference Include="Avalonia.Xaml.Behaviors" Version="11.1.0-rc1" />
+        <PackageReference Include="Avalonia.Xaml.Behaviors" Version="11.1.0-rc2" />
         <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
         <PackageReference Include="FluentIcons.Avalonia" Version="1.1.247" />
         <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
@@ -81,5 +81,6 @@
     <ItemGroup>
       <UpToDateCheckInput Remove="Views\Pages\q\.axaml" />
       <UpToDateCheckInput Remove="Assets\Html\AnnouncementTemplate.html" />
+      <UpToDateCheckInput Remove="Controls\Prohibited\NotImplementedBlock.axaml" />
     </ItemGroup>
 </Project>

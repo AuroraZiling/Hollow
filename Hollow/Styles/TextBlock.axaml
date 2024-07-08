@@ -4,7 +4,6 @@
     </Style>
     <Style Selector="TextBlock.PageTitle">
         <Setter Property="FontSize" Value="32" />
-        <Setter Property="Margin" Value="0, 0, 0, 30" />
         <Setter Property="FontFamily" Value="{StaticResource MediumFont}" />
     </Style>
     <Style Selector="TextBlock.PageSubtitle">

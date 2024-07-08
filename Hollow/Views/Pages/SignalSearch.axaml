@@ -27,9 +27,9 @@
                 <SplitButton Width="125">
                     <SplitButton.Flyout>
                         <MenuFlyout Placement="Bottom">
-                            <MenuItem Command="{Binding UpdateByWebCachesCommand}" Header="Web Caches" />
-                            <MenuItem Header="Import" IsEnabled="False" />
-                            <MenuItem Header="Url" IsEnabled="False" />
+                            <MenuItem Command="{Binding UpdateByWebCachesCommand}" Header="{I18N {x:Static languages:LangKeys.SignalSearch_Update_WebCaches}}" />
+                            <MenuItem Header="{I18N {x:Static languages:LangKeys.SignalSearch_Update_Import}}" IsEnabled="False" />
+                            <MenuItem Header="{I18N {x:Static languages:LangKeys.SignalSearch_Update_Url}}" IsEnabled="False" />
                         </MenuFlyout>
                     </SplitButton.Flyout>
                     <StackPanel Orientation="Horizontal" Spacing="10">
@@ -39,7 +39,7 @@
                             Height="15"
                             Symbol="ArrowSyncCircle"
                             Width="15" />
-                        <TextBlock Text="Update" />
+                        <TextBlock Text="{I18N {x:Static languages:LangKeys.SignalSearch_Update}}" />
                     </StackPanel>
                 </SplitButton>
                 <Button IsEnabled="False" VerticalAlignment="Stretch">
@@ -50,7 +50,7 @@
                             Height="15"
                             Symbol="ArrowUpload"
                             Width="15" />
-                        <TextBlock Text="Export" />
+                        <TextBlock Text="{I18N {x:Static languages:LangKeys.SignalSearch_Export}}" />
                     </StackPanel>
                 </Button>
             </StackPanel>
@@ -60,7 +60,7 @@
             Grid.Row="1"
             Margin="0,15,0,0"
             Opacity="{Binding GachaTabViewOpacity}">
-            <TabItem Classes="SignalSearch" Header="Overview">
+            <TabItem Classes="SignalSearch" Header="{I18N {x:Static languages:LangKeys.SignalSearch_Overview}}">
                 <Grid ColumnDefinitions="*, *, *, *">
                     <signalSearch:SignalSearchOverviewCard
                         ASingals="{Binding SelectedAnalyzedGachaRecords.StandardGachaRecords.BasicInfo.TotalA}"
@@ -68,7 +68,7 @@
                         BSingals="{Binding SelectedAnalyzedGachaRecords.StandardGachaRecords.BasicInfo.TotalB}"
                         BSingalsPercentage="{Binding SelectedAnalyzedGachaRecords.StandardGachaRecords.BasicInfo.BPercentage}"
                         Grid.Column="0"
-                        Header="Standard Channel"
+                        Header="{I18N {x:Static languages:LangKeys.SignalSearch_StandardChannel}}"
                         ProgressBars="{Binding SelectedAnalyzedGachaRecords.StandardGachaRecords.OverviewCardGachaItems}"
                         SAverage="{Binding SelectedAnalyzedGachaRecords.StandardGachaRecords.BasicInfo.TotalAverage}"
                         SSingals="{Binding SelectedAnalyzedGachaRecords.StandardGachaRecords.BasicInfo.TotalS}"
@@ -81,7 +81,7 @@
                         BSingals="{Binding SelectedAnalyzedGachaRecords.ExclusiveGachaRecords.BasicInfo.TotalB}"
                         BSingalsPercentage="{Binding SelectedAnalyzedGachaRecords.ExclusiveGachaRecords.BasicInfo.BPercentage}"
                         Grid.Column="1"
-                        Header="Exclusive Channel"
+                        Header="{I18N {x:Static languages:LangKeys.SignalSearch_ExclusiveChannel}}"
                         ProgressBars="{Binding SelectedAnalyzedGachaRecords.ExclusiveGachaRecords.OverviewCardGachaItems}"
                         SAverage="{Binding SelectedAnalyzedGachaRecords.ExclusiveGachaRecords.BasicInfo.TotalAverage}"
                         SSingals="{Binding SelectedAnalyzedGachaRecords.ExclusiveGachaRecords.BasicInfo.TotalS}"
@@ -94,7 +94,7 @@
                         BSingals="{Binding SelectedAnalyzedGachaRecords.WEngineGachaRecords.BasicInfo.TotalB}"
                         BSingalsPercentage="{Binding SelectedAnalyzedGachaRecords.WEngineGachaRecords.BasicInfo.BPercentage}"
                         Grid.Column="2"
-                        Header="W-Engine Channel"
+                        Header="{I18N {x:Static languages:LangKeys.SignalSearch_WEngineChannel}}"
                         ProgressBars="{Binding SelectedAnalyzedGachaRecords.WEngineGachaRecords.OverviewCardGachaItems}"
                         SAverage="{Binding SelectedAnalyzedGachaRecords.WEngineGachaRecords.BasicInfo.TotalAverage}"
                         SSingals="{Binding SelectedAnalyzedGachaRecords.WEngineGachaRecords.BasicInfo.TotalS}"
@@ -107,7 +107,7 @@
                         BSingals="{Binding SelectedAnalyzedGachaRecords.BangbooGachaRecords.BasicInfo.TotalB}"
                         BSingalsPercentage="{Binding SelectedAnalyzedGachaRecords.BangbooGachaRecords.BasicInfo.BPercentage}"
                         Grid.Column="3"
-                        Header="Bangboo Channel"
+                        Header="{I18N {x:Static languages:LangKeys.SignalSearch_BangbooChannel}}"
                         ProgressBars="{Binding SelectedAnalyzedGachaRecords.BangbooGachaRecords.OverviewCardGachaItems}"
                         SAverage="{Binding SelectedAnalyzedGachaRecords.BangbooGachaRecords.BasicInfo.TotalAverage}"
                         SSingals="{Binding SelectedAnalyzedGachaRecords.BangbooGachaRecords.BasicInfo.TotalS}"
@@ -116,10 +116,10 @@
                         Total="{Binding SelectedAnalyzedGachaRecords.BangbooGachaRecords.BasicInfo.Total}" />
                 </Grid>
             </TabItem>
-            <TabItem Classes="SignalSearch" Header="Standard Channel" />
-            <TabItem Classes="SignalSearch" Header="Exclusive Channel" />
-            <TabItem Classes="SignalSearch" Header="W-Engine Channel" />
-            <TabItem Classes="SignalSearch" Header="Bangboo Channel" />
+            <TabItem Classes="SignalSearch" Header="{I18N {x:Static languages:LangKeys.SignalSearch_StandardChannel}}" />
+            <TabItem Classes="SignalSearch" Header="{I18N {x:Static languages:LangKeys.SignalSearch_ExclusiveChannel}}" />
+            <TabItem Classes="SignalSearch" Header="{I18N {x:Static languages:LangKeys.SignalSearch_WEngineChannel}}" />
+            <TabItem Classes="SignalSearch" Header="{I18N {x:Static languages:LangKeys.SignalSearch_BangbooChannel}}" />
             <TabControl.Transitions>
                 <Transitions>
                     <DoubleTransition Duration="0:0:0.3" Property="Opacity" />

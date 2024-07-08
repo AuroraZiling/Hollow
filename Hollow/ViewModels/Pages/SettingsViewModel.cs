@@ -1,17 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
-using Avalonia.Controls;
-using Avalonia.Controls.Notifications;
 using Avalonia.Markup.Xaml.MarkupExtensions;
-using Avalonia.Platform.Storage;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using HarfBuzzSharp;
 using Hollow.Controls;
 using Hollow.Helpers;
 using Hollow.Languages;
@@ -26,6 +21,8 @@ namespace Hollow.ViewModels.Pages;
 
 public partial class SettingsViewModel : ViewModelBase, IViewModelBase
 {
+    [ObservableProperty] private string _appVersion = AppInfo.AppVersion;
+    
     private readonly IConfigurationService _configurationService;
     private readonly INavigationService _navigationService;
 
@@ -112,7 +109,7 @@ public partial class SettingsViewModel : ViewModelBase, IViewModelBase
 
     #endregion
 
-    #region File Management
+    #region Storage
 
     [RelayCommand]
     private void OpenAppDirectory()
@@ -120,15 +117,6 @@ public partial class SettingsViewModel : ViewModelBase, IViewModelBase
         if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
         {
             StorageHelper.OpenFolderInExplorer(Environment.CurrentDirectory);
-        }
-    }
-    
-    [RelayCommand]
-    private void OpenLogDirectory()
-    {
-        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-        {
-            StorageHelper.OpenFolderInExplorer(AppInfo.LogDir);
         }
     }
 

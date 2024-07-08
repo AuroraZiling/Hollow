@@ -48,4 +48,76 @@
     <data name="SignalSearch_Overview_Title" xml:space="preserve">
         <value>Overview</value>
     </data>
+    <data name="Special_ProhibitedCoverage_NotImplemented" xml:space="preserve">
+        <value>Feature Not Implemented</value>
+    </data>
+    <data name="Home_StartGameNotice_NavigateToSettings" xml:space="preserve">
+        <value>Go to Settings</value>
+    </data>
+    <data name="Home_StartGameNotice_GameNotFound" xml:space="preserve">
+        <value>Game Not Found</value>
+    </data>
+    <data name="Home_StartGame" xml:space="preserve">
+        <value>Start Game</value>
+    </data>
+    <data name="Settings_Subtitle_Game" xml:space="preserve">
+        <value>Game</value>
+    </data>
+    <data name="Settings_Subtitle_GameDirectory" xml:space="preserve">
+        <value>Directory</value>
+    </data>
+    <data name="Settings_Subtitle_GameArguments" xml:space="preserve">
+        <value>Arguments</value>
+    </data>
+    <data name="Settings_Subtitle_Language" xml:space="preserve">
+        <value>Language</value>
+    </data>
+    <data name="Settings_Subtitle_Storage" xml:space="preserve">
+        <value>Storage</value>
+    </data>
+    <data name="Settings_Subtitle_Storage_OpenAppFolder" xml:space="preserve">
+        <value>Open App Folder</value>
+    </data>
+    <data name="Settings_About_Version" xml:space="preserve">
+        <value>Version: {0}</value>
+    </data>
+    <data name="Settings_About_GithubRepo" xml:space="preserve">
+        <value>Github Repo</value>
+    </data>
+    <data name="Settings_About_IssueReport" xml:space="preserve">
+        <value>Issue Report</value>
+    </data>
+    <data name="Settings_About_Privacy" xml:space="preserve">
+        <value>Privacy</value>
+    </data>
+    <data name="SignalSearch_Update_WebCaches" xml:space="preserve">
+        <value>Web Caches</value>
+    </data>
+    <data name="SignalSearch_Update_Import" xml:space="preserve">
+        <value>Import</value>
+    </data>
+    <data name="SignalSearch_Update_Url" xml:space="preserve">
+        <value>Url</value>
+    </data>
+    <data name="SignalSearch_Update" xml:space="preserve">
+        <value>Update</value>
+    </data>
+    <data name="SignalSearch_Export" xml:space="preserve">
+        <value>Export</value>
+    </data>
+    <data name="SignalSearch_StandardChannel" xml:space="preserve">
+        <value>Standard Channel</value>
+    </data>
+    <data name="SignalSearch_ExclusiveChannel" xml:space="preserve">
+        <value>Exclusive Channel</value>
+    </data>
+    <data name="SignalSearch_WEngineChannel" xml:space="preserve">
+        <value>W-Engine Channel</value>
+    </data>
+    <data name="SignalSearch_BangbooChannel" xml:space="preserve">
+        <value>Bangboo Channel</value>
+    </data>
+    <data name="SignalSearch_Overview" xml:space="preserve">
+        <value>Overview</value>
+    </data>
 </root>

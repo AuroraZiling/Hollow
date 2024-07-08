@@ -114,11 +114,128 @@ namespace Hollow.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Start Game.
+        /// </summary>
+        internal static string Home_StartGame {
+            get {
+                return ResourceManager.GetString("Home_StartGame", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Game Not Found.
+        /// </summary>
+        internal static string Home_StartGameNotice_GameNotFound {
+            get {
+                return ResourceManager.GetString("Home_StartGameNotice_GameNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Go to Settings.
+        /// </summary>
+        internal static string Home_StartGameNotice_NavigateToSettings {
+            get {
+                return ResourceManager.GetString("Home_StartGameNotice_NavigateToSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Screenshots.
         /// </summary>
         internal static string Screenshots_Title {
             get {
                 return ResourceManager.GetString("Screenshots_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Github Repo.
+        /// </summary>
+        internal static string Settings_About_GithubRepo {
+            get {
+                return ResourceManager.GetString("Settings_About_GithubRepo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Issue Report.
+        /// </summary>
+        internal static string Settings_About_IssueReport {
+            get {
+                return ResourceManager.GetString("Settings_About_IssueReport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Privacy.
+        /// </summary>
+        internal static string Settings_About_Privacy {
+            get {
+                return ResourceManager.GetString("Settings_About_Privacy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Version: {0}.
+        /// </summary>
+        internal static string Settings_About_Version {
+            get {
+                return ResourceManager.GetString("Settings_About_Version", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Game.
+        /// </summary>
+        internal static string Settings_Subtitle_Game {
+            get {
+                return ResourceManager.GetString("Settings_Subtitle_Game", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Arguments.
+        /// </summary>
+        internal static string Settings_Subtitle_GameArguments {
+            get {
+                return ResourceManager.GetString("Settings_Subtitle_GameArguments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Directory.
+        /// </summary>
+        internal static string Settings_Subtitle_GameDirectory {
+            get {
+                return ResourceManager.GetString("Settings_Subtitle_GameDirectory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Language.
+        /// </summary>
+        internal static string Settings_Subtitle_Language {
+            get {
+                return ResourceManager.GetString("Settings_Subtitle_Language", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Storage.
+        /// </summary>
+        internal static string Settings_Subtitle_Storage {
+            get {
+                return ResourceManager.GetString("Settings_Subtitle_Storage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open App Folder.
+        /// </summary>
+        internal static string Settings_Subtitle_Storage_OpenAppFolder {
+            get {
+                return ResourceManager.GetString("Settings_Subtitle_Storage_OpenAppFolder", resourceCulture);
             }
         }
         
@@ -132,6 +249,42 @@ namespace Hollow.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bangboo Channel.
+        /// </summary>
+        internal static string SignalSearch_BangbooChannel {
+            get {
+                return ResourceManager.GetString("SignalSearch_BangbooChannel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exclusive Channel.
+        /// </summary>
+        internal static string SignalSearch_ExclusiveChannel {
+            get {
+                return ResourceManager.GetString("SignalSearch_ExclusiveChannel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Export.
+        /// </summary>
+        internal static string SignalSearch_Export {
+            get {
+                return ResourceManager.GetString("SignalSearch_Export", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Overview.
+        /// </summary>
+        internal static string SignalSearch_Overview {
+            get {
+                return ResourceManager.GetString("SignalSearch_Overview", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Overview.
         /// </summary>
         internal static string SignalSearch_Overview_Title {
@@ -141,11 +294,74 @@ namespace Hollow.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Standard Channel.
+        /// </summary>
+        internal static string SignalSearch_StandardChannel {
+            get {
+                return ResourceManager.GetString("SignalSearch_StandardChannel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Signal Search Records.
         /// </summary>
         internal static string SignalSearch_Title {
             get {
                 return ResourceManager.GetString("SignalSearch_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update.
+        /// </summary>
+        internal static string SignalSearch_Update {
+            get {
+                return ResourceManager.GetString("SignalSearch_Update", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Import.
+        /// </summary>
+        internal static string SignalSearch_Update_Import {
+            get {
+                return ResourceManager.GetString("SignalSearch_Update_Import", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Url.
+        /// </summary>
+        internal static string SignalSearch_Update_Url {
+            get {
+                return ResourceManager.GetString("SignalSearch_Update_Url", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Web Caches.
+        /// </summary>
+        internal static string SignalSearch_Update_WebCaches {
+            get {
+                return ResourceManager.GetString("SignalSearch_Update_WebCaches", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to W-Engine Channel.
+        /// </summary>
+        internal static string SignalSearch_WEngineChannel {
+            get {
+                return ResourceManager.GetString("SignalSearch_WEngineChannel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Feature Not Implemented.
+        /// </summary>
+        internal static string Special_ProhibitedCoverage_NotImplemented {
+            get {
+                return ResourceManager.GetString("Special_ProhibitedCoverage_NotImplemented", resourceCulture);
             }
         }
     }

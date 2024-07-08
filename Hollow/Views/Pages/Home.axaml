@@ -49,16 +49,16 @@
 
             <controls:StartGameNoticeButton
                 Command="{Binding NavigateToSettingsCommand}"
-                Message="前往设置"
+                Message="{I18N {x:Static languages:LangKeys.Home_StartGameNotice_NavigateToSettings}}"
                 Opacity="{Binding StartGameNoticeOpacity}"
-                Title="未检测到游戏" />
+                Title="{I18N {x:Static languages:LangKeys.Home_StartGameNotice_GameNotFound}}" />
 
             <controls:StartGameButton
                 Command="{Binding StartGameCommand}"
                 GameStarting="{Binding IsGameStarting}"
                 IsEnabled="{Binding IsGameStartButtonEnabled}"
                 Message="{Binding GameVersion}"
-                Title="启动游戏" />
+                Title="{I18N {x:Static languages:LangKeys.Home_StartGame}}" />
         </StackPanel>
 
         <!--  Banner  -->

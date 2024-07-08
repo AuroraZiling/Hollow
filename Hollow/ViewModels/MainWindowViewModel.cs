@@ -1,14 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Threading.Tasks;
 using Avalonia.Controls;
+using Avalonia.Markup.Xaml.MarkupExtensions;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using HarfBuzzSharp;
 using Hollow.Core.MiHoYoLauncher.Models;
 using Hollow.Helpers;
+using Hollow.Languages;
 using Hollow.Services.MiHoYoLauncherService;
 using Hollow.Services.NavigationService;
 

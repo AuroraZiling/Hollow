@@ -1,6 +1,7 @@
 ﻿using System.Globalization;
 using System.IO;
 using System.Text.Json;
+using Avalonia.Markup.Xaml.MarkupExtensions;
 using Hollow.Models;
 using Hollow.Models.Configs;
 
@@ -12,6 +13,7 @@ public class ConfigurationService: IConfigurationService
     {
         AppConfig = LoadConfiguration();
         CurrentLanguage = AppConfig.Language == "Auto" ? CultureInfo.CurrentCulture.Name : AppConfig.Language;
+        I18NExtension.Culture = AppConfig.Language != "Auto" ? new CultureInfo(AppConfig.Language) : CultureInfo.CurrentCulture;
     }
 
     public AppConfig AppConfig { get; set; }

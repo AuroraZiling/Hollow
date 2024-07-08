@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace Hollow.Models.Pages.SignalSearch;
 
@@ -47,5 +48,6 @@ public class AnalyzedCommonGachaRecordItem
 public class AnalyzedCommonGachaRecord
 {
     public required AnalyzedCommonBasicGachaRecord BasicInfo { get; set; }
+    public required ObservableCollection<OverviewCardGachaItem> OverviewCardGachaItems { get; set; }
     public required List<AnalyzedCommonGachaRecordItem> Items { get; set; }
 }

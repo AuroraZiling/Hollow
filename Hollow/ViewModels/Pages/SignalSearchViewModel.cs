@@ -38,7 +38,7 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
     
     private Dictionary<string, GachaRecords>? _gachaRecords;
     private Dictionary<string, AnalyzedGachaRecords>? _analyzedGachaRecords;
-    [ObservableProperty] private AnalyzedGachaRecords _selectedAnalyzedGachaRecords;
+    [ObservableProperty] private AnalyzedGachaRecords? _selectedAnalyzedGachaRecords;
     
     private readonly IGachaService _gachaService;
     public SignalSearchViewModel(IGachaService gachaService)
@@ -80,15 +80,9 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
         
         // Analyze
         GetGachaLogShortMessage = "Analyzing";
-        _analyzedGachaRecords = new Dictionary<string, AnalyzedGachaRecords>();
-
-        foreach (var record in _gachaRecords!)
-        {
-            var key = record.Key;
-            
-            var value = record.Value;
-            _analyzedGachaRecords.Add(key, GachaAnalyser.FromGachaRecords(value));
-        }
+        _analyzedGachaRecords = _gachaRecords!.ToDictionary(
+            item => item.Key,
+            item => GachaAnalyser.FromGachaRecords(item.Value));
 
         UidList = new ObservableCollection<string>(_gachaRecords!.Keys);
         SelectedUid = UidList[0];

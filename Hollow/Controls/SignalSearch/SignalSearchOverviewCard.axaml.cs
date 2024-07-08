@@ -1,5 +1,7 @@
-﻿using Avalonia;
+﻿using System.Collections.ObjectModel;
+using Avalonia;
 using Avalonia.Controls;
+using Hollow.Models.Pages.SignalSearch;
 
 namespace Hollow.Controls.SignalSearch;
 
@@ -93,5 +95,14 @@ public class SignalSearchOverviewCard : UserControl
     {
         get => GetValue(BSingalsPercentageProperty);
         set => SetValue(BSingalsPercentageProperty, value);
+    }
+    
+    public static readonly StyledProperty<ObservableCollection<OverviewCardGachaItem>> ProgressBarsProperty =
+        AvaloniaProperty.Register<SignalSearchOverviewCard, ObservableCollection<OverviewCardGachaItem>>(nameof(ProgressBars));
+
+    public ObservableCollection<OverviewCardGachaItem> ProgressBars
+    {
+        get => GetValue(ProgressBarsProperty);
+        set => SetValue(ProgressBarsProperty, value);
     }
 }

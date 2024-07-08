@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using Hollow.Core.Gacha.Common;
 using Hollow.Core.Gacha.Uigf;
@@ -75,6 +76,7 @@ public static class GachaAnalyser
         var totalS = 0;
         var totalA = 0;
         var totalB = 0;
+        var overviewCardGachaItems = new ObservableCollection<OverviewCardGachaItem>();
 
         // Calculate 1st
         var guaranteeCounter = 0;
@@ -86,6 +88,11 @@ public static class GachaAnalyser
             switch (analyzedCommonGachaRecordItems[gachaItemIndex].RankType)
             {
                 case "4":
+                    overviewCardGachaItems.Add(new OverviewCardGachaItem
+                    {
+                        Name = analyzedCommonGachaRecordItems[gachaItemIndex].Name,
+                        PollsUsed = guaranteeCounter
+                    });
                     guaranteeCounter = 0;
                     totalS++;
                     break;
@@ -97,6 +104,18 @@ public static class GachaAnalyser
                     break;
             }
         }
+        
+        if(guaranteeCounter > 0)
+        {
+            overviewCardGachaItems.Add(new OverviewCardGachaItem
+            {
+                Name = "Pity",
+                PollsUsed = guaranteeCounter
+            });
+        }
+
+        overviewCardGachaItems = new ObservableCollection<OverviewCardGachaItem>(overviewCardGachaItems.Reverse());
+        
         // Calculate 10 pulls
         for (var gachaItemIndex = total - 1; gachaItemIndex >= 10; gachaItemIndex--)
         {
@@ -110,10 +129,19 @@ public static class GachaAnalyser
             gachaItemIndex -= 9;
         }
         
-        var totalAverage = total / (double)totalS;
+        var totalAverage = Math.Round(total / (double)totalS, 2);
+        if (totalS == 0)
+        {
+            totalAverage = double.NaN;
+        }
+        
         var sPercentage = Math.Round(totalS / (double)total * 100, 2);
         var aPercentage = Math.Round(totalA / (double)total * 100, 2);
         var bPercentage = Math.Round(totalB / (double)total * 100, 2);
+        if (total == 0)
+        {
+            sPercentage = aPercentage = bPercentage = 0;
+        }
             
         var timeRange = "Unknown";
         if (total > 0)
@@ -135,6 +163,7 @@ public static class GachaAnalyser
                 BPercentage = bPercentage,
                 TimeRange = timeRange
             },
+            OverviewCardGachaItems = overviewCardGachaItems,
             Items = analyzedCommonGachaRecordItems
         };
     }

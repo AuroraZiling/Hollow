@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Linq;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Unicode;
@@ -11,7 +12,9 @@ using CommunityToolkit.Mvvm.Input;
 using Hollow.Controls;
 using Hollow.Core.Gacha.Uigf;
 using Hollow.Enums;
+using Hollow.Helpers;
 using Hollow.Models;
+using Hollow.Models.Pages.SignalSearch;
 using Hollow.Services.GachaService;
 
 namespace Hollow.ViewModels.Pages;
@@ -34,6 +37,9 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
     [ObservableProperty] private string _selectedUid = "";
     
     private Dictionary<string, GachaRecords>? _gachaRecords;
+    private Dictionary<string, AnalyzedGachaRecords>? _analyzedGachaRecords;
+    [ObservableProperty] private AnalyzedGachaRecords _selectedAnalyzedGachaRecords;
+    
     private readonly IGachaService _gachaService;
     public SignalSearchViewModel(IGachaService gachaService)
     {
@@ -59,8 +65,9 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
     private async Task LoadGachaRecords()
     {
         IntoCoverage();
-        await Task.Delay(1000);
-        GetGachaLogMessage = "Gacha Records";
+        
+        // Gacha Records
+        GetGachaLogShortMessage = "Gacha Records";
         if(_gachaService.GachaRecords is null)
         {
             _gachaRecords = await _gachaService.LoadGachaRecords();
@@ -69,10 +76,19 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
         {
             _gachaRecords = _gachaService.GachaRecords;
         }
+        await Task.Delay(100);
+        
+        // Analyze
+        GetGachaLogShortMessage = "Analyzing";
+        _analyzedGachaRecords = _gachaRecords!.ToDictionary(
+            item => item.Key,
+            item => GachaAnalyser.FromGachaRecords(item.Value));
 
-        Console.WriteLine(_gachaRecords!.Count);
         UidList = new ObservableCollection<string>(_gachaRecords!.Keys);
         SelectedUid = UidList[0];
+        SelectedAnalyzedGachaRecords = _analyzedGachaRecords[UidList[0]];
+        await Task.Delay(100);
+
         RemoveCoverage();
     }
 

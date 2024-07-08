@@ -5,6 +5,7 @@
     xmlns:controls="clr-namespace:Hollow.Controls"
     xmlns:languages="clr-namespace:Hollow.Languages"
     xmlns:pages="clr-namespace:Hollow.ViewModels.Pages"
+    xmlns:signalSearch="clr-namespace:Hollow.Controls.SignalSearch"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Panel>
         <TextBlock Classes="PageTitle" Text="{I18N {x:Static languages:LangKeys.GameSettings_Title}}" />

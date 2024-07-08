@@ -27,4 +27,8 @@
     <SolidColorBrush Color="{StaticResource ZzzSecondaryDarkColor}" x:Key="ZzzSecondaryDarkColorBrush" />
     <SolidColorBrush Color="{StaticResource ZzzBlackColor}" x:Key="ZzzBlackColorBrush" />
     <SolidColorBrush Color="{StaticResource ZzzGrayColor}" x:Key="ZzzGrayColorBrush" />
+
+    <Color x:Key="SignalSearchSColor">Orange</Color>
+    <Color x:Key="SignalSearchAColor">MediumPurple</Color>
+    <Color x:Key="SignalSearchBColor">RoyalBlue</Color>
 </ResourceDictionary>

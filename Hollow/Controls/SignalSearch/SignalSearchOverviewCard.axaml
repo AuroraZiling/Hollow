@@ -1,0 +1,134 @@
+﻿<ResourceDictionary
+    xmlns="https://github.com/avaloniaui"
+    xmlns:avalonia="clr-namespace:FluentIcons.Avalonia;assembly=FluentIcons.Avalonia"
+    xmlns:signalSearch="clr-namespace:Hollow.Controls.SignalSearch"
+    xmlns:signalSearchModels="clr-namespace:Hollow.Models.Pages.SignalSearch"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ControlTheme TargetType="signalSearch:SignalSearchOverviewCard" x:Key="SignalSearchOverviewCardTheme">
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Grid ColumnDefinitions="*, *, *, *">
+                    <Border
+                        Background="{StaticResource CoverageBackground}"
+                        ClipToBounds="True"
+                        CornerRadius="10"
+                        Grid.Column="0"
+                        Margin="0,0,5,0"
+                        Padding="10">
+                        <Grid RowDefinitions="50, 120, *">
+                            <Border
+                                Background="{StaticResource CoverageBackground}"
+                                CornerRadius="10"
+                                Grid.Row="0"
+                                Margin="-10,-10,-10,5"
+                                Padding="10,7,0,0">
+                                <StackPanel VerticalAlignment="Top">
+                                    <TextBlock
+                                        FontSize="16"
+                                        FontWeight="Medium"
+                                        Text="{TemplateBinding Header}" />
+                                    <TextBlock FontSize="12" Text="{TemplateBinding TimeRange}" />
+                                </StackPanel>
+                            </Border>
+                            <StackPanel
+                                Grid.Row="1"
+                                Margin="0,5,0,0"
+                                Spacing="3">
+                                <Panel>
+                                    <TextBlock HorizontalAlignment="Left" Text="Total" />
+                                    <TextBlock HorizontalAlignment="Right" Text="{TemplateBinding Total}" />
+                                </Panel>
+                                <Panel>
+                                    <TextBlock
+                                        Foreground="{StaticResource SignalSearchSColor}"
+                                        HorizontalAlignment="Left"
+                                        Text="S Average" />
+                                    <TextBlock
+                                        Foreground="{StaticResource SignalSearchSColor}"
+                                        HorizontalAlignment="Right"
+                                        Text="{TemplateBinding SAverage}" />
+                                </Panel>
+                                <Panel>
+                                    <TextBlock
+                                        Foreground="{StaticResource SignalSearchSColor}"
+                                        HorizontalAlignment="Left"
+                                        Text="S Signals" />
+                                    <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                        <TextBlock
+                                            Foreground="{StaticResource SignalSearchSColor}"
+                                            HorizontalAlignment="Right"
+                                            Text="{TemplateBinding SSingals}" />
+                                        <TextBlock
+                                            Foreground="{StaticResource SignalSearchSColor}"
+                                            HorizontalAlignment="Right"
+                                            Text="{TemplateBinding SSingalsPercentage}" />
+                                    </StackPanel>
+                                </Panel>
+                                <Panel>
+                                    <TextBlock
+                                        Foreground="{StaticResource SignalSearchAColor}"
+                                        HorizontalAlignment="Left"
+                                        Text="A Signals" />
+                                    <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                        <TextBlock
+                                            Foreground="{StaticResource SignalSearchSColor}"
+                                            HorizontalAlignment="Right"
+                                            Text="{TemplateBinding ASingals}" />
+                                        <TextBlock
+                                            Foreground="{StaticResource SignalSearchSColor}"
+                                            HorizontalAlignment="Right"
+                                            Text="{TemplateBinding ASingalsPercentage}" />
+                                    </StackPanel>
+                                </Panel>
+                                <Panel>
+                                    <TextBlock
+                                        Foreground="{StaticResource SignalSearchBColor}"
+                                        HorizontalAlignment="Left"
+                                        Text="B Signals" />
+                                    <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                        <TextBlock
+                                            Foreground="{StaticResource SignalSearchSColor}"
+                                            HorizontalAlignment="Right"
+                                            Text="{TemplateBinding BSingals}" />
+                                        <TextBlock
+                                            Foreground="{StaticResource SignalSearchSColor}"
+                                            HorizontalAlignment="Right"
+                                            Text="{TemplateBinding BSingalsPercentage}" />
+                                    </StackPanel>
+                                </Panel>
+                            </StackPanel>
+                            <ItemsControl Grid.Row="2">
+                                <!-- <ItemsControl.ItemTemplate> -->
+                                <!--     <DataTemplate DataType="signalSearchModels:OverviewCardGachaItem"> -->
+                                <!--         <ProgressBar Value="{Binding PollsUsed}"> -->
+                                <!--             <TextBlock HorizontalAlignment="Left" Text="{Binding Name}" /> -->
+                                <!--         </ProgressBar> -->
+                                <!--     </DataTemplate> -->
+                                <!-- </ItemsControl.ItemTemplate> -->
+                            </ItemsControl>
+                        </Grid>
+                    </Border>
+                    <Border
+                        Background="{StaticResource CoverageBackground}"
+                        CornerRadius="10"
+                        Grid.Column="1"
+                        Margin="0,0,5,0" />
+                    <Border
+                        Background="{StaticResource CoverageBackground}"
+                        CornerRadius="10"
+                        Grid.Column="2"
+                        Margin="0,0,5,0" />
+                    <Border
+                        Background="{StaticResource CoverageBackground}"
+                        CornerRadius="10"
+                        Grid.Column="3"
+                        Margin="0,0,5,0" />
+                </Grid>
+            </ControlTemplate>
+        </Setter>
+    </ControlTheme>
+    <ControlTheme
+        BasedOn="{StaticResource SignalSearchOverviewCardTheme}"
+        TargetType="signalSearch:SignalSearchOverviewCard"
+        x:Key="{x:Type signalSearch:SignalSearchOverviewCard}" />
+</ResourceDictionary>

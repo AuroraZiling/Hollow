@@ -67,6 +67,10 @@
       <Compile Update="Controls\StartGameNoticeButton.cs">
         <DependentUpon>StartGameNoticeButton.axaml</DependentUpon>
       </Compile>
+      <Compile Update="Controls\SignalSearch\SignalSearchOverviewCard.axaml.cs">
+        <DependentUpon>ProhibitedCoverage.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
     </ItemGroup>
 
     <ItemGroup>

@@ -5,6 +5,7 @@
     xmlns:avalonia="clr-namespace:FluentIcons.Avalonia;assembly=FluentIcons.Avalonia"
     xmlns:languages="clr-namespace:Hollow.Languages"
     xmlns:pages="clr-namespace:Hollow.ViewModels.Pages"
+    xmlns:signalSearch="clr-namespace:Hollow.Controls.SignalSearch"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Grid RowDefinitions="40, *">
         <Panel Grid.Row="0" VerticalAlignment="Center">
@@ -59,7 +60,19 @@
             Grid.Row="1"
             Margin="0,15,0,0"
             Opacity="{Binding GachaTabViewOpacity}">
-            <TabItem Classes="SignalSearch" Header="Overview" />
+            <TabItem Classes="SignalSearch" Header="Overview">
+                <signalSearch:SignalSearchOverviewCard
+                    ASingals="{Binding SelectedAnalyzedGachaRecords.StandardGachaRecords.BasicInfo.TotalA}"
+                    ASingalsPercentage="{Binding SelectedAnalyzedGachaRecords.StandardGachaRecords.BasicInfo.APercentage}"
+                    BSingals="{Binding SelectedAnalyzedGachaRecords.StandardGachaRecords.BasicInfo.TotalB}"
+                    BSingalsPercentage="{Binding SelectedAnalyzedGachaRecords.StandardGachaRecords.BasicInfo.BPercentage}"
+                    Header="Standard Channel"
+                    SAverage="{Binding SelectedAnalyzedGachaRecords.StandardGachaRecords.BasicInfo.TotalAverage}"
+                    SSingals="{Binding SelectedAnalyzedGachaRecords.StandardGachaRecords.BasicInfo.TotalS}"
+                    SSingalsPercentage="{Binding SelectedAnalyzedGachaRecords.StandardGachaRecords.BasicInfo.SPercentage}"
+                    TimeRange="2024/07/04 09:19:17 -2024/07/08 12:44:19"
+                    Total="{Binding SelectedAnalyzedGachaRecords.StandardGachaRecords.BasicInfo.Total}" />
+            </TabItem>
             <TabItem Classes="SignalSearch" Header="Standard Channel" />
             <TabItem Classes="SignalSearch" Header="Exclusive Channel" />
             <TabItem Classes="SignalSearch" Header="W-Engine Channel" />

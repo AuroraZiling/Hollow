@@ -10,13 +10,11 @@ public class GameService(IConfigurationService configurationService): IGameServi
 {
     public static bool ValidateGameDirectory(string directoryPath)
     {
+        if (!Path.Exists(directoryPath))
+        {
+            return false;
+        }
         var files = Directory.GetFiles(directoryPath);
-        return files.Any(file => file.EndsWith("config.ini")) && files.Any(file => file.EndsWith("ZenlessZoneZero.exe"));
-    }
-    
-    public bool CheckGameStartReady()
-    {
-        var files = Directory.GetFiles(configurationService.AppConfig.Game.Directory);
         return files.Any(file => file.EndsWith("config.ini")) && files.Any(file => file.EndsWith("ZenlessZoneZero.exe"));
     }
     

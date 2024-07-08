@@ -1,15 +1,76 @@
 ﻿<UserControl
     x:Class="Hollow.Views.Pages.SignalSearch"
     xmlns="https://github.com/avaloniaui"
+    xmlns:avalonia="clr-namespace:FluentIcons.Avalonia;assembly=FluentIcons.Avalonia"
     xmlns:languages="clr-namespace:Hollow.Languages"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <Panel>
-        <TextBlock Classes="PageTitle" Text="{I18N {x:Static languages:LangKeys.SignalSearch_Title}}" />
-        <TabControl Margin="0,50,0,0">
-            <TabItem Header="Overview" />
-            <TabItem Header="Standard Channel" />
-            <TabItem Header="Exclusive Channel" />
-            <TabItem Header="W-Engine Channel" />
+    <Grid RowDefinitions="40, *">
+        <StackPanel
+            Grid.Row="0"
+            HorizontalAlignment="Left"
+            Orientation="Horizontal"
+            VerticalAlignment="Center">
+            <TextBlock Classes="PageTitle" Text="{I18N {x:Static languages:LangKeys.SignalSearch_Title}}" />
+            <StackPanel
+                Margin="40,5,0,0"
+                Orientation="Horizontal"
+                Spacing="15"
+                VerticalAlignment="Center">
+                <ComboBox Width="150">
+                    <ComboBoxItem Content="11754143" />
+                </ComboBox>
+                <SplitButton Width="125">
+                    <SplitButton.Flyout>
+                        <MenuFlyout Placement="Bottom">
+                            <MenuItem Header="Web Cache" IsEnabled="False" />
+                            <MenuItem Header="Import" IsEnabled="False" />
+                            <MenuItem Header="Url" />
+                        </MenuFlyout>
+                    </SplitButton.Flyout>
+                    <StackPanel Orientation="Horizontal" Spacing="10">
+                        <avalonia:SymbolIcon
+                            FontSize="18"
+                            Foreground="White"
+                            Height="15"
+                            Symbol="ArrowSyncCircle"
+                            Width="15" />
+                        <TextBlock Text="Update" />
+                    </StackPanel>
+                </SplitButton>
+                <Button VerticalAlignment="Stretch">
+                    <StackPanel Orientation="Horizontal" Spacing="10">
+                        <avalonia:SymbolIcon
+                            FontSize="18"
+                            Foreground="White"
+                            Height="15"
+                            Symbol="ArrowUpload"
+                            Width="15" />
+                        <TextBlock Text="Export" />
+                    </StackPanel>
+                </Button>
+                <Button VerticalAlignment="Stretch">
+                    <StackPanel Orientation="Horizontal" Spacing="10">
+                        <avalonia:SymbolIcon
+                            FontSize="18"
+                            Foreground="White"
+                            Height="15"
+                            Symbol="Settings"
+                            Width="15" />
+                        <TextBlock Text="Settings" />
+                    </StackPanel>
+                    <Button.Flyout>
+                        <Flyout>This is the button flyout.</Flyout>
+                    </Button.Flyout>
+                </Button>
+            </StackPanel>
+        </StackPanel>
+
+        <TabControl Grid.Row="1" Margin="0,15,0,0">
+            <TabItem Classes="SignalSearch" Header="Overview" />
+            <TabItem Classes="SignalSearch" Header="Standard Channel" />
+            <TabItem Classes="SignalSearch" Header="Exclusive Channel" />
+            <TabItem Classes="SignalSearch" Header="W-Engine Channel" />
+            <TabItem Classes="SignalSearch" Header="Bangboo Channel" />
         </TabControl>
-    </Panel>
+    </Grid>
 </UserControl>

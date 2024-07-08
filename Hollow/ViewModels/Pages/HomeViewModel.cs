@@ -28,6 +28,7 @@ public partial class HomeViewModel: ViewModelBase, IViewModelBase
     [ObservableProperty] private string _gameVersion = "Unknown";
     
     private readonly IMiHoYoLauncherService _miHoYoLauncherService;
+    private readonly IConfigurationService _configurationService;
     private readonly IGameService _gameService;
     private readonly HttpClient _httpClient;
 
@@ -35,6 +36,7 @@ public partial class HomeViewModel: ViewModelBase, IViewModelBase
     {
         _miHoYoLauncherService = miHoYoLauncherService;
         _httpClient = httpClient;
+        _configurationService = configurationService;
         _gameService = gameService;
 
         _ = LoadContents();
@@ -45,7 +47,7 @@ public partial class HomeViewModel: ViewModelBase, IViewModelBase
 
     private void CheckStartGameReady()
     {
-        StartGameReady = _gameService.CheckGameStartReady();
+        StartGameReady = GameService.ValidateGameDirectory(_configurationService.AppConfig.Game.Directory);
         StartGameNoticeOpacity = !StartGameReady ? 1 : 0;
         if (StartGameReady)
             GameVersion = _gameService.GetGameVersion();

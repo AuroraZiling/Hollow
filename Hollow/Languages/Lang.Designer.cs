@@ -132,6 +132,15 @@ namespace Hollow.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Overview.
+        /// </summary>
+        internal static string SignalSearch_Overview_Title {
+            get {
+                return ResourceManager.GetString("SignalSearch_Overview_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Signal Search Records.
         /// </summary>
         internal static string SignalSearch_Title {

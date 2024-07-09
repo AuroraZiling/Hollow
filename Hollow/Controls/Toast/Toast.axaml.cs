@@ -122,7 +122,7 @@ public class Toast : ContentControl
         Icon = model.Type switch
         {
             NotificationType.Info => Symbol.Info,
-            NotificationType.Success => Symbol.Check,
+            NotificationType.Success => Symbol.CheckmarkCircle,
             NotificationType.Warning => Symbol.Warning,
             NotificationType.Error => Symbol.ErrorCircle,
             _ => Symbol.Info

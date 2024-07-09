@@ -115,18 +115,21 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
         IntoCoverage();
         var gachaProgress = new Progress<Response<string>>(value =>
         {
-            var data = value.Data;
-            GetGachaLogMessage = data.Replace('^', ' ')[..^1];
-            GetGachaLogShortMessage = $"Get {data.Split('^').Length} Items from {data[^1]}";
-
             if (value.Message.StartsWith("success"))
             {
                 var message = value.Message.Split(' ');
                 HollowHost.ShowToast("Success", $"{message[1]} items fetched, {message[2]} newly added",
                     NotificationType.Success);
             }
+            else
+            {
+                var data = value.Data;
+                GetGachaLogMessage = data.Replace('^', ' ')[..^1];
+                GetGachaLogShortMessage = $"Get {data.Split('^').Length} Items from {data[^1]}"; 
+            }
         });
         var gachaRecord = await _gachaService.TryGetGachaLogs(authKey.Data, gachaProgress);
+        
         await File.WriteAllTextAsync(Path.Combine(AppInfo.GachaRecordsDir, $"{gachaRecord.Data.Info.Uid}.json"), JsonSerializer.Serialize(gachaRecord.Data, new JsonSerializerOptions { WriteIndented = true, Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping }));
         await LoadGachaRecords();
         RemoveCoverage();

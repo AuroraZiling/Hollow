@@ -137,8 +137,9 @@ public partial class GachaService(IConfigurationService configurationService, Ht
         gachaRecords.Info.Uid = uid;
         gachaRecords.Info.ExportTimestamp = DateTimeOffset.Now.ToUnixTimeMilliseconds();
         gachaRecords.Info.ExportAppVersion = AppInfo.AppVersion;
-        
-        return new Response<GachaRecords>(true, $"success {fetchRecordsCount} {newRecordsCount}") {Data = gachaRecords};
+        progress.Report(new Response<string>(true, $"success {fetchRecordsCount} {newRecordsCount}"));
+
+        return new Response<GachaRecords>(true) {Data = gachaRecords};
     }
     
     public async Task<bool> IsAuthKeyValid(string authKey)

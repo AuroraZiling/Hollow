@@ -67,7 +67,7 @@ public partial class HomeViewModel: ViewModelBase, IViewModelBase
     [RelayCommand]
     private void NavigateToSettings()
     {
-        App.GetService<INavigationService>().Navigate(2);
+        App.GetService<INavigationService>().Navigate(5);
     }
 
     private async Task LoadContents()

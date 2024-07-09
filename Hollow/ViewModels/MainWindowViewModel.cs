@@ -52,6 +52,8 @@ public partial class MainWindowViewModel : ViewModelBase
         Blur = DisplayPageId == 0 ? 1 : 20;
         CoverageOpacity = DisplayPageId == 0 ? 0 : 1;
         NavigationOpacity = DisplayPageId == 0 ? 1 : 0;
+
+        DisplayPageId = _navigationService.CurrentViewId;
         
         if (DisplayPageId == 0)
             NavigatedToHome?.Invoke();

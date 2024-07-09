@@ -5,11 +5,13 @@ namespace Hollow.Services.NavigationService;
 public class NavigationService: INavigationService
 {
     public string CurrentViewName { get; set; } = "Home";
+    public int CurrentViewId { get; set; } = 0;
     
     public Action? CurrentViewChanged { get; set; }
     
     public void Navigate(int destination)
     {
+        CurrentViewId = destination;
         CurrentViewName = destination switch
         {
             0 => "Home",

@@ -53,6 +53,7 @@
             <TabControl
                 Name="NavigationTabControl"
                 Padding="0"
+                SelectedIndex="{Binding DisplayPageId, Mode=TwoWay}"
                 TabStripPlacement="Left">
                 <TabItem Classes="GameIcon" HorizontalAlignment="Center">
                     <TabItem.Header>

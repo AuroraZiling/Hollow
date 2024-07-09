@@ -8,10 +8,10 @@ namespace Hollow.Views.Pages;
 
 public partial class Home : UserControl
 {
-    public Home(HomeViewModel homeViewModel)
+    public Home()
     {
         InitializeComponent();
-        DataContext = homeViewModel;
+        DataContext = App.GetService<HomeViewModel>();
     }
 
     private void PreviousBanner(object? sender, RoutedEventArgs e)

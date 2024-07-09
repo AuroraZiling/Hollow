@@ -14,10 +14,12 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:acrylic="clr-namespace:Hollow.Controls.Acrylic"
     xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
+    xmlns:avalonia="clr-namespace:FluentIcons.Avalonia;assembly=FluentIcons.Avalonia"
     xmlns:controls="clr-namespace:Hollow.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:markupExtensions="clr-namespace:FluentIcons.Avalonia.MarkupExtensions;assembly=FluentIcons.Avalonia"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:pages="clr-namespace:Hollow.Views.Pages"
     xmlns:vm="using:Hollow.ViewModels"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
@@ -30,89 +32,73 @@
                 IsHitTestVisible="False"
                 Stretch="UniformToFill"
                 asyncImageLoader:ImageLoader.Source="{Binding BackgroundUrl}" />
-            <!--  Navigation View  -->
-            <Grid ColumnDefinitions="70, *">
-                <acrylic:Acrylic
-                    Blur="{Binding Blur}"
-                    Grid.Column="0"
-                    Grid.ColumnSpan="2"
-                    Opacity="{Binding CoverageOpacity}">
-                    <acrylic:Acrylic.Transitions>
-                        <Transitions>
-                            <IntegerTransition Duration="0:0:0.125" Property="Blur" />
-                        </Transitions>
-                    </acrylic:Acrylic.Transitions>
-                </acrylic:Acrylic>
-                <Panel Grid.Column="0">
-                    <Panel.Styles>
-                        <Style Selector="RadioButton">
-                            <Setter Property="Command" Value="{Binding NavigateCommand}" />
-                            <Setter Property="GroupName" Value="NavigationViewButtons" />
-                        </Style>
-                    </Panel.Styles>
-                    <acrylic:Acrylic Blur="20" Opacity="{Binding NavigationOpacity}">
-                        <acrylic:Acrylic.Transitions>
-                            <Transitions>
-                                <IntegerTransition Duration="0:0:0.125" Property="Blur" />
-                            </Transitions>
-                        </acrylic:Acrylic.Transitions>
-                    </acrylic:Acrylic>
-                    <StackPanel Margin="10,12,10,0" Spacing="12">
-                        <RadioButton
-                            Classes="GameIcon"
-                            CommandParameter="Home"
-                            HorizontalAlignment="Center"
-                            IsChecked="{Binding DisplayHome}">
-                            <Image Source="{Binding GameIcon}" Stretch="UniformToFill" />
-                        </RadioButton>
-                        <RadioButton
-                            BorderBrush="IndianRed"
-                            Classes="Navigation"
-                            CommandParameter="Announcements"
-                            Content="{markupExtensions:SymbolIcon Symbol=Megaphone,
-                                                                  FontSize=35}"
-                            IsChecked="{Binding DisplayAnnouncements}" />
-                        <RadioButton
-                            BorderBrush="{StaticResource ZzzPrimaryColorBrush}"
-                            Classes="Navigation"
-                            CommandParameter="GameSettings"
-                            Content="{markupExtensions:SymbolIcon Symbol=Games,
-                                                                  FontSize=35}"
-                            IsChecked="{Binding DisplayGameSettings}" />
-                        <RadioButton
-                            BorderBrush="{StaticResource ZzzSecondaryColorBrush}"
-                            Classes="Navigation"
-                            CommandParameter="SignalSearch"
-                            Content="{markupExtensions:SymbolIcon Symbol=DataPie,
-                                                                  FontSize=35}"
-                            IsChecked="{Binding DisplaySignalSearch}" />
-                        <RadioButton
-                            BorderBrush="MediumPurple"
-                            Classes="Navigation"
-                            CommandParameter="Screenshots"
-                            Content="{markupExtensions:SymbolIcon Symbol=Screenshot,
-                                                                  FontSize=35}"
-                            IsChecked="{Binding DisplayScreenshots}" />
-                    </StackPanel>
-
-                    <RadioButton
-                        BorderBrush="White"
-                        Classes="Navigation"
-                        CommandParameter="Settings"
-                        Content="{markupExtensions:SymbolIcon Symbol=Settings,
-                                                              FontSize=35}"
-                        IsChecked="{Binding DisplaySettings}"
-                        Margin="10"
-                        VerticalAlignment="Bottom" />
-                </Panel>
-
-                <!--  Page  -->
-                <TransitioningContentControl
-                    Content="{Binding CurrentView}"
-                    Grid.Column="1"
-                    Margin="30"
-                    Padding="0,20,0,0" />
-            </Grid>
+            <acrylic:Acrylic
+                Blur="20"
+                HorizontalAlignment="Left"
+                Opacity="{Binding NavigationOpacity}"
+                Width="70">
+                <acrylic:Acrylic.Transitions>
+                    <Transitions>
+                        <IntegerTransition Duration="0:0:0.125" Property="Blur" />
+                    </Transitions>
+                </acrylic:Acrylic.Transitions>
+            </acrylic:Acrylic>
+            <acrylic:Acrylic Blur="{Binding Blur}" Opacity="{Binding CoverageOpacity}">
+                <acrylic:Acrylic.Transitions>
+                    <Transitions>
+                        <IntegerTransition Duration="0:0:0.2" Property="Blur" />
+                    </Transitions>
+                </acrylic:Acrylic.Transitions>
+            </acrylic:Acrylic>
+            <TabControl
+                Name="NavigationTabControl"
+                Padding="0"
+                TabStripPlacement="Left">
+                <TabItem Classes="GameIcon" HorizontalAlignment="Center">
+                    <TabItem.Header>
+                        <Image Source="{Binding GameIcon}" Stretch="UniformToFill" />
+                    </TabItem.Header>
+                    <pages:Home Margin="10,0,0,0" />
+                </TabItem>
+                <TabItem BorderBrush="IndianRed" Classes="Navigation">
+                    <TabItem.Header>
+                        <avalonia:SymbolIcon FontSize="35" Symbol="Megaphone" />
+                    </TabItem.Header>
+                    <pages:Announcements Margin="40,40,30,30" />
+                </TabItem>
+                <TabItem BorderBrush="{StaticResource ZzzPrimaryColorBrush}" Classes="Navigation">
+                    <TabItem.Header>
+                        <avalonia:SymbolIcon FontSize="35" Symbol="Games" />
+                    </TabItem.Header>
+                    <pages:GameSettings Margin="40,40,30,30" />
+                </TabItem>
+                <TabItem BorderBrush="{StaticResource ZzzSecondaryColorBrush}" Classes="Navigation">
+                    <TabItem.Header>
+                        <avalonia:SymbolIcon FontSize="35" Symbol="DataPie" />
+                    </TabItem.Header>
+                    <pages:SignalSearch Margin="40,40,30,30" />
+                </TabItem>
+                <TabItem BorderBrush="MediumPurple" Classes="Navigation">
+                    <TabItem.Header>
+                        <avalonia:SymbolIcon FontSize="35" Symbol="Screenshot" />
+                    </TabItem.Header>
+                    <pages:Screenshots Margin="40,40,30,30" />
+                </TabItem>
+                <TabItem
+                    BorderBrush="White"
+                    Classes="Navigation"
+                    Margin="10,330,0,0">
+                    <TabItem.Header>
+                        <avalonia:SymbolIcon FontSize="35" Symbol="Settings" />
+                    </TabItem.Header>
+                    <pages:Settings Margin="40,40,30,30" />
+                </TabItem>
+                <Interaction.Behaviors>
+                    <EventTriggerBehavior EventName="SelectionChanged" SourceObject="NavigationTabControl">
+                        <InvokeCommandAction Command="{Binding ChangePageCommand}" CommandParameter="{Binding ElementName=NavigationTabControl, Path=SelectedIndex}" />
+                    </EventTriggerBehavior>
+                </Interaction.Behaviors>
+            </TabControl>
 
 
             <!--  Window Title - Decorations  -->

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Http;
+using System.Threading.Tasks;
 using Avalonia.WebView.Windows.Core;
 using AvaloniaWebView;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -11,7 +12,10 @@ using WebViewCore.Events;
 
 namespace Hollow.ViewModels.Pages;
 
-public partial class AnnouncementsViewModel : ViewModelBase, IViewModelBase
+public partial class AnnouncementsViewModel(
+    IMiHoYoLauncherService miHoYoLauncherService,
+    INavigationService navigationService)
+    : ViewModelBase, IViewModelBase
 {
     private const string Script = """
                                    window.onload = function() {
@@ -61,30 +65,26 @@ public partial class AnnouncementsViewModel : ViewModelBase, IViewModelBase
 
     public void Navigated()
     {
-        if (_navigationService.CurrentViewName == "Announcements")
-        {
-        }
+        
     }
 
     [ObservableProperty] private string? _announcementHtmlContent;
-    private readonly IMiHoYoLauncherService _miHoYoLauncherService;
-    private readonly INavigationService _navigationService;
-    public AnnouncementsViewModel(IMiHoYoLauncherService miHoYoLauncherService, INavigationService navigationService)
-    {
-        _miHoYoLauncherService = miHoYoLauncherService;
-        _navigationService = navigationService;
-        
-        _navigationService.CurrentViewChanged += Navigated;
-    }
-    
+    [ObservableProperty] private double _announcementLoadingCoverageOpacity = 1;
+    [ObservableProperty] private bool _announcementLoaded;
+
     public void GameAnnouncementWebView_OnWebViewCreated(object? sender, WebViewCreatedEventArgs e)
     {
+        AnnouncementLoadingCoverageOpacity = 1;
+        AnnouncementLoaded = false;
         //TODO: Platform specific
         if (Announcements.AnnouncementWebView.PlatformWebView is WebView2Core webView2Core)
         {
             webView2Core.CoreWebView2!.DOMContentLoaded += async (_, _) =>
             {
                 await webView2Core.CoreWebView2.ExecuteScriptAsync(Script);
+                await Task.Delay(1500);
+                AnnouncementLoadingCoverageOpacity = 0;
+                AnnouncementLoaded = true;
             };
         }
     }

@@ -20,15 +20,7 @@ namespace Hollow.ViewModels;
 
 public partial class MainWindowViewModel : ViewModelBase
 {
-    [ObservableProperty]
-    private UserControl _currentView;
-
-    [ObservableProperty] private bool _displayHome = true;
-    [ObservableProperty] private bool _displayAnnouncements;
-    [ObservableProperty] private bool _displayGameSettings;
-    [ObservableProperty] private bool _displaySignalSearch;
-    [ObservableProperty] private bool _displayScreenshots;
-    [ObservableProperty] private bool _displaySettings;
+    [ObservableProperty] private int _displayPageId;
     
     [ObservableProperty] private int _blur;
     [ObservableProperty] private double _coverageOpacity;
@@ -47,7 +39,6 @@ public partial class MainWindowViewModel : ViewModelBase
         _navigationService = navigationService;
         _miHoYoLauncherService = miHoYoLauncherService;
 
-        _currentView = _navigationService.CurrentView;
         _navigationService.CurrentViewChanged += OnNavigating;
         
         // Load game icon
@@ -66,22 +57,18 @@ public partial class MainWindowViewModel : ViewModelBase
     
     private void OnNavigating()
     {
-        CurrentView = _navigationService.CurrentView;
-        DisplayHome = _navigationService.CurrentViewName == "Home";
-        DisplayAnnouncements = _navigationService.CurrentViewName == "Announcements";
-        DisplayGameSettings = _navigationService.CurrentViewName == "GameSettings";
-        DisplaySignalSearch = _navigationService.CurrentViewName == "SignalSearch";
-        DisplayScreenshots = _navigationService.CurrentViewName == "Screenshots";
-        DisplaySettings = _navigationService.CurrentViewName == "Settings";
+        Blur = DisplayPageId == 0 ? 1 : 20;
+        CoverageOpacity = DisplayPageId == 0 ? 0 : 1;
+        NavigationOpacity = DisplayPageId == 0 ? 1 : 0;
         
-        Blur = DisplayHome ? 1 : 20;
-        CoverageOpacity = DisplayHome ? 0 : 1;
-        NavigationOpacity = DisplayHome ? 1 : 0;
-        
-        if (DisplayHome)
+        if (DisplayPageId == 0)
             NavigatedToHome?.Invoke();
     }
-    
+
     [RelayCommand]
-    private void Navigate(string destination) => _navigationService.Navigate(destination);
+    private void ChangePage(int destinationId)
+    {
+        DisplayPageId = destinationId;
+        _navigationService.Navigate(destinationId);
+    }
 }

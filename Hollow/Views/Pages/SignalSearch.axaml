@@ -3,6 +3,7 @@
     x:DataType="pages:SignalSearchViewModel"
     xmlns="https://github.com/avaloniaui"
     xmlns:avalonia="clr-namespace:FluentIcons.Avalonia;assembly=FluentIcons.Avalonia"
+    xmlns:controls="clr-namespace:Hollow.Controls"
     xmlns:languages="clr-namespace:Hollow.Languages"
     xmlns:pages="clr-namespace:Hollow.ViewModels.Pages"
     xmlns:signalSearch="clr-namespace:Hollow.Controls.SignalSearch"
@@ -128,36 +129,13 @@
             </TabControl.Transitions>
         </TabControl>
 
-        <Panel
+        <controls:LoadingCoverage
+            BackgroundText="{Binding GetGachaLogMessage}"
             Grid.Row="1"
-            IsHitTestVisible="False"
             Margin="0,15,0,0"
-            Opacity="{Binding GetGachaLogCoverageOpacity}">
-            <Image Source="avares://Hollow/Assets/Zzz/zzz_sdkbg.png" />
-            <Border Background="{StaticResource CoverageBackground}" CornerRadius="10" />
-            <TextBlock
-                FontSize="56"
-                Foreground="Gray"
-                Opacity="0.3"
-                Text="{Binding GetGachaLogMessage}"
-                TextWrapping="WrapWithOverflow" />
-            <StackPanel
-                HorizontalAlignment="Center"
-                Orientation="Horizontal"
-                Spacing="20"
-                VerticalAlignment="Center">
-                <avalonia:SymbolIcon FontSize="96" Symbol="GlobeArrowUp" />
-                <StackPanel VerticalAlignment="Center">
-                    <TextBlock FontSize="34" Text="{Binding GetGachaLogTitle}" />
-                    <TextBlock FontSize="24" Text="{Binding GetGachaLogShortMessage}" />
-                </StackPanel>
-            </StackPanel>
-            <Panel.Transitions>
-                <Transitions>
-                    <DoubleTransition Duration="0:0:0.3" Property="Opacity" />
-                </Transitions>
-            </Panel.Transitions>
-        </Panel>
+            Message="{Binding GetGachaLogShortMessage}"
+            Opacity="{Binding GetGachaLogCoverageOpacity}"
+            Title="{Binding GetGachaLogTitle}" />
 
     </Grid>
 </UserControl>

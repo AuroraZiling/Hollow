@@ -2,11 +2,24 @@
     x:Class="Hollow.Views.Pages.Announcements"
     x:DataType="pages:AnnouncementsViewModel"
     xmlns="https://github.com/avaloniaui"
+    xmlns:controls="clr-namespace:Hollow.Controls"
+    xmlns:languages="clr-namespace:Hollow.Languages"
     xmlns:pages="clr-namespace:Hollow.ViewModels.Pages"
     xmlns:webView="clr-namespace:Hollow.Controls.WebView.Avalonia.WebView"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Border Height="540" Width="1000">
-        <webView:WebView CornerRadius="100" Name="GameAnnouncementWebView" />
+        <Panel>
+            <controls:LoadingCoverage
+                Margin="0,15,0,0"
+                Message="{I18N {x:Static languages:LangKeys.Announcement_Loading_Message}}"
+                Opacity="{Binding AnnouncementLoadingCoverageOpacity}"
+                Title="{I18N {x:Static languages:LangKeys.Announcement_Loading}}" />
+
+            <webView:WebView
+                CornerRadius="100"
+                IsVisible="{Binding AnnouncementLoaded}"
+                Name="GameAnnouncementWebView" />
+        </Panel>
     </Border>
 
 </UserControl>

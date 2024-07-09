@@ -1,4 +1,5 @@
 ﻿using Avalonia.Controls;
+using Hollow.Controls.WebView.Avalonia.WebView;
 using Hollow.Services.MiHoYoLauncherService;
 using Hollow.ViewModels.Pages;
 
@@ -6,13 +7,13 @@ namespace Hollow.Views.Pages;
 
 public partial class Announcements : UserControl
 {
-    public static Controls.WebView.Avalonia.WebView.WebView AnnouncementWebView { get; set; } = null!;
+    public static WebView AnnouncementWebView { get; set; } = null!;
     
-    private readonly IMiHoYoLauncherService _miHoYoLauncherService;
-    public Announcements(AnnouncementsViewModel announcementsViewModel, IMiHoYoLauncherService miHoYoLauncherService)
+    public Announcements()
     {
-        _miHoYoLauncherService = miHoYoLauncherService;
         InitializeComponent();
+        
+        var announcementsViewModel = App.GetService<AnnouncementsViewModel>();
         DataContext = announcementsViewModel;
         AnnouncementWebView = GameAnnouncementWebView;
         AnnouncementWebView.NavigationStarting += announcementsViewModel.GameAnnouncementWebView_OnNavigationStarting;

@@ -5,9 +5,9 @@ namespace Hollow.Views.Pages;
 
 public partial class SignalSearch : UserControl
 {
-    public SignalSearch(SignalSearchViewModel viewModel)
+    public SignalSearch()
     {
         InitializeComponent();
-        DataContext = viewModel;
+        DataContext = App.GetService<SignalSearchViewModel>();
     }
 }

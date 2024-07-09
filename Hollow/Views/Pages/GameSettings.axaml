@@ -1,4 +1,5 @@
 ﻿<UserControl
+    Margin="30"
     x:Class="Hollow.Views.Pages.GameSettings"
     x:DataType="pages:GameSettingsViewModel"
     xmlns="https://github.com/avaloniaui"

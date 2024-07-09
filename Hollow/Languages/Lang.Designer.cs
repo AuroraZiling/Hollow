@@ -78,6 +78,24 @@ namespace Hollow.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Loading....
+        /// </summary>
+        internal static string Announcement_Loading {
+            get {
+                return ResourceManager.GetString("Announcement_Loading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Getting announcements.
+        /// </summary>
+        internal static string Announcement_Loading_Message {
+            get {
+                return ResourceManager.GetString("Announcement_Loading_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Game Settings.
         /// </summary>
         internal static string GameSettings_Title {

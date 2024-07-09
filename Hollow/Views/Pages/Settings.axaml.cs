@@ -7,9 +7,9 @@ namespace Hollow.Views.Pages;
 
 public partial class Settings : UserControl
 {
-    public Settings(SettingsViewModel viewModel)
+    public Settings()
     {
         InitializeComponent();
-        DataContext = viewModel;
+        DataContext = App.GetService<SettingsViewModel>();
     }
 }

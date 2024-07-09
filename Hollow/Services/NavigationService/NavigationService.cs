@@ -7,24 +7,22 @@ namespace Hollow.Services.NavigationService;
 
 public class NavigationService: INavigationService
 {
-    public UserControl CurrentView { get; set; } = App.GetService<Home>();
     public string CurrentViewName { get; set; } = "Home";
     
     public Action? CurrentViewChanged { get; set; }
     
-    public void Navigate(string destination)
+    public void Navigate(int destination)
     {
-        CurrentView = destination switch
+        CurrentViewName = destination switch
         {
-            "Home" => App.GetService<Home>(),
-            "Announcements" => App.GetService<Announcements>(),
-            "GameSettings" => App.GetService<GameSettings>(),
-            "SignalSearch" => App.GetService<SignalSearch>(),
-            "Screenshots" => App.GetService<Screenshots>(),
-            "Settings" => App.GetService<Settings>(),
+            0 => "Home",
+            1 => "Announcements",
+            2 => "GameSettings",
+            3 => "SignalSearch",
+            4 => "Screenshots",
+            5 => "Settings",
             _ => throw new ArgumentException("Invalid destination")
         };
-        CurrentViewName = destination;
         CurrentViewChanged?.Invoke();
     }
 }

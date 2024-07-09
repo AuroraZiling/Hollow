@@ -53,4 +53,13 @@ partial class WebView
         await Navigate(Url);
         await NavigateToString(HtmlContent);
     }
+
+    protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
+    {        
+        base.OnDetachedFromVisualTree(e);
+        _partInnerContainer.Child = null;
+        _platformWebView?.Dispose();
+        _platformWebView = null;
+        
+    }
 }

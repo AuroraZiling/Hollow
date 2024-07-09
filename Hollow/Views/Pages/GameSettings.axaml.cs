@@ -1,16 +1,13 @@
-﻿using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Markup.Xaml;
-using Avalonia.Media;
+﻿using Avalonia.Controls;
 using Hollow.ViewModels.Pages;
 
 namespace Hollow.Views.Pages;
 
 public partial class GameSettings : UserControl
 {
-    public GameSettings(GameSettingsViewModel gameSettingsViewModel)
+    public GameSettings()
     {
         InitializeComponent();
-        DataContext = gameSettingsViewModel;
+        DataContext = App.GetService<GameSettingsViewModel>();
     }
 }

@@ -1,0 +1,43 @@
+﻿<ResourceDictionary
+    xmlns="https://github.com/avaloniaui"
+    xmlns:avalonia="clr-namespace:FluentIcons.Avalonia;assembly=FluentIcons.Avalonia"
+    xmlns:controls="clr-namespace:Hollow.Controls"
+    xmlns:signalSearch="clr-namespace:Hollow.Controls.SignalSearch"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ControlTheme TargetType="controls:LoadingCoverage" x:Key="LoadingCoverageTheme">
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Panel IsHitTestVisible="False" Opacity="{TemplateBinding Opacity}">
+                    <Image Source="avares://Hollow/Assets/Zzz/zzz_sdkbg.png" />
+                    <Border Background="{StaticResource CoverageBackground}" CornerRadius="10" />
+                    <TextBlock
+                        FontSize="56"
+                        Foreground="Gray"
+                        Opacity="0.3"
+                        Text="{TemplateBinding BackgroundText}"
+                        TextWrapping="WrapWithOverflow" />
+                    <StackPanel
+                        HorizontalAlignment="Center"
+                        Orientation="Horizontal"
+                        Spacing="20"
+                        VerticalAlignment="Center">
+                        <avalonia:SymbolIcon FontSize="96" Symbol="GlobeArrowUp" />
+                        <StackPanel VerticalAlignment="Center">
+                            <TextBlock FontSize="34" Text="{TemplateBinding Title}" />
+                            <TextBlock FontSize="24" Text="{TemplateBinding Message}" />
+                        </StackPanel>
+                    </StackPanel>
+                    <Panel.Transitions>
+                        <Transitions>
+                            <DoubleTransition Duration="0:0:0.3" Property="Opacity" />
+                        </Transitions>
+                    </Panel.Transitions>
+                </Panel>
+            </ControlTemplate>
+        </Setter>
+    </ControlTheme>
+    <ControlTheme
+        BasedOn="{StaticResource LoadingCoverageTheme}"
+        TargetType="controls:LoadingCoverage"
+        x:Key="{x:Type controls:LoadingCoverage}" />
+</ResourceDictionary>

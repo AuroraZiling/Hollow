@@ -24,8 +24,15 @@
                 <ComboBox
                     IsVisible="{Binding RelativeSource={RelativeSource Self}, Path=SelectedItem, Converter={x:Static ObjectConverters.IsNotNull}}"
                     ItemsSource="{Binding UidList}"
+                    Name="UidComboBox"
                     SelectedItem="{Binding SelectedUid, Mode=TwoWay}"
-                    Width="150" />
+                    Width="150">
+                    <Interaction.Behaviors>
+                        <EventTriggerBehavior EventName="SelectionChanged" SourceObject="UidComboBox">
+                            <InvokeCommandAction Command="{Binding ChangeUidCommand}" />
+                        </EventTriggerBehavior>
+                    </Interaction.Behaviors>
+                </ComboBox>
                 <SplitButton Width="125">
                     <SplitButton.Flyout>
                         <MenuFlyout Placement="Bottom">

@@ -105,6 +105,12 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
     }
 
     [RelayCommand]
+    private void ChangeUid()
+    {
+        SelectedAnalyzedGachaRecords = _analyzedGachaRecords![SelectedUid];
+    }
+
+    [RelayCommand]
     private async Task UpdateByWebCaches()
     {
         var authKey = _gachaService.TryGetAuthKey();

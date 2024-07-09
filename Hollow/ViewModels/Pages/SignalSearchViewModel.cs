@@ -126,7 +126,7 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
             else
             {
                 var data = value.Data.Split('^');
-                var gachaType = data[^1] switch
+                var gachaType = data[^2] switch
                 {
                     "1" => Lang.SignalSearch_StandardChannel,
                     "2" => Lang.SignalSearch_ExclusiveChannel,
@@ -136,7 +136,7 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
                 };
                 GetGachaLogMessage = string.Join(' ', data[..^3]);
                 GetGachaLogTitle = string.Format(Lang.SignalSearch_Update_ProgressTitle, gachaType);
-                GetGachaLogShortMessage = $"UID {data[^3]} | {string.Format(Lang.SignalSearch_Update_ProgressMessage, data.Length-3, data[^2])}"; 
+                GetGachaLogShortMessage = $"UID {data[^3]} | {string.Format(Lang.SignalSearch_Update_ProgressMessage, data.Length-3, data[^1])}"; 
             }
         });
         var gachaRecord = await _gachaService.TryGetGachaLogs(authKey.Data, gachaProgress);

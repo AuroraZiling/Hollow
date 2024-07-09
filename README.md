@@ -1,6 +1,4 @@
-<div align="center">
-  <img src="https://i.ibb.co/SxZB24f/icon.webp" alt="icon"/>
-</div>
+
 <h1 align="center">Hollow</h1>
 <p align="center">《绝区零》工具箱 / Zenless Zone Zero Toolbox</p>
 

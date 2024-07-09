@@ -3,12 +3,10 @@
     x:DataType="pages:AnnouncementsViewModel"
     xmlns="https://github.com/avaloniaui"
     xmlns:pages="clr-namespace:Hollow.ViewModels.Pages"
-    xmlns:webViewControl="clr-namespace:WebViewControl;assembly=WebViewControl.Avalonia"
+    xmlns:webView="clr-namespace:Hollow.Controls.WebView.Avalonia.WebView"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <webViewControl:WebView
-        Address="{Binding AnnouncementUrl}"
-        Margin="-180"
-        Name="GameAnnouncementWebView"
-        Navigated="GameAnnouncementWebView_OnNavigated" />
+    <Border Height="540" Width="1000">
+        <webView:WebView CornerRadius="100" Name="GameAnnouncementWebView" />
+    </Border>
 
 </UserControl>

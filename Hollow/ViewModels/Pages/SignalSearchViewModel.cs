@@ -78,14 +78,7 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
         
         // Gacha Records
         GetGachaLogShortMessage = "Gacha Records";
-        if(_gachaService.GachaRecords is null)
-        {
-            _gachaRecords = await _gachaService.LoadGachaRecords();
-        }
-        else
-        {
-            _gachaRecords = _gachaService.GachaRecords;
-        }
+        _gachaRecords = await _gachaService.LoadGachaRecords();
 
         if (_gachaRecords is null || _gachaRecords!.Count == 0)
         {
@@ -112,8 +105,6 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
     [RelayCommand]
     private async Task UpdateByWebCaches()
     {
-        Console.WriteLine(SelectedUid);
-        return;
         var authKey = await _gachaService.TryGetAuthKey();
         if (!authKey.IsSuccess)
         {
@@ -127,6 +118,13 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
             var data = value.Data;
             GetGachaLogMessage = data.Replace('^', ' ')[..^1];
             GetGachaLogShortMessage = $"Get {data.Split('^').Length} Items from {data[^1]}";
+
+            if (value.Message.StartsWith("success"))
+            {
+                var message = value.Message.Split(' ');
+                HollowHost.ShowToast("Success", $"{message[1]} items fetched, {message[2]} newly added",
+                    NotificationType.Success);
+            }
         });
         var gachaRecord = await _gachaService.TryGetGachaLogs(authKey.Data, gachaProgress);
         await File.WriteAllTextAsync(Path.Combine(AppInfo.GachaRecordsDir, $"{gachaRecord.Data.Info.Uid}.json"), JsonSerializer.Serialize(gachaRecord.Data, new JsonSerializerOptions { WriteIndented = true, Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping }));

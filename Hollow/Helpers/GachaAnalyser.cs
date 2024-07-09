@@ -168,6 +168,6 @@ public static class GachaAnalyser
         };
     }
 
-    private static long GetTimestamp(string time)
+    public static long GetTimestamp(string time)
         => (DateTime.Parse(time).ToUniversalTime().Ticks - 621355968000000000) / 10000000;
 }

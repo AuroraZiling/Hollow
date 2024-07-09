@@ -75,7 +75,7 @@
                         SSingals="{Binding SelectedAnalyzedGachaRecords.StandardGachaRecords.BasicInfo.TotalS}"
                         SSingalsPercentage="{Binding SelectedAnalyzedGachaRecords.StandardGachaRecords.BasicInfo.SPercentage}"
                         TimeRange="{Binding SelectedAnalyzedGachaRecords.StandardGachaRecords.BasicInfo.TimeRange}"
-                        Total="{Binding SelectedAnalyzedGachaRecords.StandardGachaRecords.BasicInfo.Total}" />
+                        Total="{Binding SelectedAnalyzedGachaRecords.StandardGachaRecords.BasicInfo.Total, UpdateSourceTrigger=PropertyChanged}" />
                     <signalSearch:SignalSearchOverviewCard
                         ASingals="{Binding SelectedAnalyzedGachaRecords.ExclusiveGachaRecords.BasicInfo.TotalA}"
                         ASingalsPercentage="{Binding SelectedAnalyzedGachaRecords.ExclusiveGachaRecords.BasicInfo.APercentage}"

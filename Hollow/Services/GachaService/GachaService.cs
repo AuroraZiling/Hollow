@@ -7,7 +7,9 @@ using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Hollow.Core.Gacha;
+using Hollow.Core.Gacha.Common;
 using Hollow.Core.Gacha.Uigf;
+using Hollow.Helpers;
 using Hollow.Models;
 using Hollow.Services.ConfigurationService;
 
@@ -38,12 +40,27 @@ public partial class GachaService(IConfigurationService configurationService, Ht
             {
                 continue;
             }
+            gachaRecord.List = gachaRecord.List.OrderByDescending(item => GachaAnalyser.GetTimestamp(item.Time)).ToList();
             gachaRecords.Add(gachaRecord.Info.Uid, gachaRecord);
         }
         GachaRecords = gachaRecords;
         return gachaRecords;
     }
     
+    private string GetLatestTime(string uid, string gachaType)
+    {
+        if(GachaRecords is null || !GachaRecords.TryGetValue(uid, out var record))
+        {
+            return "0";
+        }
+        return record.List.Find(item => item.GachaType == gachaType)?.Time ?? "0";
+    }
+    
+    private (bool, List<GachaItem>) OmitExistedRecords(string time, List<GachaItem> gachaItems)
+    {
+        var endTimeIndex = gachaItems.FindIndex(0, item => item.Time == time);
+        return endTimeIndex != -1 ? (true, gachaItems[..endTimeIndex]) : (false, gachaItems);
+    }
     
     private const string GachaLogUrl = "https://public-operation-nap.mihoyo.com/common/gacha_record/api/getGachaLog?authkey_ver=1&authkey={0}&lang=zh-cn&game_biz=nap_cn&size=20&real_gacha_type={1}&end_id=";
     private readonly int[] _gachaTypes = [1, 2, 3, 5]; // 1 - standard, 2 - exclusive, 3 - w-engine, 5 - bangboo
@@ -57,6 +74,9 @@ public partial class GachaService(IConfigurationService configurationService, Ht
         }
         
         var gachaRecords = new GachaRecords();
+        var uid = "";
+        var fetchRecordsCount = 0;
+        var newRecordsCount = 0;
 
         foreach (var gachaType in _gachaTypes)
         {
@@ -72,13 +92,40 @@ public partial class GachaService(IConfigurationService configurationService, Ht
                 
                 var page = await httpClient.GetAsync(pageUrl);
                 var pageContent = await page.Content.ReadAsStringAsync();
-
                 var pageData = JsonSerializer.Deserialize<GachaPage>(pageContent);
                 if (pageData!.Data!.List.Count == 0)
                 {
                     break;
                 }
-                gachaRecords.List.AddRange(pageData.Data!.List);
+                var pageDataList = pageData.Data!.List;
+                
+                fetchRecordsCount += pageDataList.Count;
+                if (isFirstPage)
+                {
+                    uid = pageDataList[0].Uid;
+                }
+                
+                // If UID exists in records, into completion
+                if(GachaRecords is not null && GachaRecords.ContainsKey(uid))
+                {
+                    var time = GetLatestTime(uid, gachaType.ToString());
+                    var omitted = OmitExistedRecords(time, pageDataList);
+                    if (omitted.Item1)
+                    {
+                        newRecordsCount += omitted.Item2.Count;
+                        progress.Report(new Response<string>(true, "progress") { Data = string.Join('^', omitted.Item2.Select(x => x.Name)) + gachaType});
+                        
+                        var targetExistedGachaRecords =
+                            GachaRecords[uid].List.Where(item => item.GachaType == gachaType.ToString());
+                        gachaRecords.List.AddRange(omitted.Item2);
+                        gachaRecords.List.AddRange(targetExistedGachaRecords);
+                        break;
+                    }
+                    pageDataList = omitted.Item2;
+                }
+                
+                newRecordsCount += pageDataList.Count;
+                gachaRecords.List.AddRange(pageDataList);
                 progress.Report(new Response<string>(true, "progress") { Data = string.Join('^', pageData.Data.List.Select(x => x.Name)) + gachaType});
                 pageEndId = pageData.Data.List[^1].Id;
                 isFirstPage = false;
@@ -87,11 +134,11 @@ public partial class GachaService(IConfigurationService configurationService, Ht
             await Task.Delay(TimeSpan.FromMilliseconds(400));
         }
 
-        gachaRecords.Info.Uid = gachaRecords.List[0].Uid;
+        gachaRecords.Info.Uid = uid;
         gachaRecords.Info.ExportTimestamp = DateTimeOffset.Now.ToUnixTimeMilliseconds();
         gachaRecords.Info.ExportAppVersion = AppInfo.AppVersion;
         
-        return new Response<GachaRecords>(true, "completed") {Data = gachaRecords};
+        return new Response<GachaRecords>(true, $"success {fetchRecordsCount} {newRecordsCount}") {Data = gachaRecords};
     }
     
     public async Task<bool> IsAuthKeyValid(string authKey)
@@ -127,15 +174,28 @@ public partial class GachaService(IConfigurationService configurationService, Ht
             return new Response<string>(false, "data file not found");
         }
 
-        var data = await File.ReadAllTextAsync(dataPath);
+        var authKey = GetAuthKeyFromFile(dataPath);
+        if (!authKey.IsSuccess)
+        {
+            return authKey;
+        }
+
+        var targetGachaLogUrl = authKey.Data;
+        return new Response<string> (true) {Data = targetGachaLogUrl.Split("&authkey=")[1].Split("&")[0]};
+    }
+
+    private Response<string> GetAuthKeyFromFile(string dataPath)
+    {
+        using var fileStream = File.Open(dataPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite | FileShare.Delete);
+        using var reader = new StreamReader(fileStream);
+        var data = reader.ReadToEnd();
         var gachaLogUrls = GachaLogUrlRegex().Matches(data);
         if (gachaLogUrls.Count == 0)
         {
             return new Response<string>(false, "authKey not found");
         }
 
-        var targetGachaLogUrl = gachaLogUrls[^1].Value;
-        return new Response<string> (true) {Data = targetGachaLogUrl.Split("&authkey=")[1].Split("&")[0]};
+        return new Response<string>(true) { Data = gachaLogUrls[^1].Value };
     }
 
     [GeneratedRegex(@"https://public-operation-nap.mihoyo.com/common/gacha_record/api/getGachaLog[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]end_id=")]

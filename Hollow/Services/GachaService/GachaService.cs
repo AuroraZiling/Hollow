@@ -80,12 +80,12 @@ public partial class GachaService(IConfigurationService configurationService, Ht
 
         foreach (var gachaType in _gachaTypes)
         {
-            var isFirstPage = true;
+            var nthPage = 1;
             var pageEndId = "0";
             while (true)
             {
                 var pageUrl = string.Format(GachaLogUrl, authKey, gachaType);
-                if (!isFirstPage)
+                if (nthPage > 1)
                 {
                     pageUrl += pageEndId;
                 }
@@ -100,7 +100,7 @@ public partial class GachaService(IConfigurationService configurationService, Ht
                 var pageDataList = pageData.Data!.List;
                 
                 fetchRecordsCount += pageDataList.Count;
-                if (isFirstPage)
+                if (nthPage == 1)
                 {
                     uid = pageDataList[0].Uid;
                 }
@@ -113,7 +113,7 @@ public partial class GachaService(IConfigurationService configurationService, Ht
                     if (omitted.Item1)
                     {
                         newRecordsCount += omitted.Item2.Count;
-                        progress.Report(new Response<string>(true, "progress") { Data = string.Join('^', omitted.Item2.Select(x => x.Name)) + gachaType});
+                        progress.Report(new Response<string>(true, "progress") { Data = $"{string.Join('^', omitted.Item2.Select(x => x.Name))}^{uid}^{gachaType}^{nthPage}"});
                         
                         var targetExistedGachaRecords =
                             GachaRecords[uid].List.Where(item => item.GachaType == gachaType.ToString());
@@ -126,9 +126,9 @@ public partial class GachaService(IConfigurationService configurationService, Ht
                 
                 newRecordsCount += pageDataList.Count;
                 gachaRecords.List.AddRange(pageDataList);
-                progress.Report(new Response<string>(true, "progress") { Data = string.Join('^', pageData.Data.List.Select(x => x.Name)) + gachaType});
+                progress.Report(new Response<string>(true, "progress") { Data = $"{string.Join('^', pageData.Data.List.Select(x => x.Name))}^{uid}^{gachaType}^{nthPage}"});
                 pageEndId = pageData.Data.List[^1].Id;
-                isFirstPage = false;
+                nthPage++;
                 await Task.Delay(TimeSpan.FromMilliseconds(400));
             }
             await Task.Delay(TimeSpan.FromMilliseconds(400));

@@ -1,5 +1,6 @@
 ﻿<ResourceDictionary
     xmlns="https://github.com/avaloniaui"
+    xmlns:languages="clr-namespace:Hollow.Languages"
     xmlns:signalSearch="clr-namespace:Hollow.Controls.SignalSearch"
     xmlns:signalSearchModels="clr-namespace:Hollow.Models.Pages.SignalSearch"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
@@ -37,14 +38,14 @@
                                 </Style>
                             </StackPanel.Styles>
                             <Panel>
-                                <TextBlock HorizontalAlignment="Left" Text="Total" />
+                                <TextBlock HorizontalAlignment="Left" Text="{I18N {x:Static languages:LangKeys.SignalSearch_OverviewCard_Total}}" />
                                 <TextBlock HorizontalAlignment="Right" Text="{TemplateBinding Total}" />
                             </Panel>
                             <Panel>
                                 <TextBlock
                                     Foreground="{StaticResource SignalSearchSColor}"
                                     HorizontalAlignment="Left"
-                                    Text="S Average" />
+                                    Text="{I18N {x:Static languages:LangKeys.SignalSearch_OverviewCard_SAverage}}" />
                                 <TextBlock
                                     Foreground="{StaticResource SignalSearchSColor}"
                                     HorizontalAlignment="Right"
@@ -54,7 +55,7 @@
                                 <TextBlock
                                     Foreground="{StaticResource SignalSearchSColor}"
                                     HorizontalAlignment="Left"
-                                    Text="S Signals" />
+                                    Text="{I18N {x:Static languages:LangKeys.SignalSearch_OverviewCard_SSignals}}" />
                                 <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
                                     <TextBlock Foreground="{StaticResource SignalSearchSColor}" Text="{TemplateBinding SSingals}" />
                                     <TextBlock Foreground="{StaticResource SignalSearchSColor}" Text=" (" />
@@ -66,7 +67,7 @@
                                 <TextBlock
                                     Foreground="{StaticResource SignalSearchAColor}"
                                     HorizontalAlignment="Left"
-                                    Text="A Signals" />
+                                    Text="{I18N {x:Static languages:LangKeys.SignalSearch_OverviewCard_ASignals}}" />
                                 <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
                                     <TextBlock Foreground="{StaticResource SignalSearchAColor}" Text="{TemplateBinding ASingals}" />
                                     <TextBlock Foreground="{StaticResource SignalSearchAColor}" Text=" (" />
@@ -78,7 +79,7 @@
                                 <TextBlock
                                     Foreground="{StaticResource SignalSearchBColor}"
                                     HorizontalAlignment="Left"
-                                    Text="B Signals" />
+                                    Text="{I18N {x:Static languages:LangKeys.SignalSearch_OverviewCard_BSignals}}" />
                                 <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
                                     <TextBlock Foreground="{StaticResource SignalSearchBColor}" Text="{TemplateBinding BSingals}" />
                                     <TextBlock Foreground="{StaticResource SignalSearchBColor}" Text=" (" />
@@ -88,18 +89,30 @@
                             </Panel>
                         </StackPanel>
                         <ItemsControl Grid.Row="2" ItemsSource="{TemplateBinding ProgressBars}">
+                            <ItemsControl.Styles>
+                                <Style Selector="TextBlock">
+                                    <Setter Property="FontSize" Value="14" />
+                                </Style>
+                            </ItemsControl.Styles>
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate DataType="signalSearchModels:OverviewCardGachaItem">
                                     <Border Padding="0,3,0,3">
                                         <Panel>
                                             <ProgressBar
-                                                Height="30"
+                                                Height="20"
                                                 Maximum="90"
                                                 Value="{Binding PollsUsed}" />
                                             <TextBlock
                                                 HorizontalAlignment="Left"
                                                 Margin="5,0,0,0"
+                                                Name="OverviewCardItemsNameTextBlock"
                                                 Text="{Binding Name}"
+                                                VerticalAlignment="Center" />
+                                            <TextBlock
+                                                HorizontalAlignment="Left"
+                                                IsVisible="{Binding ElementName=OverviewCardItemsNameTextBlock, Path=Text, Converter={x:Static StringConverters.IsNullOrEmpty}}"
+                                                Margin="5,0,0,0"
+                                                Text="{I18N {x:Static languages:LangKeys.SignalSearch_OverviewCard_Pity}}"
                                                 VerticalAlignment="Center" />
                                             <TextBlock
                                                 HorizontalAlignment="Right"

@@ -5,7 +5,6 @@ using System.IO;
 using System.Linq;
 using System.Text.Encodings.Web;
 using System.Text.Json;
-using System.Text.Unicode;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -13,11 +12,11 @@ using Hollow.Controls;
 using Hollow.Core.Gacha.Uigf;
 using Hollow.Enums;
 using Hollow.Helpers;
+using Hollow.Languages;
 using Hollow.Models;
 using Hollow.Models.Pages.SignalSearch;
 using Hollow.Services.GachaService;
 using Hollow.Services.NavigationService;
-using Serilog.Sinks.File;
 
 namespace Hollow.ViewModels.Pages;
 
@@ -25,13 +24,16 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
 {
     public void Navigated()
     {
-        if(_navigationService.CurrentViewName == "SignalSearch" && GetGachaLogShortMessage == "Gacha Records Not Found")
+        if (_navigationService.CurrentViewName != "SignalSearch") return;
+        
+        GetGachaLogTitle = Lang.SignalSearch_ProhibitedCoverage_Loading;
+        if (GetGachaLogShortMessage == "Gacha Records Not Found")
         {
             _ = LoadGachaRecords();
         }
     }
 
-    [ObservableProperty] private string _getGachaLogTitle = "Loading...";
+    [ObservableProperty] private string _getGachaLogTitle = Lang.SignalSearch_ProhibitedCoverage_Loading;
     [ObservableProperty] private string _getGachaLogMessage = "";
     [ObservableProperty] private string _getGachaLogShortMessage = "";
     
@@ -39,7 +41,7 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
     [ObservableProperty] private double _gachaTabViewOpacity = 1;
     [ObservableProperty] private bool _controlEnabled = true;
     
-    [ObservableProperty] private ObservableCollection<string> _uidList = new();
+    [ObservableProperty] private ObservableCollection<string> _uidList = [];
     [ObservableProperty] private string _selectedUid = "";
     
     private Dictionary<string, GachaRecords>? _gachaRecords;
@@ -77,19 +79,19 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
         IntoCoverage();
         
         // Gacha Records
-        GetGachaLogShortMessage = "Gacha Records";
+        GetGachaLogShortMessage = Lang.SignalSearch_LoadGachaRecords_GachaRecords;
         _gachaRecords = await _gachaService.LoadGachaRecords();
 
         if (_gachaRecords is null || _gachaRecords!.Count == 0)
         {
-            GetGachaLogShortMessage = "Gacha Records Not Found";
+            GetGachaLogShortMessage = Lang.SignalSearch_LoadGachaRecords_GachaRecordsNotFound;
             ControlEnabled = true;
             return;
         }
         await Task.Delay(100);
         
         // Analyze
-        GetGachaLogShortMessage = "Analyzing";
+        GetGachaLogShortMessage = Lang.SignalSearch_LoadGachaRecords_Analyze;
         _analyzedGachaRecords = _gachaRecords!.ToDictionary(
             item => item.Key,
             item => GachaAnalyser.FromGachaRecords(item.Value));
@@ -108,7 +110,7 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
         var authKey = await _gachaService.TryGetAuthKey();
         if (!authKey.IsSuccess)
         {
-            await HollowHost.ShowToast("Failed to get records", authKey.Message, NotificationType.Error);
+            await HollowHost.ShowToast(Lang.SignalSearch_Update_GetRecordsFailed, authKey.Message, NotificationType.Error);
             return;
         }
 
@@ -118,14 +120,23 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
             if (value.Message.StartsWith("success"))
             {
                 var message = value.Message.Split(' ');
-                HollowHost.ShowToast("Success", $"{message[1]} items fetched, {message[2]} newly added",
+                HollowHost.ShowToast(Lang.SignalSearch_Update_Success, string.Format(Lang.SignalSearch_Update_SuccessMessage, message[1], message[2]),
                     NotificationType.Success);
             }
             else
             {
-                var data = value.Data;
-                GetGachaLogMessage = data.Replace('^', ' ')[..^1];
-                GetGachaLogShortMessage = $"Get {data.Split('^').Length} Items from {data[^1]}"; 
+                var data = value.Data.Split('^');
+                var gachaType = data[^1] switch
+                {
+                    "1" => Lang.SignalSearch_StandardChannel,
+                    "2" => Lang.SignalSearch_ExclusiveChannel,
+                    "3" => Lang.SignalSearch_WEngineChannel,
+                    "5" => Lang.SignalSearch_BangbooChannel,
+                    _ => Lang.SignalSearch_UnknownChannel
+                };
+                GetGachaLogMessage = string.Join(' ', data[..^3]);
+                GetGachaLogTitle = string.Format(Lang.SignalSearch_Update_ProgressTitle, gachaType);
+                GetGachaLogShortMessage = $"UID {data[^3]} | {string.Format(Lang.SignalSearch_Update_ProgressMessage, data.Length-3, data[^2])}"; 
             }
         });
         var gachaRecord = await _gachaService.TryGetGachaLogs(authKey.Data, gachaProgress);

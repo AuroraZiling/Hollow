@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using Hollow.Core.Gacha.Common;
 using Hollow.Core.Gacha.Uigf;
+using Hollow.Languages;
 using Hollow.Models.Pages.SignalSearch;
 
 namespace Hollow.Helpers;
@@ -109,7 +110,7 @@ public static class GachaAnalyser
         {
             overviewCardGachaItems.Add(new OverviewCardGachaItem
             {
-                Name = "Pity",
+                Name = "",
                 PollsUsed = guaranteeCounter
             });
         }

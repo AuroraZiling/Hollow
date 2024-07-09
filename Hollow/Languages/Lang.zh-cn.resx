@@ -120,4 +120,52 @@
     <data name="SignalSearch_Overview" xml:space="preserve">
         <value>概览</value>
     </data>
+    <data name="SignalSearch_ProhibitedCoverage_Loading" xml:space="preserve">
+        <value>加载中...</value>
+    </data>
+    <data name="SignalSearch_LoadGachaRecords_GachaRecords" xml:space="preserve">
+        <value>读取调频记录</value>
+    </data>
+    <data name="SignalSearch_LoadGachaRecords_Analyze" xml:space="preserve">
+        <value>分析中</value>
+    </data>
+    <data name="SignalSearch_LoadGachaRecords_GachaRecordsNotFound" xml:space="preserve">
+        <value>暂未获取调频记录</value>
+    </data>
+    <data name="SignalSearch_Update_GetRecordsFailed" xml:space="preserve">
+        <value>无法获取调频记录</value>
+    </data>
+    <data name="SignalSearch_Update_Success" xml:space="preserve">
+        <value>调频记录已更新</value>
+    </data>
+    <data name="SignalSearch_Update_SuccessMessage" xml:space="preserve">
+        <value>共获取了 {0} 条记录，新增 {1} 条</value>
+    </data>
+    <data name="SignalSearch_UnknownChannel" xml:space="preserve">
+        <value>未知频段</value>
+    </data>
+    <data name="SignalSearch_Update_ProgressTitle" xml:space="preserve">
+        <value>正在获取 {0}</value>
+    </data>
+    <data name="SignalSearch_Update_ProgressMessage" xml:space="preserve">
+        <value>从第{1}页获取{0}个记录</value>
+    </data>
+    <data name="SignalSearch_OverviewCard_Total" xml:space="preserve">
+        <value>记录数</value>
+    </data>
+    <data name="SignalSearch_OverviewCard_SSignals" xml:space="preserve">
+        <value>S 级记录数</value>
+    </data>
+    <data name="SignalSearch_OverviewCard_ASignals" xml:space="preserve">
+        <value>A 级记录数</value>
+    </data>
+    <data name="SignalSearch_OverviewCard_BSignals" xml:space="preserve">
+        <value>B 级记录数</value>
+    </data>
+    <data name="SignalSearch_OverviewCard_SAverage" xml:space="preserve">
+        <value>平均 S 获取记录数</value>
+    </data>
+    <data name="SignalSearch_OverviewCard_Pity" xml:space="preserve">
+        <value>已垫</value>
+    </data>
 </root>

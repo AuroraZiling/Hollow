@@ -276,6 +276,33 @@ namespace Hollow.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Analyzing.
+        /// </summary>
+        internal static string SignalSearch_LoadGachaRecords_Analyze {
+            get {
+                return ResourceManager.GetString("SignalSearch_LoadGachaRecords_Analyze", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Load signal records.
+        /// </summary>
+        internal static string SignalSearch_LoadGachaRecords_GachaRecords {
+            get {
+                return ResourceManager.GetString("SignalSearch_LoadGachaRecords_GachaRecords", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Signal records not found.
+        /// </summary>
+        internal static string SignalSearch_LoadGachaRecords_GachaRecordsNotFound {
+            get {
+                return ResourceManager.GetString("SignalSearch_LoadGachaRecords_GachaRecordsNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Overview.
         /// </summary>
         internal static string SignalSearch_Overview {
@@ -290,6 +317,69 @@ namespace Hollow.Languages {
         internal static string SignalSearch_Overview_Title {
             get {
                 return ResourceManager.GetString("SignalSearch_Overview_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A Signals.
+        /// </summary>
+        internal static string SignalSearch_OverviewCard_ASignals {
+            get {
+                return ResourceManager.GetString("SignalSearch_OverviewCard_ASignals", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to B Signals.
+        /// </summary>
+        internal static string SignalSearch_OverviewCard_BSignals {
+            get {
+                return ResourceManager.GetString("SignalSearch_OverviewCard_BSignals", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pity.
+        /// </summary>
+        internal static string SignalSearch_OverviewCard_Pity {
+            get {
+                return ResourceManager.GetString("SignalSearch_OverviewCard_Pity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to S Average.
+        /// </summary>
+        internal static string SignalSearch_OverviewCard_SAverage {
+            get {
+                return ResourceManager.GetString("SignalSearch_OverviewCard_SAverage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to S Signals.
+        /// </summary>
+        internal static string SignalSearch_OverviewCard_SSignals {
+            get {
+                return ResourceManager.GetString("SignalSearch_OverviewCard_SSignals", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total Records.
+        /// </summary>
+        internal static string SignalSearch_OverviewCard_Total {
+            get {
+                return ResourceManager.GetString("SignalSearch_OverviewCard_Total", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Loading....
+        /// </summary>
+        internal static string SignalSearch_ProhibitedCoverage_Loading {
+            get {
+                return ResourceManager.GetString("SignalSearch_ProhibitedCoverage_Loading", resourceCulture);
             }
         }
         
@@ -312,6 +402,15 @@ namespace Hollow.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Unknown Channel.
+        /// </summary>
+        internal static string SignalSearch_UnknownChannel {
+            get {
+                return ResourceManager.GetString("SignalSearch_UnknownChannel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Update.
         /// </summary>
         internal static string SignalSearch_Update {
@@ -321,11 +420,56 @@ namespace Hollow.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed to get singal records.
+        /// </summary>
+        internal static string SignalSearch_Update_GetRecordsFailed {
+            get {
+                return ResourceManager.GetString("SignalSearch_Update_GetRecordsFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Import.
         /// </summary>
         internal static string SignalSearch_Update_Import {
             get {
                 return ResourceManager.GetString("SignalSearch_Update_Import", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fetching {0} records from page {1}.
+        /// </summary>
+        internal static string SignalSearch_Update_ProgressMessage {
+            get {
+                return ResourceManager.GetString("SignalSearch_Update_ProgressMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Getting {0}.
+        /// </summary>
+        internal static string SignalSearch_Update_ProgressTitle {
+            get {
+                return ResourceManager.GetString("SignalSearch_Update_ProgressTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Signal records updated.
+        /// </summary>
+        internal static string SignalSearch_Update_Success {
+            get {
+                return ResourceManager.GetString("SignalSearch_Update_Success", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} records fetched, {1} records added.
+        /// </summary>
+        internal static string SignalSearch_Update_SuccessMessage {
+            get {
+                return ResourceManager.GetString("SignalSearch_Update_SuccessMessage", resourceCulture);
             }
         }
         

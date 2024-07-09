@@ -89,6 +89,7 @@ public partial class GachaService(IConfigurationService configurationService, Ht
 
         gachaRecords.Info.Uid = gachaRecords.List[0].Uid;
         gachaRecords.Info.ExportTimestamp = DateTimeOffset.Now.ToUnixTimeMilliseconds();
+        gachaRecords.Info.ExportAppVersion = AppInfo.AppVersion;
         
         return new Response<GachaRecords>(true, "completed") {Data = gachaRecords};
     }

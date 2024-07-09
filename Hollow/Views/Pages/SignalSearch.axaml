@@ -21,6 +21,7 @@
                 Spacing="15"
                 VerticalAlignment="Center">
                 <ComboBox
+                    IsVisible="{Binding RelativeSource={RelativeSource Self}, Path=SelectedItem, Converter={x:Static ObjectConverters.IsNotNull}}"
                     ItemsSource="{Binding UidList}"
                     SelectedItem="{Binding SelectedUid, Mode=TwoWay}"
                     Width="150" />

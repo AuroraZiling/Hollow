@@ -21,7 +21,7 @@ public class GachaRecordsInfo
     public string ExportApp { get; } = "Hollow";
     
     [JsonPropertyName("export_app_version")]
-    public string ExportAppVersion { get; } = "Alpha";
+    public string ExportAppVersion { get; set; } = "1.0.0";
     
     // TODO: UIGF 4.0 Support
     // [JsonPropertyName("uigf_version")]

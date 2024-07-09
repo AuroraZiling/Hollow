@@ -16,6 +16,8 @@ using Hollow.Helpers;
 using Hollow.Models;
 using Hollow.Models.Pages.SignalSearch;
 using Hollow.Services.GachaService;
+using Hollow.Services.NavigationService;
+using Serilog.Sinks.File;
 
 namespace Hollow.ViewModels.Pages;
 
@@ -23,6 +25,10 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
 {
     public void Navigated()
     {
+        if(_navigationService.CurrentViewName == "SignalSearch" && GetGachaLogShortMessage == "Gacha Records Not Found")
+        {
+            _ = LoadGachaRecords();
+        }
     }
 
     [ObservableProperty] private string _getGachaLogTitle = "Loading...";
@@ -41,9 +47,13 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
     [ObservableProperty] private AnalyzedGachaRecords? _selectedAnalyzedGachaRecords;
     
     private readonly IGachaService _gachaService;
-    public SignalSearchViewModel(IGachaService gachaService)
+    private readonly INavigationService _navigationService;
+    public SignalSearchViewModel(IGachaService gachaService, INavigationService navigationService)
     {
         _gachaService = gachaService;
+        _navigationService = navigationService;
+
+        _navigationService.CurrentViewChanged += Navigated;
 
         _ = LoadGachaRecords();
     }
@@ -76,6 +86,13 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
         {
             _gachaRecords = _gachaService.GachaRecords;
         }
+
+        if (_gachaRecords is null || _gachaRecords!.Count == 0)
+        {
+            GetGachaLogShortMessage = "Gacha Records Not Found";
+            ControlEnabled = true;
+            return;
+        }
         await Task.Delay(100);
         
         // Analyze
@@ -95,6 +112,8 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
     [RelayCommand]
     private async Task UpdateByWebCaches()
     {
+        Console.WriteLine(SelectedUid);
+        return;
         var authKey = await _gachaService.TryGetAuthKey();
         if (!authKey.IsSuccess)
         {
@@ -111,6 +130,7 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
         });
         var gachaRecord = await _gachaService.TryGetGachaLogs(authKey.Data, gachaProgress);
         await File.WriteAllTextAsync(Path.Combine(AppInfo.GachaRecordsDir, $"{gachaRecord.Data.Info.Uid}.json"), JsonSerializer.Serialize(gachaRecord.Data, new JsonSerializerOptions { WriteIndented = true, Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping }));
+        await LoadGachaRecords();
         RemoveCoverage();
     }
 }

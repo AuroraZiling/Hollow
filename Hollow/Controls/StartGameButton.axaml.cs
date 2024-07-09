@@ -1,8 +1,6 @@
 ﻿using System.Windows.Input;
 using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Controls.Primitives;
-using Avalonia.Media;
 
 namespace Hollow.Controls;
 

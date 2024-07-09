@@ -1,33 +1,34 @@
 ﻿using System;
 using Avalonia;
 
-namespace Hollow.Controls.WebView.Avalonia.WebView;
+namespace Hollow.Controls.WebView;
 
 partial class WebView
 {
-    static bool LoadHostDependencyObjectsChanged()
+    static void LoadHostDependencyObjectsChanged()
     {
-        UrlProperty.Changed.AddClassHandler<Hollow.Controls.WebView.Avalonia.WebView.WebView, Uri?>(async (s, e) =>
+        async void UrlPropertyChangedClassHandler(WebView s, AvaloniaPropertyChangedEventArgs<Uri?> e)
         {
-            var oldValue = e.OldValue.Value;
             var newValue = e.NewValue.Value;
             await s.Navigate(newValue);
-        });
+        }
 
-        HtmlContentProperty.Changed.AddClassHandler<Hollow.Controls.WebView.Avalonia.WebView.WebView, string?>(async (s, e) => 
+        UrlProperty.Changed.AddClassHandler<WebView, Uri?>(UrlPropertyChangedClassHandler);
+
+        async void HtmlContentPropertyChangedClassHandler(WebView s, AvaloniaPropertyChangedEventArgs<string?> e)
         {
             var newValue = e.NewValue.Value;
             await s.NavigateToString(newValue);
-        });
+        }
 
-        return true;
+        HtmlContentProperty.Changed.AddClassHandler<WebView, string?>(HtmlContentPropertyChangedClassHandler);
     }
 
     public static readonly StyledProperty<Uri?> UrlProperty =
-           AvaloniaProperty.Register<Hollow.Controls.WebView.Avalonia.WebView.WebView, Uri?>(nameof(Url));
+           AvaloniaProperty.Register<WebView, Uri?>(nameof(Url));
 
     public static readonly StyledProperty<string?> HtmlContentProperty =
-           AvaloniaProperty.Register<Hollow.Controls.WebView.Avalonia.WebView.WebView, string?>(nameof(HtmlContent));
+           AvaloniaProperty.Register<WebView, string?>(nameof(HtmlContent));
 
     public Uri? Url
     {

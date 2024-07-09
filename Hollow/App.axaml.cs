@@ -5,7 +5,6 @@ using System.Net.Http;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
-using AvaloniaWebView;
 using Hollow.Models;
 using Hollow.Services.ConfigurationService;
 using Hollow.Services.GachaService;
@@ -18,11 +17,11 @@ using Hollow.Views;
 using Hollow.Views.Pages;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
-using AvaloniaWebViewBuilder = Hollow.Controls.WebView.Avalonia.WebView.AvaloniaWebViewBuilder;
+using AvaloniaWebViewBuilder = Hollow.Controls.WebView.AvaloniaWebViewBuilder;
 
 namespace Hollow;
 
-public partial class App : Application
+public class App : Application
 {
     private static IServiceProvider? _provider;
     public override void Initialize()

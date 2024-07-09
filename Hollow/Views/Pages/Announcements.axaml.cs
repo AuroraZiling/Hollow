@@ -1,7 +1,6 @@
 ﻿using Avalonia.Controls;
-using Hollow.Controls.WebView.Avalonia.WebView;
-using Hollow.Services.MiHoYoLauncherService;
 using Hollow.ViewModels.Pages;
+using WebView = Hollow.Controls.WebView.WebView;
 
 namespace Hollow.Views.Pages;
 

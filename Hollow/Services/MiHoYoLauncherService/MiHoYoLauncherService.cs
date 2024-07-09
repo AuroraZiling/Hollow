@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 using Hollow.Core.MiHoYoLauncher;
 using Hollow.Core.MiHoYoLauncher.Models;
 using Hollow.Models.Pages.Announcement;
-using Hollow.Services.ConfigurationService;
 using HtmlHelper = Hollow.Helpers.HtmlHelper;
 
 namespace Hollow.Services.MiHoYoLauncherService;
 
-public class MiHoYoLauncherService(HttpClient httpClient, IConfigurationService configurationService) : IMiHoYoLauncherService
+public class MiHoYoLauncherService(HttpClient httpClient) : IMiHoYoLauncherService
 {
     private const string GameInfoUrl = $"https://hyp-api.mihoyo.com/hyp/hyp-connect/api/getGames?launcher_id={LauncherId.CnOfficial}";
 

@@ -1,50 +1,48 @@
-﻿using Avalonia;
+﻿using System;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Templates;
 using Avalonia.Layout;
 using Avalonia.Media;
 using Avalonia.Metadata;
-using Avalonia.Utilities;
 
-namespace Hollow.Controls.WebView.Avalonia.WebView;
+namespace Hollow.Controls.WebView;
 
 partial class WebView
 {
-    static bool LoadDependencyObjectsChanged()
+    static void LoadDependencyObjectsChanged()
     {
-        ChildProperty.Changed.AddClassHandler<Hollow.Controls.WebView.Avalonia.WebView.WebView, Control?>((x, e) => x.ChildChanged(e));
+        ChildProperty.Changed.AddClassHandler<WebView, Control?>((x, e) => x.ChildChanged(e));
 
-        EmptyViewerProperty.Changed.AddClassHandler<Hollow.Controls.WebView.Avalonia.WebView.WebView, object?>((x, e) => x.HeaderChanged(e));
-
-        return true;
+        EmptyViewerProperty.Changed.AddClassHandler<WebView, object?>((x, e) => x.HeaderChanged(e));
     }
 
     private static readonly StyledProperty<Control?> ChildProperty =
-            AvaloniaProperty.Register<Hollow.Controls.WebView.Avalonia.WebView.WebView, Control?>(nameof(Child));
+            AvaloniaProperty.Register<WebView, Control?>(nameof(Child));
 
     public static readonly StyledProperty<Thickness> PaddingProperty =
-           AvaloniaProperty.Register<Hollow.Controls.WebView.Avalonia.WebView.WebView, Thickness>(nameof(Padding), defaultValue: new Thickness(0));
+           AvaloniaProperty.Register<WebView, Thickness>(nameof(Padding), defaultValue: new Thickness(0));
 
     public static readonly StyledProperty<IBrush?> BackgroundProperty =
-           AvaloniaProperty.Register<Hollow.Controls.WebView.Avalonia.WebView.WebView, IBrush?>(nameof(Background));
+           AvaloniaProperty.Register<WebView, IBrush?>(nameof(Background));
 
     public static readonly StyledProperty<IBrush?> BorderBrushProperty =
-           AvaloniaProperty.Register<Hollow.Controls.WebView.Avalonia.WebView.WebView, IBrush?>(nameof(BorderBrush));
+           AvaloniaProperty.Register<WebView, IBrush?>(nameof(BorderBrush));
 
     public static readonly StyledProperty<Thickness> BorderThicknessProperty =
-           AvaloniaProperty.Register<Hollow.Controls.WebView.Avalonia.WebView.WebView, Thickness>(nameof(BorderThickness));
+           AvaloniaProperty.Register<WebView, Thickness>(nameof(BorderThickness));
 
     public static readonly StyledProperty<CornerRadius> CornerRadiusProperty =
-           AvaloniaProperty.Register<Hollow.Controls.WebView.Avalonia.WebView.WebView, CornerRadius>(nameof(CornerRadius));
+           AvaloniaProperty.Register<WebView, CornerRadius>(nameof(CornerRadius));
 
     public static readonly StyledProperty<BoxShadows> BoxShadowProperty =
-           AvaloniaProperty.Register<Hollow.Controls.WebView.Avalonia.WebView.WebView, BoxShadows>(nameof(BoxShadow));
+           AvaloniaProperty.Register<WebView, BoxShadows>(nameof(BoxShadow));
 
     public static readonly StyledProperty<object?> EmptyViewerProperty =
-           AvaloniaProperty.Register<Hollow.Controls.WebView.Avalonia.WebView.WebView, object?>(nameof(EmptyViewer));
+           AvaloniaProperty.Register<WebView, object?>(nameof(EmptyViewer));
 
     public static readonly StyledProperty<IDataTemplate?> EmptyViewerTemplateProperty =
-           AvaloniaProperty.Register<Hollow.Controls.WebView.Avalonia.WebView.WebView, IDataTemplate?>(nameof(EmptyViewerTemplate));
+           AvaloniaProperty.Register<WebView, IDataTemplate?>(nameof(EmptyViewerTemplate));
 
     [Content]
     private Control? Child
@@ -124,14 +122,13 @@ partial class WebView
     private void VerifyScale()
     {
         var currentScale = LayoutHelper.GetLayoutScale(this);
-        if (MathUtilities.AreClose(currentScale, _scale))
+        if(Math.Abs(currentScale - _scale) > 0.0001)
             return;
-
         _scale = currentScale;
         _layoutThickness = null;
     }
 
-    protected sealed override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
+    protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
     {
         base.OnPropertyChanged(change);
         switch (change.Property.Name)
@@ -167,7 +164,7 @@ partial class WebView
         }
     }
 
-    private void HeaderChanged(AvaloniaPropertyChangedEventArgs e)
+    private void HeaderChanged(AvaloniaPropertyChangedEventArgs _)
     {
 
 

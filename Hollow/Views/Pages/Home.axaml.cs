@@ -1,7 +1,5 @@
-﻿using Avalonia;
-using Avalonia.Controls;
+﻿using Avalonia.Controls;
 using Avalonia.Interactivity;
-using Avalonia.Markup.Xaml;
 using Hollow.ViewModels.Pages;
 
 namespace Hollow.Views.Pages;
@@ -14,12 +12,12 @@ public partial class Home : UserControl
         DataContext = App.GetService<HomeViewModel>();
     }
 
-    private void PreviousBanner(object? sender, RoutedEventArgs e)
+    private void PreviousBanner(object? _1, RoutedEventArgs _2)
     {
         Banners.Previous();
     }
 
-    private void NextBanner(object? sender, RoutedEventArgs e)
+    private void NextBanner(object? _1, RoutedEventArgs _2)
     {
         Banners.Next();
     }

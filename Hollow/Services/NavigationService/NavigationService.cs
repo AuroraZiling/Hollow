@@ -1,7 +1,4 @@
 ﻿using System;
-using Avalonia.Controls;
-using Hollow.ViewModels;
-using Hollow.Views.Pages;
 
 namespace Hollow.Services.NavigationService;
 

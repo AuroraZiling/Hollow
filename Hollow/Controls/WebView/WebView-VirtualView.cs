@@ -1,8 +1,6 @@
-﻿
+﻿using WebViewCore;
 
-using WebViewCore;
-
-namespace Hollow.Controls.WebView.Avalonia.WebView;
+namespace Hollow.Controls.WebView;
 
 partial class WebView
 {

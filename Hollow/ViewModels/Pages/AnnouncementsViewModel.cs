@@ -1,20 +1,14 @@
 ﻿using System;
-using System.Net.Http;
 using System.Threading.Tasks;
 using Avalonia.WebView.Windows.Core;
-using AvaloniaWebView;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Hollow.Helpers;
-using Hollow.Services.MiHoYoLauncherService;
-using Hollow.Services.NavigationService;
 using Hollow.Views.Pages;
 using WebViewCore.Events;
 
 namespace Hollow.ViewModels.Pages;
 
-public partial class AnnouncementsViewModel(
-    IMiHoYoLauncherService miHoYoLauncherService,
-    INavigationService navigationService)
+public partial class AnnouncementsViewModel
     : ViewModelBase, IViewModelBase
 {
     private const string Script = """

@@ -11,7 +11,6 @@ using Avalonia.LogicalTree;
 using Avalonia.Threading;
 using Hollow.Controls.Toast;
 using Hollow.Helpers;
-using static Hollow.Helpers.ViewLocator;
 using NotificationType = Hollow.Enums.NotificationType;
 
 namespace Hollow.Controls;

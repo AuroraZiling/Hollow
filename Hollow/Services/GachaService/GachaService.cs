@@ -149,7 +149,7 @@ public partial class GachaService(IConfigurationService configurationService, Ht
         return !firstPageContent.Contains("\"data\": null");
     }
     
-    public async Task<Response<string>> TryGetAuthKey()
+    public Response<string> TryGetAuthKey()
     {
         var gameDirectory = configurationService.AppConfig.Game.Directory;
         if (string.IsNullOrWhiteSpace(gameDirectory))

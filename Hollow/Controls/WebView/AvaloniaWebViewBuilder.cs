@@ -3,7 +3,7 @@ using DryIoc;
 using WebViewCore.Configurations;
 using WebViewCore.Ioc;
 
-namespace Hollow.Controls.WebView.Avalonia.WebView;
+namespace Hollow.Controls.WebView;
 
 public static class AvaloniaWebViewBuilder
 {
@@ -11,6 +11,6 @@ public static class AvaloniaWebViewBuilder
     {
         WebViewCreationProperties creationProperties = new();
         configDelegate?.Invoke(creationProperties);
-        WebViewLocator.s_Registrator.RegisterInstance<WebViewCreationProperties>(creationProperties);
+        WebViewLocator.s_Registrator.RegisterInstance(creationProperties);
     }
 }

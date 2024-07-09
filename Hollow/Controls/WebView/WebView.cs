@@ -1,34 +1,27 @@
-﻿using System;
-using Avalonia;
+﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Presenters;
 using AvaloniaWebView.Core;
 using AvaloniaWebView.Shared;
 using DryIoc.Shared.Extensions;
-using Hollow.Controls.WebView.Avalonia.WebView.Helpers;
+using Hollow.Controls.WebView.Helpers;
 using WebViewCore;
 using WebViewCore.Configurations;
 using WebViewCore.Ioc;
 
-namespace Hollow.Controls.WebView.Avalonia.WebView;
+namespace Hollow.Controls.WebView;
 
-public sealed partial class WebView : Control, IVirtualWebView<Hollow.Controls.WebView.Avalonia.WebView.WebView>, IEmptyView, IWebViewEventHandler, IVirtualWebViewControlCallBack, IWebViewControl
+public sealed partial class WebView : Control, IVirtualWebView<WebView>, IEmptyView, IWebViewEventHandler, IVirtualWebViewControlCallBack, IWebViewControl
 {
     static WebView()
     {
-        AffectsRender<Hollow.Controls.WebView.Avalonia.WebView.WebView>(global::Hollow.Controls.WebView.Avalonia.WebView.WebView.BackgroundProperty, global::Hollow.Controls.WebView.Avalonia.WebView.WebView.BorderBrushProperty, global::Hollow.Controls.WebView.Avalonia.WebView.WebView.BorderThicknessProperty, global::Hollow.Controls.WebView.Avalonia.WebView.WebView.CornerRadiusProperty, global::Hollow.Controls.WebView.Avalonia.WebView.WebView.BoxShadowProperty);
-        AffectsMeasure<Hollow.Controls.WebView.Avalonia.WebView.WebView>(global::Hollow.Controls.WebView.Avalonia.WebView.WebView.ChildProperty, global::Hollow.Controls.WebView.Avalonia.WebView.WebView.PaddingProperty, global::Hollow.Controls.WebView.Avalonia.WebView.WebView.BorderThicknessProperty);
-        global::Hollow.Controls.WebView.Avalonia.WebView.WebView.LoadDependencyObjectsChanged();
-        global::Hollow.Controls.WebView.Avalonia.WebView.WebView.LoadHostDependencyObjectsChanged();
+        AffectsRender<WebView>(BackgroundProperty, BorderBrushProperty, BorderThicknessProperty, CornerRadiusProperty, BoxShadowProperty);
+        AffectsMeasure<WebView>(ChildProperty, PaddingProperty, BorderThicknessProperty);
+        LoadDependencyObjectsChanged();
+        LoadHostDependencyObjectsChanged();
     }
 
     public WebView()
-        : this(default)
-    {
-
-    }
-
-    public WebView(IServiceProvider? serviceProvider = default)
     {
         var properties = WebViewLocator.s_ResolverContext.GetRequiredService<WebViewCreationProperties>();
         _creationProperties = properties;
@@ -36,17 +29,17 @@ public sealed partial class WebView : Control, IVirtualWebView<Hollow.Controls.W
         _viewHandlerProvider = WebViewLocator.s_ResolverContext.GetRequiredService<IViewHandlerProvider>();
         ClipToBounds = false;
 
-        _partEmptyViewPresenter = new()
+        ContentPresenter partEmptyViewPresenter = new()
         {
-            [!ContentPresenter.ContentProperty] = this[!global::Hollow.Controls.WebView.Avalonia.WebView.WebView.EmptyViewerProperty],
-            [!ContentPresenter.ContentTemplateProperty] = this[!global::Hollow.Controls.WebView.Avalonia.WebView.WebView.EmptyViewerTemplateProperty],
+            [!ContentPresenter.ContentProperty] = this[!EmptyViewerProperty],
+            [!ContentPresenter.ContentTemplateProperty] = this[!EmptyViewerTemplateProperty],
         };
 
         _partInnerContainer = new()
         {
-            Child = _partEmptyViewPresenter,
+            Child = partEmptyViewPresenter,
             ClipToBounds = true,
-            [!Border.CornerRadiusProperty] = this[!global::Hollow.Controls.WebView.Avalonia.WebView.WebView.CornerRadiusProperty]
+            [!Border.CornerRadiusProperty] = this[!CornerRadiusProperty]
         };
         Child = _partInnerContainer;
     }
@@ -56,7 +49,6 @@ public sealed partial class WebView : Control, IVirtualWebView<Hollow.Controls.W
     readonly IViewHandlerProvider _viewHandlerProvider;
 
     readonly Border _partInnerContainer;
-    readonly ContentPresenter _partEmptyViewPresenter;
 
     double _scale;
     Thickness? _layoutThickness;

@@ -107,7 +107,7 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
     [RelayCommand]
     private async Task UpdateByWebCaches()
     {
-        var authKey = await _gachaService.TryGetAuthKey();
+        var authKey = _gachaService.TryGetAuthKey();
         if (!authKey.IsSuccess)
         {
             await HollowHost.ShowToast(Lang.SignalSearch_Update_GetRecordsFailed, authKey.Message, NotificationType.Error);

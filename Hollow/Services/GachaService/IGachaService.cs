@@ -11,5 +11,5 @@ public interface IGachaService
     public Dictionary<string, GachaRecords>? GachaRecords { get; set; }
     public Task<Dictionary<string, GachaRecords>?> LoadGachaRecords();
     public Task<Response<GachaRecords>> TryGetGachaLogs(string authKey, IProgress<Response<string>> progress);
-    public Task<Response<string>> TryGetAuthKey();
+    public Response<string> TryGetAuthKey();
 }

@@ -42,7 +42,6 @@
         <PackageReference Include="Serilog.Sinks.File" Version="6.0.0" />
         <PackageReference Include="WebView.Avalonia" Version="11.0.0.1" />
         <PackageReference Include="WebView.Avalonia.Desktop" Version="11.0.0.1" />
-        <PackageReference Include="WebView.Avalonia.Windows" Version="11.0.0.1" />
     </ItemGroup>
 
     <ItemGroup>
@@ -81,11 +80,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Hollow.Core\Hollow.Core.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Helpers\Announcement\" />
-      <Folder Include="Resources\ControlTheme\" />
     </ItemGroup>
 
     <ItemGroup>

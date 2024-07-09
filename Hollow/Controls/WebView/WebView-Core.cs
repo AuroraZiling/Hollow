@@ -1,52 +1,45 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace Hollow.Controls.WebView.Avalonia.WebView;
+namespace Hollow.Controls.WebView;
 
 partial class WebView
 {
-    async Task<bool> Navigate(Uri? uri)
+    async Task Navigate(Uri? uri)
     {
-        if (uri is null)
-            return false;
+        if (uri is null) return;
 
-        if (_platformWebView is null)
-            return false;
+        if (_platformWebView is null) return;
 
         if (!_platformWebView.IsInitialized)
         {
             var bRet = await _platformWebView.Initialize();
-            if (!bRet)
-                return false;
+            if (!bRet) return;
         }
 
-        if (_platformWebView is null)
-            return false;
+        if (_platformWebView is null) return;
         try
         {
-            return _platformWebView.Navigate(uri);
-        }catch (Exception ex)
+            _platformWebView.Navigate(uri);
+        }catch (Exception)
         {
-            return false;
+            // ignored
         }
     }
 
-    async Task<bool> NavigateToString(string? htmlContent)
+    async Task NavigateToString(string? htmlContent)
     {
-        if (string.IsNullOrWhiteSpace(htmlContent))
-            return false;
+        if (string.IsNullOrWhiteSpace(htmlContent)) return;
 
-        if (_platformWebView is null)
-            return false;
+        if (_platformWebView is null) return;
 
         if (!_platformWebView.IsInitialized)
         {
             var bRet = await _platformWebView.Initialize();
-            if (!bRet)
-                return false;
+            if (!bRet) return;
         }
 
-        return _platformWebView.NavigateToString(htmlContent!);
+        _platformWebView.NavigateToString(htmlContent);
     }
 
 }

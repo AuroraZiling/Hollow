@@ -5,7 +5,7 @@
     xmlns:controls="clr-namespace:Hollow.Controls"
     xmlns:languages="clr-namespace:Hollow.Languages"
     xmlns:pages="clr-namespace:Hollow.ViewModels.Pages"
-    xmlns:webView="clr-namespace:Hollow.Controls.WebView.Avalonia.WebView"
+    xmlns:webView1="clr-namespace:Hollow.Controls.WebView"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Border Height="540" Width="1000">
         <Panel>
@@ -15,7 +15,7 @@
                 Opacity="{Binding AnnouncementLoadingCoverageOpacity}"
                 Title="{I18N {x:Static languages:LangKeys.Announcement_Loading}}" />
 
-            <webView:WebView
+            <webView1:WebView
                 CornerRadius="100"
                 IsVisible="{Binding AnnouncementLoaded}"
                 Name="GameAnnouncementWebView" />

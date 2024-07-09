@@ -1,7 +1,7 @@
 ﻿using WebViewCore;
 using WebViewCore.Events;
 
-namespace Hollow.Controls.WebView.Avalonia.WebView;
+namespace Hollow.Controls.WebView;
 
 partial class WebView
 {

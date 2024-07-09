@@ -3,9 +3,8 @@ using Avalonia;
 using Avalonia.Collections;
 using Avalonia.Media;
 using Avalonia.Media.Immutable;
-using Avalonia.Utilities;
 
-namespace Hollow.Controls.WebView.Avalonia.WebView.Helpers;
+namespace Hollow.Controls.WebView.Helpers;
 
 internal class BorderRenderHelper
 {
@@ -114,7 +113,7 @@ internal class BorderRenderHelper
                 pen = new ImmutablePen(borderBrush.ToImmutable(), borderThickness, dashStyle, borderLineCap, borderLineJoin);
 
             var rect = new Rect(_size);
-            if (!MathUtilities.IsZero(borderThickness))
+            if (borderThickness > 0)
                 rect = rect.Deflate(borderThickness * 0.5);
             var rrect = new RoundedRect(rect, _cornerRadius.TopLeft, _cornerRadius.TopRight, _cornerRadius.BottomRight, _cornerRadius.BottomLeft);
 

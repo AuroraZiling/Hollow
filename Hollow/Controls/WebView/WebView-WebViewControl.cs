@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using WebViewCore;
 
-namespace Hollow.Controls.WebView.Avalonia.WebView;
+namespace Hollow.Controls.WebView;
 
 partial class WebView
 {

@@ -2,10 +2,8 @@
 using Avalonia;
 using Avalonia.Layout;
 using Avalonia.Media;
-using Hollow.Helpers;
-using WebViewCore;
 
-namespace Hollow.Controls.WebView.Avalonia.WebView;
+namespace Hollow.Controls.WebView;
 
 partial class WebView
 {
@@ -45,8 +43,6 @@ partial class WebView
             throw new ArgumentNullException(nameof(viewHandler));
 
         var control = viewHandler.AttachableControl;
-        if (control is null)
-            return;
         //Child = control;
         _partInnerContainer.Child = control;
         _platformWebView = viewHandler.PlatformWebView;

@@ -11,12 +11,12 @@ public partial class MainWindow : Window
         InitializeComponent();
     }
 
-    private void MinimizeButton_OnClick(object? sender, RoutedEventArgs e)
+    private void MinimizeButton_OnClick(object? _1, RoutedEventArgs _2)
     {
         WindowState = WindowState.Minimized;
     }
 
-    private void CloseButton_OnClick(object? sender, RoutedEventArgs e)
+    private void CloseButton_OnClick(object? _1, RoutedEventArgs _2)
     {
         Close();
     }

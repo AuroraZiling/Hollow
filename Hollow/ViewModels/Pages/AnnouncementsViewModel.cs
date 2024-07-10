@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Avalonia.WebView.Windows.Core;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Hollow.Helpers;
+using Hollow.Models;
 using Hollow.Views.Pages;
 using WebViewCore.Events;
 

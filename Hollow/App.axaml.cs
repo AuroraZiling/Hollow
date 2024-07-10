@@ -29,13 +29,14 @@ public class App : Application
         Log.Logger = new LoggerConfiguration()
             .Enrich.WithProperty("Version", AppInfo.AppVersion)
             .MinimumLevel.Debug()
-            .WriteTo.Console(outputTemplate: "{Timestamp:HH:mm:ss} [{Level}] {Message}{NewLine}{Exception}")
-            .WriteTo.File(Path.Combine(AppInfo.LogDir, $"log_{DateTime.Now:yyyy-MM-dd_HH-mm-ss}.txt"), outputTemplate: "{Timestamp:HH:mm:ss} [{Level}] (Thread: {ThreadId}) {Message}{NewLine}{Exception}", rollingInterval: RollingInterval.Day, retainedFileCountLimit: null)
+            .WriteTo.Console(outputTemplate: "[{Level}] {Timestamp:HH:mm:ss} {Message}{NewLine}{Exception}")
+            .WriteTo.File(Path.Combine(AppInfo.LogDir, "log_.txt"), outputTemplate: "[{Level}] {Timestamp:HH:mm:ss} {Message}{NewLine}{Exception}", rollingInterval: RollingInterval.Day, retainedFileCountLimit: null)
             .CreateLogger();
         
         AvaloniaXamlLoader.Load(this);
         _provider = ConfigureServices();
         
+        Environment.SetEnvironmentVariable("WEBVIEW2_USER_DATA_FOLDER", AppInfo.CachesDir);
         AvaloniaWebViewBuilder.Initialize(default);
     }
     

@@ -1,5 +1,6 @@
 ﻿using System;
 using DryIoc;
+using Hollow.Models;
 using WebViewCore.Configurations;
 using WebViewCore.Ioc;
 

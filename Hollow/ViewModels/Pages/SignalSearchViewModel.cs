@@ -42,7 +42,7 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
     [ObservableProperty] private bool _controlEnabled = true;
     
     [ObservableProperty] private ObservableCollection<string> _uidList = [];
-    [ObservableProperty] private string _selectedUid = "";
+    [ObservableProperty] private string? _selectedUid;
     
     private Dictionary<string, GachaRecords>? _gachaRecords;
     private Dictionary<string, AnalyzedGachaRecords>? _analyzedGachaRecords;
@@ -74,7 +74,7 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
         ControlEnabled = true;
     }
 
-    private async Task LoadGachaRecords()
+    private async Task LoadGachaRecords(string? updatedUid = null)
     {
         IntoCoverage();
         
@@ -88,7 +88,6 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
             ControlEnabled = true;
             return;
         }
-        await Task.Delay(100);
         
         // Analyze
         GetGachaLogShortMessage = Lang.SignalSearch_LoadGachaRecords_Analyze;
@@ -97,8 +96,8 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
             item => GachaAnalyser.FromGachaRecords(item.Value));
 
         UidList = new ObservableCollection<string>(_gachaRecords!.Keys);
-        SelectedUid = UidList[0];
-        SelectedAnalyzedGachaRecords = _analyzedGachaRecords[UidList[0]];
+        SelectedUid = UidList.FirstOrDefault(uid => uid == updatedUid) ?? UidList.First();
+        SelectedAnalyzedGachaRecords = _analyzedGachaRecords[SelectedUid];
         await Task.Delay(100);
 
         RemoveCoverage();
@@ -107,7 +106,10 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
     [RelayCommand]
     private void ChangeUid()
     {
-        SelectedAnalyzedGachaRecords = _analyzedGachaRecords![SelectedUid];
+        if (SelectedUid != null && _analyzedGachaRecords!.TryGetValue(SelectedUid, out var value))
+        {
+            SelectedAnalyzedGachaRecords = value;
+        }
     }
 
     [RelayCommand]
@@ -148,7 +150,7 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
         var gachaRecord = await _gachaService.TryGetGachaLogs(authKey.Data, gachaProgress);
         
         await File.WriteAllTextAsync(Path.Combine(AppInfo.GachaRecordsDir, $"{gachaRecord.Data.Info.Uid}.json"), JsonSerializer.Serialize(gachaRecord.Data, new JsonSerializerOptions { WriteIndented = true, Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping }));
-        await LoadGachaRecords();
+        await LoadGachaRecords(gachaRecord.Data.Info.Uid);
         RemoveCoverage();
     }
 }

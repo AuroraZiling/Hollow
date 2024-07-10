@@ -36,6 +36,7 @@ public class App : Application
         AvaloniaXamlLoader.Load(this);
         _provider = ConfigureServices();
         
+        //TODO: Platform specific
         Environment.SetEnvironmentVariable("WEBVIEW2_USER_DATA_FOLDER", AppInfo.CachesDir);
         AvaloniaWebViewBuilder.Initialize(default);
     }

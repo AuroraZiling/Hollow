@@ -12,6 +12,7 @@ using Hollow.Core.Gacha.Uigf;
 using Hollow.Helpers;
 using Hollow.Models;
 using Hollow.Services.ConfigurationService;
+using Serilog;
 
 namespace Hollow.Services.GachaService;
 
@@ -181,8 +182,9 @@ public partial class GachaService(IConfigurationService configurationService, Ht
             return authKey;
         }
 
-        var targetGachaLogUrl = authKey.Data;
-        return new Response<string> (true) {Data = targetGachaLogUrl.Split("&authkey=")[1].Split("&")[0]};
+        var targetGachaLogUrl = authKey.Data.Split("&authkey=")[1].Split("&")[0];
+        Log.Information("Get authKey: {0}", targetGachaLogUrl);
+        return new Response<string> (true) {Data = targetGachaLogUrl};
     }
 
     private Response<string> GetAuthKeyFromFile(string dataPath)

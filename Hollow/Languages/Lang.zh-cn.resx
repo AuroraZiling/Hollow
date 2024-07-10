@@ -174,4 +174,28 @@
     <data name="Announcement_Loading_Message" xml:space="preserve">
         <value>获取公告中</value>
     </data>
+    <data name="SignalSearch_Detailed_Name" xml:space="preserve">
+        <value>项</value>
+    </data>
+    <data name="SignalSearch_Detailed_ItemType" xml:space="preserve">
+        <value>类型</value>
+    </data>
+    <data name="SignalSearch_Detailed_RankType" xml:space="preserve">
+        <value>等级</value>
+    </data>
+    <data name="SignalSearch_Detailed_Time" xml:space="preserve">
+        <value>时间</value>
+    </data>
+    <data name="SignalSearch_Detailed_SingleOrConsecutive" xml:space="preserve">
+        <value>单抽 / 十连</value>
+    </data>
+    <data name="SignalSearch_Detailed_InGuarantee" xml:space="preserve">
+        <value>保底内</value>
+    </data>
+    <data name="SignalSearch_Detailed_SingleOrConsecutive_Single" xml:space="preserve">
+        <value>单抽</value>
+    </data>
+    <data name="SignalSearch_Detailed_SingleOrConsecutive_Consecutive" xml:space="preserve">
+        <value>十连 - 第{0}抽</value>
+    </data>
 </root>

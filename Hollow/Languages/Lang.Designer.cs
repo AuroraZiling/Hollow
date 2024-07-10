@@ -276,6 +276,78 @@ namespace Hollow.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to In Guarantee.
+        /// </summary>
+        internal static string SignalSearch_Detailed_InGuarantee {
+            get {
+                return ResourceManager.GetString("SignalSearch_Detailed_InGuarantee", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Item Type.
+        /// </summary>
+        internal static string SignalSearch_Detailed_ItemType {
+            get {
+                return ResourceManager.GetString("SignalSearch_Detailed_ItemType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        internal static string SignalSearch_Detailed_Name {
+            get {
+                return ResourceManager.GetString("SignalSearch_Detailed_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rank Type.
+        /// </summary>
+        internal static string SignalSearch_Detailed_RankType {
+            get {
+                return ResourceManager.GetString("SignalSearch_Detailed_RankType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Single / Consecutive.
+        /// </summary>
+        internal static string SignalSearch_Detailed_SingleOrConsecutive {
+            get {
+                return ResourceManager.GetString("SignalSearch_Detailed_SingleOrConsecutive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Consecutive - {0} poll.
+        /// </summary>
+        internal static string SignalSearch_Detailed_SingleOrConsecutive_Consecutive {
+            get {
+                return ResourceManager.GetString("SignalSearch_Detailed_SingleOrConsecutive_Consecutive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Single.
+        /// </summary>
+        internal static string SignalSearch_Detailed_SingleOrConsecutive_Single {
+            get {
+                return ResourceManager.GetString("SignalSearch_Detailed_SingleOrConsecutive_Single", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Time.
+        /// </summary>
+        internal static string SignalSearch_Detailed_Time {
+            get {
+                return ResourceManager.GetString("SignalSearch_Detailed_Time", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Exclusive Channel.
         /// </summary>
         internal static string SignalSearch_ExclusiveChannel {

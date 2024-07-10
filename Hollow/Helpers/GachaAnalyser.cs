@@ -64,8 +64,8 @@ public static class GachaAnalyser
                 Timestamp = GetTimestamp(gachaItem.Time),
                 
                 IsSinglePoll = true, // Not initialized yet
-                NthPoll = 0, // Not initialized yet
-                NthGuaranteePoll = 0, // Not initialized yet
+                NthPull = 0, // Not initialized yet
+                NthGuaranteePull = 0, // Not initialized yet
             });
         }
 
@@ -83,7 +83,7 @@ public static class GachaAnalyser
         for (var gachaItemIndex = total - 1; gachaItemIndex >= 0; gachaItemIndex--)
         {
             guaranteeCounter++;
-            analyzedCommonGachaRecordItems[gachaItemIndex].NthGuaranteePoll = guaranteeCounter;
+            analyzedCommonGachaRecordItems[gachaItemIndex].NthGuaranteePull = guaranteeCounter;
             
             switch (analyzedCommonGachaRecordItems[gachaItemIndex].RankType)
             {
@@ -117,13 +117,13 @@ public static class GachaAnalyser
         overviewCardGachaItems = new ObservableCollection<OverviewCardGachaItem>(overviewCardGachaItems.Reverse());
         
         // Calculate 10 pulls
-        for (var gachaItemIndex = total - 1; gachaItemIndex >= 10; gachaItemIndex--)
+        for (var gachaItemIndex = total - 1; gachaItemIndex >= 9; gachaItemIndex--)
         {
             if (analyzedCommonGachaRecordItems[gachaItemIndex].Timestamp !=
                 analyzedCommonGachaRecordItems[gachaItemIndex - 1].Timestamp) continue;
             for (var i = gachaItemIndex; i > gachaItemIndex-10; i--)
             {
-                analyzedCommonGachaRecordItems[i].NthPoll = -i + gachaItemIndex + 1;
+                analyzedCommonGachaRecordItems[i].NthPull = -i + gachaItemIndex + 1;
                 analyzedCommonGachaRecordItems[i].IsSinglePoll = false;
             }
             gachaItemIndex -= 9;

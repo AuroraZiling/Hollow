@@ -4,10 +4,16 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:avalonia="clr-namespace:FluentIcons.Avalonia;assembly=FluentIcons.Avalonia"
     xmlns:controls="clr-namespace:Hollow.Controls"
+    xmlns:converters="clr-namespace:Hollow.Helpers.Converters"
     xmlns:languages="clr-namespace:Hollow.Languages"
     xmlns:pages="clr-namespace:Hollow.ViewModels.Pages"
     xmlns:signalSearch="clr-namespace:Hollow.Controls.SignalSearch"
+    xmlns:signalSearchModel="clr-namespace:Hollow.Models.Pages.SignalSearch"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <UserControl.Resources>
+        <converters:RankTypeToFormattedConverter x:Key="RankTypeToFormattedConverter" />
+    </UserControl.Resources>
+
     <Grid RowDefinitions="40, *">
         <Panel Grid.Row="0" VerticalAlignment="Center">
             <TextBlock
@@ -69,6 +75,8 @@
             Grid.Row="1"
             Margin="0,15,0,0"
             Opacity="{Binding GachaTabViewOpacity}">
+
+            <!--  Overview Tab  -->
             <TabItem Classes="SignalSearch" Header="{I18N {x:Static languages:LangKeys.SignalSearch_Overview}}">
                 <Grid ColumnDefinitions="*, *, *, *">
                     <signalSearch:SignalSearchOverviewCard
@@ -125,10 +133,210 @@
                         Total="{Binding SelectedAnalyzedGachaRecords.BangbooGachaRecords.BasicInfo.Total}" />
                 </Grid>
             </TabItem>
-            <TabItem Classes="SignalSearch" Header="{I18N {x:Static languages:LangKeys.SignalSearch_StandardChannel}}" />
-            <TabItem Classes="SignalSearch" Header="{I18N {x:Static languages:LangKeys.SignalSearch_ExclusiveChannel}}" />
-            <TabItem Classes="SignalSearch" Header="{I18N {x:Static languages:LangKeys.SignalSearch_WEngineChannel}}" />
-            <TabItem Classes="SignalSearch" Header="{I18N {x:Static languages:LangKeys.SignalSearch_BangbooChannel}}" />
+
+            <!--  Standard Channel Tab  -->
+            <TabItem Classes="SignalSearch" Header="{I18N {x:Static languages:LangKeys.SignalSearch_StandardChannel}}">
+                <DataGrid
+                    CanUserSortColumns="False"
+                    GridLinesVisibility="Horizontal"
+                    IsReadOnly="True"
+                    ItemsSource="{Binding SelectedAnalyzedGachaRecords.StandardGachaRecords.Items}"
+                    LoadingRow="DataGrid_OnLoadingRow">
+                    <DataGrid.Styles>
+                        <Style Selector="DataGridColumnHeader">
+                            <Setter Property="Background" Value="Transparent" />
+                        </Style>
+                    </DataGrid.Styles>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn
+                            Binding="{Binding Name}"
+                            Header="{I18N {x:Static languages:LangKeys.SignalSearch_Detailed_Name}}"
+                            Width="1.5*" />
+                        <DataGridTextColumn
+                            Binding="{Binding ItemType}"
+                            Header="{I18N {x:Static languages:LangKeys.SignalSearch_Detailed_ItemType}}"
+                            Width="*" />
+                        <DataGridTextColumn Binding="{Binding RankType, Converter={StaticResource RankTypeToFormattedConverter}}" Header="{I18N {x:Static languages:LangKeys.SignalSearch_Detailed_RankType}}" />
+                        <DataGridTextColumn
+                            Binding="{Binding Time}"
+                            Header="{I18N {x:Static languages:LangKeys.SignalSearch_Detailed_Time}}"
+                            Width="1.5*" />
+                        <DataGridTemplateColumn Header="{I18N {x:Static languages:LangKeys.SignalSearch_Detailed_SingleOrConsecutive}}" Width="1.5*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate DataType="signalSearchModel:AnalyzedCommonGachaRecordItem">
+                                    <Panel Margin="10,0,0,0" VerticalAlignment="Center">
+                                        <TextBlock IsVisible="{Binding IsSinglePoll}" Text="{I18N {x:Static languages:LangKeys.SignalSearch_Detailed_SingleOrConsecutive_Single}}" />
+                                        <TextBlock IsVisible="{Binding !IsSinglePoll}">
+                                            <TextBlock.Text>
+                                                <I18N Key="{x:Static languages:LangKeys.SignalSearch_Detailed_SingleOrConsecutive_Consecutive}">
+                                                    <Binding Path="NthPull" />
+                                                </I18N>
+                                            </TextBlock.Text>
+                                        </TextBlock>
+                                    </Panel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn
+                            Binding="{Binding NthGuaranteePull}"
+                            Header="{I18N {x:Static languages:LangKeys.SignalSearch_Detailed_InGuarantee}}"
+                            Width="*" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+
+            <!--  Exclusive Channel Tab  -->
+            <TabItem Classes="SignalSearch" Header="{I18N {x:Static languages:LangKeys.SignalSearch_ExclusiveChannel}}">
+                <DataGrid
+                    CanUserSortColumns="False"
+                    GridLinesVisibility="Horizontal"
+                    IsReadOnly="True"
+                    ItemsSource="{Binding SelectedAnalyzedGachaRecords.ExclusiveGachaRecords.Items}"
+                    LoadingRow="DataGrid_OnLoadingRow">
+                    <DataGrid.Styles>
+                        <Style Selector="DataGridColumnHeader">
+                            <Setter Property="Background" Value="Transparent" />
+                        </Style>
+                    </DataGrid.Styles>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn
+                            Binding="{Binding Name}"
+                            Header="{I18N {x:Static languages:LangKeys.SignalSearch_Detailed_Name}}"
+                            Width="1.5*" />
+                        <DataGridTextColumn
+                            Binding="{Binding ItemType}"
+                            Header="{I18N {x:Static languages:LangKeys.SignalSearch_Detailed_ItemType}}"
+                            Width="*" />
+                        <DataGridTextColumn Binding="{Binding RankType, Converter={StaticResource RankTypeToFormattedConverter}}" Header="{I18N {x:Static languages:LangKeys.SignalSearch_Detailed_RankType}}" />
+                        <DataGridTextColumn
+                            Binding="{Binding Time}"
+                            Header="Time"
+                            Width="1.5*" />
+                        <DataGridTemplateColumn Header="{I18N {x:Static languages:LangKeys.SignalSearch_Detailed_SingleOrConsecutive}}" Width="1.5*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate DataType="signalSearchModel:AnalyzedCommonGachaRecordItem">
+                                    <Panel Margin="10,0,0,0" VerticalAlignment="Center">
+                                        <TextBlock IsVisible="{Binding IsSinglePoll}" Text="{I18N {x:Static languages:LangKeys.SignalSearch_Detailed_SingleOrConsecutive_Single}}" />
+                                        <TextBlock IsVisible="{Binding !IsSinglePoll}">
+                                            <TextBlock.Text>
+                                                <I18N Key="{x:Static languages:LangKeys.SignalSearch_Detailed_SingleOrConsecutive_Consecutive}">
+                                                    <Binding Path="NthPull" />
+                                                </I18N>
+                                            </TextBlock.Text>
+                                        </TextBlock>
+                                    </Panel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn
+                            Binding="{Binding NthGuaranteePull}"
+                            Header="{I18N {x:Static languages:LangKeys.SignalSearch_Detailed_InGuarantee}}"
+                            Width="*" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+
+            <!--  WEngine Channel Tab  -->
+            <TabItem Classes="SignalSearch" Header="{I18N {x:Static languages:LangKeys.SignalSearch_WEngineChannel}}">
+                <DataGrid
+                    CanUserSortColumns="False"
+                    GridLinesVisibility="Horizontal"
+                    IsReadOnly="True"
+                    ItemsSource="{Binding SelectedAnalyzedGachaRecords.WEngineGachaRecords.Items}"
+                    LoadingRow="DataGrid_OnLoadingRow">
+                    <DataGrid.Styles>
+                        <Style Selector="DataGridColumnHeader">
+                            <Setter Property="Background" Value="Transparent" />
+                        </Style>
+                    </DataGrid.Styles>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn
+                            Binding="{Binding Name}"
+                            Header="{I18N {x:Static languages:LangKeys.SignalSearch_Detailed_Name}}"
+                            Width="1.5*" />
+                        <DataGridTextColumn
+                            Binding="{Binding ItemType}"
+                            Header="{I18N {x:Static languages:LangKeys.SignalSearch_Detailed_ItemType}}"
+                            Width="*" />
+                        <DataGridTextColumn Binding="{Binding RankType, Converter={StaticResource RankTypeToFormattedConverter}}" Header="{I18N {x:Static languages:LangKeys.SignalSearch_Detailed_RankType}}" />
+                        <DataGridTextColumn
+                            Binding="{Binding Time}"
+                            Header="Time"
+                            Width="1.5*" />
+                        <DataGridTemplateColumn Header="{I18N {x:Static languages:LangKeys.SignalSearch_Detailed_SingleOrConsecutive}}" Width="1.5*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate DataType="signalSearchModel:AnalyzedCommonGachaRecordItem">
+                                    <Panel Margin="10,0,0,0" VerticalAlignment="Center">
+                                        <TextBlock IsVisible="{Binding IsSinglePoll}" Text="{I18N {x:Static languages:LangKeys.SignalSearch_Detailed_SingleOrConsecutive_Single}}" />
+                                        <TextBlock IsVisible="{Binding !IsSinglePoll}">
+                                            <TextBlock.Text>
+                                                <I18N Key="{x:Static languages:LangKeys.SignalSearch_Detailed_SingleOrConsecutive_Consecutive}">
+                                                    <Binding Path="NthPull" />
+                                                </I18N>
+                                            </TextBlock.Text>
+                                        </TextBlock>
+                                    </Panel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn
+                            Binding="{Binding NthGuaranteePull}"
+                            Header="{I18N {x:Static languages:LangKeys.SignalSearch_Detailed_InGuarantee}}"
+                            Width="*" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+
+            <!--  Bangboo Channel Tab  -->
+            <TabItem Classes="SignalSearch" Header="{I18N {x:Static languages:LangKeys.SignalSearch_BangbooChannel}}">
+                <DataGrid
+                    CanUserSortColumns="False"
+                    GridLinesVisibility="Horizontal"
+                    IsReadOnly="True"
+                    ItemsSource="{Binding SelectedAnalyzedGachaRecords.BangbooGachaRecords.Items}"
+                    LoadingRow="DataGrid_OnLoadingRow">
+                    <DataGrid.Styles>
+                        <Style Selector="DataGridColumnHeader">
+                            <Setter Property="Background" Value="Transparent" />
+                        </Style>
+                    </DataGrid.Styles>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn
+                            Binding="{Binding Name}"
+                            Header="{I18N {x:Static languages:LangKeys.SignalSearch_Detailed_Name}}"
+                            Width="1.5*" />
+                        <DataGridTextColumn
+                            Binding="{Binding ItemType}"
+                            Header="{I18N {x:Static languages:LangKeys.SignalSearch_Detailed_ItemType}}"
+                            Width="*" />
+                        <DataGridTextColumn Binding="{Binding RankType, Converter={StaticResource RankTypeToFormattedConverter}}" Header="{I18N {x:Static languages:LangKeys.SignalSearch_Detailed_RankType}}" />
+                        <DataGridTextColumn
+                            Binding="{Binding Time}"
+                            Header="Time"
+                            Width="1.5*" />
+                        <DataGridTemplateColumn Header="{I18N {x:Static languages:LangKeys.SignalSearch_Detailed_SingleOrConsecutive}}" Width="1.5*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate DataType="signalSearchModel:AnalyzedCommonGachaRecordItem">
+                                    <Panel Margin="10,0,0,0" VerticalAlignment="Center">
+                                        <TextBlock IsVisible="{Binding IsSinglePoll}" Text="{I18N {x:Static languages:LangKeys.SignalSearch_Detailed_SingleOrConsecutive_Single}}" />
+                                        <TextBlock IsVisible="{Binding !IsSinglePoll}">
+                                            <TextBlock.Text>
+                                                <I18N Key="{x:Static languages:LangKeys.SignalSearch_Detailed_SingleOrConsecutive_Consecutive}">
+                                                    <Binding Path="NthPull" />
+                                                </I18N>
+                                            </TextBlock.Text>
+                                        </TextBlock>
+                                    </Panel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn
+                            Binding="{Binding NthGuaranteePull}"
+                            Header="{I18N {x:Static languages:LangKeys.SignalSearch_Detailed_InGuarantee}}"
+                            Width="*" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
             <TabControl.Transitions>
                 <Transitions>
                     <DoubleTransition Duration="0:0:0.3" Property="Opacity" />

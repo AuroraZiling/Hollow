@@ -9,6 +9,7 @@
         <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
         <TieredPGO>true</TieredPGO>
         <TieredCompilationQuickJitForLoops>true</TieredCompilationQuickJitForLoops>
+        <ApplicationIcon>Assets\Icons\small_icon.ico</ApplicationIcon>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">

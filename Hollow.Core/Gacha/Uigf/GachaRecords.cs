@@ -40,5 +40,5 @@ public class GachaRecordsInfo
     
     // TODO: UIGF 4.0 Support
     [JsonPropertyName("uigf_version")]
-    public string UigfVersion { get; } = "UNSUPPORTED";
+    public string UigfVersion { get; } = "v4.0 READY";
 }

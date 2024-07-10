@@ -101,8 +101,13 @@ public partial class GachaService(IConfigurationService configurationService, Ht
                 fetchRecordsCount += pageDataList.Count;
                 if (nthPage == 1)
                 {
-                    uid = pageDataList[0].Uid;
+                    uid = pageDataList[0].Uid!;
                     targetProfile.Uid = uid;
+                }
+
+                foreach (var pageDataListItem in pageDataList)
+                {
+                    pageDataListItem.Uid = null;
                 }
                 
                 // If UID exists in records, into completion

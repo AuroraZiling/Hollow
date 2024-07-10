@@ -5,7 +5,8 @@ namespace Hollow.Core.Gacha.Common;
 public class GachaItem
 {
     [JsonPropertyName("uid")]
-    public required string Uid { get; set; }
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] // This field used for getting UID from 1st page, UIGF does not have this field
+    public string? Uid { get; set; }
     
     [JsonPropertyName("gacha_id")]
     public required string GachaId { get; set; }
@@ -24,9 +25,6 @@ public class GachaItem
     
     [JsonPropertyName("name")]
     public required string Name { get; set; }
-    
-    [JsonPropertyName("lang")]
-    public required string Language { get; set; }
     
     [JsonPropertyName("item_type")]
     public required string ItemType { get; set; }

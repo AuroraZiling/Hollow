@@ -72,7 +72,7 @@ public partial class AnnouncementsViewModel
         AnnouncementLoadingCoverageOpacity = 1;
         AnnouncementLoaded = false;
         //TODO: Platform specific
-        if (Announcements.AnnouncementWebView.PlatformWebView is WebView2Core webView2Core)
+        if (Announcements.AnnouncementWebView.PlatformWebView is WebView2Core { CoreWebView2: not null } webView2Core)
         {
             webView2Core.CoreWebView2!.DOMContentLoaded += async (_, _) =>
             {

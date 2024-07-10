@@ -23,7 +23,6 @@ public class ConfigurationService: IConfigurationService
     public static AppConfig LoadConfiguration()
     {
         Directory.CreateDirectory(AppInfo.BasePath);
-        Directory.CreateDirectory(AppInfo.CrushesDir);
         Directory.CreateDirectory(AppInfo.LogDir);
         Directory.CreateDirectory(AppInfo.CachesDir);
         Directory.CreateDirectory(AppInfo.GachaRecordsDir);

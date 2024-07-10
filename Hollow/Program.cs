@@ -19,14 +19,27 @@ sealed class Program
         Log.Logger = new LoggerConfiguration()
             .Enrich.WithProperty("Version", AppInfo.AppVersion)
             .MinimumLevel.Debug()
-            .WriteTo.Console(outputTemplate: "[{Level}] {Timestamp:HH:mm:ss} {Message}{NewLine}{Exception}")
-            .WriteTo.File(Path.Combine(AppInfo.LogDir, "log_.txt"), outputTemplate: "[{Level}] {Timestamp:HH:mm:ss} {Message}{NewLine}{Exception}", rollingInterval: RollingInterval.Day, retainedFileCountLimit: null)
+            .WriteTo.Console(outputTemplate: "{Timestamp:HH:mm:ss} [{Level}] {Message}{NewLine}{Exception}")
+            .WriteTo.File(Path.Combine(AppInfo.LogDir, "log_.txt"), outputTemplate: "{Timestamp:HH:mm:ss} [{Level}] {Message}{NewLine}{Exception}", rollingInterval: RollingInterval.Day, retainedFileCountLimit: null)
             .CreateLogger();
+        
+        Log.Information("Hollow is starting...");
 
         //TODO: Platform specific
         Environment.SetEnvironmentVariable("WEBVIEW2_USER_DATA_FOLDER", AppInfo.CachesDir);
         
-        BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
+        try
+        {
+            BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
+        }
+        catch (Exception e)
+        {
+            Log.Fatal(e, "Oops, Hollow crashed!");
+        }
+        finally
+        {
+            Log.CloseAndFlush();
+        }
     }
 
     // Avalonia configuration, don't remove; also used by visual designer.

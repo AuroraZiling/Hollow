@@ -39,8 +39,6 @@ public partial class HomeViewModel: ViewModelBase, IViewModelBase
         _httpClient = httpClient;
         _configurationService = configurationService;
         _gameService = gameService;
-        
-        Log.Information("test");
 
         _ = LoadContents();
         CheckStartGameReady();

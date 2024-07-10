@@ -2,6 +2,7 @@ using System;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
+using Serilog;
 
 namespace Hollow.Views;
 
@@ -19,6 +20,7 @@ public partial class MainWindow : Window
 
     private void CloseButton_OnClick(object? _1, RoutedEventArgs _2)
     {
+        Log.CloseAndFlush();
         Environment.Exit(0);
     }
 

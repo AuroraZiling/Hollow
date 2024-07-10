@@ -44,9 +44,9 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
     [ObservableProperty] private ObservableCollection<string> _uidList = [];
     [ObservableProperty] private string? _selectedUid;
     
-    private Dictionary<string, GachaRecords>? _gachaRecords;
-    private Dictionary<string, AnalyzedGachaRecords>? _analyzedGachaRecords;
-    [ObservableProperty] private AnalyzedGachaRecords? _selectedAnalyzedGachaRecords;
+    private Dictionary<string, GachaRecordProfile>? _gachaProfiles;
+    private Dictionary<string, AnalyzedGachaRecordProfile>? _analyzedGachaProfiles;
+    [ObservableProperty] private AnalyzedGachaRecordProfile? _selectedAnalyzedGachaRecords;
     
     private readonly IGachaService _gachaService;
     private readonly INavigationService _navigationService;
@@ -80,9 +80,9 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
         
         // Gacha Records
         GetGachaLogShortMessage = Lang.SignalSearch_LoadGachaRecords_GachaRecords;
-        _gachaRecords = await _gachaService.LoadGachaRecords();
+        _gachaProfiles = await _gachaService.LoadGachaRecordProfiles();
 
-        if (_gachaRecords is null || _gachaRecords!.Count == 0)
+        if (_gachaProfiles is null || _gachaProfiles!.Count == 0)
         {
             GetGachaLogShortMessage = Lang.SignalSearch_LoadGachaRecords_GachaRecordsNotFound;
             ControlEnabled = true;
@@ -91,13 +91,11 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
         
         // Analyze
         GetGachaLogShortMessage = Lang.SignalSearch_LoadGachaRecords_Analyze;
-        _analyzedGachaRecords = _gachaRecords!.ToDictionary(
-            item => item.Key,
-            item => GachaAnalyser.FromGachaRecords(item.Value));
+        _analyzedGachaProfiles = GachaAnalyser.FromGachaProfiles(_gachaProfiles);
 
-        UidList = new ObservableCollection<string>(_gachaRecords!.Keys);
+        UidList = new ObservableCollection<string>(_analyzedGachaProfiles!.Keys);
         SelectedUid = UidList.FirstOrDefault(uid => uid == updatedUid) ?? UidList.First();
-        SelectedAnalyzedGachaRecords = _analyzedGachaRecords[SelectedUid];
+        SelectedAnalyzedGachaRecords = _analyzedGachaProfiles[SelectedUid];
         await Task.Delay(100);
 
         RemoveCoverage();
@@ -106,7 +104,7 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
     [RelayCommand]
     private void ChangeUid()
     {
-        if (SelectedUid != null && _analyzedGachaRecords!.TryGetValue(SelectedUid, out var value))
+        if (SelectedUid != null && _analyzedGachaProfiles!.TryGetValue(SelectedUid, out var value))
         {
             SelectedAnalyzedGachaRecords = value;
         }
@@ -123,6 +121,8 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
         }
 
         IntoCoverage();
+
+        string? uid = null;
         var gachaProgress = new Progress<Response<string>>(value =>
         {
             if (value.Message.StartsWith("success"))
@@ -144,13 +144,14 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
                 };
                 GetGachaLogMessage = string.Join(' ', data[..^3]);
                 GetGachaLogTitle = string.Format(Lang.SignalSearch_Update_ProgressTitle, gachaType);
-                GetGachaLogShortMessage = $"UID {data[^3]} | {string.Format(Lang.SignalSearch_Update_ProgressMessage, data.Length-3, data[^1])}"; 
+                GetGachaLogShortMessage = $"UID {data[^3]} | {string.Format(Lang.SignalSearch_Update_ProgressMessage, data.Length-3, data[^1])}";
+                uid ??= data[^3];
             }
         });
         var gachaRecord = await _gachaService.TryGetGachaLogs(authKey.Data, gachaProgress);
         
-        await File.WriteAllTextAsync(Path.Combine(AppInfo.GachaRecordsDir, $"{gachaRecord.Data.Info.Uid}.json"), JsonSerializer.Serialize(gachaRecord.Data, new JsonSerializerOptions { WriteIndented = true, Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping }));
-        await LoadGachaRecords(gachaRecord.Data.Info.Uid);
+        await File.WriteAllTextAsync(AppInfo.GachaRecordPath, JsonSerializer.Serialize(gachaRecord.Data, new JsonSerializerOptions { WriteIndented = true, Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping }));
+        await LoadGachaRecords(uid);
         RemoveCoverage();
     }
 }

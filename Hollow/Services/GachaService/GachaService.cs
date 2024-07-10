@@ -18,39 +18,34 @@ namespace Hollow.Services.GachaService;
 
 public partial class GachaService(IConfigurationService configurationService, HttpClient httpClient) : IGachaService
 {
-    public Dictionary<string, GachaRecords>? GachaRecords { get; set; }
+    public Dictionary<string, GachaRecordProfile>? GachaRecordProfiles { get; set; }
     
-    public async Task<Dictionary<string, GachaRecords>?> LoadGachaRecords()
+    public async Task<Dictionary<string, GachaRecordProfile>?> LoadGachaRecordProfiles()
     {
-        if(!Directory.Exists(AppInfo.GachaRecordsDir))
+        GachaRecords gachaRecords;
+        if(!File.Exists(AppInfo.GachaRecordPath))
         {
-            return null;
+            gachaRecords = new GachaRecords();
+            await File.WriteAllTextAsync(AppInfo.GachaRecordPath, JsonSerializer.Serialize(gachaRecords, new JsonSerializerOptions { WriteIndented = true }));
         }
-        var gachaRecordFiles = Directory.GetFiles(AppInfo.GachaRecordsDir).Where(file => file.EndsWith(".json")).ToArray();
-        if (gachaRecordFiles.Length == 0)
+        else
         {
-            return null;
+            gachaRecords = JsonSerializer.Deserialize<GachaRecords>(await File.ReadAllTextAsync(AppInfo.GachaRecordPath))!;
         }
-        
-        var gachaRecords = new Dictionary<string, GachaRecords>();
 
-        foreach (var gachaRecordFile in gachaRecordFiles)
+        var gachaRecordProfiles =  gachaRecords.Profiles.ToDictionary(item => item.Uid, item => item);
+        foreach (var profile in gachaRecordProfiles.Keys)
         {
-            var gachaRecord = JsonSerializer.Deserialize<GachaRecords>(await File.ReadAllTextAsync(gachaRecordFile));
-            if(gachaRecord is null)
-            {
-                continue;
-            }
-            gachaRecord.List = gachaRecord.List.OrderByDescending(item => GachaAnalyser.GetTimestamp(item.Time)).ToList();
-            gachaRecords.Add(gachaRecord.Info.Uid, gachaRecord);
+            gachaRecordProfiles[profile].List = gachaRecordProfiles[profile].List.OrderByDescending(item => GachaAnalyser.GetTimestamp(item.Time)).ToList();
         }
-        GachaRecords = gachaRecords;
-        return gachaRecords;
+
+        GachaRecordProfiles = gachaRecordProfiles;
+        return gachaRecordProfiles;
     }
     
     private string GetLatestTime(string uid, string gachaType)
     {
-        if(GachaRecords is null || !GachaRecords.TryGetValue(uid, out var record))
+        if(GachaRecordProfiles is null || !GachaRecordProfiles.TryGetValue(uid, out var record))
         {
             return "0";
         }
@@ -75,7 +70,9 @@ public partial class GachaService(IConfigurationService configurationService, Ht
         }
         
         var gachaRecords = new GachaRecords();
+        var targetProfile = new GachaRecordProfile();
         var uid = "";
+        var isCompletionMode = false;
         var fetchRecordsCount = 0;
         var newRecordsCount = 0;
 
@@ -104,11 +101,13 @@ public partial class GachaService(IConfigurationService configurationService, Ht
                 if (nthPage == 1)
                 {
                     uid = pageDataList[0].Uid;
+                    targetProfile.Uid = uid;
                 }
                 
                 // If UID exists in records, into completion
-                if(GachaRecords is not null && GachaRecords.ContainsKey(uid))
+                if(GachaRecordProfiles is not null && GachaRecordProfiles.ContainsKey(uid))
                 {
+                    isCompletionMode = true;
                     var time = GetLatestTime(uid, gachaType.ToString());
                     var omitted = OmitExistedRecords(time, pageDataList);
                     if (omitted.Item1)
@@ -117,26 +116,32 @@ public partial class GachaService(IConfigurationService configurationService, Ht
                         progress.Report(new Response<string>(true, "progress") { Data = $"{string.Join('^', omitted.Item2.Select(x => x.Name))}^{uid}^{gachaType}^{nthPage}"});
                         
                         var targetExistedGachaRecords =
-                            GachaRecords[uid].List.Where(item => item.GachaType == gachaType.ToString());
-                        gachaRecords.List.AddRange(omitted.Item2);
-                        gachaRecords.List.AddRange(targetExistedGachaRecords);
+                            GachaRecordProfiles[uid].List.Where(item => item.GachaType == gachaType.ToString());
+                        targetProfile.List.AddRange(omitted.Item2);
+                        targetProfile.List.AddRange(targetExistedGachaRecords);
                         break;
                     }
                     pageDataList = omitted.Item2;
                 }
                 
                 newRecordsCount += pageDataList.Count;
-                gachaRecords.List.AddRange(pageDataList);
+                targetProfile.List.AddRange(pageDataList);
                 progress.Report(new Response<string>(true, "progress") { Data = $"{string.Join('^', pageData.Data.List.Select(x => x.Name))}^{uid}^{gachaType}^{nthPage}"});
                 pageEndId = pageData.Data.List[^1].Id;
                 nthPage++;
                 await Task.Delay(TimeSpan.FromMilliseconds(400));
             }
+            
             await Task.Delay(TimeSpan.FromMilliseconds(400));
         }
 
-        gachaRecords.Info.Uid = uid;
-        gachaRecords.Info.ExportTimestamp = DateTimeOffset.Now.ToUnixTimeMilliseconds();
+        if(isCompletionMode)
+        {
+            gachaRecords.Profiles.Remove(GachaRecordProfiles![uid]);
+        }
+        gachaRecords.Profiles.Add(targetProfile);
+        
+        gachaRecords.Info.ExportTimestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
         gachaRecords.Info.ExportAppVersion = AppInfo.AppVersion;
         progress.Report(new Response<string>(true, $"success {fetchRecordsCount} {newRecordsCount}"));
 

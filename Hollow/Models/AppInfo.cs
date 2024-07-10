@@ -11,5 +11,5 @@ public class AppInfo
     public static readonly string ConfigPath = Path.Combine(BasePath, "config.json");
     public static readonly string LogDir = Path.Combine(BasePath, "logs");
     public static readonly string CachesDir = Path.Combine(BasePath, "caches");
-    public static readonly string GachaRecordsDir = Path.Combine(BasePath, "gacha_records");
+    public static readonly string GachaRecordPath = Path.Combine(BasePath, "records.json");
 }

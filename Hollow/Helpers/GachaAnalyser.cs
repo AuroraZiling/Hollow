@@ -10,41 +10,45 @@ namespace Hollow.Helpers;
 
 public static class GachaAnalyser
 {
-    public static AnalyzedGachaRecords FromGachaRecords(GachaRecords gachaRecords)
+    public static Dictionary<string, AnalyzedGachaRecordProfile> FromGachaProfiles(Dictionary<string, GachaRecordProfile> gachaProfiles)
     {
-        // Separate gacha records by gacha type
-        var standardGachaRecords = new List<GachaItem>();
-        var exclusiveGachaRecords = new List<GachaItem>();
-        var wEngineGachaRecords = new List<GachaItem>();
-        var bangbooGachaRecords = new List<GachaItem>();
-
-        foreach (var gachaItem in gachaRecords.List)
+        var analyzed = new Dictionary<string, AnalyzedGachaRecordProfile>();
+        
+        foreach (var profile in gachaProfiles.Keys)
         {
-            switch (gachaItem.GachaType)
+            // Separate gacha records by gacha type
+            var standardGachaRecords = new List<GachaItem>();
+            var exclusiveGachaRecords = new List<GachaItem>();
+            var wEngineGachaRecords = new List<GachaItem>();
+            var bangbooGachaRecords = new List<GachaItem>();
+            foreach (var gachaItem in gachaProfiles[profile].List)
             {
-                case "1":
-                    standardGachaRecords.Add(gachaItem);
-                    break;
-                case "2":
-                    exclusiveGachaRecords.Add(gachaItem);
-                    break;
-                case "3":
-                    wEngineGachaRecords.Add(gachaItem);
-                    break;
-                case "5":
-                    bangbooGachaRecords.Add(gachaItem);
-                    break;
+                switch (gachaItem.GachaType)
+                {
+                    case "1":
+                        standardGachaRecords.Add(gachaItem);
+                        break;
+                    case "2":
+                        exclusiveGachaRecords.Add(gachaItem);
+                        break;
+                    case "3":
+                        wEngineGachaRecords.Add(gachaItem);
+                        break;
+                    case "5":
+                        bangbooGachaRecords.Add(gachaItem);
+                        break;
+                }
             }
+            analyzed.Add(profile, new AnalyzedGachaRecordProfile
+            {
+                StandardGachaRecords = FromGachaItems(standardGachaRecords),
+                ExclusiveGachaRecords = FromGachaItems(exclusiveGachaRecords),
+                WEngineGachaRecords = FromGachaItems(wEngineGachaRecords),
+                BangbooGachaRecords = FromGachaItems(bangbooGachaRecords),
+            });
         }
         
-        // Analyze gacha records
-        return new AnalyzedGachaRecords
-        {
-            StandardGachaRecords = FromGachaItems(standardGachaRecords),
-            ExclusiveGachaRecords = FromGachaItems(exclusiveGachaRecords),
-            WEngineGachaRecords = FromGachaItems(wEngineGachaRecords),
-            BangbooGachaRecords = FromGachaItems(bangbooGachaRecords),
-        };
+        return analyzed;
     }
 
     private static AnalyzedCommonGachaRecord FromGachaItems(List<GachaItem> gachaItems)

@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 
 namespace Hollow.Models.Pages.SignalSearch;
 
-public class AnalyzedGachaRecords
+public class AnalyzedGachaRecordProfile
 {
     public required AnalyzedCommonGachaRecord StandardGachaRecords { get; set; }
     public required AnalyzedCommonGachaRecord ExclusiveGachaRecords { get; set; }

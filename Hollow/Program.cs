@@ -1,6 +1,10 @@
 ﻿using Avalonia;
 using System;
+using System.IO;
+using Avalonia.Logging;
 using Avalonia.WebView.Desktop;
+using Hollow.Models;
+using Serilog;
 
 namespace Hollow;
 
@@ -10,14 +14,26 @@ sealed class Program
     // SynchronizationContext-reliant code before AppMain is called: things aren't initialized
     // yet and stuff might break.
     [STAThread]
-    public static void Main(string[] args) => BuildAvaloniaApp()
-        .StartWithClassicDesktopLifetime(args);
+    public static void Main(string[] args)
+    {
+        Log.Logger = new LoggerConfiguration()
+            .Enrich.WithProperty("Version", AppInfo.AppVersion)
+            .MinimumLevel.Debug()
+            .WriteTo.Console(outputTemplate: "[{Level}] {Timestamp:HH:mm:ss} {Message}{NewLine}{Exception}")
+            .WriteTo.File(Path.Combine(AppInfo.LogDir, "log_.txt"), outputTemplate: "[{Level}] {Timestamp:HH:mm:ss} {Message}{NewLine}{Exception}", rollingInterval: RollingInterval.Day, retainedFileCountLimit: null)
+            .CreateLogger();
+
+        //TODO: Platform specific
+        Environment.SetEnvironmentVariable("WEBVIEW2_USER_DATA_FOLDER", AppInfo.CachesDir);
+        
+        BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
+    }
 
     // Avalonia configuration, don't remove; also used by visual designer.
     public static AppBuilder BuildAvaloniaApp()
         => AppBuilder.Configure<App>()
             .UsePlatformDetect()
-            .WithInterFont()
             .LogToTrace()
+            .WithInterFont()
             .UseDesktopWebView();
 }

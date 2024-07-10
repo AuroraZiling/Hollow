@@ -1,3 +1,4 @@
+using System;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
@@ -18,7 +19,7 @@ public partial class MainWindow : Window
 
     private void CloseButton_OnClick(object? _1, RoutedEventArgs _2)
     {
-        Close();
+        Environment.Exit(0);
     }
 
     protected override void OnPointerPressed(PointerPressedEventArgs e)

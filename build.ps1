@@ -4,15 +4,21 @@ param(
 
 $ErrorActionPreference = "Stop";
 
+Write-Output "Start building launcher...";
+
+cargo build --manifest-path .\hollow-launcher\Cargo.toml -r
+
 Write-Output "Start building withRuntime...";
 
-dotnet publish Hollow/Hollow.csproj -o "build/$Version/withRuntime" -p:EnableCompressionInSingleFile=true -p:PublishSingleFile=true -p:Platform=win-x64 -p:SelfContained=true -p:AssemblyVersion=$Version -p:Configuration=Release;
+dotnet publish Hollow/Hollow.csproj -o "build/$Version/withRuntime/hollow_app" -r win-x64 -p:SelfContained=true -p:AssemblyVersion=$Version -p:Configuration=Release;
 
-Rename-Item -Path "build/$Version/withRuntime/Hollow.exe" -NewName "Hollow_withRuntime.exe"
+Copy-Item -Path ".\hollow-launcher\target\release\Hollow.exe" -Destination ".\build\$Version\withRuntime\Hollow.exe"
 
 Write-Output "Start building withoutRuntime...";
 
-dotnet publish Hollow/Hollow.csproj -o "build/$Version/withoutRuntime" -p:Platform=win-x64 -p:PublishReadyToRun=true -p:SelfContained=false -p:AssemblyVersion=$Version -p:Configuration=Release;
+dotnet publish Hollow/Hollow.csproj -o "build/$Version/withoutRuntime/hollow_app" -r win-x64 -p:SelfContained=false -p:AssemblyVersion=$Version -p:Configuration=Release;
+
+Copy-Item -Path ".\hollow-launcher\target\release\Hollow.exe" -Destination ".\build\$Version\withoutRuntime\Hollow.exe"
 
 Write-Output "Build Finished";
 

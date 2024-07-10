@@ -26,18 +26,8 @@ public class App : Application
     private static IServiceProvider? _provider;
     public override void Initialize()
     {
-        Log.Logger = new LoggerConfiguration()
-            .Enrich.WithProperty("Version", AppInfo.AppVersion)
-            .MinimumLevel.Debug()
-            .WriteTo.Console(outputTemplate: "[{Level}] {Timestamp:HH:mm:ss} {Message}{NewLine}{Exception}")
-            .WriteTo.File(Path.Combine(AppInfo.LogDir, "log_.txt"), outputTemplate: "[{Level}] {Timestamp:HH:mm:ss} {Message}{NewLine}{Exception}", rollingInterval: RollingInterval.Day, retainedFileCountLimit: null)
-            .CreateLogger();
-        
         AvaloniaXamlLoader.Load(this);
         _provider = ConfigureServices();
-        
-        //TODO: Platform specific
-        Environment.SetEnvironmentVariable("WEBVIEW2_USER_DATA_FOLDER", AppInfo.CachesDir);
         AvaloniaWebViewBuilder.Initialize(default);
     }
     

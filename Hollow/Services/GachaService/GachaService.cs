@@ -18,41 +18,42 @@ namespace Hollow.Services.GachaService;
 
 public partial class GachaService(IConfigurationService configurationService, HttpClient httpClient) : IGachaService
 {
-    public Dictionary<string, GachaRecordProfile>? GachaRecordProfiles { get; set; }
+    public Dictionary<string, GachaRecordProfile>? GachaRecordProfileDictionary { get; set; }
     
-    public async Task<Dictionary<string, GachaRecordProfile>?> LoadGachaRecordProfiles()
+    public async Task<Dictionary<string, GachaRecordProfile>?> LoadGachaRecordProfileDictionary()
     {
+        //TODO: UIGF 4.0 Schema + Strict Json Validation
         GachaRecords gachaRecords;
         if(!File.Exists(AppInfo.GachaRecordPath))
         {
             gachaRecords = new GachaRecords();
-            await File.WriteAllTextAsync(AppInfo.GachaRecordPath, JsonSerializer.Serialize(gachaRecords, new JsonSerializerOptions { WriteIndented = true }));
+            await File.WriteAllTextAsync(AppInfo.GachaRecordPath, JsonSerializer.Serialize(gachaRecords, HollowJsonSerializer.Options));
         }
         else
         {
             gachaRecords = JsonSerializer.Deserialize<GachaRecords>(await File.ReadAllTextAsync(AppInfo.GachaRecordPath))!;
         }
 
-        var gachaRecordProfiles =  gachaRecords.Profiles.ToDictionary(item => item.Uid, item => item);
-        foreach (var profile in gachaRecordProfiles.Keys)
+        var gachaRecordProfileDictionary =  gachaRecords.Profiles.ToDictionary(item => item.Uid, item => item);
+        foreach (var profile in gachaRecordProfileDictionary.Keys)
         {
-            gachaRecordProfiles[profile].List = gachaRecordProfiles[profile].List.OrderByDescending(item => GachaAnalyser.GetTimestamp(item.Time)).ToList();
+            gachaRecordProfileDictionary[profile].List = gachaRecordProfileDictionary[profile].List.OrderByDescending(item => GachaAnalyser.GetTimestamp(item.Time)).ToList();
         }
 
-        GachaRecordProfiles = gachaRecordProfiles;
-        return gachaRecordProfiles;
+        GachaRecordProfileDictionary = gachaRecordProfileDictionary;
+        return gachaRecordProfileDictionary;
     }
     
     private string GetLatestTime(string uid, string gachaType)
     {
-        if(GachaRecordProfiles is null || !GachaRecordProfiles.TryGetValue(uid, out var record))
+        if(GachaRecordProfileDictionary is null || !GachaRecordProfileDictionary.TryGetValue(uid, out var record))
         {
             return "0";
         }
         return record.List.Find(item => item.GachaType == gachaType)?.Time ?? "0";
     }
     
-    private (bool, List<GachaItem>) OmitExistedRecords(string time, List<GachaItem> gachaItems)
+    private static (bool, List<GachaItem>) OmitExistedRecords(string time, List<GachaItem> gachaItems)
     {
         var endTimeIndex = gachaItems.FindIndex(0, item => item.Time == time);
         return endTimeIndex != -1 ? (true, gachaItems[..endTimeIndex]) : (false, gachaItems);
@@ -61,7 +62,7 @@ public partial class GachaService(IConfigurationService configurationService, Ht
     private const string GachaLogUrl = "https://public-operation-nap.mihoyo.com/common/gacha_record/api/getGachaLog?authkey_ver=1&authkey={0}&lang=zh-cn&game_biz=nap_cn&size=20&real_gacha_type={1}&end_id=";
     private readonly int[] _gachaTypes = [1, 2, 3, 5]; // 1 - standard, 2 - exclusive, 3 - w-engine, 5 - bangboo
     
-    public async Task<Response<GachaRecords>> TryGetGachaLogs(string authKey, IProgress<Response<string>> progress)
+    public async Task<Response<GachaRecords>> GetGachaRecords(string authKey, IProgress<Response<string>> progress)
     {
         if (!await IsAuthKeyValid(authKey))
         {
@@ -105,7 +106,7 @@ public partial class GachaService(IConfigurationService configurationService, Ht
                 }
                 
                 // If UID exists in records, into completion
-                if(GachaRecordProfiles is not null && GachaRecordProfiles.ContainsKey(uid))
+                if(GachaRecordProfileDictionary is not null && GachaRecordProfileDictionary.ContainsKey(uid))
                 {
                     isCompletionMode = true;
                     var time = GetLatestTime(uid, gachaType.ToString());
@@ -116,7 +117,7 @@ public partial class GachaService(IConfigurationService configurationService, Ht
                         progress.Report(new Response<string>(true, "progress") { Data = $"{string.Join('^', omitted.Item2.Select(x => x.Name))}^{uid}^{gachaType}^{nthPage}"});
                         
                         var targetExistedGachaRecords =
-                            GachaRecordProfiles[uid].List.Where(item => item.GachaType == gachaType.ToString());
+                            GachaRecordProfileDictionary[uid].List.Where(item => item.GachaType == gachaType.ToString());
                         targetProfile.List.AddRange(omitted.Item2);
                         targetProfile.List.AddRange(targetExistedGachaRecords);
                         break;
@@ -137,7 +138,7 @@ public partial class GachaService(IConfigurationService configurationService, Ht
 
         if(isCompletionMode)
         {
-            gachaRecords.Profiles.Remove(GachaRecordProfiles![uid]);
+            gachaRecords.Profiles.Remove(GachaRecordProfileDictionary![uid]);
         }
         gachaRecords.Profiles.Add(targetProfile);
         
@@ -147,15 +148,15 @@ public partial class GachaService(IConfigurationService configurationService, Ht
 
         return new Response<GachaRecords>(true) {Data = gachaRecords};
     }
-    
-    public async Task<bool> IsAuthKeyValid(string authKey)
+
+    private async Task<bool> IsAuthKeyValid(string authKey)
     {
         var firstPage = await httpClient.GetAsync(string.Format(GachaLogUrl, authKey, _gachaTypes[0]));
         var firstPageContent = await firstPage.Content.ReadAsStringAsync();
         return !firstPageContent.Contains("\"data\": null");
     }
     
-    public Response<string> TryGetAuthKey()
+    public Response<string> GetAuthKey()
     {
         var gameDirectory = configurationService.AppConfig.Game.Directory;
         if (string.IsNullOrWhiteSpace(gameDirectory))

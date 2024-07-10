@@ -8,8 +8,8 @@ namespace Hollow.Services.GachaService;
 
 public interface IGachaService
 {
-    public Dictionary<string, GachaRecordProfile>? GachaRecordProfiles { get; set; }
-    public Task<Dictionary<string, GachaRecordProfile>?> LoadGachaRecordProfiles();
-    public Task<Response<GachaRecords>> TryGetGachaLogs(string authKey, IProgress<Response<string>> progress);
-    public Response<string> TryGetAuthKey();
+    public Dictionary<string, GachaRecordProfile>? GachaRecordProfileDictionary { get; set; }
+    public Task<Dictionary<string, GachaRecordProfile>?> LoadGachaRecordProfileDictionary();
+    public Task<Response<GachaRecords>> GetGachaRecords(string authKey, IProgress<Response<string>> progress);
+    public Response<string> GetAuthKey();
 }

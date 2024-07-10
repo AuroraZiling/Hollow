@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -80,7 +79,7 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
         
         // Gacha Records
         GetGachaLogShortMessage = Lang.SignalSearch_LoadGachaRecords_GachaRecords;
-        _gachaProfiles = await _gachaService.LoadGachaRecordProfiles();
+        _gachaProfiles = await _gachaService.LoadGachaRecordProfileDictionary();
 
         if (_gachaProfiles is null || _gachaProfiles!.Count == 0)
         {
@@ -113,7 +112,7 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
     [RelayCommand]
     private async Task UpdateByWebCaches()
     {
-        var authKey = _gachaService.TryGetAuthKey();
+        var authKey = _gachaService.GetAuthKey();
         if (!authKey.IsSuccess)
         {
             await HollowHost.ShowToast(Lang.SignalSearch_Update_GetRecordsFailed, authKey.Message, NotificationType.Error);
@@ -148,9 +147,9 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
                 uid ??= data[^3];
             }
         });
-        var gachaRecord = await _gachaService.TryGetGachaLogs(authKey.Data, gachaProgress);
+        var gachaRecord = await _gachaService.GetGachaRecords(authKey.Data, gachaProgress);
         
-        await File.WriteAllTextAsync(AppInfo.GachaRecordPath, JsonSerializer.Serialize(gachaRecord.Data, new JsonSerializerOptions { WriteIndented = true, Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping }));
+        await File.WriteAllTextAsync(AppInfo.GachaRecordPath, JsonSerializer.Serialize(gachaRecord.Data, HollowJsonSerializer.Options));
         await LoadGachaRecords(uid);
         RemoveCoverage();
     }

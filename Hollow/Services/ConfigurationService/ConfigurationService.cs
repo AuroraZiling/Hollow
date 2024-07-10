@@ -27,13 +27,13 @@ public class ConfigurationService: IConfigurationService
         Directory.CreateDirectory(AppInfo.CachesDir);
         if (!File.Exists(AppInfo.ConfigPath))
         {
-            File.WriteAllText(AppInfo.ConfigPath, JsonSerializer.Serialize(new AppConfig(), new JsonSerializerOptions { WriteIndented = true }));
+            File.WriteAllText(AppInfo.ConfigPath, JsonSerializer.Serialize(new AppConfig(), HollowJsonSerializer.Options));
         }
         return JsonSerializer.Deserialize<AppConfig>(File.ReadAllText(AppInfo.ConfigPath))!;
     }
 
     public void Save()
     {
-        File.WriteAllText(AppInfo.ConfigPath, JsonSerializer.Serialize(AppConfig, new JsonSerializerOptions { WriteIndented = true }));
+        File.WriteAllText(AppInfo.ConfigPath, JsonSerializer.Serialize(AppConfig, HollowJsonSerializer.Options));
     }
 }

@@ -1,7 +1,6 @@
 ﻿using Avalonia;
 using System;
 using System.IO;
-using Avalonia.Logging;
 using Avalonia.WebView.Desktop;
 using Hollow.Models;
 using Serilog;

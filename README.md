@@ -37,6 +37,7 @@ WIP
 
 ### 参考项目
 - [Scighost/Starward](https://github.com/Scighost/Starward)
+- [kikipoulet/SukiUI](https://github.com/kikipoulet/SukiUI)
 
 ### 技术栈
 - [.NET](https://dotnet.microsoft.com/)

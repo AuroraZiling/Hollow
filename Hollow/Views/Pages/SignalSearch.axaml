@@ -57,7 +57,7 @@
                         <TextBlock Text="{I18N {x:Static languages:LangKeys.SignalSearch_Update}}" />
                     </StackPanel>
                 </SplitButton>
-                <Button IsEnabled="False" VerticalAlignment="Stretch">
+                <Button Command="{Binding ExportRecordsCommand}" VerticalAlignment="Stretch">
                     <StackPanel Orientation="Horizontal" Spacing="10">
                         <avalonia:SymbolIcon
                             FontSize="18"

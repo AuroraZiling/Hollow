@@ -16,6 +16,7 @@ using Hollow.Models;
 using Hollow.Models.Pages.SignalSearch;
 using Hollow.Services.GachaService;
 using Hollow.Services.NavigationService;
+using Hollow.Views.Dialogs;
 
 namespace Hollow.ViewModels.Pages;
 
@@ -98,6 +99,12 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
         await Task.Delay(100);
 
         RemoveCoverage();
+    }
+
+    [RelayCommand]
+    private void ExportRecords()
+    {
+        HollowHost.ShowDialog(new StandardDialog());
     }
 
     [RelayCommand]

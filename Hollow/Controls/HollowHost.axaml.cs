@@ -6,8 +6,10 @@ using Avalonia;
 using Avalonia.Collections;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
+using Avalonia.Controls.Templates;
 using Avalonia.Layout;
 using Avalonia.LogicalTree;
+using Avalonia.Rendering.Composition;
 using Avalonia.Threading;
 using Hollow.Controls.Toast;
 using Hollow.Helpers;
@@ -18,7 +20,71 @@ namespace Hollow.Controls;
 
 public class HollowHost : ContentControl
 {
+    // Dialogs
+    public static readonly StyledProperty<bool> IsDialogOpenProperty =
+        AvaloniaProperty.Register<HollowHost, bool>(nameof(IsDialogOpen), defaultValue: false);
 
+    public bool IsDialogOpen
+    {
+        get => GetValue(IsDialogOpenProperty);
+        set => SetValue(IsDialogOpenProperty, value);
+    }
+
+    public static readonly StyledProperty<Control> DialogContentProperty =
+        AvaloniaProperty.Register<HollowHost, Control>(nameof(DialogContent));
+
+    public Control DialogContent
+    {
+        get => GetValue(DialogContentProperty);
+        set => SetValue(DialogContentProperty, value);
+    }
+
+    public static readonly StyledProperty<bool> AllowBackgroundCloseProperty =
+        AvaloniaProperty.Register<HollowHost, bool>(nameof(AllowBackgroundClose), defaultValue: true);
+
+    public bool AllowBackgroundClose
+    {
+        get => GetValue(AllowBackgroundCloseProperty);
+        set => SetValue(AllowBackgroundCloseProperty, value);
+    }
+    
+    public static void ShowDialog(Window window, object? content, bool showCardBehind = true,
+        bool allowBackgroundClose = false)
+    {
+        if (!Instances.TryGetValue(window, out var host))
+            throw new InvalidOperationException("No HollowHost present in this window");
+        var control = content as Control ?? DialogViewLocator.TryBuild(content);
+        host.IsDialogOpen = true;
+        host.DialogContent = control;
+        host.AllowBackgroundClose = allowBackgroundClose;
+        host.GetTemplateChildren().First(n => n.Name == "InnerBorderDialog").Opacity = showCardBehind ? 1 : 0;
+    }
+    
+    public static void ShowDialog(object? content, bool showCardBehind = true, bool allowBackgroundClose = false)
+    {
+        if (_mainWindow != null) ShowDialog(_mainWindow, content, showCardBehind, allowBackgroundClose);
+    }
+
+    public static void CloseDialog(Window window)
+    {
+        if (!Instances.TryGetValue(window, out var host))
+            throw new InvalidOperationException("No HollowHost present in this window");
+        host.IsDialogOpen = false;
+    }
+    
+    private static void BackgroundRequestClose(HollowHost host)
+    {
+        if (!host.AllowBackgroundClose) return;
+        host.IsDialogOpen = false;
+    }
+    
+    public static void CloseDialog()
+    {
+        if (_mainWindow != null) CloseDialog(_mainWindow);
+    }
+
+
+    // Toasts
     public static readonly AttachedProperty<ToastLocation> ToastLocationProperty =
         AvaloniaProperty.RegisterAttached<HollowHost, Window, ToastLocation>("ToastLocation",
             defaultValue: ToastLocation.BottomRight);
@@ -46,10 +112,11 @@ public class HollowHost : ContentControl
         set => SetValue(ToastsCollectionProperty, value);
     }
 
+    private int _maxToasts;
+    
+    // Common
     private static Window? _mainWindow;
     private static readonly Dictionary<Window, HollowHost> Instances = new();
-
-    private int _maxToasts;
 
     protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
     {
@@ -64,15 +131,19 @@ public class HollowHost : ContentControl
         base.OnApplyTemplate(e);
         if (VisualRoot is not Window window)
             throw new InvalidOperationException("HollowHost must be hosted inside a Window");
-        ToastsCollection ??= new AvaloniaList<Toast.Toast>();
+        ToastsCollection ??= [];
         _maxToasts = GetToastLimit(window);
-        var toastLoc = GetToastLocation(window);
+        var toastLocation = GetToastLocation(window);
+        
+        e.NameScope.Get<Border>("PART_DialogBackground").PointerPressed += (_, _) => BackgroundRequestClose(this);
+        
+        var b = e.NameScope.Get<Border>("PART_DialogBackground");
+        b.Loaded += (_, _) => ControlAnimationHelper.MakeOpacityAnimate(ElementComposition.GetElementVisual(b)!, 400); 
         
         e.NameScope.Get<ItemsControl>("PART_ToastPresenter").HorizontalAlignment =
-            toastLoc == ToastLocation.BottomLeft
+            toastLocation == ToastLocation.BottomLeft
                 ? HorizontalAlignment.Left
                 : HorizontalAlignment.Right;
-      
     }
     
     public static async Task ShowToast(Window window, ToastModel model)

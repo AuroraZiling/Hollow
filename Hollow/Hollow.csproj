@@ -67,15 +67,23 @@
         <DependentUpon>Announcements.axaml</DependentUpon>
         <SubType>Code</SubType>
       </Compile>
-      <Compile Update="Controls\StartGameNoticeButton.cs">
-        <DependentUpon>StartGameNoticeButton.axaml</DependentUpon>
-      </Compile>
       <Compile Update="Controls\SignalSearch\SignalSearchOverviewCard.axaml.cs">
         <DependentUpon>ProhibitedCoverage.axaml</DependentUpon>
         <SubType>Code</SubType>
       </Compile>
-      <Compile Update="Controls\LoadingCoverage.axaml.cs">
+      <Compile Update="Controls\Home\StartGameButton.axaml.cs">
+        <DependentUpon>StartGameButton.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Controls\Home\StartGameNoticeButton.cs">
+        <DependentUpon>StartGameNoticeButton.axaml</DependentUpon>
+      </Compile>
+      <Compile Update="Controls\Coverages\LoadingCoverage.axaml.cs">
         <DependentUpon>LoadingCoverage.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Controls\Coverages\ProhibitedCoverage.axaml.cs">
+        <DependentUpon>ProhibitedCoverage.axaml</DependentUpon>
         <SubType>Code</SubType>
       </Compile>
     </ItemGroup>

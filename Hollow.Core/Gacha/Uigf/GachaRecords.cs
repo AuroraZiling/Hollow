@@ -1,20 +1,22 @@
 ﻿using System.Text.Json.Serialization;
 using Hollow.Core.Gacha.Common;
+using Hollow.Core.Helpers;
 
 namespace Hollow.Core.Gacha.Uigf;
 
 public class GachaRecords
 {
     [JsonPropertyName("info")]
-    public GachaRecordsInfo Info { get; set; } = new();
+    public GachaRecordsInfo Info { get; init; } = new();
     
     [JsonPropertyName("nap")]
-    public List<GachaRecordProfile> Profiles { get; set; } = new();
+    public List<GachaRecordProfile> Profiles { get; init; } = [];
 }
 
 public class GachaRecordProfile
 {
     [JsonPropertyName("uid")]
+    [JsonConverter(typeof(JsonIntToStringConverter))]
     public string Uid { get; set; } = "";
     
     [JsonPropertyName("lang")]
@@ -24,7 +26,7 @@ public class GachaRecordProfile
     public uint Timezone { get; } = 8;
     
     [JsonPropertyName("list")]
-    public List<GachaItem> List { get; set; } = new();
+    public List<GachaItem> List { get; set; } = [];
 }
 
 public class GachaRecordsInfo
@@ -39,6 +41,6 @@ public class GachaRecordsInfo
     public string ExportAppVersion { get; set; } = "1.0.0";
     
     // TODO: UIGF 4.0 Support
-    [JsonPropertyName("uigf_version")]
+    [JsonPropertyName("version")]
     public string UigfVersion { get; } = "v4.0 READY";
 }

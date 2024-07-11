@@ -37,7 +37,7 @@ public partial class GachaService(IConfigurationService configurationService, Ht
         var gachaRecordProfileDictionary =  gachaRecords.Profiles.ToDictionary(item => item.Uid, item => item);
         foreach (var profile in gachaRecordProfileDictionary.Keys)
         {
-            gachaRecordProfileDictionary[profile].List = gachaRecordProfileDictionary[profile].List.OrderByDescending(item => GachaAnalyser.GetTimestamp(item.Time)).ToList();
+            gachaRecordProfileDictionary[profile].List = gachaRecordProfileDictionary[profile].List.OrderByDescending(item => item.Id).ToList();
         }
 
         GachaRecordProfileDictionary = gachaRecordProfileDictionary;

@@ -39,7 +39,7 @@
                         </EventTriggerBehavior>
                     </Interaction.Behaviors>
                 </ComboBox>
-                <SplitButton Width="125">
+                <SplitButton Command="{Binding UpdateByWebCachesCommand}" Width="125">
                     <SplitButton.Flyout>
                         <MenuFlyout Placement="Bottom">
                             <MenuItem Command="{Binding UpdateByWebCachesCommand}" Header="{I18N {x:Static languages:LangKeys.SignalSearch_Update_WebCaches}}" />

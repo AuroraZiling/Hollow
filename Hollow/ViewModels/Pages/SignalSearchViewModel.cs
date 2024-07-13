@@ -27,10 +27,7 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
         if (_navigationService.CurrentViewName != "SignalSearch") return;
         
         GetGachaLogTitle = Lang.SignalSearch_ProhibitedCoverage_Loading;
-        if (GetGachaLogShortMessage == "Gacha Records Not Found")
-        {
-            _ = LoadGachaRecords();
-        }
+        _ = LoadGachaRecords();
     }
 
     [ObservableProperty] private string _getGachaLogTitle = Lang.SignalSearch_ProhibitedCoverage_Loading;
@@ -56,8 +53,6 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
         _navigationService = navigationService;
 
         _navigationService.CurrentViewChanged += Navigated;
-
-        _ = LoadGachaRecords();
     }
 
     private void IntoCoverage()
@@ -137,7 +132,7 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
                 HollowHost.ShowToast(Lang.SignalSearch_Update_Success, string.Format(Lang.SignalSearch_Update_SuccessMessage, message[1], message[2]),
                     NotificationType.Success);
             }
-            else
+            else if(value.IsSuccess)
             {
                 var data = value.Data.Split('^');
                 var gachaType = data[^2] switch
@@ -153,11 +148,19 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
                 GetGachaLogShortMessage = $"UID {data[^3]} | {string.Format(Lang.SignalSearch_Update_ProgressMessage, data.Length-3, data[^1])}";
                 uid ??= data[^3];
             }
+            else
+            {
+                HollowHost.ShowToast("Error", value.Message, NotificationType.Error);
+            }
         });
         var gachaRecord = await _gachaService.GetGachaRecords(authKey.Data, gachaProgress);
-        
-        await File.WriteAllTextAsync(AppInfo.GachaRecordPath, JsonSerializer.Serialize(gachaRecord.Data, HollowJsonSerializer.Options));
-        await LoadGachaRecords(uid);
-        RemoveCoverage();
+        if (gachaRecord.IsSuccess)
+        {
+            await File.WriteAllTextAsync(AppInfo.GachaRecordPath, JsonSerializer.Serialize(gachaRecord.Data, HollowJsonSerializer.Options));
+            await LoadGachaRecords(uid);
+            RemoveCoverage();
+        }
+
+        ControlEnabled = true;
     }
 }

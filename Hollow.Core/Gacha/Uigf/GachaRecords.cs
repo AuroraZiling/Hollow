@@ -32,7 +32,8 @@ public class GachaRecordProfile
 public class GachaRecordsInfo
 {
     [JsonPropertyName("export_timestamp")]
-    public long ExportTimestamp { get; set; }
+    [JsonConverter(typeof(JsonIntToStringConverter))]
+    public string ExportTimestamp { get; set; } = "";
     
     [JsonPropertyName("export_app")]
     public string ExportApp { get; } = "Hollow";

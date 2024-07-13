@@ -8,7 +8,7 @@ public class JsonIntToStringConverter: JsonConverter<string>
     public override string Read(ref Utf8JsonReader reader, Type type, JsonSerializerOptions options)
     {
         if (reader.TokenType == JsonTokenType.Number)
-            return reader.GetUInt32().ToString();
+            return reader.GetUInt64().ToString();
       
         return reader.GetString() ?? "";
     }

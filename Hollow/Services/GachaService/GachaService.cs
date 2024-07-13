@@ -92,7 +92,7 @@ public partial class GachaService(IConfigurationService configurationService, Ht
                 var page = await httpClient.GetAsync(pageUrl);
                 var pageContent = await page.Content.ReadAsStringAsync();
                 var pageData = JsonSerializer.Deserialize<GachaPage>(pageContent);
-                if (pageData!.Data!.List.Count == 0)
+                if (pageData is null || pageData.Data!.List.Count == 0)
                 {
                     break;
                 }
@@ -147,7 +147,7 @@ public partial class GachaService(IConfigurationService configurationService, Ht
         }
         gachaRecords.Profiles.Add(targetProfile);
         
-        gachaRecords.Info.ExportTimestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+        gachaRecords.Info.ExportTimestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString();
         gachaRecords.Info.ExportAppVersion = AppInfo.AppVersion;
         progress.Report(new Response<string>(true, $"success {fetchRecordsCount} {newRecordsCount}"));
 
@@ -158,7 +158,7 @@ public partial class GachaService(IConfigurationService configurationService, Ht
     {
         var firstPage = await httpClient.GetAsync(string.Format(GachaLogUrl, authKey, _gachaTypes[0]));
         var firstPageContent = await firstPage.Content.ReadAsStringAsync();
-        return !firstPageContent.Contains("\"data\": null");
+        return !firstPageContent.Contains("\"data\":null");
     }
     
     public Response<string> GetAuthKey()

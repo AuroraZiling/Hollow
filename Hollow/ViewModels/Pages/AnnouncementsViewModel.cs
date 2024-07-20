@@ -62,14 +62,6 @@ public partial class AnnouncementsViewModel
     }
 
     [ObservableProperty] private string? _announcementHtmlContent;
-    [ObservableProperty] private double _announcementLoadingCoverageOpacity = 1;
-    [ObservableProperty] private bool _announcementLoaded;
-
-    public void GameAnnouncementWebView_OnNavigationCompleted(object? sender, WebViewNavigationCompletedEventArgs e)
-    {
-        AnnouncementLoadingCoverageOpacity = 1;
-        AnnouncementLoaded = false;
-    }
 
     public void GameAnnouncementWebView_OnInitialized(object? sender, EventArgs e)
     {
@@ -87,8 +79,5 @@ public partial class AnnouncementsViewModel
     public async void GameAnnouncementWebView_OnDomContentLoaded(object? sender, WebViewDomContentLoadedEventArgs e)
     {
         await Announcements.AnnouncementWebView.InvokeScript(Script);
-        await Task.Delay(1500);
-        AnnouncementLoadingCoverageOpacity = 0;
-        AnnouncementLoaded = true;
     }
 }

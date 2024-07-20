@@ -18,6 +18,5 @@ public partial class Announcements : UserControl
         AnnouncementWebView.DomContentLoaded += announcementsViewModel.GameAnnouncementWebView_OnDomContentLoaded;
         AnnouncementWebView.NavigationStarted += announcementsViewModel.GameAnnouncementWebView_OnNavigationStarting;
         AnnouncementWebView.Initialized += announcementsViewModel.GameAnnouncementWebView_OnInitialized;
-        AnnouncementWebView.NavigationCompleted += announcementsViewModel.GameAnnouncementWebView_OnNavigationCompleted;
     }
 }

@@ -1,12 +1,12 @@
 ﻿using Avalonia.Controls;
+using Hollow.Controls.WebView;
 using Hollow.ViewModels.Pages;
-using WebView = Hollow.Controls.WebView.WebView;
 
 namespace Hollow.Views.Pages;
 
 public partial class Announcements : UserControl
 {
-    public static WebView AnnouncementWebView { get; set; } = null!;
+    public static NativeWebView AnnouncementWebView { get; set; } = null!;
     
     public Announcements()
     {
@@ -15,8 +15,9 @@ public partial class Announcements : UserControl
         var announcementsViewModel = App.GetService<AnnouncementsViewModel>();
         DataContext = announcementsViewModel;
         AnnouncementWebView = GameAnnouncementWebView;
-        AnnouncementWebView.NavigationStarting += announcementsViewModel.GameAnnouncementWebView_OnNavigationStarting;
+        AnnouncementWebView.DomContentLoaded += announcementsViewModel.GameAnnouncementWebView_OnDomContentLoaded;
+        AnnouncementWebView.NavigationStarted += announcementsViewModel.GameAnnouncementWebView_OnNavigationStarting;
         AnnouncementWebView.Initialized += announcementsViewModel.GameAnnouncementWebView_OnInitialized;
-        AnnouncementWebView.WebViewCreated += announcementsViewModel.GameAnnouncementWebView_OnWebViewCreated;
+        AnnouncementWebView.NavigationCompleted += announcementsViewModel.GameAnnouncementWebView_OnNavigationCompleted;
     }
 }

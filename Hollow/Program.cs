@@ -1,7 +1,6 @@
 ﻿using Avalonia;
 using System;
 using System.IO;
-using Avalonia.WebView.Desktop;
 using Hollow.Models;
 using Serilog;
 
@@ -46,6 +45,5 @@ sealed class Program
         => AppBuilder.Configure<App>()
             .UsePlatformDetect()
             .LogToTrace()
-            .WithInterFont()
-            .UseDesktopWebView();
+            .WithInterFont();
 }

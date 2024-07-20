@@ -17,7 +17,6 @@ using Hollow.Views;
 using Hollow.Views.Pages;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
-using AvaloniaWebViewBuilder = Hollow.Controls.WebView.AvaloniaWebViewBuilder;
 
 namespace Hollow;
 
@@ -28,7 +27,6 @@ public class App : Application
     {
         AvaloniaXamlLoader.Load(this);
         _provider = ConfigureServices();
-        AvaloniaWebViewBuilder.Initialize(default);
     }
     
     private static ServiceProvider ConfigureServices()

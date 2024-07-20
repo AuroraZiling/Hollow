@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Avalonia.WebView.Windows.Core;
 using CommunityToolkit.Mvvm.ComponentModel;
+using Hollow.Controls.WebView;
 using Hollow.Helpers;
-using Hollow.Models;
 using Hollow.Views.Pages;
-using WebViewCore.Events;
 
 namespace Hollow.ViewModels.Pages;
 
@@ -67,33 +65,30 @@ public partial class AnnouncementsViewModel
     [ObservableProperty] private double _announcementLoadingCoverageOpacity = 1;
     [ObservableProperty] private bool _announcementLoaded;
 
-    public void GameAnnouncementWebView_OnWebViewCreated(object? sender, WebViewCreatedEventArgs e)
+    public void GameAnnouncementWebView_OnNavigationCompleted(object? sender, WebViewNavigationCompletedEventArgs e)
     {
         AnnouncementLoadingCoverageOpacity = 1;
         AnnouncementLoaded = false;
-        //TODO: Platform specific
-        if (Announcements.AnnouncementWebView.PlatformWebView is WebView2Core { CoreWebView2: not null } webView2Core)
-        {
-            webView2Core.CoreWebView2!.DOMContentLoaded += async (_, _) =>
-            {
-                await webView2Core.CoreWebView2.ExecuteScriptAsync(Script);
-                await Task.Delay(1500);
-                AnnouncementLoadingCoverageOpacity = 0;
-                AnnouncementLoaded = true;
-            };
-        }
     }
 
     public void GameAnnouncementWebView_OnInitialized(object? sender, EventArgs e)
     {
-        Announcements.AnnouncementWebView.Url = new Uri(AnnouncementUrl);
+        Announcements.AnnouncementWebView.Source = new Uri(AnnouncementUrl);
     }
 
-    public void GameAnnouncementWebView_OnNavigationStarting(object? sender, WebViewUrlLoadingEventArg e)
+    public void GameAnnouncementWebView_OnNavigationStarting(object? sender, WebViewNavigationStartingEventArgs e)
     {
-        if (e.Url!.ToString().StartsWith("uniwebview://open_url?url="))
+        if (e.Request!.ToString().StartsWith("uniwebview://open_url?url="))
         {
-            HtmlHelper.OpenUrl(e.Url!.ToString().Replace("uniwebview://open_url?url=", ""));
+            HtmlHelper.OpenUrl(e.Request!.ToString().Replace("uniwebview://open_url?url=", ""));
         }
+    }
+
+    public async void GameAnnouncementWebView_OnDomContentLoaded(object? sender, WebViewDomContentLoadedEventArgs e)
+    {
+        await Announcements.AnnouncementWebView.InvokeScript(Script);
+        await Task.Delay(1500);
+        AnnouncementLoadingCoverageOpacity = 0;
+        AnnouncementLoaded = true;
     }
 }

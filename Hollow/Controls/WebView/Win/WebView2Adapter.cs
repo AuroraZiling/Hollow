@@ -33,7 +33,8 @@ internal class WebView2Adapter : IWebViewAdapter
         _controller = controller;
 
         SizeChanged();
-
+        
+        _controller.CoreWebView2.Settings.IsStatusBarEnabled = false;
         _subscriptions = AddHandlers(_controller.CoreWebView2);
 
         IsInitialized = true;

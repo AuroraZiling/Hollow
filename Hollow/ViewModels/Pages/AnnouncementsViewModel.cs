@@ -20,8 +20,7 @@ public partial class AnnouncementsViewModel
                                    
                                    let bodyhome = document.getElementsByClassName("home__body home__body--pc");
                                    if (bodyhome.length > 0) {
-                                       bodyhome[0].style.transform = "scale(1.43, 1.47)";
-                                       bodyhome[0].style.marginTop = "-3px";
+                                       bodyhome[0].style.transform = "scale(1.33, 1.37)";
                                    }
                                    
                                    let home = document.getElementsByClassName("home");
@@ -49,8 +48,36 @@ public partial class AnnouncementsViewModel
                                    if (homeclose.length > 0) {
                                        homeclose[0].remove();
                                    }
+                                   
+                                   // 重写所有 uniwebview URL 方案
+                                   function rewriteUniWebViewUrls() {
+                                       document.querySelectorAll('a[href]').forEach(link => {
+                                           let href = link.getAttribute('href');
+                                           if (href && href.startsWith('uniwebview://open_url?url=')) {
+                                               let newUrl = href.replace('uniwebview://open_url?url=', '');
+                                               link.setAttribute('href', newUrl);
+                                           }
+                                       });
+                                   }
+                                   
+                                   document.addEventListener('click', function(event) {
+                                        let target = event.target;
+                                        while (target && target.tagName !== 'A') {
+                                            target = target.parentNode;
+                                        }
+                                        if (target && target.tagName === 'A') {
+                                            let href = target.getAttribute('href');
+                                            if (href && href.startsWith('javascript:miHoYoGameJSSDK.openInBrowser')) {
+                                                event.preventDefault();
+                                                const regex = /javascript:miHoYoGameJSSDK\.openInBrowser\('([^']+)'\)/;
+                                                const match = href.match(regex);
+                                                if (match && match[1]) {
+                                                    window.location.href = "inner:" + match[1];
+                                                }
+                                            }
+                                        }
+                                   });
                                    };
-
                                    """;
 
     private const string AnnouncementUrl =
@@ -70,9 +97,9 @@ public partial class AnnouncementsViewModel
 
     public void GameAnnouncementWebView_OnNavigationStarting(object? sender, WebViewNavigationStartingEventArgs e)
     {
-        if (e.Request!.ToString().StartsWith("uniwebview://open_url?url="))
+        if (e.Request!.ToString().StartsWith("inner:"))
         {
-            HtmlHelper.OpenUrl(e.Request!.ToString().Replace("uniwebview://open_url?url=", ""));
+            HtmlHelper.OpenUrl(e.Request!.ToString()[6..]);
         }
     }
 

@@ -16,6 +16,7 @@ public partial class MainWindowViewModel : ViewModelBase
     
     [ObservableProperty] private int _blur;
     [ObservableProperty] private double _coverageOpacity;
+    [ObservableProperty] private double _announcementCoverageOpacity;
     [ObservableProperty] private double _navigationOpacity = 1;
 
     [ObservableProperty] private Bitmap _gameIcon;
@@ -52,6 +53,7 @@ public partial class MainWindowViewModel : ViewModelBase
         Blur = DisplayPageId == 0 ? 1 : 20;
         CoverageOpacity = DisplayPageId == 0 ? 0 : 1;
         NavigationOpacity = DisplayPageId == 0 ? 1 : 0;
+        AnnouncementCoverageOpacity = DisplayPageId == 1 ? 1 : 0;
 
         DisplayPageId = _navigationService.CurrentViewId;
         

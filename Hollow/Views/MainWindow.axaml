@@ -50,6 +50,14 @@
                     </Transitions>
                 </acrylic:Acrylic.Transitions>
             </acrylic:Acrylic>
+            <Panel Background="{StaticResource ZzzGrayColor}" Opacity="{Binding AnnouncementCoverageOpacity}">
+                <Panel.Transitions>
+                    <Transitions>
+                        <DoubleTransition Duration="0:0:0.2" Property="Opacity" />
+                    </Transitions>
+                </Panel.Transitions>
+            </Panel>
+
             <TabControl
                 Name="NavigationTabControl"
                 Padding="0"

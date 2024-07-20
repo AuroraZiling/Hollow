@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Drawing;
 using System.Runtime.Versioning;
 using System.Threading.Tasks;
 using Avalonia.Platform;
@@ -27,6 +28,7 @@ internal class WebView2Adapter : IWebViewAdapter
     {
         var env = await CoreWebView2Environment.CreateAsync();
         var controller = await env.CreateCoreWebView2ControllerAsync(Handle);
+        controller.DefaultBackgroundColor = Color.FromArgb(49, 49, 49);
         controller.IsVisible = true;
         _controller = controller;
 
@@ -119,6 +121,12 @@ internal class WebView2Adapter : IWebViewAdapter
         {
             DomContentLoaded?.Invoke(this, new WebViewDomContentLoadedEventArgs());
         }
+
+        webView.WebResourceRequested += (s, e) =>
+        {
+            if(e.Request.Uri.Contains("aaa"))
+                e.Response = webView.Environment.CreateWebResourceResponse(System.IO.Stream.Null, 404, "Not Found", "Content-Type: text/html");
+        };
         
         webView.NavigationStarting += WebViewOnNavigationStarting;
         void WebViewOnNavigationStarting(object? sender, CoreWebView2NavigationStartingEventArgs e)

@@ -1,11 +1,10 @@
 using System;
 using System.IO;
-using System.Linq;
 using System.Net.Http;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
-using Hollow.Models;
+using Hollow.Abstractions.Models;
 using Hollow.Services.ConfigurationService;
 using Hollow.Services.GachaService;
 using Hollow.Services.GameService;
@@ -23,19 +22,24 @@ namespace Hollow;
 public class App : Application
 {
     private static IServiceProvider? _provider;
+    
     public override void Initialize()
     {
+        Log.Logger = new LoggerConfiguration()
+            .Enrich.WithProperty("Version", AppInfo.AppVersion)
+            .MinimumLevel.Debug()
+            .WriteTo.Console(outputTemplate: "{Timestamp:HH:mm:ss} [{Level}] {Message}{NewLine}{Exception}")
+            .WriteTo.File(Path.Combine(AppInfo.LogDir, "log_.txt"), outputTemplate: "{Timestamp:HH:mm:ss} [{Level}] {Message}{NewLine}{Exception}", rollingInterval: RollingInterval.Day, retainedFileCountLimit: null)
+            .CreateLogger();
+        
+        Log.Information("Hollow is starting...");
+        
         AvaloniaXamlLoader.Load(this);
-        _provider = ConfigureServices();
     }
     
-    private static ServiceProvider ConfigureServices()
+    public static void ConfigureServices(Action<IServiceCollection>? customServicesFactory = null)
     {
-        var viewLocator = Current?.DataTemplates.First(x => x is ViewLocator);
         var services = new ServiceCollection();
-
-        if (viewLocator is not null)
-            services.AddSingleton(viewLocator);
         
         services.AddSingleton<MainWindow>();
         services.AddSingleton<MainWindowViewModel>();
@@ -64,11 +68,13 @@ public class App : Application
         services.AddSingleton<IConfigurationService, ConfigurationService>();
         services.AddSingleton<IGameService, GameService>();
         services.AddSingleton<IGachaService, GachaService>();
+        
+        customServicesFactory?.Invoke(services);
 
-        return services.BuildServiceProvider();
+        _provider = services.BuildServiceProvider();
     }
     
-    public static T GetService<T>() where T : notnull => _provider!.GetRequiredService<T>();
+    public static T GetService<T>() where T : notnull => (_provider ?? throw new InvalidOperationException("Services not Configured")).GetRequiredService<T>();
 
     public override void OnFrameworkInitializationCompleted()
     {

@@ -2,12 +2,14 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hollow", "Hollow\Hollow.csproj", "{6375F724-DD81-40FD-9AA3-7DE665081710}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hollow.Core", "Hollow.Core\Hollow.Core.csproj", "{1FB38667-CE4E-4AAD-A05E-FCB75D357A73}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hollow.Abstractions", "Hollow.Abstractions\Hollow.Abstractions.csproj", "{1FB38667-CE4E-4AAD-A05E-FCB75D357A73}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionFolder", "SolutionFolder", "{7F12BC30-0491-4531-823E-11B7A4A4ABD5}"
 	ProjectSection(SolutionItems) = preProject
 		README.md = README.md
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hollow.Windows", "Hollow.Windows\Hollow.Windows.csproj", "{B83D0035-224D-475B-9058-1AA3769B808D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,5 +25,9 @@ Global
 		{1FB38667-CE4E-4AAD-A05E-FCB75D357A73}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1FB38667-CE4E-4AAD-A05E-FCB75D357A73}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1FB38667-CE4E-4AAD-A05E-FCB75D357A73}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B83D0035-224D-475B-9058-1AA3769B808D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B83D0035-224D-475B-9058-1AA3769B808D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B83D0035-224D-475B-9058-1AA3769B808D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B83D0035-224D-475B-9058-1AA3769B808D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -3,12 +3,12 @@
     x:Class="Hollow.Views.Pages.GameSettings"
     x:DataType="pages:GameSettingsViewModel"
     xmlns="https://github.com/avaloniaui"
-    xmlns:controls="clr-namespace:Hollow.Controls"
     xmlns:languages="clr-namespace:Hollow.Languages"
     xmlns:pages="clr-namespace:Hollow.ViewModels.Pages"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:coverages="clr-namespace:Hollow.Views.Controls.Coverages">
     <Panel>
         <TextBlock Classes="PageTitle" Text="{I18N {x:Static languages:LangKeys.GameSettings_Title}}" />
-        <controls:ProhibitedCoverage Margin="30,50,30,30" Text="{I18N {x:Static languages:LangKeys.Special_ProhibitedCoverage_NotImplemented}}" />
+        <coverages:ProhibitedCoverage Margin="30,50,30,30" Text="{I18N {x:Static languages:LangKeys.Special_ProhibitedCoverage_NotImplemented}}" />
     </Panel>
 </UserControl>

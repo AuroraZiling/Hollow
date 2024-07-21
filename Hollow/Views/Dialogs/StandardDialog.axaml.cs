@@ -1,6 +1,6 @@
 using Avalonia.Controls;
 using Avalonia.Interactivity;
-using Hollow.Controls;
+using Hollow.Views.Controls;
 
 namespace Hollow.Views.Dialogs;
 

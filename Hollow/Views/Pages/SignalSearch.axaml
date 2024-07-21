@@ -3,13 +3,13 @@
     x:DataType="pages:SignalSearchViewModel"
     xmlns="https://github.com/avaloniaui"
     xmlns:avalonia="clr-namespace:FluentIcons.Avalonia;assembly=FluentIcons.Avalonia"
-    xmlns:controls="clr-namespace:Hollow.Controls"
     xmlns:converters="clr-namespace:Hollow.Helpers.Converters"
     xmlns:languages="clr-namespace:Hollow.Languages"
     xmlns:pages="clr-namespace:Hollow.ViewModels.Pages"
-    xmlns:signalSearch="clr-namespace:Hollow.Controls.SignalSearch"
     xmlns:signalSearchModel="clr-namespace:Hollow.Models.Pages.SignalSearch"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:signalSearch="clr-namespace:Hollow.Views.Controls.SignalSearch"
+    xmlns:coverages="clr-namespace:Hollow.Views.Controls.Coverages">
     <UserControl.Resources>
         <converters:RankTypeToFormattedConverter x:Key="RankTypeToFormattedConverter" />
     </UserControl.Resources>
@@ -344,7 +344,7 @@
             </TabControl.Transitions>
         </TabControl>
 
-        <controls:LoadingCoverage
+        <coverages:LoadingCoverage
             BackgroundText="{Binding GetGachaLogMessage}"
             Grid.Row="1"
             Margin="0,15,0,0"

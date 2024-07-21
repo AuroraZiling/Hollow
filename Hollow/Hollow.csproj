@@ -1,15 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
-        <OutputType>WinExe</OutputType>
         <TargetFramework>net8.0</TargetFramework>
         <Nullable>enable</Nullable>
-        <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
-        <ApplicationManifest>app.manifest</ApplicationManifest>
         <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
-        <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
-        <TieredPGO>true</TieredPGO>
-        <TieredCompilationQuickJitForLoops>true</TieredCompilationQuickJitForLoops>
-        <ApplicationIcon>Assets\Icons\small_icon.ico</ApplicationIcon>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
@@ -39,7 +32,6 @@
         <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
         <PackageReference Include="FluentIcons.Avalonia" Version="1.1.247" />
         <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
-        <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.2646-prerelease" />
         <PackageReference Include="Serilog" Version="4.0.0" />
         <PackageReference Include="Serilog.Sinks.Console" Version="6.0.0" />
         <PackageReference Include="Serilog.Sinks.File" Version="6.0.0" />
@@ -88,7 +80,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Hollow.Core\Hollow.Core.csproj" />
+      <ProjectReference Include="..\Hollow.Abstractions\Hollow.Abstractions.csproj" />
     </ItemGroup>
 
     <ItemGroup>
@@ -101,5 +93,21 @@
       <UpToDateCheckInput Remove="Controls\WebView\Sample\SampleWebView\SampleWebView\App.axaml" />
       <UpToDateCheckInput Remove="Controls\WebView\Sample\SampleWebView\SampleWebView\Views\MainView.axaml" />
       <UpToDateCheckInput Remove="Controls\WebView\Sample\SampleWebView\SampleWebView\Views\MainWindow.axaml" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Models\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <AdditionalFiles Include="Views\Controls\Acrylic\Acrylic.axaml" />
+      <AdditionalFiles Include="Views\Controls\Coverages\LoadingCoverage.axaml" />
+      <AdditionalFiles Include="Views\Controls\Coverages\ProhibitedCoverage.axaml" />
+      <AdditionalFiles Include="Views\Controls\HollowHost.axaml" />
+      <AdditionalFiles Include="Views\Controls\Home\StartGameButton.axaml" />
+      <AdditionalFiles Include="Views\Controls\Home\StartGameNoticeButton.axaml" />
+      <AdditionalFiles Include="Views\Controls\Screenshots\ScreenshotImage.axaml" />
+      <AdditionalFiles Include="Views\Controls\SignalSearch\SignalSearchOverviewCard.axaml" />
+      <AdditionalFiles Include="Views\Controls\Toast\Toast.axaml" />
     </ItemGroup>
 </Project>

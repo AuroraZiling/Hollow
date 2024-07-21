@@ -1,0 +1,120 @@
+<ResourceDictionary
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:Hollow.Views.Controls">
+    <ControlTheme TargetType="controls:HollowHost" x:Key="HollowHostTheme">
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Panel>
+                    <Panel Name="PART_ContentContainer">
+                        <ContentPresenter Content="{TemplateBinding Content}" />
+                    </Panel>
+
+                    <ItemsControl
+                        HorizontalAlignment="Stretch"
+                        ItemsSource="{TemplateBinding ToastsCollection}"
+                        Margin="5,5"
+                        Name="PART_ToastPresenter"
+                        VerticalAlignment="Bottom">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <DockPanel LastChildFill="True" VerticalAlignment="Bottom" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+
+                    <Border
+                        Background="#131313"
+                        HorizontalAlignment="Stretch"
+                        IsHitTestVisible="False"
+                        Name="PART_DialogBackground"
+                        Opacity="0"
+                        VerticalAlignment="Stretch" />
+
+                    <Border
+                        Background="#363636"
+                        Classes.opened="False"
+                        CornerRadius="15"
+                        HorizontalAlignment="Center"
+                        IsHitTestVisible="False"
+                        Name="borderDialog"
+                        Opacity="0"
+                        VerticalAlignment="Center">
+                        <Border.Transitions>
+                            <Transitions>
+                                <ThicknessTransition Duration="0:0:0.25" Property="Margin">
+                                    <ThicknessTransition.Easing>
+                                        <CircularEaseOut />
+                                    </ThicknessTransition.Easing>
+                                </ThicknessTransition>
+                                <DoubleTransition Duration="0:0:0.15" Property="Opacity" />
+                                <TransformOperationsTransition Duration="0:0:0.25" Property="RenderTransform">
+                                    <TransformOperationsTransition.Easing>
+                                        <CircularEaseOut />
+                                    </TransformOperationsTransition.Easing>
+                                </TransformOperationsTransition>
+                            </Transitions>
+                        </Border.Transitions>
+
+                        <Panel>
+                            <Border Classes="Card" Name="InnerBorderDialog" />
+                            <ContentPresenter Content="{TemplateBinding DialogContent}" Margin="20" />
+                        </Panel>
+                    </Border>
+
+                    <Panel.Styles>
+                        <Style Selector="controls|HollowHost[IsDialogOpen=True]">
+                            <Style Selector="^ Border#PART_DialogBackground">
+                                <Setter Property="Opacity" Value="0.4" />
+                                <Setter Property="IsHitTestVisible" Value="True" />
+                            </Style>
+
+                            <Style Selector="^ Panel#PART_ContentContainer">
+                                <Setter Property="IsHitTestVisible" Value="False" />
+                                <Style.Animations>
+                                    <Animation Duration="0:0:0.5" FillMode="Forward">
+                                        <KeyFrame Cue="0%">
+                                            <Setter Property="Effect" Value="blur(0)" />
+                                        </KeyFrame>
+                                        <KeyFrame Cue="100%">
+                                            <Setter Property="Effect" Value="blur(0)" />
+                                        </KeyFrame>
+                                    </Animation>
+                                </Style.Animations>
+                            </Style>
+
+                            <Style Selector="^ Border#borderDialog">
+                                <Setter Property="Margin" Value="0,25,0,0" />
+                                <Setter Property="Opacity" Value="1" />
+                                <Setter Property="IsHitTestVisible" Value="True" />
+                                <Setter Property="RenderTransform" Value="scale(1) translateY(-10px)" />
+                            </Style>
+
+                        </Style>
+
+                        <Style Selector="controls|HollowHost[IsDialogOpen=False]">
+                            <Style Selector="^ Border#PART_DialogBackground">
+                                <Setter Property="Opacity" Value="0" />
+                                <Setter Property="IsHitTestVisible" Value="False" />
+                            </Style>
+
+                            <Style Selector="^ Panel#PART_ContentContainer">
+                                <Setter Property="IsHitTestVisible" Value="True" />
+                            </Style>
+
+                            <Style Selector="^ Border#borderDialog">
+                                <Setter Property="Opacity" Value="0" />
+                                <Setter Property="IsHitTestVisible" Value="False" />
+                                <Setter Property="Margin" Value="0,125,0,0" />
+                            </Style>
+                        </Style>
+                    </Panel.Styles>
+                </Panel>
+            </ControlTemplate>
+        </Setter>
+    </ControlTheme>
+    <ControlTheme
+        BasedOn="{StaticResource HollowHostTheme}"
+        TargetType="controls:HollowHost"
+        x:Key="{x:Type controls:HollowHost}" />
+</ResourceDictionary>

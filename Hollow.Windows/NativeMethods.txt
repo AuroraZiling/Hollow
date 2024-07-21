@@ -1,0 +1,9 @@
+﻿GetModuleHandle
+RegisterClassEx
+CreateWindowEx
+PostQuitMessage
+WM_DESTROY
+DefWindowProc
+DestroyWindow
+GetWindowLong
+SetLayeredWindowAttributes

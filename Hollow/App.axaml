@@ -15,14 +15,14 @@
                 <ResourceInclude Source="Resources/Palette.axaml" />
                 <ResourceInclude Source="Resources/Fonts.axaml" />
 
-                <ResourceInclude Source="Controls/Home/StartGameButton.axaml" />
-                <ResourceInclude Source="Controls/Home/StartGameNoticeButton.axaml" />
-                <ResourceInclude Source="Controls/Acrylic/Acrylic.axaml" />
-                <ResourceInclude Source="Controls/HollowHost.axaml" />
-                <ResourceInclude Source="Controls/Coverages/ProhibitedCoverage.axaml" />
-                <ResourceInclude Source="Controls/Coverages/LoadingCoverage.axaml" />
-                <ResourceInclude Source="Controls/Toast/Toast.axaml" />
-                <ResourceInclude Source="Controls/SignalSearch/SignalSearchOverviewCard.axaml" />
+                <ResourceInclude Source="Views/Controls/Home/StartGameButton.axaml" />
+                <ResourceInclude Source="Views/Controls/Home/StartGameNoticeButton.axaml" />
+                <ResourceInclude Source="Views/Controls/Acrylic/Acrylic.axaml" />
+                <ResourceInclude Source="Views/Controls/HollowHost.axaml" />
+                <ResourceInclude Source="Views/Controls/Coverages/ProhibitedCoverage.axaml" />
+                <ResourceInclude Source="Views/Controls/Coverages/LoadingCoverage.axaml" />
+                <ResourceInclude Source="Views/Controls/Toast/Toast.axaml" />
+                <ResourceInclude Source="Views/Controls/SignalSearch/SignalSearchOverviewCard.axaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
 

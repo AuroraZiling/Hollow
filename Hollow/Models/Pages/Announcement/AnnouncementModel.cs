@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Hollow.Core.MiHoYoLauncher.Models;
 
 namespace Hollow.Models.Pages.Announcement;
 

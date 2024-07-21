@@ -5,23 +5,23 @@
     ExtendClientAreaToDecorationsHint="True"
     FontFamily="avares://Hollow/Assets/Fonts/#MiSans"
     Height="700"
-    Icon="/Assets/Icons/small_icon.ico"
+    Icon="avares://Hollow/Assets/Icons/small_icon.png"
     Title="Hollow"
     Width="1200"
     mc:Ignorable="d"
     x:Class="Hollow.Views.MainWindow"
     x:DataType="vm:MainWindowViewModel"
     xmlns="https://github.com/avaloniaui"
-    xmlns:acrylic="clr-namespace:Hollow.Controls.Acrylic"
     xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
     xmlns:avalonia="clr-namespace:FluentIcons.Avalonia;assembly=FluentIcons.Avalonia"
-    xmlns:controls="clr-namespace:Hollow.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:markupExtensions="clr-namespace:FluentIcons.Avalonia.MarkupExtensions;assembly=FluentIcons.Avalonia"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:pages="clr-namespace:Hollow.Views.Pages"
     xmlns:vm="using:Hollow.ViewModels"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:Hollow.Views.Controls"
+    xmlns:acrylic="clr-namespace:Hollow.Views.Controls.Acrylic">
 
     <VisualLayerManager>
         <VisualLayerManager.ChromeOverlayLayer>
@@ -50,13 +50,6 @@
                     </Transitions>
                 </acrylic:Acrylic.Transitions>
             </acrylic:Acrylic>
-            <Panel Background="{StaticResource ZzzGrayColor}" Opacity="{Binding AnnouncementCoverageOpacity}">
-                <Panel.Transitions>
-                    <Transitions>
-                        <DoubleTransition Duration="0:0:0.2" Property="Opacity" />
-                    </Transitions>
-                </Panel.Transitions>
-            </Panel>
 
             <TabControl
                 Name="NavigationTabControl"

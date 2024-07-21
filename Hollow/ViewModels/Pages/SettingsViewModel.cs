@@ -7,13 +7,14 @@ using System.Threading.Tasks;
 using Avalonia.Markup.Xaml.MarkupExtensions;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Hollow.Controls;
+using Hollow.Abstractions.Models;
 using Hollow.Helpers;
 using Hollow.Languages;
 using Hollow.Models;
 using Hollow.Services.ConfigurationService;
 using Hollow.Services.GameService;
 using Hollow.Services.NavigationService;
+using Hollow.Views.Controls;
 using Hollow.Views.Pages;
 using NotificationType = Hollow.Enums.NotificationType;
 

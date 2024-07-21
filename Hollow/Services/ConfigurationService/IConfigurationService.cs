@@ -1,4 +1,4 @@
-﻿using Hollow.Models.Configs;
+﻿using Hollow.Abstractions.Models.Configs;
 
 namespace Hollow.Services.ConfigurationService;
 

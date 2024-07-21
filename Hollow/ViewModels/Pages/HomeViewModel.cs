@@ -3,7 +3,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Hollow.Core.MiHoYoLauncher.Models;
+using Hollow.Abstractions.Models.HttpContrasts.MiHoYoLauncher;
 using Hollow.Helpers;
 using Hollow.Models.Pages.Home;
 using Hollow.Services.ConfigurationService;

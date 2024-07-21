@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using Hollow.Core.Gacha.Common;
-using Hollow.Core.Gacha.Uigf;
+using Hollow.Abstractions.Models.HttpContrasts.Gacha.Common;
+using Hollow.Abstractions.Models.HttpContrasts.Gacha.Uigf;
 using Hollow.Models.Pages.SignalSearch;
 
 namespace Hollow.Helpers;

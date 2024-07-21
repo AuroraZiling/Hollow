@@ -1,7 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.Input;
-using Hollow.Controls;
 using Hollow.Enums;
 using Hollow.Services.ConfigurationService;
+using Hollow.Views.Controls;
 
 namespace Hollow.ViewModels.Pages;
 

@@ -1,6 +1,6 @@
 ﻿using Avalonia.Controls;
-using Hollow.Controls.WebView;
 using Hollow.ViewModels.Pages;
+using Hollow.Views.Controls.WebView;
 
 namespace Hollow.Views.Pages;
 

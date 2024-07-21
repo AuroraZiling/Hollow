@@ -3,8 +3,8 @@ using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
-using Hollow.Core.MiHoYoLauncher;
-using Hollow.Core.MiHoYoLauncher.Models;
+using Hollow.Abstractions.Models.HttpContrasts.MiHoYoLauncher;
+using Hollow.Abstractions.Models.MiHoYoLauncher;
 using Hollow.Models.Pages.Announcement;
 using HtmlHelper = Hollow.Helpers.HtmlHelper;
 

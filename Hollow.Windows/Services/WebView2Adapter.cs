@@ -86,6 +86,7 @@ public class WebView2Adapter : IWebViewAdapter
         {
             // Avalonia提供的宿主窗口默认为黑色背景，设置为透明
             // 由于 WebView2 不是GDI+，所以不会影响 WebView2 的渲染
+            await Task.Delay(150);
             PInvoke.SetLayeredWindowAttributes((HWND)handle, new COLORREF(1), 0, LAYERED_WINDOW_ATTRIBUTES_FLAGS.LWA_COLORKEY); 
         }
         
@@ -123,12 +124,6 @@ public class WebView2Adapter : IWebViewAdapter
         {
             DomContentLoaded?.Invoke(this, new WebViewDomContentLoadedEventArgs());
         }
-
-        webView.WebResourceRequested += (_, e) =>
-        {
-            if(e.Request.Uri.Contains("aaa"))
-                e.Response = webView.Environment.CreateWebResourceResponse(Stream.Null, 404, "Not Found", "Content-Type: text/html");
-        };
         
         webView.NavigationStarting += WebViewOnNavigationStarting;
         void WebViewOnNavigationStarting(object? sender, CoreWebView2NavigationStartingEventArgs e)

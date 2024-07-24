@@ -62,7 +62,6 @@ public partial class MainWindowViewModel : ViewModelBase
     [RelayCommand]
     private void ChangePage(int destinationId)
     {
-        DisplayPageId = destinationId;
         _navigationService.Navigate(destinationId);
     }
 }

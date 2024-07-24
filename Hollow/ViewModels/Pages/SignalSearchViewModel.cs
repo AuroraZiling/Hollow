@@ -19,6 +19,7 @@ using Hollow.Services.GachaService;
 using Hollow.Services.NavigationService;
 using Hollow.Views.Controls;
 using Hollow.Views.Dialogs;
+using Hollow.Views.Pages;
 
 namespace Hollow.ViewModels.Pages;
 
@@ -26,7 +27,7 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
 {
     public void Navigated()
     {
-        if (_navigationService.CurrentViewName != "SignalSearch") return;
+        if (_navigationService.CurrentViewName != nameof(SignalSearch)) return;
         
         GetGachaLogTitle = Lang.SignalSearch_ProhibitedCoverage_Loading;
         _ = LoadGachaRecords();

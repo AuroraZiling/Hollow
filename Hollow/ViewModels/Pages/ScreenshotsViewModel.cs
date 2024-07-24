@@ -15,7 +15,7 @@ public partial class ScreenshotsViewModel: ViewModelBase, IViewModelBase
 {
     public void Navigated()
     {
-        if (_navigationService.CurrentViewName != nameof(Screenshots)) return;
+        if (_navigationService.CurrentViewName != nameof(Views.Pages.Screenshots)) return;
         if (ValidateScreenshots())
         {
             LoadScreenshots();

@@ -198,4 +198,13 @@
     <data name="SignalSearch_Detailed_SingleOrConsecutive_Consecutive" xml:space="preserve">
         <value>十连 - 第{0}抽</value>
     </data>
+    <data name="SignalSearch_Export_Tip" xml:space="preserve">
+        <value>选择需要导出的 UIDs:</value>
+    </data>
+    <data name="Dialog_Ok" xml:space="preserve">
+        <value>确认</value>
+    </data>
+    <data name="Dialog_Cancel" xml:space="preserve">
+        <value>取消</value>
+    </data>
 </root>

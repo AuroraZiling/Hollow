@@ -96,6 +96,24 @@ namespace Hollow.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        internal static string Dialog_Cancel {
+            get {
+                return ResourceManager.GetString("Dialog_Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ok.
+        /// </summary>
+        internal static string Dialog_Ok {
+            get {
+                return ResourceManager.GetString("Dialog_Ok", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Game Settings.
         /// </summary>
         internal static string GameSettings_Title {
@@ -362,6 +380,15 @@ namespace Hollow.Languages {
         internal static string SignalSearch_Export {
             get {
                 return ResourceManager.GetString("SignalSearch_Export", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select the UIDs to be exported:.
+        /// </summary>
+        internal static string SignalSearch_Export_Tip {
+            get {
+                return ResourceManager.GetString("SignalSearch_Export_Tip", resourceCulture);
             }
         }
         

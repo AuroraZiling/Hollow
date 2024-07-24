@@ -198,4 +198,13 @@
     <data name="SignalSearch_Detailed_SingleOrConsecutive_Consecutive" xml:space="preserve">
         <value>Consecutive - {0} poll</value>
     </data>
+    <data name="SignalSearch_Export_Tip" xml:space="preserve">
+        <value>Select the UIDs to be exported:</value>
+    </data>
+    <data name="Dialog_Ok" xml:space="preserve">
+        <value>Ok</value>
+    </data>
+    <data name="Dialog_Cancel" xml:space="preserve">
+        <value>Cancel</value>
+    </data>
 </root>

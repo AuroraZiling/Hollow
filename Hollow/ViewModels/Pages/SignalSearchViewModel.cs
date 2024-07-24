@@ -5,6 +5,8 @@ using System.IO;
 using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Avalonia.Controls;
+using Avalonia.Platform.Storage;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Hollow.Abstractions.Models;
@@ -17,6 +19,7 @@ using Hollow.Models;
 using Hollow.Models.Pages.SignalSearch;
 using Hollow.Services.GachaService;
 using Hollow.Services.NavigationService;
+using Hollow.Views;
 using Hollow.Views.Controls;
 using Hollow.Views.Dialogs;
 using Hollow.Views.Pages;
@@ -105,7 +108,20 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
     [RelayCommand]
     private void ExportRecords()
     {
-        HollowHost.ShowDialog(new StandardDialog());
+        HollowHost.ShowDialog(new ExportDialog(UidList, SelectedUidListCallback));
+    }
+
+    private async void SelectedUidListCallback(string[] selectedUidList)
+    {
+        if (selectedUidList.Length == 0) return;
+        var gachaRecords = new GachaRecords { Info = { ExportAppVersion = AppInfo.AppVersion, ExportTimestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString() }, Profiles = selectedUidList.Select(uid => _gachaProfiles![uid]).ToList() };
+
+        var topLevel = TopLevel.GetTopLevel(App.GetService<MainWindow>());
+        var file = await topLevel!.StorageProvider.SaveFilePickerAsync(new FilePickerSaveOptions { Title = "Save Text File", SuggestedFileName = $"Hollow_{gachaRecords.Info.ExportTimestamp}.json"});
+        if (file is null) return;
+        await using var stream = await file.OpenWriteAsync();
+        await using var streamWriter = new StreamWriter(stream);
+        await streamWriter.WriteLineAsync(JsonSerializer.Serialize(gachaRecords, HollowJsonSerializer.Options));
     }
 
     [RelayCommand]

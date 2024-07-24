@@ -210,7 +210,7 @@
                         <DataGridTextColumn Binding="{Binding RankType, Converter={StaticResource RankTypeToFormattedConverter}}" Header="{I18N {x:Static languages:LangKeys.SignalSearch_Detailed_RankType}}" />
                         <DataGridTextColumn
                             Binding="{Binding Time}"
-                            Header="Time"
+                            Header="{I18N {x:Static languages:LangKeys.SignalSearch_Detailed_Time}}"
                             Width="1.5*" />
                         <DataGridTemplateColumn Header="{I18N {x:Static languages:LangKeys.SignalSearch_Detailed_SingleOrConsecutive}}" Width="1.5*">
                             <DataGridTemplateColumn.CellTemplate>
@@ -261,7 +261,7 @@
                         <DataGridTextColumn Binding="{Binding RankType, Converter={StaticResource RankTypeToFormattedConverter}}" Header="{I18N {x:Static languages:LangKeys.SignalSearch_Detailed_RankType}}" />
                         <DataGridTextColumn
                             Binding="{Binding Time}"
-                            Header="Time"
+                            Header="{I18N {x:Static languages:LangKeys.SignalSearch_Detailed_Time}}"
                             Width="1.5*" />
                         <DataGridTemplateColumn Header="{I18N {x:Static languages:LangKeys.SignalSearch_Detailed_SingleOrConsecutive}}" Width="1.5*">
                             <DataGridTemplateColumn.CellTemplate>
@@ -312,7 +312,7 @@
                         <DataGridTextColumn Binding="{Binding RankType, Converter={StaticResource RankTypeToFormattedConverter}}" Header="{I18N {x:Static languages:LangKeys.SignalSearch_Detailed_RankType}}" />
                         <DataGridTextColumn
                             Binding="{Binding Time}"
-                            Header="Time"
+                            Header="{I18N {x:Static languages:LangKeys.SignalSearch_Detailed_Time}}"
                             Width="1.5*" />
                         <DataGridTemplateColumn Header="{I18N {x:Static languages:LangKeys.SignalSearch_Detailed_SingleOrConsecutive}}" Width="1.5*">
                             <DataGridTemplateColumn.CellTemplate>

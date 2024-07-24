@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Hollow.Abstractions.Models.HttpContrasts;
 using Hollow.Abstractions.Models.HttpContrasts.Gacha.Uigf;
-using Hollow.Models;
 
 namespace Hollow.Services.GachaService;
 

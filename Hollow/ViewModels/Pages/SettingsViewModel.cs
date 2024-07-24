@@ -10,7 +10,6 @@ using CommunityToolkit.Mvvm.Input;
 using Hollow.Abstractions.Models;
 using Hollow.Helpers;
 using Hollow.Languages;
-using Hollow.Models;
 using Hollow.Services.ConfigurationService;
 using Hollow.Services.GameService;
 using Hollow.Services.NavigationService;

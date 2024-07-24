@@ -15,7 +15,6 @@ using Hollow.Abstractions.Models.HttpContrasts.Gacha.Uigf;
 using Hollow.Enums;
 using Hollow.Helpers;
 using Hollow.Languages;
-using Hollow.Models;
 using Hollow.Models.Pages.SignalSearch;
 using Hollow.Services.GachaService;
 using Hollow.Services.NavigationService;

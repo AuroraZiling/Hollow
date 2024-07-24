@@ -4,12 +4,12 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:avalonia="clr-namespace:FluentIcons.Avalonia;assembly=FluentIcons.Avalonia"
     xmlns:converters="clr-namespace:Hollow.Helpers.Converters"
+    xmlns:coverages="clr-namespace:Hollow.Views.Controls.Coverages"
     xmlns:languages="clr-namespace:Hollow.Languages"
     xmlns:pages="clr-namespace:Hollow.ViewModels.Pages"
-    xmlns:signalSearchModel="clr-namespace:Hollow.Models.Pages.SignalSearch"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:signalSearch="clr-namespace:Hollow.Views.Controls.SignalSearch"
-    xmlns:coverages="clr-namespace:Hollow.Views.Controls.Coverages">
+    xmlns:signalSearchModel="clr-namespace:Hollow.Models.Pages.SignalSearch"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <UserControl.Resources>
         <converters:RankTypeToFormattedConverter x:Key="RankTypeToFormattedConverter" />
     </UserControl.Resources>

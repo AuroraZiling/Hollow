@@ -13,7 +13,7 @@ public partial class SignalSearch : UserControl
         DataContext = App.GetService<SignalSearchViewModel>();
     }
 
-    private void DataGrid_OnLoadingRow(object? sender, DataGridRowEventArgs e)
+    private void DataGrid_OnLoadingRow(object? _, DataGridRowEventArgs e)
     {
         var row = e.Row;
         row.Bind(ForegroundProperty, 

@@ -9,7 +9,7 @@ public class RankTypeToFormattedConverter: IValueConverter
 {
     public static readonly RankTypeToFormattedConverter Instance = new();
 
-    public object? Convert(object? value, Type targetType, object? parameter, 
+    public object Convert(object? value, Type targetType, object? parameter, 
         CultureInfo culture)
     {
         if (value is string rankType && targetType.IsAssignableTo(typeof(string)))

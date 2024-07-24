@@ -5,7 +5,6 @@ using Avalonia.Markup.Xaml.MarkupExtensions;
 using Hollow.Abstractions.Models;
 using Hollow.Abstractions.Models.Configs;
 using Hollow.Helpers;
-using Hollow.Models;
 
 namespace Hollow.Services.ConfigurationService;
 

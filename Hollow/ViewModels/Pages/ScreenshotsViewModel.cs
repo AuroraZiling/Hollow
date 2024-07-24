@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -7,7 +6,6 @@ using Hollow.Models.Pages.Screenshots;
 using Hollow.Services.ConfigurationService;
 using Hollow.Services.GameService;
 using Hollow.Services.NavigationService;
-using Hollow.Views.Pages;
 
 namespace Hollow.ViewModels.Pages;
 

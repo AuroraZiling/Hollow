@@ -1,27 +1,25 @@
 ﻿using System;
 using System.Globalization;
-using Avalonia;
 using Avalonia.Data.Converters;
 using Avalonia.Media.Imaging;
-using Avalonia.Platform;
 
 namespace Hollow.Helpers.Converters;
 
 public class BitmapValueConverter : IValueConverter
 {
-    public static BitmapValueConverter Instance = new BitmapValueConverter();
+    public static BitmapValueConverter Instance = new();
 
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
-        if (value is string && targetType == typeof(Bitmap))
+        if (value is string fileName && targetType == typeof(Bitmap))
         {
-            return new Bitmap((string)value);
+            return new Bitmap(fileName);
         }
 
         throw new NotSupportedException();
     }
 
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
         throw new NotSupportedException();
     }

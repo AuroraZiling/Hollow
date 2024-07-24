@@ -12,7 +12,6 @@ using Hollow.Abstractions.Models.HttpContrasts.Gacha;
 using Hollow.Abstractions.Models.HttpContrasts.Gacha.Common;
 using Hollow.Abstractions.Models.HttpContrasts.Gacha.Uigf;
 using Hollow.Helpers;
-using Hollow.Models;
 using Hollow.Services.ConfigurationService;
 using Serilog;
 

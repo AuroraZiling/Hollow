@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Hollow.Models.Pages.Announcement;
+﻿namespace Hollow.Models.Pages.Announcement;
 
 public class AnnouncementModel
 {

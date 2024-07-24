@@ -10,7 +10,7 @@ public class RankTypeToBrushConverter : IValueConverter
 {
     public static readonly RankTypeToBrushConverter Instance = new();
 
-    public object? Convert(object? value, Type targetType, object? parameter, 
+    public object Convert(object? value, Type targetType, object? parameter, 
         CultureInfo culture)
     {
         if (value is string rankType && targetType.IsAssignableTo(typeof(IBrush)))

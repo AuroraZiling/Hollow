@@ -5,7 +5,7 @@ namespace Hollow.Services.NavigationService;
 public class NavigationService: INavigationService
 {
     public string CurrentViewName { get; set; } = "Home";
-    public int CurrentViewId { get; set; } = 0;
+    public int CurrentViewId { get; set; }
     
     public Action? CurrentViewChanged { get; set; }
     

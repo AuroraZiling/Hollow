@@ -28,9 +28,12 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
     public void Navigated()
     {
         if (_navigationService.CurrentViewName != nameof(SignalSearch)) return;
-        
         GetGachaLogTitle = Lang.SignalSearch_ProhibitedCoverage_Loading;
-        _ = LoadGachaRecords();
+
+        if(GetGachaLogShortMessage == "")
+        {
+            _ = LoadGachaRecords();
+        }
     }
 
     [ObservableProperty] private string _getGachaLogTitle = Lang.SignalSearch_ProhibitedCoverage_Loading;
@@ -79,7 +82,6 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
         // Gacha Records
         GetGachaLogShortMessage = Lang.SignalSearch_LoadGachaRecords_GachaRecords;
         _gachaProfiles = await _gachaService.LoadGachaRecordProfileDictionary();
-
         if (_gachaProfiles is null || _gachaProfiles!.Count == 0)
         {
             GetGachaLogShortMessage = Lang.SignalSearch_LoadGachaRecords_GachaRecordsNotFound;
@@ -94,7 +96,8 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
         UidList = new ObservableCollection<string>(_analyzedGachaProfiles!.Keys);
         SelectedUid = UidList.FirstOrDefault(uid => uid == updatedUid) ?? UidList.First();
         SelectedAnalyzedGachaRecords = _analyzedGachaProfiles[SelectedUid];
-        await Task.Delay(100);
+
+        await Task.Delay(1000);
 
         RemoveCoverage();
     }

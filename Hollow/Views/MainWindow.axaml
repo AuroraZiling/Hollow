@@ -12,16 +12,16 @@
     x:Class="Hollow.Views.MainWindow"
     x:DataType="vm:MainWindowViewModel"
     xmlns="https://github.com/avaloniaui"
+    xmlns:acrylic="clr-namespace:Hollow.Views.Controls.Acrylic"
     xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
     xmlns:avalonia="clr-namespace:FluentIcons.Avalonia;assembly=FluentIcons.Avalonia"
+    xmlns:controls="clr-namespace:Hollow.Views.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:markupExtensions="clr-namespace:FluentIcons.Avalonia.MarkupExtensions;assembly=FluentIcons.Avalonia"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:pages="clr-namespace:Hollow.Views.Pages"
     xmlns:vm="using:Hollow.ViewModels"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:controls="clr-namespace:Hollow.Views.Controls"
-    xmlns:acrylic="clr-namespace:Hollow.Views.Controls.Acrylic">
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <VisualLayerManager>
         <VisualLayerManager.ChromeOverlayLayer>
@@ -32,6 +32,7 @@
                 IsHitTestVisible="False"
                 Stretch="UniformToFill"
                 asyncImageLoader:ImageLoader.Source="{Binding BackgroundUrl}" />
+            <Panel Background="{StaticResource CoverageBackground}" Opacity="{Binding CoverageOpacity}" />
             <acrylic:Acrylic
                 Blur="20"
                 HorizontalAlignment="Left"

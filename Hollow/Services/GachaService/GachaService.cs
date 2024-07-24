@@ -36,14 +36,14 @@ public partial class GachaService(IConfigurationService configurationService, Ht
             gachaRecords = JsonSerializer.Deserialize<GachaRecords>(await File.ReadAllTextAsync(AppInfo.GachaRecordPath))!;
         }
 
-        var gachaRecordProfileDictionary =  gachaRecords.Profiles.ToDictionary(item => item.Uid, item => item);
+        var gachaRecordProfileDictionary = gachaRecords.Profiles.ToDictionary(item => item.Uid, item => item);
         foreach (var profile in gachaRecordProfileDictionary.Keys)
         {
             gachaRecordProfileDictionary[profile].List = gachaRecordProfileDictionary[profile].List.OrderByDescending(item => item.Id).ToList();
         }
 
         GachaRecordProfileDictionary = gachaRecordProfileDictionary;
-        return gachaRecordProfileDictionary;
+        return GachaRecordProfileDictionary;
     }
     
     private string GetLatestTime(string uid, string gachaType)

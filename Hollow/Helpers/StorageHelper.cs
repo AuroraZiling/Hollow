@@ -11,7 +11,7 @@ public static class StorageHelper
 {
     public static async Task<string> OpenFolderPickerForPath()
     {
-        var dialog = await new Window().StorageProvider.OpenFolderPickerAsync(new FolderPickerOpenOptions {AllowMultiple = false});
+        var dialog = await new Window().StorageProvider.OpenFolderPickerAsync(new FolderPickerOpenOptions {AllowMultiple = false, Title = "\"ZenlessZoneZero Game\" Folder"});
         return dialog.Count == 0 ? string.Empty : Uri.UnescapeDataString(dialog[0].Path.AbsolutePath);
     }
 

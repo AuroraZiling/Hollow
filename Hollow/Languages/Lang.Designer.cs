@@ -625,5 +625,59 @@ namespace Hollow.Languages {
                 return ResourceManager.GetString("Special_ProhibitedCoverage_NotImplemented", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to AuthKey not found, make sure Signal Search records are visited in game.
+        /// </summary>
+        internal static string Toast_AuthKeyNotFound_Message {
+            get {
+                return ResourceManager.GetString("Toast_AuthKeyNotFound_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        internal static string Toast_Common_Error_Title {
+            get {
+                return ResourceManager.GetString("Toast_Common_Error_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please select the folder named “ZenlessZoneZero Game”.
+        /// </summary>
+        internal static string Toast_InvalidGameDirectory_Message {
+            get {
+                return ResourceManager.GetString("Toast_InvalidGameDirectory_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid Game Directory.
+        /// </summary>
+        internal static string Toast_InvalidGameDirectory_Title {
+            get {
+                return ResourceManager.GetString("Toast_InvalidGameDirectory_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unknown Game Directory.
+        /// </summary>
+        internal static string Toast_UnknownGameDirectory_Message {
+            get {
+                return ResourceManager.GetString("Toast_UnknownGameDirectory_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No web caches found, make sure Signal Search records are visited in game.
+        /// </summary>
+        internal static string Toast_WebCachesNotFound_Message {
+            get {
+                return ResourceManager.GetString("Toast_WebCachesNotFound_Message", resourceCulture);
+            }
+        }
     }
 }

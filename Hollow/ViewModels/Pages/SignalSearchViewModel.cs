@@ -99,7 +99,7 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
         SelectedUid = UidList.FirstOrDefault(uid => uid == updatedUid) ?? UidList.First();
         SelectedAnalyzedGachaRecords = _analyzedGachaProfiles[SelectedUid];
 
-        await Task.Delay(1000);
+        await Task.Delay(200);
 
         RemoveCoverage();
     }
@@ -171,7 +171,7 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
             }
             else
             {
-                HollowHost.ShowToast("Error", value.Message, NotificationType.Error);
+                HollowHost.ShowToast(Lang.Toast_Common_Error_Title, value.Message, NotificationType.Error);
             }
         });
         var gachaRecord = await _gachaService.GetGachaRecords(authKey.Data, gachaProgress);

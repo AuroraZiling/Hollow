@@ -207,4 +207,22 @@
     <data name="Dialog_Cancel" xml:space="preserve">
         <value>取消</value>
     </data>
+    <data name="Toast_InvalidGameDirectory_Title" xml:space="preserve">
+        <value>错误的游戏目录</value>
+    </data>
+    <data name="Toast_InvalidGameDirectory_Message" xml:space="preserve">
+        <value>请选择以"ZenlessZoneZero Game"为名的文件夹</value>
+    </data>
+    <data name="Toast_Common_Error_Title" xml:space="preserve">
+        <value>错误</value>
+    </data>
+    <data name="Toast_UnknownGameDirectory_Message" xml:space="preserve">
+        <value>未知的游戏目录</value>
+    </data>
+    <data name="Toast_WebCachesNotFound_Message" xml:space="preserve">
+        <value>没有发现缓存，请确保在游戏内访问过调频记录</value>
+    </data>
+    <data name="Toast_AuthKeyNotFound_Message" xml:space="preserve">
+        <value>没有发现 AuthKey，请确保在游戏内访问过调频记录</value>
+    </data>
 </root>

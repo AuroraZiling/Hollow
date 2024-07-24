@@ -207,4 +207,22 @@
     <data name="Dialog_Cancel" xml:space="preserve">
         <value>Cancel</value>
     </data>
+    <data name="Toast_InvalidGameDirectory_Title" xml:space="preserve">
+        <value>Invalid Game Directory</value>
+    </data>
+    <data name="Toast_InvalidGameDirectory_Message" xml:space="preserve">
+        <value>Please select the folder named “ZenlessZoneZero Game”</value>
+    </data>
+    <data name="Toast_Common_Error_Title" xml:space="preserve">
+        <value>Error</value>
+    </data>
+    <data name="Toast_UnknownGameDirectory_Message" xml:space="preserve">
+        <value>Unknown Game Directory</value>
+    </data>
+    <data name="Toast_WebCachesNotFound_Message" xml:space="preserve">
+        <value>No web caches found, make sure Signal Search records are visited in game</value>
+    </data>
+    <data name="Toast_AuthKeyNotFound_Message" xml:space="preserve">
+        <value>AuthKey not found, make sure Signal Search records are visited in game</value>
+    </data>
 </root>

@@ -12,6 +12,7 @@ using Hollow.Abstractions.Models.HttpContrasts.Gacha;
 using Hollow.Abstractions.Models.HttpContrasts.Gacha.Common;
 using Hollow.Abstractions.Models.HttpContrasts.Gacha.Uigf;
 using Hollow.Helpers;
+using Hollow.Languages;
 using Hollow.Services.ConfigurationService;
 using Serilog;
 
@@ -167,25 +168,25 @@ public partial class GachaService(IConfigurationService configurationService, Ht
         var gameDirectory = configurationService.AppConfig.Game.Directory;
         if (string.IsNullOrWhiteSpace(gameDirectory))
         {
-            return new Response<string>(false, "gameDirectory is empty");
+            return new Response<string>(false, Lang.Toast_UnknownGameDirectory_Message);
         }
         
         var webCachesPath = Path.Combine(gameDirectory, "ZenlessZoneZero_Data", "webCaches");
         if (!Directory.Exists(webCachesPath))
         {
-            return new Response<string>(false, "webCaches not found");
+            return new Response<string>(false, Lang.Toast_WebCachesNotFound_Message);
         }
         
         var webCachesVersionPath = Directory.GetDirectories(webCachesPath).FirstOrDefault();
         if (string.IsNullOrWhiteSpace(webCachesVersionPath))
         {
-            return new Response<string>(false, "webCaches not found");
+            return new Response<string>(false, Lang.Toast_WebCachesNotFound_Message);
         }
         
         var dataPath = Path.Combine(webCachesVersionPath, "Cache", "Cache_Data", "data_2");
         if (!File.Exists(dataPath))
         {
-            return new Response<string>(false, "data file not found");
+            return new Response<string>(false, Lang.Toast_WebCachesNotFound_Message);
         }
 
         var authKey = GetAuthKeyFromFile(dataPath);
@@ -207,7 +208,7 @@ public partial class GachaService(IConfigurationService configurationService, Ht
         var gachaLogUrls = GachaLogUrlRegex().Matches(data);
         if (gachaLogUrls.Count == 0)
         {
-            return new Response<string>(false, "authKey not found");
+            return new Response<string>(false, Lang.Toast_AuthKeyNotFound_Message);
         }
 
         return new Response<string>(true) { Data = gachaLogUrls[^1].Value };

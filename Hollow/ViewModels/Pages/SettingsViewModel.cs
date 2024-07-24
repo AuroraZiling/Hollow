@@ -70,7 +70,7 @@ public partial class SettingsViewModel : ViewModelBase, IViewModelBase
         }
         else if (!string.IsNullOrWhiteSpace(directory))
         {
-            await HollowHost.ShowToast("Invalid Game Directory", "Please select a valid game directory", NotificationType.Error);
+            await HollowHost.ShowToast(Lang.Toast_InvalidGameDirectory_Title, Lang.Toast_InvalidGameDirectory_Message, NotificationType.Error);
         }
     }
     

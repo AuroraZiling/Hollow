@@ -400,3 +400,4 @@ FodyWeavers.xsd
 
 # Build
 build/
+/hollow-launcher/target

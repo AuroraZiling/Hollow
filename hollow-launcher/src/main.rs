@@ -46,7 +46,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         panic_then_pause(format!("{:?} is not a directory", root_directory));
     }
 
-    let executable = root_directory.join("Hollow.exe");
+    let executable = root_directory.join("Hollow.Windows.exe");
     if !executable.exists() {
         panic_then_pause(format!("{:?} not found", executable));
     }

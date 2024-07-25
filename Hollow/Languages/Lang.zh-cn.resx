@@ -247,7 +247,7 @@
         <value>元数据已更新</value>
     </data>
     <data name="Toast_MetadataUpdated_Message" xml:space="preserve">
-        <value>updated successfully</value>
+        <value>更新成功</value>
     </data>
     <data name="Toast_MetadataFailed_Title" xml:space="preserve">
         <value>元数据获取失败</value>

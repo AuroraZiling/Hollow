@@ -1,7 +1,7 @@
 ﻿<ResourceDictionary
     xmlns="https://github.com/avaloniaui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:home="clr-namespace:Hollow.Views.Controls.Home">
+    xmlns:home="clr-namespace:Hollow.Views.Controls.Home"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Design.PreviewWith>
         <home:StartGameNoticeButton
             FontFamily="avares://Hollow/Assets/Fonts#MiSans"
@@ -23,7 +23,7 @@
                     </Border.Background>
                     <Panel>
                         <TextBlock
-                            FontSize="18"
+                            FontSize="16"
                             HorizontalAlignment="Center"
                             Name="PART_Title"
                             Opacity="1"
@@ -53,9 +53,9 @@
                                 </Transitions>
                             </Button.Transitions>
                             <TextBlock
-                                FontSize="18"
+                                FontSize="16"
                                 HorizontalAlignment="Center"
-                                Margin="0,3,0,0"
+                                Margin="0,2,0,0"
                                 Text="{TemplateBinding Message}" />
                         </Button>
                     </Panel>

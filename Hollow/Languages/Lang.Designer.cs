@@ -762,7 +762,7 @@ namespace Hollow.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 更新成功.
+        ///   Looks up a localized string similar to updated successfully.
         /// </summary>
         internal static string Toast_MetadataUpdated_Message {
             get {

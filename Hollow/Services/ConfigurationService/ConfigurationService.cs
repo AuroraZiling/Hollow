@@ -5,6 +5,7 @@ using Avalonia.Markup.Xaml.MarkupExtensions;
 using Hollow.Abstractions.Models;
 using Hollow.Abstractions.Models.Configs;
 using Hollow.Helpers;
+using Serilog;
 
 namespace Hollow.Services.ConfigurationService;
 
@@ -15,6 +16,8 @@ public class ConfigurationService: IConfigurationService
         AppConfig = LoadConfiguration();
         CurrentLanguage = AppConfig.Language == "Auto" ? CultureInfo.CurrentCulture.Name : AppConfig.Language;
         I18NExtension.Culture = AppConfig.Language != "Auto" ? new CultureInfo(AppConfig.Language) : CultureInfo.CurrentCulture;
+        
+        Log.Information("[ConfigurationService] Initialized (Current Language: {Language})", CurrentLanguage);
     }
 
     public AppConfig AppConfig { get; set; }
@@ -31,6 +34,7 @@ public class ConfigurationService: IConfigurationService
         {
             File.WriteAllText(AppInfo.ConfigPath, JsonSerializer.Serialize(new AppConfig(), HollowJsonSerializer.Options));
         }
+        Log.Information("[ConfigurationService] Configuration loaded");
         return JsonSerializer.Deserialize<AppConfig>(File.ReadAllText(AppInfo.ConfigPath))!;
     }
 

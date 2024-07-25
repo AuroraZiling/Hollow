@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Hollow.Abstractions.Models;
 using Hollow.Abstractions.Models.HttpContrasts;
+using Serilog;
 
 namespace Hollow.Services.MetadataService;
 
@@ -73,6 +74,7 @@ public class MetadataService(HttpClient httpClient): IMetadataService
                 File.Delete(metadataPath);
             }
             await File.WriteAllTextAsync(metadataPath, metadata);
+            Log.Information("[MetadataService] Metadata downloaded ({key})", metadataUrl);
             return true;
         }
         catch (Exception)

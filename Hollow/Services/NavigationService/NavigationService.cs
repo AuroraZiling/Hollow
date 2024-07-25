@@ -1,4 +1,5 @@
 ﻿using System;
+using Serilog;
 
 namespace Hollow.Services.NavigationService;
 

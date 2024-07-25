@@ -10,6 +10,7 @@ using Hollow.Services.ConfigurationService;
 using Hollow.Services.GameService;
 using Hollow.Services.MiHoYoLauncherService;
 using Hollow.Services.NavigationService;
+using Serilog;
 
 namespace Hollow.ViewModels.Pages;
 
@@ -78,6 +79,7 @@ public partial class HomeViewModel: ViewModelBase, IViewModelBase
         // Version News
         VersionNewsImageUrl = allGameBasicInfo?.Data.GameInfo[0].Backgrounds[0].Icon.Url ?? "";
         VersionNewsUrl = allGameBasicInfo?.Data.GameInfo[0].Backgrounds[0].Icon.Link ?? "";
+        Log.Information("[Home] Version news loaded");
 
         // Banners
         var banners = gameContent?.Data.Content.Banners;
@@ -88,6 +90,7 @@ public partial class HomeViewModel: ViewModelBase, IViewModelBase
             using var stream = await _httpClient.GetAsync(banner.Image.Url);
             Banners.Add(new BannerModel {Link = banner.Image.Link, Image = BitmapOperations.Convert(await stream.Content.ReadAsStreamAsync(), 320)});
         }
+        Log.Information("[Home] Banners loaded");
         
         // Posts
         var posts = gameContent?.Data.Content.Posts;
@@ -109,6 +112,7 @@ public partial class HomeViewModel: ViewModelBase, IViewModelBase
                     break;
             }
         }
+        Log.Information("[Home] Posts loaded");
     }
 
     public void Navigated()

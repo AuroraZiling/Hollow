@@ -22,6 +22,7 @@ using Hollow.Views;
 using Hollow.Views.Controls;
 using Hollow.Views.Dialogs;
 using Hollow.Views.Pages;
+using Serilog;
 
 namespace Hollow.ViewModels.Pages;
 
@@ -120,6 +121,7 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
             var gachaRecords = new GachaRecords { Info = { ExportAppVersion = AppInfo.AppVersion, ExportTimestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString() }, Profiles = UidList.Where(uid => uid != SelectedUid).Select(uid => _gachaProfiles![uid]).ToList() };
             await File.WriteAllTextAsync(AppInfo.GachaRecordPath, JsonSerializer.Serialize(gachaRecords, HollowJsonSerializer.Options));
             await LoadGachaRecords();
+            Log.Information("[SignalSearch] Profile deleted: {Uid}", SelectedUid);
         }
     }
 
@@ -140,6 +142,7 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
             await using var stream = await file.OpenWriteAsync();
             await using var streamWriter = new StreamWriter(stream);
             await streamWriter.WriteLineAsync(JsonSerializer.Serialize(gachaRecords, HollowJsonSerializer.Options));
+            Log.Information("[SignalSearch] Records exported: {UidList} to {File}", selectedUidList, file.Path);
         }
     }
     
@@ -181,7 +184,6 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
             await HollowHost.ShowToast(Lang.SignalSearch_Update_GetRecordsFailed, authKey.Message, NotificationType.Error);
             return;
         }
-
         await UpdateRecords(authKey.Data);
     }
 

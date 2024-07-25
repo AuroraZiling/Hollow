@@ -22,6 +22,7 @@ public partial class MainWindow : Window
     {
         Log.CloseAndFlush();
         Environment.Exit(0);
+        Log.Information("[App] Hollow is shutting down");
     }
 
     protected override void OnPointerPressed(PointerPressedEventArgs e)

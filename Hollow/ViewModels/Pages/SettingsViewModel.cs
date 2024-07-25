@@ -15,6 +15,7 @@ using Hollow.Services.GameService;
 using Hollow.Services.NavigationService;
 using Hollow.Views.Controls;
 using Hollow.Views.Pages;
+using Serilog;
 using NotificationType = Hollow.Enums.NotificationType;
 
 namespace Hollow.ViewModels.Pages;
@@ -54,6 +55,8 @@ public partial class SettingsViewModel : ViewModelBase, IViewModelBase
         }
         var language = _configurationService.AppConfig.Language;
         Language = language != "Auto" ? GetLanguage.LanguageList.Select(x => x.Key).ToList()[GetLanguage.LanguageList.Select(x => x.Value).ToList().IndexOf(language)] : "Auto";
+        
+        Log.Information("[Settings] Configuration loaded");
     }
 
     #region Game
@@ -70,10 +73,12 @@ public partial class SettingsViewModel : ViewModelBase, IViewModelBase
             GameDirectory = directory;
             _configurationService.AppConfig.Game.Directory = GameDirectory;
             _configurationService.Save();
+            Log.Information("[Settings] Game directory changed to {GameDirectory}", GameDirectory);
         }
         else if (!string.IsNullOrWhiteSpace(directory))
         {
             await HollowHost.ShowToast(Lang.Toast_InvalidGameDirectory_Title, Lang.Toast_InvalidGameDirectory_Message, NotificationType.Error);
+            Log.Warning("[Settings] Invalid game directory: {GameDirectory}", directory);
         }
     }
     
@@ -121,6 +126,7 @@ public partial class SettingsViewModel : ViewModelBase, IViewModelBase
         _configurationService.AppConfig.Language = Language != "Auto" ? GetLanguage.LanguageList[Language] : "Auto";
         _configurationService.CurrentLanguage = language != "Auto" ? language : CultureInfo.CurrentCulture.Name;
         _configurationService.Save();
+        Log.Information("[Settings] Language changed to {Language}", Language);
     }
 
     #endregion

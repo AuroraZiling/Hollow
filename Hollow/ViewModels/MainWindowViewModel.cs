@@ -12,6 +12,7 @@ using Hollow.Services.MetadataService;
 using Hollow.Services.MiHoYoLauncherService;
 using Hollow.Services.NavigationService;
 using Hollow.Views.Controls;
+using Serilog;
 
 namespace Hollow.ViewModels;
 
@@ -52,6 +53,7 @@ public partial class MainWindowViewModel : ViewModelBase
         // Background
         var allGameBasicInfo = await _miHoYoLauncherService.GetAllGameBasicInfo();
         BackgroundUrl = allGameBasicInfo?.Data.GameInfo[0].Backgrounds[0].Image.Url ?? BackgroundUrl;
+        Log.Information("[MainWindow] Background loaded");
         
         // Metadata
         var metadataProgress = new Progress<Response<string>>(value =>

@@ -33,7 +33,7 @@ public class App : Application
             .WriteTo.File(Path.Combine(AppInfo.LogDir, "log_.txt"), outputTemplate: "{Timestamp:HH:mm:ss} [{Level}] {Message}{NewLine}{Exception}", rollingInterval: RollingInterval.Day, retainedFileCountLimit: null)
             .CreateLogger();
         
-        Log.Information("Hollow is starting...");
+        Log.Information("[App] Hollow is starting");
         
         AvaloniaXamlLoader.Load(this);
     }
@@ -74,6 +74,7 @@ public class App : Application
         customServicesFactory?.Invoke(services);
 
         _provider = services.BuildServiceProvider();
+        Log.Information("[App] Services Configured");
     }
     
     public static T GetService<T>() where T : notnull => (_provider ?? throw new InvalidOperationException("Services not Configured")).GetRequiredService<T>();

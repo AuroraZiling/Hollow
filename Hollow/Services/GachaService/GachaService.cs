@@ -30,10 +30,12 @@ public partial class GachaService(IConfigurationService configurationService, Ht
         {
             gachaRecords = new GachaRecords();
             await File.WriteAllTextAsync(AppInfo.GachaRecordPath, JsonSerializer.Serialize(gachaRecords, HollowJsonSerializer.Options));
+            Log.Information("[GachaService] Gacha record file not found, created new one");
         }
         else
         {
             gachaRecords = JsonSerializer.Deserialize<GachaRecords>(await File.ReadAllTextAsync(AppInfo.GachaRecordPath))!;
+            Log.Information("[GachaService] Gacha record file loaded");
         }
 
         var gachaRecordProfileDictionary = gachaRecords.Profiles.ToDictionary(item => item.Uid, item => item);
@@ -43,6 +45,8 @@ public partial class GachaService(IConfigurationService configurationService, Ht
         }
 
         GachaRecordProfileDictionary = gachaRecordProfileDictionary;
+        
+        Log.Information("[GachaService] Found {0} gacha record profiles", GachaRecordProfileDictionary.Count);
         return GachaRecordProfileDictionary;
     }
     
@@ -66,6 +70,7 @@ public partial class GachaService(IConfigurationService configurationService, Ht
     
     public async Task<Response<GachaRecords>> GetGachaRecords(string authKey, IProgress<Response<string>> progress)
     {
+        Log.Information("[GachaService] Start fetching gacha records");
         var gachaRecords = new GachaRecords();
         var targetProfile = new GachaRecordProfile();
         var uid = "";
@@ -127,7 +132,11 @@ public partial class GachaService(IConfigurationService configurationService, Ht
                 
                 newRecordsCount += pageDataList.Count;
                 targetProfile.List.AddRange(pageDataList);
-                progress.Report(new Response<string>(true, "progress") { Data = $"{string.Join('^', pageData.Data.List.Select(x => x.Name))}^{uid}^{gachaType}^{nthPage}"});
+
+                var dataItemsName= pageData.Data.List.Select(x => x.Name).ToArray();
+                progress.Report(new Response<string>(true, "progress") { Data = $"{string.Join('^', dataItemsName)}^{uid}^{gachaType}^{nthPage}"});
+                Log.Information("[GachaService] Fetched Records ({0} Items | Page {1} | Gacha Type {2} | UID {3})", dataItemsName.Length, nthPage, gachaType, uid);
+                
                 pageEndId = pageData.Data.List[^1].Id;
                 nthPage++;
                 await Task.Delay(TimeSpan.FromMilliseconds(400));
@@ -145,6 +154,7 @@ public partial class GachaService(IConfigurationService configurationService, Ht
         gachaRecords.Info.ExportTimestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString();
         gachaRecords.Info.ExportAppVersion = AppInfo.AppVersion;
         progress.Report(new Response<string>(true, $"success {fetchRecordsCount} {newRecordsCount}"));
+        Log.Information("[GachaService] Fetched {0} new records", newRecordsCount);
 
         return new Response<GachaRecords>(true) {Data = gachaRecords};
     }
@@ -161,24 +171,28 @@ public partial class GachaService(IConfigurationService configurationService, Ht
         var gameDirectory = configurationService.AppConfig.Game.Directory;
         if (string.IsNullOrWhiteSpace(gameDirectory))
         {
+            Log.Error("[GachaService] Game directory not found");
             return new Response<string>(false, Lang.Toast_UnknownGameDirectory_Message);
         }
         
         var webCachesPath = Path.Combine(gameDirectory, "ZenlessZoneZero_Data", "webCaches");
         if (!Directory.Exists(webCachesPath))
         {
+            Log.Error("[GachaService] Web caches not found");
             return new Response<string>(false, Lang.Toast_WebCachesNotFound_Message);
         }
         
         var webCachesVersionPath = Directory.GetDirectories(webCachesPath).FirstOrDefault();
         if (string.IsNullOrWhiteSpace(webCachesVersionPath))
         {
+            Log.Error("[GachaService] Web caches version not found");
             return new Response<string>(false, Lang.Toast_WebCachesNotFound_Message);
         }
         
         var dataPath = Path.Combine(webCachesVersionPath, "Cache", "Cache_Data", "data_2");
         if (!File.Exists(dataPath))
         {
+            Log.Error("[GachaService] Data file not found");
             return new Response<string>(false, Lang.Toast_WebCachesNotFound_Message);
         }
 
@@ -189,7 +203,7 @@ public partial class GachaService(IConfigurationService configurationService, Ht
         }
 
         var targetGachaLogUrl = authKey.Data.Split("&authkey=")[1].Split("&")[0];
-        Log.Information("Get authKey: {0}", targetGachaLogUrl);
+        Log.Information("[GachaService] Get authKey from WebCaches: {0}", targetGachaLogUrl);
         return new Response<string> (true) {Data = targetGachaLogUrl};
     }
 
@@ -197,16 +211,17 @@ public partial class GachaService(IConfigurationService configurationService, Ht
     {
         if (!GachaLogUrlRegex().IsMatch(url) && !url.StartsWith(_gachaLogClientUrl))
         {
+            Log.Error("[GachaService] Invalid URL: {url}", url);
             return new Response<string>(false, Lang.Toast_InvalidUrl_Message);
         }
 
         try
         {
             var targetGachaLogUrl = url.Split("&authkey=")[1].Split("&")[0];
-            Log.Information("Get authKey: {0}", targetGachaLogUrl);
+            Log.Information("[GachaService] Get authKey from URL: {0}", targetGachaLogUrl);
             return new Response<string> (true) {Data = targetGachaLogUrl};
         }
-        catch (Exception e)
+        catch (Exception)
         {
             return new Response<string>(false, Lang.Toast_InvalidUrl_Message);
         }

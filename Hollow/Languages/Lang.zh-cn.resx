@@ -231,4 +231,16 @@
     <data name="SignalSearch_Delete_Tip" xml:space="preserve">
         <value>删除调频记录档案：</value>
     </data>
+    <data name="Settings_Uigf_Member" xml:space="preserve">
+        <value>UIGF 组织成员</value>
+    </data>
+    <data name="Settings_Uigf_Website" xml:space="preserve">
+        <value>UIGF 官网</value>
+    </data>
+    <data name="Settings_Uigf_Announcement" xml:space="preserve">
+        <value>Hollow 仅支持 UIGF v4.0 标准，提供并接受ZZZ相关的记录</value>
+    </data>
+    <data name="Settings_Uigf_Standard" xml:space="preserve">
+        <value>有关 UIGF v4.0 标准</value>
+    </data>
 </root>

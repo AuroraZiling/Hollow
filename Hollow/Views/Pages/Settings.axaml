@@ -77,6 +77,8 @@
                 </StackPanel>
             </StackPanel>
         </ScrollViewer>
+
+        <!--  About  -->
         <Border
             CornerRadius="10"
             Grid.Column="1"
@@ -114,6 +116,28 @@
                             Content="{I18N {x:Static languages:LangKeys.Settings_About_Privacy}}"
                             HorizontalAlignment="Right"
                             NavigateUri="https://github.com/AuroraZiling/Hollow/privacy.txt" />
+                    </StackPanel>
+                </Border>
+
+                <Border
+                    Background="{StaticResource CoverageBackground}"
+                    CornerRadius="10"
+                    Padding="12">
+                    <StackPanel
+                        Margin="0,10,0,0"
+                        Spacing="10"
+                        TextElement.FontSize="14">
+                        <Image Height="30" Source="avares://Hollow/Assets/Icons/uigf.png" />
+                        <TextBlock HorizontalAlignment="Center" Text="{I18N {x:Static languages:LangKeys.Settings_Uigf_Member}}" />
+                        <HyperlinkButton
+                            Classes="Default"
+                            Content="{I18N {x:Static languages:LangKeys.Settings_Uigf_Website}}"
+                            NavigateUri="https://uigf.org/" />
+                        <TextBlock Text="{I18N {x:Static languages:LangKeys.Settings_Uigf_Announcement}}" TextWrapping="WrapWithOverflow" />
+                        <HyperlinkButton
+                            Classes="Default"
+                            Content="{I18N {x:Static languages:LangKeys.Settings_Uigf_Standard}}"
+                            NavigateUri="https://uigf.org/standards/uigf.html" />
                     </StackPanel>
                 </Border>
             </StackPanel>

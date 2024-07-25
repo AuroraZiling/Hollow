@@ -285,6 +285,42 @@ namespace Hollow.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hollow supports only the UIGF v4.0 standard for providing and accepting ZZZ-related records.
+        /// </summary>
+        internal static string Settings_Uigf_Announcement {
+            get {
+                return ResourceManager.GetString("Settings_Uigf_Announcement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to UIGF organization member.
+        /// </summary>
+        internal static string Settings_Uigf_Member {
+            get {
+                return ResourceManager.GetString("Settings_Uigf_Member", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to About UIGF v4.0 Standard.
+        /// </summary>
+        internal static string Settings_Uigf_Standard {
+            get {
+                return ResourceManager.GetString("Settings_Uigf_Standard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to UIGF Website.
+        /// </summary>
+        internal static string Settings_Uigf_Website {
+            get {
+                return ResourceManager.GetString("Settings_Uigf_Website", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bangboo Channel.
         /// </summary>
         internal static string SignalSearch_BangbooChannel {

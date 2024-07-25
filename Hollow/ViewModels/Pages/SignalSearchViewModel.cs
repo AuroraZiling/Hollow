@@ -135,7 +135,7 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
             var gachaRecords = new GachaRecords { Info = { ExportAppVersion = AppInfo.AppVersion, ExportTimestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString() }, Profiles = selectedUidList.Select(uid => _gachaProfiles![uid]).ToList() };
 
             var topLevel = TopLevel.GetTopLevel(App.GetService<MainWindow>());
-            var file = await topLevel!.StorageProvider.SaveFilePickerAsync(new FilePickerSaveOptions { Title = "Save Text File", SuggestedFileName = $"Hollow_{gachaRecords.Info.ExportTimestamp}.json"});
+            var file = await topLevel!.StorageProvider.SaveFilePickerAsync(new FilePickerSaveOptions { SuggestedFileName = $"Hollow_{gachaRecords.Info.ExportTimestamp}.json"});
             if (file is null) return;
             await using var stream = await file.OpenWriteAsync();
             await using var streamWriter = new StreamWriter(stream);

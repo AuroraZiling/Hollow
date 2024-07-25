@@ -231,4 +231,16 @@
     <data name="SignalSearch_Delete_Tip" xml:space="preserve">
         <value>Delete record profile: </value>
     </data>
+    <data name="Settings_Uigf_Member" xml:space="preserve">
+        <value>UIGF organization member</value>
+    </data>
+    <data name="Settings_Uigf_Website" xml:space="preserve">
+        <value>UIGF Website</value>
+    </data>
+    <data name="Settings_Uigf_Announcement" xml:space="preserve">
+        <value>Hollow supports only the UIGF v4.0 standard for providing and accepting ZZZ-related records</value>
+    </data>
+    <data name="Settings_Uigf_Standard" xml:space="preserve">
+        <value>About UIGF v4.0 Standard</value>
+    </data>
 </root>

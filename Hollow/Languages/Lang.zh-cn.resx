@@ -264,4 +264,13 @@
     <data name="Settings_Records_FullUpdateTip" xml:space="preserve">
         <value>全量更新是指在更新调频记录时，会尝试获取整个记录，而不仅仅是新记录。启用该选项可以修复错误记录，但六个月前的记录会消失。</value>
     </data>
+    <data name="Toast_InvalidAuthKey_Message" xml:space="preserve">
+        <value>无效的 AuthKey</value>
+    </data>
+    <data name="Toast_InvalidUrl_Message" xml:space="preserve">
+        <value>无效的地址</value>
+    </data>
+    <data name="Dialog_Url_EnterUrl" xml:space="preserve">
+        <value>输入 Url：</value>
+    </data>
 </root>

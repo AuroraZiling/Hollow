@@ -133,7 +133,7 @@
         <value>Signal records not found</value>
     </data>
     <data name="SignalSearch_Update_GetRecordsFailed" xml:space="preserve">
-        <value>Failed to get singal records</value>
+        <value>Failed to get signal records</value>
     </data>
     <data name="SignalSearch_Update_Success" xml:space="preserve">
         <value>Signal records updated</value>
@@ -263,5 +263,14 @@
     </data>
     <data name="Settings_Records_FullUpdateTip" xml:space="preserve">
         <value>Full update means that while updating Signal Search records, it tries to fetch the entire record history, not just the new records. Enabling this option fixes erroneous records, but records from six months ago will disappear.</value>
+    </data>
+    <data name="Toast_InvalidAuthKey_Message" xml:space="preserve">
+        <value>Invalid AuthKey</value>
+    </data>
+    <data name="Toast_InvalidUrl_Message" xml:space="preserve">
+        <value>Invalid Url</value>
+    </data>
+    <data name="Dialog_Url_EnterUrl" xml:space="preserve">
+        <value>Enter Url:</value>
     </data>
 </root>

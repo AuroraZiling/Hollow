@@ -44,13 +44,12 @@
                         <MenuFlyout Placement="Bottom">
                             <MenuItem Command="{Binding UpdateByWebCachesCommand}" Header="{I18N {x:Static languages:LangKeys.SignalSearch_Update_WebCaches}}" />
                             <MenuItem Header="{I18N {x:Static languages:LangKeys.SignalSearch_Update_Import}}" IsEnabled="False" />
-                            <MenuItem Header="{I18N {x:Static languages:LangKeys.SignalSearch_Update_Url}}" IsEnabled="False" />
+                            <MenuItem Command="{Binding UpdateByUrlCommand}" Header="{I18N {x:Static languages:LangKeys.SignalSearch_Update_Url}}" />
                         </MenuFlyout>
                     </SplitButton.Flyout>
                     <StackPanel Orientation="Horizontal" Spacing="10">
                         <avalonia:SymbolIcon
                             FontSize="18"
-                            Foreground="White"
                             Height="15"
                             Symbol="ArrowSyncCircle"
                             Width="15" />
@@ -64,7 +63,6 @@
                     <StackPanel Orientation="Horizontal" Spacing="10">
                         <avalonia:SymbolIcon
                             FontSize="18"
-                            Foreground="White"
                             Height="15"
                             Symbol="ArrowUpload"
                             Width="15" />

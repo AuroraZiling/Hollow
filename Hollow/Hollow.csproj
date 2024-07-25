@@ -83,6 +83,10 @@
         <DependentUpon>DeleteProfileDialog.axaml</DependentUpon>
         <SubType>Code</SubType>
       </Compile>
+      <Compile Update="Views\Dialogs\RecordUrlDialog.axaml.cs">
+        <DependentUpon>RecordUrlDialog.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
     </ItemGroup>
 
     <ItemGroup>

@@ -114,6 +114,15 @@ namespace Hollow.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enter Url:.
+        /// </summary>
+        internal static string Dialog_Url_EnterUrl {
+            get {
+                return ResourceManager.GetString("Dialog_Url_EnterUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Game Settings.
         /// </summary>
         internal static string GameSettings_Title {
@@ -618,7 +627,7 @@ namespace Hollow.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Failed to get singal records.
+        ///   Looks up a localized string similar to Failed to get signal records.
         /// </summary>
         internal static string SignalSearch_Update_GetRecordsFailed {
             get {
@@ -726,6 +735,15 @@ namespace Hollow.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid AuthKey.
+        /// </summary>
+        internal static string Toast_InvalidAuthKey_Message {
+            get {
+                return ResourceManager.GetString("Toast_InvalidAuthKey_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please select the folder named “ZenlessZoneZero Game”.
         /// </summary>
         internal static string Toast_InvalidGameDirectory_Message {
@@ -740,6 +758,15 @@ namespace Hollow.Languages {
         internal static string Toast_InvalidGameDirectory_Title {
             get {
                 return ResourceManager.GetString("Toast_InvalidGameDirectory_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid Url.
+        /// </summary>
+        internal static string Toast_InvalidUrl_Message {
+            get {
+                return ResourceManager.GetString("Toast_InvalidUrl_Message", resourceCulture);
             }
         }
         

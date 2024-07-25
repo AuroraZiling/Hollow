@@ -66,12 +66,6 @@ public partial class GachaService(IConfigurationService configurationService, Ht
     
     public async Task<Response<GachaRecords>> GetGachaRecords(string authKey, IProgress<Response<string>> progress)
     {
-        if (!await IsAuthKeyValid(authKey))
-        {
-            progress.Report(new Response<string>(false, "authKey is invalid"));
-            return new Response<GachaRecords>(false, "authKey is invalid");
-        }
-        
         var gachaRecords = new GachaRecords();
         var targetProfile = new GachaRecordProfile();
         var uid = "";
@@ -155,7 +149,7 @@ public partial class GachaService(IConfigurationService configurationService, Ht
         return new Response<GachaRecords>(true) {Data = gachaRecords};
     }
 
-    private async Task<bool> IsAuthKeyValid(string authKey)
+    public async Task<bool> IsAuthKeyValid(string authKey)
     {
         var firstPage = await httpClient.GetAsync(string.Format(GachaLogUrl, authKey, _gachaTypes[0]));
         var firstPageContent = await firstPage.Content.ReadAsStringAsync();
@@ -199,6 +193,25 @@ public partial class GachaService(IConfigurationService configurationService, Ht
         return new Response<string> (true) {Data = targetGachaLogUrl};
     }
 
+    public Response<string> GetAuthKeyFromUrl(string url)
+    {
+        if (!GachaLogUrlRegex().IsMatch(url) && !url.StartsWith(_gachaLogClientUrl))
+        {
+            return new Response<string>(false, Lang.Toast_InvalidUrl_Message);
+        }
+
+        try
+        {
+            var targetGachaLogUrl = url.Split("&authkey=")[1].Split("&")[0];
+            Log.Information("Get authKey: {0}", targetGachaLogUrl);
+            return new Response<string> (true) {Data = targetGachaLogUrl};
+        }
+        catch (Exception e)
+        {
+            return new Response<string>(false, Lang.Toast_InvalidUrl_Message);
+        }
+    }
+
     private Response<string> GetAuthKeyFromFile(string dataPath)
     {
         using var fileStream = File.Open(dataPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite | FileShare.Delete);
@@ -215,4 +228,6 @@ public partial class GachaService(IConfigurationService configurationService, Ht
 
     [GeneratedRegex(@"https://public-operation-nap.mihoyo.com/common/gacha_record/api/getGachaLog[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]end_id=")]
     private static partial Regex GachaLogUrlRegex();
+
+    private readonly string _gachaLogClientUrl = "https://webstatic.mihoyo.com/nap/event/e20230424gacha/index.html";
 }

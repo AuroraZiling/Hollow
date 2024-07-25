@@ -1,0 +1,29 @@
+<UserControl
+    MaxWidth="600"
+    MinWidth="400"
+    x:Class="Hollow.Views.Dialogs.RecordUrlDialog"
+    x:DataType="dialogs:RecordUrlDialogViewModel"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:dialogs="clr-namespace:Hollow.Views.Dialogs"
+    xmlns:languages="clr-namespace:Hollow.Languages"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <StackPanel Spacing="17">
+        <TextBlock Text="{I18N {x:Static languages:LangKeys.Dialog_Url_EnterUrl}}" />
+        <TextBox Text="{Binding Url, Mode=TwoWay}" />
+
+        <Grid ColumnDefinitions="*, 10, *">
+            <Button
+                Command="{Binding CancelCommand}"
+                Content="{I18N {x:Static languages:LangKeys.Dialog_Cancel}}"
+                Grid.Column="0"
+                HorizontalAlignment="Stretch"
+                HorizontalContentAlignment="Center" />
+            <Button
+                Command="{Binding OkCommand}"
+                Content="{I18N {x:Static languages:LangKeys.Dialog_Ok}}"
+                Grid.Column="2"
+                HorizontalAlignment="Stretch"
+                HorizontalContentAlignment="Center" />
+        </Grid>
+    </StackPanel>
+</UserControl>

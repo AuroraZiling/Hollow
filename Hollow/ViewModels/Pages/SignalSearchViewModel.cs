@@ -153,6 +153,26 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
     }
 
     [RelayCommand]
+    private void UpdateByUrl()
+    {
+        HollowHost.ShowDialog(new RecordUrlDialog(UrlCallback));
+        return;
+
+        async void UrlCallback(string url)
+        {
+            if (string.IsNullOrEmpty(url)) return;
+            var authKey = _gachaService.GetAuthKeyFromUrl(url);
+            
+            if (!authKey.IsSuccess)
+            {
+                await HollowHost.ShowToast(Lang.SignalSearch_Update_GetRecordsFailed, authKey.Message, NotificationType.Error);
+                return;
+            }
+            await UpdateRecords(authKey.Data);
+        }
+    }
+
+    [RelayCommand]
     private async Task UpdateByWebCaches()
     {
         var authKey = _gachaService.GetAuthKey();
@@ -162,6 +182,17 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
             return;
         }
 
+        await UpdateRecords(authKey.Data);
+    }
+
+    private async Task UpdateRecords(string authKey)
+    {
+        if (!await _gachaService.IsAuthKeyValid(authKey))
+        {
+            await HollowHost.ShowToast(Lang.Toast_Common_Error_Title, Lang.Toast_InvalidAuthKey_Message, NotificationType.Error);
+            return;
+        }
+        
         IntoCoverage();
 
         string? uid = null;
@@ -195,7 +226,7 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
             }
         });
         GetGachaLogMessage = "";
-        var gachaRecord = await _gachaService.GetGachaRecords(authKey.Data, gachaProgress);
+        var gachaRecord = await _gachaService.GetGachaRecords(authKey, gachaProgress);
         if (gachaRecord.IsSuccess)
         {
             await File.WriteAllTextAsync(AppInfo.GachaRecordPath, JsonSerializer.Serialize(gachaRecord.Data, HollowJsonSerializer.Options));

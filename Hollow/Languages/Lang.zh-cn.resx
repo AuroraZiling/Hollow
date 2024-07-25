@@ -63,10 +63,10 @@
     <data name="Settings_Subtitle_Game" xml:space="preserve">
         <value>游戏</value>
     </data>
-    <data name="Settings_Subtitle_GameDirectory" xml:space="preserve">
+    <data name="Settings_Game_GameDirectory" xml:space="preserve">
         <value>游戏目录</value>
     </data>
-    <data name="Settings_Subtitle_GameArguments" xml:space="preserve">
+    <data name="Settings_Game_GameArguments" xml:space="preserve">
         <value>启动参数</value>
     </data>
     <data name="Settings_Subtitle_Language" xml:space="preserve">
@@ -75,7 +75,7 @@
     <data name="Settings_Subtitle_Storage" xml:space="preserve">
         <value>存储</value>
     </data>
-    <data name="Settings_Subtitle_Storage_OpenAppFolder" xml:space="preserve">
+    <data name="Settings_Storage_OpenAppFolder" xml:space="preserve">
         <value>打开 App 目录</value>
     </data>
     <data name="Settings_About_Version" xml:space="preserve">
@@ -254,5 +254,14 @@
     </data>
     <data name="Toast_MetadataFailed_Message" xml:space="preserve">
         <value>获取失败</value>
+    </data>
+    <data name="Settings_Subtitle_Records" xml:space="preserve">
+        <value>调频记录</value>
+    </data>
+    <data name="Settings_Records_FullUpdate" xml:space="preserve">
+        <value>全量更新</value>
+    </data>
+    <data name="Settings_Records_FullUpdateTip" xml:space="preserve">
+        <value>全量更新是指在更新调频记录时，会尝试获取整个记录，而不仅仅是新记录。启用该选项可以修复错误记录，但六个月前的记录会消失。</value>
     </data>
 </root>

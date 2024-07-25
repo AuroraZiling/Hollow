@@ -44,6 +44,9 @@ public partial class SettingsViewModel : ViewModelBase, IViewModelBase
         GameDirectory = _configurationService.AppConfig.Game.Directory;
         GameArguments = _configurationService.AppConfig.Game.Arguments;
         
+        // Records Init
+        FullUpdate = _configurationService.AppConfig.Records.FullUpdate;
+        
         // Language Init
         foreach (var languagePair in GetLanguage.LanguageList)
         {
@@ -87,6 +90,19 @@ public partial class SettingsViewModel : ViewModelBase, IViewModelBase
     private void SaveGameArguments()
     {
         _configurationService.AppConfig.Game.Arguments = GameArguments;
+        _configurationService.Save();
+    }
+
+    #endregion
+
+    #region Records
+
+    [ObservableProperty] private bool _fullUpdate;
+    
+    [RelayCommand]
+    private void ChangeFullUpdate()
+    {
+        _configurationService.AppConfig.Records.FullUpdate = FullUpdate;
         _configurationService.Save();
     }
 

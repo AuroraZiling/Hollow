@@ -63,10 +63,10 @@
     <data name="Settings_Subtitle_Game" xml:space="preserve">
         <value>Game</value>
     </data>
-    <data name="Settings_Subtitle_GameDirectory" xml:space="preserve">
+    <data name="Settings_Game_GameDirectory" xml:space="preserve">
         <value>Directory</value>
     </data>
-    <data name="Settings_Subtitle_GameArguments" xml:space="preserve">
+    <data name="Settings_Game_GameArguments" xml:space="preserve">
         <value>Arguments</value>
     </data>
     <data name="Settings_Subtitle_Language" xml:space="preserve">
@@ -75,7 +75,7 @@
     <data name="Settings_Subtitle_Storage" xml:space="preserve">
         <value>Storage</value>
     </data>
-    <data name="Settings_Subtitle_Storage_OpenAppFolder" xml:space="preserve">
+    <data name="Settings_Storage_OpenAppFolder" xml:space="preserve">
         <value>Open App Folder</value>
     </data>
     <data name="Settings_About_Version" xml:space="preserve">
@@ -254,5 +254,14 @@
     </data>
     <data name="Toast_MetadataFailed_Message" xml:space="preserve">
         <value>fetched failed</value>
+    </data>
+    <data name="Settings_Subtitle_Records" xml:space="preserve">
+        <value>Signal Search Records</value>
+    </data>
+    <data name="Settings_Records_FullUpdate" xml:space="preserve">
+        <value>Full Update</value>
+    </data>
+    <data name="Settings_Records_FullUpdateTip" xml:space="preserve">
+        <value>Full update means that while updating Signal Search records, it tries to fetch the entire record history, not just the new records. Enabling this option fixes erroneous records, but records from six months ago will disappear.</value>
     </data>
 </root>

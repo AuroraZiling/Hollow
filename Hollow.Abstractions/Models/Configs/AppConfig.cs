@@ -10,6 +10,9 @@ public class AppConfig
     [JsonPropertyName("after_executing")]
     public AfterExecutingConfig AfterExecuting { get; set; } = new();
     
+    [JsonPropertyName("records")]
+    public RecordsConfig Records { get; set; } = new();
+    
     [JsonPropertyName("language")]
     public string Language { get; set; } = "Auto";
     
@@ -33,4 +36,10 @@ public class AfterExecutingConfig
     
     [JsonPropertyName("keep_front")]
     public bool KeepFront { get; set; }
+}
+
+public class RecordsConfig
+{
+    [JsonPropertyName("full_update")]
+    public bool FullUpdate { get; set; } = false;
 }

@@ -222,29 +222,56 @@ namespace Hollow.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Game.
-        /// </summary>
-        internal static string Settings_Subtitle_Game {
-            get {
-                return ResourceManager.GetString("Settings_Subtitle_Game", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Arguments.
         /// </summary>
-        internal static string Settings_Subtitle_GameArguments {
+        internal static string Settings_Game_GameArguments {
             get {
-                return ResourceManager.GetString("Settings_Subtitle_GameArguments", resourceCulture);
+                return ResourceManager.GetString("Settings_Game_GameArguments", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Directory.
         /// </summary>
-        internal static string Settings_Subtitle_GameDirectory {
+        internal static string Settings_Game_GameDirectory {
             get {
-                return ResourceManager.GetString("Settings_Subtitle_GameDirectory", resourceCulture);
+                return ResourceManager.GetString("Settings_Game_GameDirectory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Full Update.
+        /// </summary>
+        internal static string Settings_Records_FullUpdate {
+            get {
+                return ResourceManager.GetString("Settings_Records_FullUpdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Full update means that while updating Signal Search records, it tries to fetch the entire record history, not just the new records. Enabling this option fixes erroneous records, but records from six months ago will disappear..
+        /// </summary>
+        internal static string Settings_Records_FullUpdateTip {
+            get {
+                return ResourceManager.GetString("Settings_Records_FullUpdateTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open App Folder.
+        /// </summary>
+        internal static string Settings_Storage_OpenAppFolder {
+            get {
+                return ResourceManager.GetString("Settings_Storage_OpenAppFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Game.
+        /// </summary>
+        internal static string Settings_Subtitle_Game {
+            get {
+                return ResourceManager.GetString("Settings_Subtitle_Game", resourceCulture);
             }
         }
         
@@ -258,20 +285,20 @@ namespace Hollow.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Signal Search Records.
+        /// </summary>
+        internal static string Settings_Subtitle_Records {
+            get {
+                return ResourceManager.GetString("Settings_Subtitle_Records", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Storage.
         /// </summary>
         internal static string Settings_Subtitle_Storage {
             get {
                 return ResourceManager.GetString("Settings_Subtitle_Storage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Open App Folder.
-        /// </summary>
-        internal static string Settings_Subtitle_Storage_OpenAppFolder {
-            get {
-                return ResourceManager.GetString("Settings_Subtitle_Storage_OpenAppFolder", resourceCulture);
             }
         }
         

@@ -86,6 +86,10 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
         _gachaProfiles = await _gachaService.LoadGachaRecordProfileDictionary();
         if (_gachaProfiles is null || _gachaProfiles!.Count == 0)
         {
+            UidList = [];
+            SelectedUid = null;
+            SelectedAnalyzedGachaRecords = null;
+            
             GetGachaLogShortMessage = Lang.SignalSearch_LoadGachaRecords_GachaRecordsNotFound;
             ControlEnabled = true;
             return;
@@ -105,24 +109,40 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
     }
 
     [RelayCommand]
+    private void DeleteProfile()
+    {
+        HollowHost.ShowDialog(new DeleteProfileDialog(SelectedUid!, UidDeleteConfirmCallback));
+        return;
+
+        async void UidDeleteConfirmCallback(bool confirmed)
+        {
+            if (!confirmed) return;
+            var gachaRecords = new GachaRecords { Info = { ExportAppVersion = AppInfo.AppVersion, ExportTimestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString() }, Profiles = UidList.Where(uid => uid != SelectedUid).Select(uid => _gachaProfiles![uid]).ToList() };
+            await File.WriteAllTextAsync(AppInfo.GachaRecordPath, JsonSerializer.Serialize(gachaRecords, HollowJsonSerializer.Options));
+            await LoadGachaRecords();
+        }
+    }
+
+    [RelayCommand]
     private void ExportRecords()
     {
         HollowHost.ShowDialog(new ExportDialog(UidList, SelectedUidListCallback));
+        return;
+
+        async void SelectedUidListCallback(string[] selectedUidList)
+        {
+            if (selectedUidList.Length == 0) return;
+            var gachaRecords = new GachaRecords { Info = { ExportAppVersion = AppInfo.AppVersion, ExportTimestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString() }, Profiles = selectedUidList.Select(uid => _gachaProfiles![uid]).ToList() };
+
+            var topLevel = TopLevel.GetTopLevel(App.GetService<MainWindow>());
+            var file = await topLevel!.StorageProvider.SaveFilePickerAsync(new FilePickerSaveOptions { Title = "Save Text File", SuggestedFileName = $"Hollow_{gachaRecords.Info.ExportTimestamp}.json"});
+            if (file is null) return;
+            await using var stream = await file.OpenWriteAsync();
+            await using var streamWriter = new StreamWriter(stream);
+            await streamWriter.WriteLineAsync(JsonSerializer.Serialize(gachaRecords, HollowJsonSerializer.Options));
+        }
     }
-
-    private async void SelectedUidListCallback(string[] selectedUidList)
-    {
-        if (selectedUidList.Length == 0) return;
-        var gachaRecords = new GachaRecords { Info = { ExportAppVersion = AppInfo.AppVersion, ExportTimestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString() }, Profiles = selectedUidList.Select(uid => _gachaProfiles![uid]).ToList() };
-
-        var topLevel = TopLevel.GetTopLevel(App.GetService<MainWindow>());
-        var file = await topLevel!.StorageProvider.SaveFilePickerAsync(new FilePickerSaveOptions { Title = "Save Text File", SuggestedFileName = $"Hollow_{gachaRecords.Info.ExportTimestamp}.json"});
-        if (file is null) return;
-        await using var stream = await file.OpenWriteAsync();
-        await using var streamWriter = new StreamWriter(stream);
-        await streamWriter.WriteLineAsync(JsonSerializer.Serialize(gachaRecords, HollowJsonSerializer.Options));
-    }
-
+    
     [RelayCommand]
     private void ChangeUid()
     {
@@ -174,6 +194,7 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
                 HollowHost.ShowToast(Lang.Toast_Common_Error_Title, value.Message, NotificationType.Error);
             }
         });
+        GetGachaLogMessage = "";
         var gachaRecord = await _gachaService.GetGachaRecords(authKey.Data, gachaProgress);
         if (gachaRecord.IsSuccess)
         {

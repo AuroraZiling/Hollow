@@ -1,0 +1,30 @@
+<UserControl
+    MinWidth="300"
+    x:Class="Hollow.Views.Dialogs.DeleteProfileDialog"
+    x:DataType="dialogs:DeleteProfileDialogViewModel"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:dialogs="clr-namespace:Hollow.Views.Dialogs"
+    xmlns:languages="clr-namespace:Hollow.Languages"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <StackPanel Spacing="17">
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="{I18N {x:Static languages:LangKeys.SignalSearch_Delete_Tip}}" />
+            <TextBlock Text="{Binding Uid}" />
+        </StackPanel>
+
+        <Grid ColumnDefinitions="*, 10, *">
+            <Button
+                Command="{Binding CancelCommand}"
+                Content="{I18N {x:Static languages:LangKeys.Dialog_Cancel}}"
+                Grid.Column="0"
+                HorizontalAlignment="Stretch"
+                HorizontalContentAlignment="Center" />
+            <Button
+                Command="{Binding OkCommand}"
+                Content="{I18N {x:Static languages:LangKeys.Dialog_Ok}}"
+                Grid.Column="2"
+                HorizontalAlignment="Stretch"
+                HorizontalContentAlignment="Center" />
+        </Grid>
+    </StackPanel>
+</UserControl>

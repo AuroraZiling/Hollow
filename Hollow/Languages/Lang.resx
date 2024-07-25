@@ -225,4 +225,10 @@
     <data name="Toast_AuthKeyNotFound_Message" xml:space="preserve">
         <value>AuthKey not found, make sure Signal Search records are visited in game</value>
     </data>
+    <data name="SignalSearch_Delete" xml:space="preserve">
+        <value>Delete</value>
+    </data>
+    <data name="SignalSearch_Delete_Tip" xml:space="preserve">
+        <value>Delete record profile: </value>
+    </data>
 </root>

@@ -294,6 +294,24 @@ namespace Hollow.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        internal static string SignalSearch_Delete {
+            get {
+                return ResourceManager.GetString("SignalSearch_Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete record profile: .
+        /// </summary>
+        internal static string SignalSearch_Delete_Tip {
+            get {
+                return ResourceManager.GetString("SignalSearch_Delete_Tip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to In Guarantee.
         /// </summary>
         internal static string SignalSearch_Detailed_InGuarantee {

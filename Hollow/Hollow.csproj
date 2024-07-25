@@ -80,6 +80,10 @@
       <Compile Update="Views\Controls\Acrylic\Acrylic.cs">
         <DependentUpon>Acrylic.axaml</DependentUpon>
       </Compile>
+      <Compile Update="Views\Dialogs\DeleteProfileDialog.axaml.cs">
+        <DependentUpon>DeleteProfileDialog.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
     </ItemGroup>
 
     <ItemGroup>

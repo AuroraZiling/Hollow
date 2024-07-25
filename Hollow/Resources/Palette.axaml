@@ -15,6 +15,14 @@
         Color="White"
         Opacity="0.9"
         x:Key="ToastTextForeground" />
+    <SolidColorBrush
+        Color="Black"
+        Opacity="0.2"
+        x:Key="ButtonDarkBackground" />
+    <SolidColorBrush
+        Color="Black"
+        Opacity="0.25"
+        x:Key="ButtonDarkPointerOverBackground" />
 
     <Color x:Key="ZzzPrimaryColor">#FFDB29</Color>
     <Color x:Key="ZzzSecondaryColor">#B0D700</Color>

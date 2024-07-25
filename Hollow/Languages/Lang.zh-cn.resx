@@ -225,4 +225,10 @@
     <data name="Toast_AuthKeyNotFound_Message" xml:space="preserve">
         <value>没有发现 AuthKey，请确保在游戏内访问过调频记录</value>
     </data>
+    <data name="SignalSearch_Delete" xml:space="preserve">
+        <value>删除</value>
+    </data>
+    <data name="SignalSearch_Delete_Tip" xml:space="preserve">
+        <value>删除调频记录档案：</value>
+    </data>
 </root>

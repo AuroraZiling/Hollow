@@ -25,7 +25,7 @@
                 IsEnabled="{Binding ControlEnabled}"
                 Margin="0,5,15,0"
                 Orientation="Horizontal"
-                Spacing="15"
+                Spacing="10"
                 VerticalAlignment="Center">
                 <ComboBox
                     IsVisible="{Binding UidList.Count}"
@@ -57,7 +57,10 @@
                         <TextBlock Text="{I18N {x:Static languages:LangKeys.SignalSearch_Update}}" />
                     </StackPanel>
                 </SplitButton>
-                <Button Command="{Binding ExportRecordsCommand}" VerticalAlignment="Stretch">
+                <Button
+                    Command="{Binding ExportRecordsCommand}"
+                    IsEnabled="{Binding UidList.Count}"
+                    VerticalAlignment="Stretch">
                     <StackPanel Orientation="Horizontal" Spacing="10">
                         <avalonia:SymbolIcon
                             FontSize="18"
@@ -66,6 +69,20 @@
                             Symbol="ArrowUpload"
                             Width="15" />
                         <TextBlock Text="{I18N {x:Static languages:LangKeys.SignalSearch_Export}}" />
+                    </StackPanel>
+                </Button>
+                <Button
+                    Classes="Critical"
+                    Command="{Binding DeleteProfileCommand}"
+                    IsEnabled="{Binding UidList.Count}"
+                    VerticalAlignment="Stretch">
+                    <StackPanel Orientation="Horizontal" Spacing="10">
+                        <avalonia:SymbolIcon
+                            FontSize="18"
+                            Height="15"
+                            Symbol="Delete"
+                            Width="15" />
+                        <TextBlock Text="{I18N {x:Static languages:LangKeys.SignalSearch_Delete}}" />
                     </StackPanel>
                 </Button>
             </StackPanel>

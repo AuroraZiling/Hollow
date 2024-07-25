@@ -53,4 +53,26 @@
             </Setter>
         </Style>
     </Style>
+
+    <Style Selector="Button.Critical">
+        <Setter Property="Background" Value="{StaticResource ButtonDarkBackground}" />
+        <Setter Property="Foreground">
+            <Setter.Value>
+                <SolidColorBrush Color="Red" Opacity="0.8" />
+            </Setter.Value>
+        </Setter>
+
+        <Style Selector="^:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="{StaticResource ButtonDarkPointerOverBackground}" />
+            <Setter Property="Foreground">
+                <SolidColorBrush Color="Red" Opacity="0.7" />
+            </Setter>
+        </Style>
+
+        <Style Selector="^:pressed /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Foreground">
+                <SolidColorBrush Color="Red" Opacity="0.9" />
+            </Setter>
+        </Style>
+    </Style>
 </Styles>

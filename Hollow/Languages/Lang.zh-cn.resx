@@ -243,4 +243,16 @@
     <data name="Settings_Uigf_Standard" xml:space="preserve">
         <value>有关 UIGF v4.0 标准</value>
     </data>
+    <data name="Toast_MetadataUpdated_Title" xml:space="preserve">
+        <value>元数据已更新</value>
+    </data>
+    <data name="Toast_MetadataUpdated_Message" xml:space="preserve">
+        <value>updated successfully</value>
+    </data>
+    <data name="Toast_MetadataFailed_Title" xml:space="preserve">
+        <value>元数据获取失败</value>
+    </data>
+    <data name="Toast_MetadataFailed_Message" xml:space="preserve">
+        <value>获取失败</value>
+    </data>
 </root>

@@ -8,6 +8,7 @@ using Hollow.Abstractions.Models;
 using Hollow.Services.ConfigurationService;
 using Hollow.Services.GachaService;
 using Hollow.Services.GameService;
+using Hollow.Services.MetadataService;
 using Hollow.Services.MiHoYoLauncherService;
 using Hollow.Services.NavigationService;
 using Hollow.ViewModels;
@@ -68,6 +69,7 @@ public class App : Application
         services.AddSingleton<IConfigurationService, ConfigurationService>();
         services.AddSingleton<IGameService, GameService>();
         services.AddSingleton<IGachaService, GachaService>();
+        services.AddSingleton<IMetadataService, MetadataService>();
         
         customServicesFactory?.Invoke(services);
 

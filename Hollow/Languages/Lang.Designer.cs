@@ -717,6 +717,42 @@ namespace Hollow.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to fetched failed.
+        /// </summary>
+        internal static string Toast_MetadataFailed_Message {
+            get {
+                return ResourceManager.GetString("Toast_MetadataFailed_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to fetch metadata.
+        /// </summary>
+        internal static string Toast_MetadataFailed_Title {
+            get {
+                return ResourceManager.GetString("Toast_MetadataFailed_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 更新成功.
+        /// </summary>
+        internal static string Toast_MetadataUpdated_Message {
+            get {
+                return ResourceManager.GetString("Toast_MetadataUpdated_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Metadata Updated.
+        /// </summary>
+        internal static string Toast_MetadataUpdated_Title {
+            get {
+                return ResourceManager.GetString("Toast_MetadataUpdated_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unknown Game Directory.
         /// </summary>
         internal static string Toast_UnknownGameDirectory_Message {

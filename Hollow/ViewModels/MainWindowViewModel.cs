@@ -4,9 +4,14 @@ using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Hollow.Abstractions.Models.HttpContrasts;
+using Hollow.Enums;
 using Hollow.Helpers;
+using Hollow.Languages;
+using Hollow.Services.MetadataService;
 using Hollow.Services.MiHoYoLauncherService;
 using Hollow.Services.NavigationService;
+using Hollow.Views.Controls;
 
 namespace Hollow.ViewModels;
 
@@ -23,13 +28,15 @@ public partial class MainWindowViewModel : ViewModelBase
     
     private readonly INavigationService _navigationService;
     private readonly IMiHoYoLauncherService _miHoYoLauncherService;
+    private readonly IMetadataService _metadataService;
     
     public static Action? NavigatedToHome { get; set; }
 
-    public MainWindowViewModel(INavigationService navigationService, IMiHoYoLauncherService miHoYoLauncherService)
+    public MainWindowViewModel(INavigationService navigationService, IMiHoYoLauncherService miHoYoLauncherService, IMetadataService metadataService)
     {
         _navigationService = navigationService;
         _miHoYoLauncherService = miHoYoLauncherService;
+        _metadataService = metadataService;
 
         _navigationService.CurrentViewChanged += OnNavigating;
         
@@ -45,6 +52,20 @@ public partial class MainWindowViewModel : ViewModelBase
         // Background
         var allGameBasicInfo = await _miHoYoLauncherService.GetAllGameBasicInfo();
         BackgroundUrl = allGameBasicInfo?.Data.GameInfo[0].Backgrounds[0].Image.Url ?? BackgroundUrl;
+        
+        // Metadata
+        var metadataProgress = new Progress<Response<string>>(value =>
+        {
+            if (value.IsSuccess)
+            {
+                HollowHost.ShowToast(Lang.Toast_MetadataUpdated_Title, $"{value.Message} {Lang.Toast_MetadataUpdated_Message}", NotificationType.Success);
+            }
+            else
+            {
+                HollowHost.ShowToast(Lang.Toast_MetadataFailed_Title, $"{value.Message} {Lang.Toast_MetadataFailed_Message}", NotificationType.Error);
+            }
+        });
+        await _metadataService.LoadMetadata(metadataProgress);
     }
     
     private void OnNavigating()

@@ -26,6 +26,7 @@ public class ConfigurationService: IConfigurationService
         Directory.CreateDirectory(AppInfo.BasePath);
         Directory.CreateDirectory(AppInfo.LogDir);
         Directory.CreateDirectory(AppInfo.CachesDir);
+        Directory.CreateDirectory(AppInfo.MetadataDir);
         if (!File.Exists(AppInfo.ConfigPath))
         {
             File.WriteAllText(AppInfo.ConfigPath, JsonSerializer.Serialize(new AppConfig(), HollowJsonSerializer.Options));

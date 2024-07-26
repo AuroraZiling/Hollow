@@ -60,14 +60,14 @@ public partial class MainWindowViewModel : ViewModelBase
         {
             if (value.IsSuccess)
             {
-                HollowHost.ShowToast(Lang.Toast_MetadataUpdated_Title, $"{value.Message} {Lang.Toast_MetadataUpdated_Message}", NotificationType.Success);
+                HollowHost.ShowToast(Lang.Toast_MetadataUpdated_Title, "", NotificationType.Success);
             }
             else
             {
-                HollowHost.ShowToast(Lang.Toast_MetadataFailed_Title, $"{value.Message} {Lang.Toast_MetadataFailed_Message}", NotificationType.Error);
+                HollowHost.ShowToast(Lang.Toast_MetadataFailed_Title, "", NotificationType.Error);
             }
         });
-        await _metadataService.LoadMetadata(metadataProgress);
+        await _metadataService.LoadItemMetadata(metadataProgress); 
     }
     
     private void OnNavigating()

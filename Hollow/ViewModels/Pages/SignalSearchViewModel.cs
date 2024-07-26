@@ -172,6 +172,26 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
     }
 
     [RelayCommand]
+    private async Task UpdateByImport()
+    {
+        var topLevel = TopLevel.GetTopLevel(App.GetService<MainWindow>())!;
+        var files = await topLevel.StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
+        {
+            Title = "Open Text File",
+            FileTypeFilter = new[] { new("UIGF v4.0") { Patterns = new[] { "*.json" } }, FilePickerFileTypes.All },
+            AllowMultiple = false
+        });
+
+        if (files.Count >= 1)
+        {
+            await using var stream = await files[0].OpenReadAsync();
+            using var streamReader = new StreamReader(stream);
+            var fileContent = await streamReader.ReadToEndAsync();
+            Console.WriteLine(fileContent);
+        }
+    }
+
+    [RelayCommand]
     private void UpdateByUrl()
     {
         HollowHost.ShowDialog(new RecordUrlDialog(UrlCallback));

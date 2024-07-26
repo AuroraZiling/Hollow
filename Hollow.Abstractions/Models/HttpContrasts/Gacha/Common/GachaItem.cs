@@ -9,7 +9,7 @@ public class GachaItem
     public string? Uid { get; set; }
 
     [JsonPropertyName("gacha_id")] 
-    public string GachaId { get; set; } = "0";  // TODO: UIGF 4.0: Not required, Ensure this is ALWAYS 0
+    public string GachaId { get; set; } = "0";
     
     [JsonPropertyName("gacha_type")]
     public required string GachaType { get; set; }

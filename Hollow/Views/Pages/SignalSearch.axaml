@@ -57,7 +57,7 @@
                     <SplitButton.Flyout>
                         <MenuFlyout Placement="Bottom">
                             <MenuItem Command="{Binding UpdateByWebCachesCommand}" Header="{I18N {x:Static languages:LangKeys.SignalSearch_Update_WebCaches}}" />
-                            <MenuItem Header="{I18N {x:Static languages:LangKeys.SignalSearch_Update_Import}}" IsEnabled="False" />
+                            <MenuItem Command="{Binding UpdateByImportCommand}" Header="{I18N {x:Static languages:LangKeys.SignalSearch_Update_Import}}" />
                             <MenuItem Command="{Binding UpdateByUrlCommand}" Header="{I18N {x:Static languages:LangKeys.SignalSearch_Update_Url}}" />
                         </MenuFlyout>
                     </SplitButton.Flyout>

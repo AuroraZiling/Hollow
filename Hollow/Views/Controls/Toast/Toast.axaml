@@ -1,8 +1,8 @@
 <ResourceDictionary
     xmlns="https://github.com/avaloniaui"
     xmlns:avalonia="clr-namespace:FluentIcons.Avalonia;assembly=FluentIcons.Avalonia"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:toast="clr-namespace:Hollow.Views.Controls.Toast">
+    xmlns:toast="clr-namespace:Hollow.Views.Controls.Toast"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Design.PreviewWith>
         <Panel Background="Wheat">
             <toast:Toast
@@ -46,6 +46,8 @@
                                             Padding="14,6" />
                                         <TextBlock
                                             Foreground="{StaticResource ToastTextForeground}"
+                                            IsVisible="{TemplateBinding Message,
+                                                                        Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
                                             Margin="12,7,0,0"
                                             Text="{TemplateBinding Message}"
                                             TextWrapping="Wrap" />

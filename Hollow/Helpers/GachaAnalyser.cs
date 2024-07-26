@@ -16,6 +16,8 @@ public static class GachaAnalyser
         
         foreach (var profile in gachaProfiles.Keys)
         {
+            var timezoneAdjuster = new TimeZoneAdjuster(gachaProfiles[profile].Timezone);
+            
             // Separate gacha records by gacha type
             var standardGachaRecords = new List<GachaItem>();
             var exclusiveGachaRecords = new List<GachaItem>();
@@ -41,22 +43,23 @@ public static class GachaAnalyser
             }
             analyzed.Add(profile, new AnalyzedGachaRecordProfile
             {
-                StandardGachaRecords = FromGachaItems(standardGachaRecords),
-                ExclusiveGachaRecords = FromGachaItems(exclusiveGachaRecords),
-                WEngineGachaRecords = FromGachaItems(wEngineGachaRecords),
-                BangbooGachaRecords = FromGachaItems(bangbooGachaRecords),
+                StandardGachaRecords = FromGachaItems(standardGachaRecords, timezoneAdjuster),
+                ExclusiveGachaRecords = FromGachaItems(exclusiveGachaRecords, timezoneAdjuster),
+                WEngineGachaRecords = FromGachaItems(wEngineGachaRecords, timezoneAdjuster),
+                BangbooGachaRecords = FromGachaItems(bangbooGachaRecords, timezoneAdjuster),
             });
         }
         
         return analyzed;
     }
 
-    private static AnalyzedCommonGachaRecord FromGachaItems(List<GachaItem> gachaItems)
+    private static AnalyzedCommonGachaRecord FromGachaItems(List<GachaItem> gachaItems, TimeZoneAdjuster timezoneAdjuster)
     {
         // Prepare analyzed gacha record items
         var analyzedCommonGachaRecordItems = new List<AnalyzedCommonGachaRecordItem>();
         foreach (var gachaItem in gachaItems)
         {
+            var adjustedTime = timezoneAdjuster.ConvertToLocalTimeZone(gachaItem.Time);
             analyzedCommonGachaRecordItems.Add(new AnalyzedCommonGachaRecordItem
             {
                 Id = gachaItem.Id,
@@ -64,8 +67,8 @@ public static class GachaAnalyser
                 ItemType = gachaItem.ItemType,
                 Name = gachaItem.Name,
                 RankType = gachaItem.RankType,
-                Time = gachaItem.Time,
-                Timestamp = GetTimestamp(gachaItem.Time),
+                Time = adjustedTime,
+                Timestamp = GetTimestamp(adjustedTime),
                 
                 IsSinglePoll = true, // Not initialized yet
                 NthPull = 0, // Not initialized yet

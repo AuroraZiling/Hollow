@@ -88,7 +88,7 @@ public partial class GachaService(IConfigurationService configurationService, Ht
         var regionTimeZone = gachaUrlData.Region switch
         {
             "prod_gf_cn" => 8,
-            "prod_gf_us" => -7,
+            "prod_gf_us" => -5,
             "prod_gf_jp" => 9,
             "prod_gf_eu" => 1,
             _ => throw new ArgumentOutOfRangeException(nameof(gachaUrlData.Region), gachaUrlData.Region, null)

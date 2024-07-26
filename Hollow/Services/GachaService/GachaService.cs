@@ -241,7 +241,7 @@ public partial class GachaService(IConfigurationService configurationService, Ht
         return new Response<string>(true) { Data = gachaLogUrls[^1].Value };
     }
 
-    [GeneratedRegex(@"https://public-operation-nap.mihoyo.com/common/gacha_record/api/getGachaLog[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]end_id=")]
+    [GeneratedRegex(@"https://webstatic.mihoyo.com/nap/event/e20230424gacha/index.html[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]")]
     private static partial Regex GachaLogUrlRegex();
 
     private readonly string _gachaLogClientUrl = "https://webstatic.mihoyo.com/nap/event/e20230424gacha/index.html";

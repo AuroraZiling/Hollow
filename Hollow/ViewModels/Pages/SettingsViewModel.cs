@@ -8,6 +8,7 @@ using Avalonia.Markup.Xaml.MarkupExtensions;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Hollow.Abstractions.Models;
+using Hollow.Enums;
 using Hollow.Helpers;
 using Hollow.Languages;
 using Hollow.Services.ConfigurationService;
@@ -26,6 +27,7 @@ public partial class SettingsViewModel : ViewModelBase, IViewModelBase
     
     private readonly IConfigurationService _configurationService;
     private readonly INavigationService _navigationService;
+    private readonly IGameService _gameService;
 
     public void Navigated()
     {
@@ -34,11 +36,12 @@ public partial class SettingsViewModel : ViewModelBase, IViewModelBase
             Console.WriteLine(1);
         }
     }
-    public SettingsViewModel(IConfigurationService configurationService, INavigationService navigationService)
+    public SettingsViewModel(IConfigurationService configurationService, INavigationService navigationService, IGameService gameService)
     {
         _configurationService = configurationService;
         _navigationService = navigationService;
-        
+        _gameService = gameService;
+
         //navigationService.CurrentViewChanged += Navigated;
 
         // Game Init
@@ -56,28 +59,44 @@ public partial class SettingsViewModel : ViewModelBase, IViewModelBase
         var language = _configurationService.AppConfig.Language;
         Language = language != "Auto" ? GetLanguage.LanguageList.Select(x => x.Key).ToList()[GetLanguage.LanguageList.Select(x => x.Value).ToList().IndexOf(language)] : "Auto";
         
+        // Game Init
+        CheckGameDirectory(_configurationService.AppConfig.Game.Directory, true);
+        
         Log.Information("[Settings] Configuration loaded");
     }
 
     #region Game
 
     [ObservableProperty] private string _gameDirectory;
+    [ObservableProperty] private string _gameBiz;
     [ObservableProperty] private string _gameArguments;
     
     [RelayCommand]
     private async Task BrowseGameDirectory()
     {
         var directory = await StorageHelper.OpenFolderPickerForPath();
-        if (GameService.ValidateGameDirectory(directory))
+        CheckGameDirectory(directory);
+    }
+
+    private void CheckGameDirectory(string directory, bool removeIfInvalid = false)
+    {
+        if (_gameService.ValidateGameDirectory(directory))
         {
             GameDirectory = directory;
+            GameBiz = _gameService.GameBiz.ToI18NString();
             _configurationService.AppConfig.Game.Directory = GameDirectory;
             _configurationService.Save();
             Log.Information("[Settings] Game directory changed to {GameDirectory}", GameDirectory);
         }
         else if (!string.IsNullOrWhiteSpace(directory))
         {
-            await HollowHost.ShowToast(Lang.Toast_InvalidGameDirectory_Title, Lang.Toast_InvalidGameDirectory_Message, NotificationType.Error);
+            HollowHost.ShowToast(Lang.Toast_InvalidGameDirectory_Title, Lang.Toast_InvalidGameDirectory_Message, NotificationType.Error);
+            if (removeIfInvalid)
+            {
+                GameDirectory = string.Empty;
+                _configurationService.AppConfig.Game.Directory = GameDirectory;
+                _configurationService.Save();
+            }
             Log.Warning("[Settings] Invalid game directory: {GameDirectory}", directory);
         }
     }
@@ -126,6 +145,7 @@ public partial class SettingsViewModel : ViewModelBase, IViewModelBase
         _configurationService.AppConfig.Language = Language != "Auto" ? GetLanguage.LanguageList[Language] : "Auto";
         _configurationService.CurrentLanguage = language != "Auto" ? language : CultureInfo.CurrentCulture.Name;
         _configurationService.Save();
+        GameBiz = _gameService.GameBiz.ToI18NString();
         Log.Information("[Settings] Language changed to {Language}", Language);
     }
 

@@ -36,16 +36,16 @@ public partial class ScreenshotsViewModel: ViewModelBase, IViewModelBase
 
         _navigationService.CurrentViewChanged += Navigated;
 
-        if (ValidateScreenshots())
-        {
-            LoadScreenshots();
-        }
+        // if (ValidateScreenshots())
+        // {
+        //     LoadScreenshots();
+        // }
     }
 
     private bool ValidateScreenshots()
     {
         // Validation
-        GameReady = GameService.ValidateGameDirectory(_configurationService.AppConfig.Game.Directory);
+        // GameReady = GameService.ValidateGameDirectory(_configurationService.AppConfig.Game.Directory);
         if (GameReady)
         {
             var screenshotsDirectory = Path.Combine(_configurationService.AppConfig.Game.Directory, "Screenshot");

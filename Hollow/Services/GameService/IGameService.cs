@@ -1,7 +1,11 @@
-﻿namespace Hollow.Services.GameService;
+﻿using Hollow.Enums;
+
+namespace Hollow.Services.GameService;
 
 public interface IGameService
 {
-    public string GetGameVersion();
     public bool StartGame();
+    public string GameVersion { get; set; }
+    public GameServer GameBiz { get; set; }
+    public bool ValidateGameDirectory(string directoryPath);
 }

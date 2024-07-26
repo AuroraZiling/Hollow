@@ -1,7 +1,10 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using Hollow.Enums;
+using Hollow.Languages;
 using Hollow.Services.ConfigurationService;
 using Serilog;
 
@@ -9,7 +12,7 @@ namespace Hollow.Services.GameService;
 
 public class GameService(IConfigurationService configurationService): IGameService
 {
-    public static bool ValidateGameDirectory(string directoryPath)
+    public bool ValidateGameDirectory(string directoryPath)
     {
         if (!Path.Exists(directoryPath))
         {
@@ -20,23 +23,36 @@ public class GameService(IConfigurationService configurationService): IGameServi
                          files.Any(file => file.EndsWith("ZenlessZoneZero.exe"));
         if (validation)
         {
-            Log.Information("[GameService] Game directory validated ({path})", directoryPath);
+            try
+            {
+                var configIniFile = File.ReadAllLines(files.First(file => file.EndsWith("config.ini")));
+                GameVersion = configIniFile.First(line => line.StartsWith("game_version=")).Split("=")[1];
+                GameBiz = configIniFile.First(line => line.StartsWith("cps=")).Split("=")[1] switch
+                {
+                    "hyp_mihoyo" => GameServer.China,
+                    "hyp_hoyoverse" => GameServer.Global,
+                    _ => throw new ArgumentOutOfRangeException()
+                };
+                Log.Information("[GameService] Game directory validated ({path})", directoryPath);
+            }
+            catch (Exception)
+            {
+                GameVersion = Lang.Service_Game_Unknown;
+                GameBiz = GameServer.Unknown;
+                Log.Error("[GameService] Game directory validation failed ({path})", directoryPath);
+            }
         }
         else
         {
+            GameVersion = Lang.Service_Game_Unknown;
+            GameBiz = GameServer.Unknown;
             Log.Error("[GameService] Game directory validation failed ({path})", directoryPath);
         }
         return validation;
     }
-    
-    public string GetGameVersion()
-    {
-        var files = Directory.GetFiles(configurationService.AppConfig.Game.Directory);
-        var configIni = files.First(file => file.EndsWith("config.ini"));
-        var version = File.ReadAllLines(configIni).First(line => line.StartsWith("game_version=")).Split("=")[1];
-        Log.Information("[GameService] Get game version: {version}", version);
-        return version;
-    }
+
+    public string GameVersion { get; set; } = Lang.Service_Game_Unknown;
+    public GameServer GameBiz { get; set; } = GameServer.Unknown;
     
     public bool StartGame()
     {

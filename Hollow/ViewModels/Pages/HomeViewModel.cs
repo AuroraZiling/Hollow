@@ -48,10 +48,10 @@ public partial class HomeViewModel: ViewModelBase, IViewModelBase
 
     private void CheckStartGameReady()
     {
-        StartGameReady = GameService.ValidateGameDirectory(_configurationService.AppConfig.Game.Directory);
+        StartGameReady = _gameService.ValidateGameDirectory(_configurationService.AppConfig.Game.Directory);
         StartGameNoticeOpacity = !StartGameReady ? 1 : 0;
         if (StartGameReady)
-            GameVersion = _gameService.GetGameVersion();
+            GameVersion = _gameService.GameVersion;
     }
     
     [ObservableProperty][NotifyPropertyChangedFor(nameof(IsGameStartButtonEnabled))] private bool _isGameStarting;

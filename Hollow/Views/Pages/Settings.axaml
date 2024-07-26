@@ -30,6 +30,26 @@
                     <Button Command="{Binding OpenGameDirectoryCommand}" IsEnabled="{Binding ElementName=GamePathTextBox, Path=Text, Converter={x:Static StringConverters.IsNotNullOrEmpty}}">
                         <avalonia:SymbolIcon FontSize="24" Symbol="Open" />
                     </Button>
+                    <Border
+                        BorderBrush="{StaticResource ZzzSecondaryColor}"
+                        BorderThickness="1"
+                        CornerRadius="3"
+                        IsVisible="{Binding GameDirectory, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+                        Padding="7,5,7,5">
+                        <StackPanel Orientation="Horizontal" Spacing="10">
+                            <avalonia:SymbolIcon
+                                FontSize="18"
+                                Foreground="{StaticResource ZzzSecondaryColor}"
+                                Margin="0,0,0,1"
+                                Symbol="CheckmarkCircle"
+                                VerticalAlignment="Center"
+                                Width="15" />
+                            <TextBlock
+                                Foreground="{StaticResource ZzzSecondaryColor}"
+                                Text="{Binding GameBiz}"
+                                VerticalAlignment="Center" />
+                        </StackPanel>
+                    </Border>
                 </StackPanel>
                 <StackPanel
                     Margin="0,10,0,0"

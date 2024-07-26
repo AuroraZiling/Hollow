@@ -273,4 +273,13 @@
     <data name="Dialog_Url_EnterUrl" xml:space="preserve">
         <value>Enter Url:</value>
     </data>
+    <data name="Service_Game_Unknown" xml:space="preserve">
+        <value>Unknown</value>
+    </data>
+    <data name="Service_GameBiz_China" xml:space="preserve">
+        <value>China Official</value>
+    </data>
+    <data name="Service_GameBiz_Global" xml:space="preserve">
+        <value>Global</value>
+    </data>
 </root>

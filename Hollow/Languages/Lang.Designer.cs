@@ -195,6 +195,33 @@ namespace Hollow.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Unknown.
+        /// </summary>
+        internal static string Service_Game_Unknown {
+            get {
+                return ResourceManager.GetString("Service_Game_Unknown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to China Official.
+        /// </summary>
+        internal static string Service_GameBiz_China {
+            get {
+                return ResourceManager.GetString("Service_GameBiz_China", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Global.
+        /// </summary>
+        internal static string Service_GameBiz_Global {
+            get {
+                return ResourceManager.GetString("Service_GameBiz_Global", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Github Repo.
         /// </summary>
         internal static string Settings_About_GithubRepo {

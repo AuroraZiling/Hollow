@@ -5,6 +5,7 @@ namespace Hollow.Models.Pages.SignalSearch;
 
 public class AnalyzedGachaRecordProfile
 {
+    public required string DisplayTimezone { get; set; }
     public required AnalyzedCommonGachaRecord StandardGachaRecords { get; set; }
     public required AnalyzedCommonGachaRecord ExclusiveGachaRecords { get; set; }
     public required AnalyzedCommonGachaRecord WEngineGachaRecords { get; set; }

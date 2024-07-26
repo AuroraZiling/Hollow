@@ -43,6 +43,7 @@ public static class GachaAnalyser
             }
             analyzed.Add(profile, new AnalyzedGachaRecordProfile
             {
+                DisplayTimezone = gachaProfiles[profile].Timezone.ToUtcPrefixTimeZone(),
                 StandardGachaRecords = FromGachaItems(standardGachaRecords, timezoneAdjuster),
                 ExclusiveGachaRecords = FromGachaItems(exclusiveGachaRecords, timezoneAdjuster),
                 WEngineGachaRecords = FromGachaItems(wEngineGachaRecords, timezoneAdjuster),

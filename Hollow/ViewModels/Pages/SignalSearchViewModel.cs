@@ -52,6 +52,11 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
     [ObservableProperty] private ObservableCollection<string> _uidList = [];
     [ObservableProperty] private string? _selectedUid;
     
+    // Timezone
+    [ObservableProperty] private bool _isTimezoneEqual = true;
+    [ObservableProperty] private string _displayLocalTimezone;
+    [ObservableProperty] private string _selectedUidTimezone;
+    
     private Dictionary<string, GachaRecordProfile>? _gachaProfiles;
     private Dictionary<string, AnalyzedGachaRecordProfile>? _analyzedGachaProfiles;
     [ObservableProperty] private AnalyzedGachaRecordProfile? _selectedAnalyzedGachaRecords;
@@ -64,6 +69,10 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
         _gachaService = gachaService;
         _navigationService = navigationService;
         _gameService = gameService;
+
+        var localTimeZoneOffset = TimeZoneAdjuster.LocalTimeZone.BaseUtcOffset.Hours;
+        DisplayLocalTimezone = localTimeZoneOffset.ToUtcPrefixTimeZone();
+        SelectedUidTimezone = DisplayLocalTimezone;
 
         _navigationService.CurrentViewChanged += Navigated;
     }
@@ -156,6 +165,9 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
         if (SelectedUid != null && _analyzedGachaProfiles!.TryGetValue(SelectedUid, out var value))
         {
             SelectedAnalyzedGachaRecords = value;
+            IsTimezoneEqual = value.DisplayTimezone == DisplayLocalTimezone;
+            SelectedUidTimezone = SelectedAnalyzedGachaRecords.DisplayTimezone;
+            App.GetService<MainWindow>().UpdateLayout();
         }
     }
 

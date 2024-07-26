@@ -282,4 +282,7 @@
     <data name="Service_GameBiz_Global" xml:space="preserve">
         <value>Global</value>
     </data>
+    <data name="SignalSearch_TimezoneTip" xml:space="preserve">
+        <value>Timezone Converted (Data: {0} Local: {1})</value>
+    </data>
 </root>

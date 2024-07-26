@@ -27,6 +27,26 @@
                 Orientation="Horizontal"
                 Spacing="10"
                 VerticalAlignment="Center">
+                <Border
+                    BorderBrush="{StaticResource ZzzSecondaryColor}"
+                    BorderThickness="1"
+                    CornerRadius="3"
+                    IsVisible="{Binding !IsTimezoneEqual}"
+                    Margin="0,0,0,1"
+                    Padding="7,6,7,6">
+                    <TextBlock
+                        FontSize="14"
+                        Foreground="{StaticResource ZzzSecondaryColor}"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+                        <TextBlock.Text>
+                            <I18N Key="{x:Static languages:LangKeys.SignalSearch_TimezoneTip}">
+                                <Binding Path="SelectedUidTimezone" />
+                                <Binding Path="DisplayLocalTimezone" />
+                            </I18N>
+                        </TextBlock.Text>
+                    </TextBlock>
+                </Border>
                 <ComboBox
                     IsVisible="{Binding UidList.Count}"
                     ItemsSource="{Binding UidList}"

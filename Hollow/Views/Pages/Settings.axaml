@@ -7,7 +7,7 @@
     xmlns:pages="clr-namespace:Hollow.ViewModels.Pages"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Grid ColumnDefinitions="*, 270">
-        <ScrollViewer Grid.Column="0">
+        <ScrollViewer Grid.Column="0" VerticalScrollBarVisibility="Hidden">
             <StackPanel>
                 <TextBlock
                     Classes="PageTitle"
@@ -98,13 +98,27 @@
                     Content="{I18N {x:Static languages:LangKeys.Settings_Records_FullUpdate}}"
                     IsChecked="{Binding FullUpdate, Mode=TwoWay}" />
                 <TextBlock
-                    FontSize="14"
-                    Foreground="LightGray"
-                    HorizontalAlignment="Left"
+                    Classes="PageTip"
                     Margin="27,0,0,0"
                     Text="{I18N {x:Static languages:LangKeys.Settings_Records_FullUpdateTip}}"
-                    TextWrapping="WrapWithOverflow"
-                    Width="550" />
+                    Width="570" />
+
+                <!--  Metadata  -->
+                <TextBlock
+                    Classes="PageSubtitle"
+                    Margin="0,30,0,10"
+                    Text="{I18N {x:Static languages:LangKeys.Settings_Subtitle_Metadata}}" />
+                <StackPanel Spacing="7">
+                    <Button Command="{Binding CheckMetadataCommand}" Content="{I18N {x:Static languages:LangKeys.Settings_Metadata_Check}}" />
+                    <TextBlock
+                        Classes="PageTip"
+                        Text="{I18N {x:Static languages:LangKeys.Settings_Metadata_Tip1}}"
+                        Width="650" />
+                    <TextBlock
+                        Classes="PageTip"
+                        Text="{I18N {x:Static languages:LangKeys.Settings_Metadata_Tip2}}"
+                        Width="650" />
+                </StackPanel>
 
                 <!--  Folders  -->
                 <TextBlock

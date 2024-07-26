@@ -14,7 +14,7 @@ namespace Hollow.Services.MetadataService;
 
 public class MetadataService(HttpClient httpClient): IMetadataService
 {
-    public async Task LoadItemMetadata(IProgress<Response<string>> progress)
+    public async Task LoadItemMetadata(IProgress<Response<string>> progress, bool force = false)
     {
         var urls = new List<string> {
             "https://api.hakush.in/zzz/data/character.json", "https://api.hakush.in/zzz/data/weapon.json",
@@ -29,12 +29,14 @@ public class MetadataService(HttpClient httpClient): IMetadataService
         {
             var metadataCreationTime = ((DateTimeOffset)new FileInfo(itemMetadataPath).CreationTime).ToUnixTimeSeconds();
             var now = DateTimeOffset.Now.ToUnixTimeSeconds();
-            if (now - metadataCreationTime >= 1209600)
+            if (now - metadataCreationTime >= 1209600 || force)
             {
                 progress.Report(new Response<string>(await DownloadItemMetadata()));
             }
         }
-        
+
+        return;
+
         async Task<bool> DownloadItemMetadata()
         {
             try

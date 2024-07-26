@@ -11,4 +11,10 @@
         <Setter Property="Margin" Value="0, 0, 0, 10" />
         <Setter Property="FontFamily" Value="{StaticResource MediumFont}" />
     </Style>
+    <Style Selector="TextBlock.PageTip">
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="Foreground" Value="LightGray" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="TextWrapping" Value="WrapWithOverflow" />
+    </Style>
 </Styles>

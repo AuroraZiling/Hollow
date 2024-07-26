@@ -8,11 +8,13 @@ using Avalonia.Markup.Xaml.MarkupExtensions;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Hollow.Abstractions.Models;
+using Hollow.Abstractions.Models.HttpContrasts;
 using Hollow.Enums;
 using Hollow.Helpers;
 using Hollow.Languages;
 using Hollow.Services.ConfigurationService;
 using Hollow.Services.GameService;
+using Hollow.Services.MetadataService;
 using Hollow.Services.NavigationService;
 using Hollow.Views.Controls;
 using Hollow.Views.Pages;
@@ -28,6 +30,7 @@ public partial class SettingsViewModel : ViewModelBase, IViewModelBase
     private readonly IConfigurationService _configurationService;
     private readonly INavigationService _navigationService;
     private readonly IGameService _gameService;
+    private readonly IMetadataService _metadataService;
 
     public void Navigated()
     {
@@ -36,11 +39,12 @@ public partial class SettingsViewModel : ViewModelBase, IViewModelBase
             Console.WriteLine(1);
         }
     }
-    public SettingsViewModel(IConfigurationService configurationService, INavigationService navigationService, IGameService gameService)
+    public SettingsViewModel(IConfigurationService configurationService, INavigationService navigationService, IGameService gameService, IMetadataService metadataService)
     {
         _configurationService = configurationService;
         _navigationService = navigationService;
         _gameService = gameService;
+        _metadataService = metadataService;
 
         //navigationService.CurrentViewChanged += Navigated;
 
@@ -147,6 +151,27 @@ public partial class SettingsViewModel : ViewModelBase, IViewModelBase
         _configurationService.Save();
         GameBiz = _gameService.GameBiz.ToI18NString();
         Log.Information("[Settings] Language changed to {Language}", Language);
+    }
+
+    #endregion
+
+    #region Metadata
+
+    [RelayCommand]
+    private async Task CheckMetadata()
+    {
+        var metadataProgress = new Progress<Response<string>>(value =>
+        {
+            if (value.IsSuccess)
+            {
+                HollowHost.ShowToast(Lang.Toast_MetadataUpdated_Title, "", NotificationType.Success);
+            }
+            else
+            {
+                HollowHost.ShowToast(Lang.Toast_MetadataFailed_Title, "", NotificationType.Error);
+            }
+        });
+        await _metadataService.LoadItemMetadata(metadataProgress, true);
     }
 
     #endregion

@@ -285,4 +285,16 @@
     <data name="SignalSearch_TimezoneTip" xml:space="preserve">
         <value>时区已转换</value>
     </data>
+    <data name="Settings_Subtitle_Metadata" xml:space="preserve">
+        <value>元数据</value>
+    </data>
+    <data name="Settings_Metadata_Tip1" xml:space="preserve">
+        <value>请勿频繁手动获取元数据，Hollow会自动判断元数据更新。</value>
+    </data>
+    <data name="Settings_Metadata_Tip2" xml:space="preserve">
+        <value>如果在使用过程中出现元数据缺失的情况，可以尝试手动更新。</value>
+    </data>
+    <data name="Settings_Metadata_Check" xml:space="preserve">
+        <value>检查</value>
+    </data>
 </root>

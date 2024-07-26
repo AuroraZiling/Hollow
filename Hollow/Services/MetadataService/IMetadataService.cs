@@ -6,5 +6,5 @@ namespace Hollow.Services.MetadataService;
 
 public interface IMetadataService
 {
-    public Task LoadItemMetadata(IProgress<Response<string>> progress);
+    public Task LoadItemMetadata(IProgress<Response<string>> progress, bool force = false);
 }

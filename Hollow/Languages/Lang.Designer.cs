@@ -276,6 +276,33 @@ namespace Hollow.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Check.
+        /// </summary>
+        internal static string Settings_Metadata_Check {
+            get {
+                return ResourceManager.GetString("Settings_Metadata_Check", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do not get metadata manually too often, Hollow will automatically determine metadata updates..
+        /// </summary>
+        internal static string Settings_Metadata_Tip1 {
+            get {
+                return ResourceManager.GetString("Settings_Metadata_Tip1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If metadata is missing while in use, try updating it manually..
+        /// </summary>
+        internal static string Settings_Metadata_Tip2 {
+            get {
+                return ResourceManager.GetString("Settings_Metadata_Tip2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Full Update.
         /// </summary>
         internal static string Settings_Records_FullUpdate {
@@ -317,6 +344,15 @@ namespace Hollow.Languages {
         internal static string Settings_Subtitle_Language {
             get {
                 return ResourceManager.GetString("Settings_Subtitle_Language", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Metadata.
+        /// </summary>
+        internal static string Settings_Subtitle_Metadata {
+            get {
+                return ResourceManager.GetString("Settings_Subtitle_Metadata", resourceCulture);
             }
         }
         

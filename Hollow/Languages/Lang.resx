@@ -285,4 +285,16 @@
     <data name="SignalSearch_TimezoneTip" xml:space="preserve">
         <value>Timezone Converted</value>
     </data>
+    <data name="Settings_Subtitle_Metadata" xml:space="preserve">
+        <value>Metadata</value>
+    </data>
+    <data name="Settings_Metadata_Tip1" xml:space="preserve">
+        <value>Do not get metadata manually too often, Hollow will automatically determine metadata updates.</value>
+    </data>
+    <data name="Settings_Metadata_Tip2" xml:space="preserve">
+        <value>If metadata is missing while in use, try updating it manually.</value>
+    </data>
+    <data name="Settings_Metadata_Check" xml:space="preserve">
+        <value>Check</value>
+    </data>
 </root>

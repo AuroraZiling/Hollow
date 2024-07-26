@@ -283,6 +283,6 @@
         <value>Global</value>
     </data>
     <data name="SignalSearch_TimezoneTip" xml:space="preserve">
-        <value>Timezone Converted (Data: {0} Local: {1})</value>
+        <value>Timezone Converted</value>
     </data>
 </root>

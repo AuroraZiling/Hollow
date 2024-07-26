@@ -627,7 +627,7 @@ namespace Hollow.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Timezone Converted (Data: {0} Local: {1}).
+        ///   Looks up a localized string similar to Timezone Converted.
         /// </summary>
         internal static string SignalSearch_TimezoneTip {
             get {

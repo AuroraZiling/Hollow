@@ -283,6 +283,6 @@
         <value>国际服</value>
     </data>
     <data name="SignalSearch_TimezoneTip" xml:space="preserve">
-        <value>时区已转换 (数据: {0} 本地: {1})</value>
+        <value>时区已转换</value>
     </data>
 </root>

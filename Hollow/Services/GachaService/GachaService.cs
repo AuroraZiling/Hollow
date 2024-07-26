@@ -171,10 +171,10 @@ public partial class GachaService(IConfigurationService configurationService, Ht
             
             await Task.Delay(TimeSpan.FromMilliseconds(400));
         }
-
-        if(isCompletionMode)
+        var existedProfile = gachaRecords.Profiles.Find(item => item.Uid == uid);
+        if (existedProfile != null)
         {
-            gachaRecords.Profiles.Remove(targetProfile);
+            gachaRecords.Profiles.Remove(existedProfile);
         }
         gachaRecords.Profiles.Add(targetProfile);
         

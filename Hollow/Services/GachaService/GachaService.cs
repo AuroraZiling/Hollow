@@ -179,7 +179,6 @@ public partial class GachaService(IConfigurationService configurationService, Ht
         gachaRecords.Profiles.Add(targetProfile);
         
         gachaRecords.Info.ExportTimestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString();
-        gachaRecords.Info.ExportAppVersion = AppInfo.AppVersion;
         progress.Report(new Response<string>(true, $"success {fetchRecordsCount} {newRecordsCount}"));
         Log.Information("[GachaService] Fetched {0} new records", newRecordsCount);
 

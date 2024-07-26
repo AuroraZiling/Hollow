@@ -131,7 +131,7 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
         async void UidDeleteConfirmCallback(bool confirmed)
         {
             if (!confirmed) return;
-            var gachaRecords = new GachaRecords { Info = { ExportAppVersion = AppInfo.AppVersion, ExportTimestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString() }, Profiles = UidList.Where(uid => uid != SelectedUid).Select(uid => _gachaProfiles![uid]).ToList() };
+            var gachaRecords = new GachaRecords { Info = { ExportTimestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString() }, Profiles = UidList.Where(uid => uid != SelectedUid).Select(uid => _gachaProfiles![uid]).ToList() };
             await File.WriteAllTextAsync(AppInfo.GachaRecordPath, JsonSerializer.Serialize(gachaRecords, HollowJsonSerializer.Options));
             await LoadGachaRecords();
             Log.Information("[SignalSearch] Profile deleted: {Uid}", SelectedUid);
@@ -147,7 +147,7 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
         async void SelectedUidListCallback(string[] selectedUidList)
         {
             if (selectedUidList.Length == 0) return;
-            var gachaRecords = new GachaRecords { Info = { ExportAppVersion = AppInfo.AppVersion, ExportTimestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString() }, Profiles = selectedUidList.Select(uid => _gachaProfiles![uid]).ToList() };
+            var gachaRecords = new GachaRecords { Info = { ExportTimestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString() }, Profiles = selectedUidList.Select(uid => _gachaProfiles![uid]).ToList() };
 
             var topLevel = TopLevel.GetTopLevel(App.GetService<MainWindow>());
             var file = await topLevel!.StorageProvider.SaveFilePickerAsync(new FilePickerSaveOptions { SuggestedFileName = $"Hollow_{gachaRecords.Info.ExportTimestamp}.json"});

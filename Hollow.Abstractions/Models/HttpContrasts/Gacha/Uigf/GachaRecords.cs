@@ -23,7 +23,7 @@ public class GachaRecordProfile
     public string Language { get; } = "zh-cn";
     
     [JsonPropertyName("timezone")]
-    public uint Timezone { get; } = 8;
+    public int Timezone { get; set; } = 8;
     
     [JsonPropertyName("list")]
     public List<GachaItem> List { get; set; } = [];

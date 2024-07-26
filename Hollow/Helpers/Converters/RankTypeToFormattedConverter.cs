@@ -28,6 +28,16 @@ public class RankTypeToFormattedConverter: IValueConverter
     public object ConvertBack(object? value, Type targetType, 
         object? parameter, CultureInfo culture)
     {
-        throw new NotSupportedException();
+        if (value is string rankType && targetType.IsAssignableTo(typeof(string)))
+        {
+            return rankType switch
+            {
+                "A" => "3",
+                "S" => "4",
+                _ => "2"
+            };
+        }
+        return new BindingNotification(new InvalidCastException(), 
+            BindingErrorType.Error);
     }
 }

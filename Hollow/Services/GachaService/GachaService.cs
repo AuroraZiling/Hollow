@@ -11,14 +11,16 @@ using Hollow.Abstractions.Models.HttpContrasts;
 using Hollow.Abstractions.Models.HttpContrasts.Gacha;
 using Hollow.Abstractions.Models.HttpContrasts.Gacha.Common;
 using Hollow.Abstractions.Models.HttpContrasts.Gacha.Uigf;
+using Hollow.Enums;
 using Hollow.Helpers;
 using Hollow.Languages;
 using Hollow.Services.ConfigurationService;
+using Hollow.Services.GameService;
 using Serilog;
 
 namespace Hollow.Services.GachaService;
 
-public partial class GachaService(IConfigurationService configurationService, HttpClient httpClient) : IGachaService
+public partial class GachaService(IConfigurationService configurationService, HttpClient httpClient, IGameService gameService) : IGachaService
 {
     public Dictionary<string, GachaRecordProfile>? GachaRecordProfileDictionary { get; set; }
     
@@ -65,18 +67,43 @@ public partial class GachaService(IConfigurationService configurationService, Ht
         return endTimeIndex != -1 ? (true, gachaItems[..endTimeIndex]) : (false, gachaItems);
     }
     
-    private const string GachaLogUrl = "https://public-operation-nap.mihoyo.com/common/gacha_record/api/getGachaLog?authkey_ver=1&authkey={0}&lang=zh-cn&game_biz=nap_cn&size=20&real_gacha_type={1}&end_id=";
+    private const string GachaLogChinaUrl = "https://public-operation-nap.mihoyo.com/common/gacha_record/api/getGachaLog?authkey_ver=1&authkey={0}&lang=zh-cn&game_biz=nap_cn&size=20&real_gacha_type={1}&end_id=";
+    private const string GachaLogGlobalUrl = "https://public-operation-nap-sg.hoyoverse.com/common/gacha_record/api/getGachaLog?authkey_ver=1&authkey={0}&lang=zh-cn&game_biz=nap_global&size=20&real_gacha_type={1}&end_id=";
     private readonly int[] _gachaTypes = [1, 2, 3, 5]; // 1 - standard, 2 - exclusive, 3 - w-engine, 5 - bangboo
-    
-    public async Task<Response<GachaRecords>> GetGachaRecords(string authKey, IProgress<Response<string>> progress)
+
+    public async Task<Response<GachaRecords>> GetGachaRecords(GachaUrlData gachaUrlData, IProgress<Response<string>> progress,
+        GameServer gameServer)
     {
         Log.Information("[GachaService] Start fetching gacha records");
-        var gachaRecords = new GachaRecords();
-        var targetProfile = new GachaRecordProfile();
+        var gachaRecords = new GachaRecords
+        {
+            Profiles = GachaRecordProfileDictionary?.Values.ToList() ?? [],
+        };
         var uid = "";
         var isCompletionMode = false;
         var fetchRecordsCount = 0;
         var newRecordsCount = 0;
+
+        var authKey = gachaUrlData.AuthKey;
+        var regionTimeZone = gachaUrlData.Region switch
+        {
+            "prod_gf_cn" => 8,
+            "prod_gf_us" => -7,
+            "prod_gf_jp" => 9,
+            "prod_gf_eu" => 1,
+            _ => throw new ArgumentOutOfRangeException(nameof(gachaUrlData.Region), gachaUrlData.Region, null)
+        };
+        var gachaLogUrl = gameServer switch
+        {
+            GameServer.China => GachaLogChinaUrl,
+            GameServer.Global => GachaLogGlobalUrl,
+            _ => throw new ArgumentOutOfRangeException(nameof(gameServer), gameServer, null)
+        };
+        
+        var targetProfile = new GachaRecordProfile
+        {
+            Timezone = regionTimeZone
+        };
 
         foreach (var gachaType in _gachaTypes)
         {
@@ -84,7 +111,7 @@ public partial class GachaService(IConfigurationService configurationService, Ht
             var pageEndId = "0";
             while (true)
             {
-                var pageUrl = string.Format(GachaLogUrl, authKey, gachaType);
+                var pageUrl = string.Format(gachaLogUrl, authKey, gachaType);
                 if (nthPage > 1)
                 {
                     pageUrl += pageEndId;
@@ -147,7 +174,7 @@ public partial class GachaService(IConfigurationService configurationService, Ht
 
         if(isCompletionMode)
         {
-            gachaRecords.Profiles.Remove(GachaRecordProfileDictionary![uid]);
+            gachaRecords.Profiles.Remove(targetProfile);
         }
         gachaRecords.Profiles.Add(targetProfile);
         
@@ -161,88 +188,95 @@ public partial class GachaService(IConfigurationService configurationService, Ht
 
     public async Task<bool> IsAuthKeyValid(string authKey)
     {
-        var firstPage = await httpClient.GetAsync(string.Format(GachaLogUrl, authKey, _gachaTypes[0]));
+        var gachaLogUrl = gameService.GameBiz switch
+        {
+            GameServer.China => GachaLogChinaUrl,
+            GameServer.Global => GachaLogGlobalUrl,
+            _ => throw new ArgumentOutOfRangeException(nameof(gameService.GameBiz),  gameService.GameBiz, null)
+        };
+        var firstPage = await httpClient.GetAsync(string.Format(gachaLogUrl, authKey, _gachaTypes[0]));
         var firstPageContent = await firstPage.Content.ReadAsStringAsync();
         return !firstPageContent.Contains("\"data\":null");
     }
     
-    public Response<string> GetAuthKey()
+    public Response<GachaUrlData> GetGachaUrlData()
     {
         var gameDirectory = configurationService.AppConfig.Game.Directory;
         if (string.IsNullOrWhiteSpace(gameDirectory))
         {
             Log.Error("[GachaService] Game directory not found");
-            return new Response<string>(false, Lang.Toast_UnknownGameDirectory_Message);
+            return new Response<GachaUrlData>(false, Lang.Toast_UnknownGameDirectory_Message);
         }
         
         var webCachesPath = Path.Combine(gameDirectory, "ZenlessZoneZero_Data", "webCaches");
         if (!Directory.Exists(webCachesPath))
         {
             Log.Error("[GachaService] Web caches not found");
-            return new Response<string>(false, Lang.Toast_WebCachesNotFound_Message);
+            return new Response<GachaUrlData>(false, Lang.Toast_WebCachesNotFound_Message);
         }
         
         var webCachesVersionPath = Directory.GetDirectories(webCachesPath).FirstOrDefault();
         if (string.IsNullOrWhiteSpace(webCachesVersionPath))
         {
             Log.Error("[GachaService] Web caches version not found");
-            return new Response<string>(false, Lang.Toast_WebCachesNotFound_Message);
+            return new Response<GachaUrlData>(false, Lang.Toast_WebCachesNotFound_Message);
         }
         
         var dataPath = Path.Combine(webCachesVersionPath, "Cache", "Cache_Data", "data_2");
         if (!File.Exists(dataPath))
         {
             Log.Error("[GachaService] Data file not found");
-            return new Response<string>(false, Lang.Toast_WebCachesNotFound_Message);
+            return new Response<GachaUrlData>(false, Lang.Toast_WebCachesNotFound_Message);
         }
-
-        var authKey = GetAuthKeyFromFile(dataPath);
-        if (!authKey.IsSuccess)
-        {
-            return authKey;
-        }
-
-        var targetGachaLogUrl = authKey.Data.Split("&authkey=")[1].Split("&")[0];
-        Log.Information("[GachaService] Get authKey from WebCaches: {0}", targetGachaLogUrl);
-        return new Response<string> (true) {Data = targetGachaLogUrl};
+        
+        return GetGachaUrlDataFromFile(dataPath, gameService.GameBiz);
     }
 
-    public Response<string> GetAuthKeyFromUrl(string url)
+    public Response<GachaUrlData> GetGachaUrlDataFromUrl(string url)
     {
-        if (!GachaLogUrlRegex().IsMatch(url) && !url.StartsWith(_gachaLogClientUrl))
+        if (!GachaLogChinaUrlRegex().IsMatch(url) && !GachaLogGlobalUrlRegex().IsMatch(url))
         {
             Log.Error("[GachaService] Invalid URL: {url}", url);
-            return new Response<string>(false, Lang.Toast_InvalidUrl_Message);
+            return new Response<GachaUrlData>(false, Lang.Toast_InvalidUrl_Message);
         }
-
         try
         {
-            var targetGachaLogUrl = url.Split("&authkey=")[1].Split("&")[0];
-            Log.Information("[GachaService] Get authKey from URL: {0}", targetGachaLogUrl);
-            return new Response<string> (true) {Data = targetGachaLogUrl};
+            var targetAuthKey = url.Split("&authkey=")[1].Split("&")[0];
+            var targetRegion = url.Split("&region=")[1].Split("&")[0];
+            Log.Information("[GachaService] Get authKey from URL: {0}", targetAuthKey);
+            return new Response<GachaUrlData> (true) {Data = new GachaUrlData {AuthKey = targetAuthKey, Region = targetRegion}};
         }
         catch (Exception)
         {
-            return new Response<string>(false, Lang.Toast_InvalidUrl_Message);
+            return new Response<GachaUrlData>(false, Lang.Toast_InvalidUrl_Message);
         }
     }
 
-    private Response<string> GetAuthKeyFromFile(string dataPath)
+    private Response<GachaUrlData> GetGachaUrlDataFromFile(string dataPath, GameServer gameServer)
     {
         using var fileStream = File.Open(dataPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite | FileShare.Delete);
         using var reader = new StreamReader(fileStream);
         var data = reader.ReadToEnd();
-        var gachaLogUrls = GachaLogUrlRegex().Matches(data);
-        if (gachaLogUrls.Count == 0)
+        var gachaLogUrls = gameServer switch
         {
-            return new Response<string>(false, Lang.Toast_AuthKeyNotFound_Message);
+            GameServer.China => GachaLogChinaUrlRegex().Matches(data),
+            GameServer.Global => GachaLogGlobalUrlRegex().Matches(data),
+            _ => default
+        };
+        
+        if (gachaLogUrls == null || gachaLogUrls.Count == 0)
+        {
+            return new Response<GachaUrlData>(false, Lang.Toast_AuthKeyNotFound_Message);
         }
-
-        return new Response<string>(true) { Data = gachaLogUrls[^1].Value };
+        var targetAuthKey = gachaLogUrls[^1].Value.Split("&authkey=")[1].Split("&")[0];
+        var targetRegion = gachaLogUrls[^1].Value.Split("&region=")[1].Split("&")[0];
+        Log.Information("[GachaService] Get authKey from WebCaches: {0}", targetAuthKey);
+        return new Response<GachaUrlData>(true) { Data = new GachaUrlData {AuthKey = targetAuthKey, Region = targetRegion}  };
     }
 
     [GeneratedRegex(@"https://webstatic.mihoyo.com/nap/event/e20230424gacha/index.html[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]")]
-    private static partial Regex GachaLogUrlRegex();
-
-    private readonly string _gachaLogClientUrl = "https://webstatic.mihoyo.com/nap/event/e20230424gacha/index.html";
+    private static partial Regex GachaLogChinaUrlRegex();
+    
+    [GeneratedRegex(@"https://gs.hoyoverse.com/nap/event/e20230424gacha/index.html[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]")]
+    private static partial Regex GachaLogGlobalUrlRegex();
 }

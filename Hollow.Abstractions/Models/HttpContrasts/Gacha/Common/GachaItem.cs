@@ -22,15 +22,15 @@ public class GachaItem
     
     [JsonPropertyName("time")]
     public required string Time { get; set; }
-    
+
     [JsonPropertyName("name")]
-    public required string Name { get; set; }  // TODO: UIGF 4.0: Not required
+    public string Name { get; set; } = "";
     
     [JsonPropertyName("item_type")]
-    public required string ItemType { get; set; }  // TODO: UIGF 4.0: Not required
+    public string ItemType { get; set; } = "";
     
     [JsonPropertyName("rank_type")]
-    public required string RankType { get; set; }  // TODO: UIGF 4.0: Not required
+    public string RankType { get; set; } = "";
     
     [JsonPropertyName("id")]
     public required string Id { get; set; }

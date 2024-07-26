@@ -80,7 +80,6 @@ public partial class GachaService(IConfigurationService configurationService, Ht
             Profiles = GachaRecordProfileDictionary?.Values.ToList() ?? [],
         };
         var uid = "";
-        var isCompletionMode = false;
         var fetchRecordsCount = 0;
         var newRecordsCount = 0;
 
@@ -141,7 +140,6 @@ public partial class GachaService(IConfigurationService configurationService, Ht
                 // If UID exists in records, into completion
                 if(GachaRecordProfileDictionary is not null && GachaRecordProfileDictionary.TryGetValue(uid, out var value) && !configurationService.AppConfig.Records.FullUpdate)
                 {
-                    isCompletionMode = true;
                     var time = GetLatestTime(uid, gachaType.ToString());
                     var omitted = OmitExistedRecords(time, pageDataList);
                     if (omitted.Item1)

@@ -30,6 +30,7 @@
         <PackageReference Include="Avalonia.Xaml.Behaviors" Version="11.1.0" />
         <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
         <PackageReference Include="FluentIcons.Avalonia" Version="1.1.247" />
+        <PackageReference Include="JsonSchema.Net" Version="7.1.2" />
         <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
         <PackageReference Include="Serilog" Version="4.0.1" />
         <PackageReference Include="Serilog.Sinks.Console" Version="6.0.0" />

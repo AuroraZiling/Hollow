@@ -834,6 +834,15 @@ namespace Hollow.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid UIGF File.
+        /// </summary>
+        internal static string Toast_InvalidUigfFile_Message {
+            get {
+                return ResourceManager.GetString("Toast_InvalidUigfFile_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid Url.
         /// </summary>
         internal static string Toast_InvalidUrl_Message {
@@ -857,6 +866,15 @@ namespace Hollow.Languages {
         internal static string Toast_MetadataFailed_Title {
             get {
                 return ResourceManager.GetString("Toast_MetadataFailed_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Metadata not found, please update manually on the settings page.
+        /// </summary>
+        internal static string Toast_MetadataNotFound_Message {
+            get {
+                return ResourceManager.GetString("Toast_MetadataNotFound_Message", resourceCulture);
             }
         }
         

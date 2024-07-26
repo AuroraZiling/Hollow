@@ -19,6 +19,7 @@ using Hollow.Languages;
 using Hollow.Models.Pages.SignalSearch;
 using Hollow.Services.GachaService;
 using Hollow.Services.GameService;
+using Hollow.Services.MetadataService;
 using Hollow.Services.NavigationService;
 using Hollow.Views;
 using Hollow.Views.Controls;
@@ -64,11 +65,13 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
     private readonly IGachaService _gachaService;
     private readonly INavigationService _navigationService;
     private readonly IGameService _gameService;
-    public SignalSearchViewModel(IGachaService gachaService, INavigationService navigationService, IGameService gameService)
+    private readonly IMetadataService _metadataService;
+    public SignalSearchViewModel(IGachaService gachaService, INavigationService navigationService, IGameService gameService, IMetadataService metadataService)
     {
         _gachaService = gachaService;
         _navigationService = navigationService;
         _gameService = gameService;
+        _metadataService = metadataService;
 
         var localTimeZoneOffset = TimeZoneAdjuster.LocalTimeZone.BaseUtcOffset.Hours;
         DisplayLocalTimezone = localTimeZoneOffset.ToUtcPrefixTimeZone();
@@ -174,6 +177,11 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
     [RelayCommand]
     private async Task UpdateByImport()
     {
+        if(_metadataService.ItemsMetadata is null)
+        {
+            await HollowHost.ShowToast(Lang.Toast_Common_Error_Title, Lang.Toast_MetadataNotFound_Message, NotificationType.Error);
+        }
+        
         var topLevel = TopLevel.GetTopLevel(App.GetService<MainWindow>())!;
         var files = await topLevel.StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
         {
@@ -187,7 +195,10 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
             await using var stream = await files[0].OpenReadAsync();
             using var streamReader = new StreamReader(stream);
             var fileContent = await streamReader.ReadToEndAsync();
-            Console.WriteLine(fileContent);
+            if (!UigfSchemaValidator.Validate(fileContent))
+            {
+                await HollowHost.ShowToast(Lang.Toast_Common_Error_Title, Lang.Toast_InvalidUigfFile_Message, NotificationType.Error);
+            }
         }
     }
 

@@ -297,4 +297,10 @@
     <data name="Settings_Metadata_Check" xml:space="preserve">
         <value>检查</value>
     </data>
+    <data name="Toast_MetadataNotFound_Message" xml:space="preserve">
+        <value>未找到元数据，请在设置页面手动更新</value>
+    </data>
+    <data name="Toast_InvalidUigfFile_Message" xml:space="preserve">
+        <value>无效的 UIGF 文件</value>
+    </data>
 </root>

@@ -8,12 +8,12 @@ using Hollow.Abstractions.Models;
 using Hollow.Abstractions.Models.HttpContrasts;
 using Hollow.Abstractions.Models.HttpContrasts.Hakush;
 using Hollow.Helpers;
-using Serilog;
 
 namespace Hollow.Services.MetadataService;
 
 public class MetadataService(HttpClient httpClient): IMetadataService
 {
+    public Dictionary<string, ItemModel>? ItemsMetadata { get; set; }
     public async Task LoadItemMetadata(IProgress<Response<string>> progress, bool force = false)
     {
         var urls = new List<string> {
@@ -34,7 +34,7 @@ public class MetadataService(HttpClient httpClient): IMetadataService
                 progress.Report(new Response<string>(await DownloadItemMetadata()));
             }
         }
-
+        ItemsMetadata = JsonSerializer.Deserialize<Dictionary<string, ItemModel>>(await File.ReadAllTextAsync(itemMetadataPath), HollowJsonSerializer.Options);
         return;
 
         async Task<bool> DownloadItemMetadata()

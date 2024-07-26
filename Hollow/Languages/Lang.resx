@@ -297,4 +297,10 @@
     <data name="Settings_Metadata_Check" xml:space="preserve">
         <value>Check</value>
     </data>
+    <data name="Toast_MetadataNotFound_Message" xml:space="preserve">
+        <value>Metadata not found, please update manually on the settings page</value>
+    </data>
+    <data name="Toast_InvalidUigfFile_Message" xml:space="preserve">
+        <value>Invalid UIGF File</value>
+    </data>
 </root>

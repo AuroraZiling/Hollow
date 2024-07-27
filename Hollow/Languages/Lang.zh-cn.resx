@@ -151,7 +151,7 @@
         <value>从第{1}页获取{0}个记录</value>
     </data>
     <data name="SignalSearch_OverviewCard_Total" xml:space="preserve">
-        <value>记录数</value>
+        <value>条记录</value>
     </data>
     <data name="SignalSearch_OverviewCard_SSignals" xml:space="preserve">
         <value>S 级记录数</value>

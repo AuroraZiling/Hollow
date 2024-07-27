@@ -420,7 +420,7 @@ namespace Hollow.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Bangboo Channel.
+        ///   Looks up a localized string similar to Bangboo.
         /// </summary>
         internal static string SignalSearch_BangbooChannel {
             get {
@@ -519,7 +519,7 @@ namespace Hollow.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Exclusive Channel.
+        ///   Looks up a localized string similar to Exclusive.
         /// </summary>
         internal static string SignalSearch_ExclusiveChannel {
             get {
@@ -699,7 +699,7 @@ namespace Hollow.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Total Records.
+        ///   Looks up a localized string similar to Records.
         /// </summary>
         internal static string SignalSearch_OverviewCard_Total {
             get {
@@ -717,7 +717,7 @@ namespace Hollow.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Standard Channel.
+        ///   Looks up a localized string similar to Standard.
         /// </summary>
         internal static string SignalSearch_StandardChannel {
             get {
@@ -834,7 +834,7 @@ namespace Hollow.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to W-Engine Channel.
+        ///   Looks up a localized string similar to W-Engine.
         /// </summary>
         internal static string SignalSearch_WEngineChannel {
             get {

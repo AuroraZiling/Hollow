@@ -1,9 +1,9 @@
 ﻿<ResourceDictionary
     xmlns="https://github.com/avaloniaui"
     xmlns:languages="clr-namespace:Hollow.Languages"
+    xmlns:signalSearch="clr-namespace:Hollow.Views.Controls.SignalSearch"
     xmlns:signalSearchModels="clr-namespace:Hollow.Models.Pages.SignalSearch"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:signalSearch="clr-namespace:Hollow.Views.Controls.SignalSearch">
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <ControlTheme TargetType="signalSearch:SignalSearchOverviewCard" x:Key="SignalSearchOverviewCardTheme">
         <Setter Property="Template">
             <ControlTemplate>
@@ -13,20 +13,30 @@
                     CornerRadius="10"
                     Margin="0,0,5,0"
                     Padding="10">
-                    <Grid RowDefinitions="50, 120, *">
+                    <Grid RowDefinitions="35, 120, *">
                         <Border
                             Background="{StaticResource CoverageBackground}"
                             CornerRadius="10"
                             Grid.Row="0"
                             Margin="-10,-10,-10,5"
-                            Padding="7,7,0,0">
-                            <StackPanel VerticalAlignment="Top">
+                            Padding="9">
+                            <Panel VerticalAlignment="Top">
                                 <TextBlock
-                                    FontSize="16"
-                                    FontWeight="Medium"
+                                    FontSize="18"
+                                    HorizontalAlignment="Left"
                                     Text="{TemplateBinding Header}" />
-                                <TextBlock FontSize="12" Text="{TemplateBinding TimeRange}" />
-                            </StackPanel>
+                                <StackPanel
+                                    HorizontalAlignment="Right"
+                                    Orientation="Horizontal"
+                                    Spacing="3">
+                                    <TextBlock FontSize="18" Text="{TemplateBinding Total}" />
+                                    <TextBlock
+                                        FontSize="14"
+                                        Margin="0,0,0,-1"
+                                        Text="{I18N {x:Static languages:LangKeys.SignalSearch_OverviewCard_Total}}"
+                                        VerticalAlignment="Bottom" />
+                                </StackPanel>
+                            </Panel>
                         </Border>
                         <StackPanel
                             Grid.Row="1"
@@ -37,10 +47,6 @@
                                     <Setter Property="FontSize" Value="14" />
                                 </Style>
                             </StackPanel.Styles>
-                            <Panel>
-                                <TextBlock HorizontalAlignment="Left" Text="{I18N {x:Static languages:LangKeys.SignalSearch_OverviewCard_Total}}" />
-                                <TextBlock HorizontalAlignment="Right" Text="{TemplateBinding Total}" />
-                            </Panel>
                             <Panel>
                                 <TextBlock
                                     Foreground="{StaticResource SignalSearchSColor}"
@@ -87,7 +93,25 @@
                                     <TextBlock Foreground="{StaticResource SignalSearchBColor}" Text="%)" />
                                 </StackPanel>
                             </Panel>
+                            <Grid ColumnDefinitions="*, 3.5*, *">
+                                <Panel
+                                    Background="White"
+                                    Grid.Column="0"
+                                    Height="0.5"
+                                    Opacity="0.5" />
+                                <TextBlock
+                                    FontSize="12"
+                                    Grid.Column="1"
+                                    HorizontalAlignment="Center"
+                                    Text="{TemplateBinding TimeRange}" />
+                                <Panel
+                                    Background="White"
+                                    Grid.Column="2"
+                                    Height="0.5"
+                                    Opacity="0.5" />
+                            </Grid>
                         </StackPanel>
+
                         <ItemsControl Grid.Row="2" ItemsSource="{TemplateBinding ProgressBars}">
                             <ItemsControl.Styles>
                                 <Style Selector="TextBlock">

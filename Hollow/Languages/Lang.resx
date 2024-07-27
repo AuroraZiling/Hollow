@@ -106,16 +106,16 @@
         <value>Export</value>
     </data>
     <data name="SignalSearch_StandardChannel" xml:space="preserve">
-        <value>Standard Channel</value>
+        <value>Standard</value>
     </data>
     <data name="SignalSearch_ExclusiveChannel" xml:space="preserve">
-        <value>Exclusive Channel</value>
+        <value>Exclusive</value>
     </data>
     <data name="SignalSearch_WEngineChannel" xml:space="preserve">
-        <value>W-Engine Channel</value>
+        <value>W-Engine</value>
     </data>
     <data name="SignalSearch_BangbooChannel" xml:space="preserve">
-        <value>Bangboo Channel</value>
+        <value>Bangboo</value>
     </data>
     <data name="SignalSearch_Overview" xml:space="preserve">
         <value>Overview</value>
@@ -151,7 +151,7 @@
         <value>Fetching {0} records from page {1}</value>
     </data>
     <data name="SignalSearch_OverviewCard_Total" xml:space="preserve">
-        <value>Total Records</value>
+        <value>Records</value>
     </data>
     <data name="SignalSearch_OverviewCard_SSignals" xml:space="preserve">
         <value>S Signals</value>

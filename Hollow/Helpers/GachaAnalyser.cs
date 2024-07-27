@@ -154,7 +154,7 @@ public static class GachaAnalyser
         var timeRange = "Unknown";
         if (total > 0)
         {
-            timeRange = $"{analyzedCommonGachaRecordItems.Last().Time} - {analyzedCommonGachaRecordItems.First().Time}";
+            timeRange = $"{analyzedCommonGachaRecordItems.Last().Time.Split(' ')[0]} - {analyzedCommonGachaRecordItems.First().Time.Split(' ')[0]}";
         }
         
         return new AnalyzedCommonGachaRecord

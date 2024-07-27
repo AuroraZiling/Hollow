@@ -9,9 +9,9 @@
 WIP
 
 ## 截图
-![](https://i.ibb.co/1J9XSc4/1.webp)
+![](https://i.ibb.co/jg6fRSx/hollow-home.webp)
 
-![](https://i.ibb.co/6rZqqSm/2.webp)
+![](https://i.ibb.co/F6NQSmv/hollow-gacha.webp)
 
 ## 计划
 - [x] 启动

@@ -34,13 +34,13 @@ public partial class MainWindow : Window
             BeginMoveDrag(e);
     }
 
-    private void NavigationTabControl_OnSelectionChanged(object? sender, SelectionChangedEventArgs e)
+    private void NavigationTabControl_OnSelectionChanged(object? _, SelectionChangedEventArgs e)
     {
         if (NavigationTabControl != null && e.Source is TabControl { Name: "NavigationTabControl" })
         {
             _navigationService!.Navigate(NavigationTabControl.SelectedIndex);
         }
-        else
+        else if (NavigationTabControl == null)
         {
             _navigationService = App.GetService<INavigationService>();
         }

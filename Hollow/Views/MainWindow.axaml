@@ -84,10 +84,11 @@
                 </TabItem>
                 <TabItem BorderBrush="MediumPurple" Classes="Navigation">
                     <TabItem.Header>
-                        <avalonia:SymbolIcon FontSize="35" Symbol="Screenshot" />
+                        <avalonia:SymbolIcon FontSize="35" Symbol="DocumentDatabase" />
                     </TabItem.Header>
-                    <pages:Screenshots Margin="40,40,30,30" />
+                    <pages:Wiki Margin="40,40,30,30" />
                 </TabItem>
+
                 <TabItem
                     BorderBrush="White"
                     Classes="Navigation"
@@ -97,11 +98,6 @@
                     </TabItem.Header>
                     <pages:Settings Margin="40,40,30,30" />
                 </TabItem>
-                <!-- <Interaction.Behaviors> -->
-                <!--     <ValueChangedTriggerBehavior Binding="{Binding ElementName=NavigationTabControl, Path=Selection}"> -->
-                <!--         <InvokeCommandAction Command="{Binding ChangePageCommand}" CommandParameter="{Binding ElementName=NavigationTabControl, Path=SelectedIndex}" /> -->
-                <!--     </ValueChangedTriggerBehavior> -->
-                <!-- </Interaction.Behaviors> -->
             </TabControl>
 
 

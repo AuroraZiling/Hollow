@@ -57,8 +57,8 @@ public class App : Application
         services.AddSingleton<SignalSearch>();
         services.AddSingleton<SignalSearchViewModel>();
         
-        services.AddSingleton<Screenshots>();
-        services.AddSingleton<ScreenshotsViewModel>();
+        services.AddSingleton<Wiki>();
+        services.AddSingleton<WikiViewModel>();
         
         services.AddSingleton<Settings>();
         services.AddSingleton<SettingsViewModel>();

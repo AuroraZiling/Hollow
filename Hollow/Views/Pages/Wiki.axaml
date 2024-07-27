@@ -1,0 +1,14 @@
+﻿<UserControl
+    Margin="30"
+    x:Class="Hollow.Views.Pages.Wiki"
+    x:DataType="pages:WikiViewModel"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:coverages="clr-namespace:Hollow.Views.Controls.Coverages"
+    xmlns:languages="clr-namespace:Hollow.Languages"
+    xmlns:pages="clr-namespace:Hollow.ViewModels.Pages"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Panel>
+        <TextBlock Classes="PageTitle" Text="Wiki" />
+        <coverages:ProhibitedCoverage Margin="30,50,30,30" Text="{I18N {x:Static languages:LangKeys.Special_ProhibitedCoverage_NotImplemented}}" />
+    </Panel>
+</UserControl>

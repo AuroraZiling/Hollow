@@ -3,11 +3,11 @@ using Hollow.ViewModels.Pages;
 
 namespace Hollow.Views.Pages;
 
-public partial class Screenshots : UserControl
+public partial class Wiki : UserControl
 {
-    public Screenshots()
+    public Wiki()
     {
         InitializeComponent();
-        DataContext = App.GetService<ScreenshotsViewModel>();
+        DataContext = App.GetService<WikiViewModel>();
     }
 }

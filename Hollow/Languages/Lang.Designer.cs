@@ -321,6 +321,15 @@ namespace Hollow.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Clear Cache ({0} MB).
+        /// </summary>
+        internal static string Settings_Storage_ClearCache {
+            get {
+                return ResourceManager.GetString("Settings_Storage_ClearCache", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Open App Folder.
         /// </summary>
         internal static string Settings_Storage_OpenAppFolder {
@@ -857,6 +866,24 @@ namespace Hollow.Languages {
         internal static string Toast_AuthKeyNotFound_Message {
             get {
                 return ResourceManager.GetString("Toast_AuthKeyNotFound_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cache Cleared.
+        /// </summary>
+        internal static string Toast_CacheCleared_Title {
+            get {
+                return ResourceManager.GetString("Toast_CacheCleared_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to clear cache.
+        /// </summary>
+        internal static string Toast_CacheFailed_Title {
+            get {
+                return ResourceManager.GetString("Toast_CacheFailed_Title", resourceCulture);
             }
         }
         

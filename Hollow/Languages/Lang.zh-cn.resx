@@ -333,4 +333,13 @@
     <data name="Toast_ImportSuccess_Message" xml:space="preserve">
         <value>已从 {0} 更新了 {1} 个档案</value>
     </data>
+    <data name="Settings_Storage_ClearCache" xml:space="preserve">
+        <value>清除缓存 ({0} MB)</value>
+    </data>
+    <data name="Toast_CacheCleared_Title" xml:space="preserve">
+        <value>缓存已清除</value>
+    </data>
+    <data name="Toast_CacheFailed_Title" xml:space="preserve">
+        <value>缓存清除失败</value>
+    </data>
 </root>

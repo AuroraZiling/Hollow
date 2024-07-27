@@ -125,8 +125,17 @@
                     Classes="PageSubtitle"
                     Margin="0,30,0,10"
                     Text="{I18N {x:Static languages:LangKeys.Settings_Subtitle_Storage}}" />
-                <StackPanel Spacing="10">
+                <StackPanel Orientation="Horizontal" Spacing="10">
                     <Button Command="{Binding OpenAppDirectoryCommand}" Content="{I18N {x:Static languages:LangKeys.Settings_Storage_OpenAppFolder}}" />
+                    <Button Command="{Binding ClearCacheCommand}">
+                        <TextBlock FontSize="14">
+                            <TextBlock.Text>
+                                <I18N Key="{x:Static languages:LangKeys.Settings_Storage_ClearCache}">
+                                    <Binding Path="CacheSize" />
+                                </I18N>
+                            </TextBlock.Text>
+                        </TextBlock>
+                    </Button>
                 </StackPanel>
             </StackPanel>
         </ScrollViewer>

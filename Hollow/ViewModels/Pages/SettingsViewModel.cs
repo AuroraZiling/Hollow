@@ -36,7 +36,7 @@ public partial class SettingsViewModel : ViewModelBase, IViewModelBase
     {
         if (_navigationService.CurrentViewName == nameof(Settings))
         {
-            Console.WriteLine(1);
+            CacheSize = StorageHelper.GetCacheFolderMegabytes();
         }
     }
     public SettingsViewModel(IConfigurationService configurationService, INavigationService navigationService, IGameService gameService, IMetadataService metadataService)
@@ -66,6 +66,7 @@ public partial class SettingsViewModel : ViewModelBase, IViewModelBase
         // Game Init
         CheckGameDirectory(_configurationService.AppConfig.Game.Directory, true);
         
+        _navigationService.CurrentViewChanged += Navigated;
         Log.Information("[Settings] Configuration loaded");
     }
 
@@ -185,6 +186,16 @@ public partial class SettingsViewModel : ViewModelBase, IViewModelBase
         {
             StorageHelper.OpenFolderInExplorer(Environment.CurrentDirectory);
         }
+    }
+    
+    [ObservableProperty] private double _cacheSize;
+    
+    [RelayCommand]
+    private void ClearCache()
+    {
+        StorageHelper.ClearCacheFolder();
+        HollowHost.ShowToast(Lang.Toast_CacheCleared_Title, "", NotificationType.Success);
+        CacheSize = StorageHelper.GetCacheFolderMegabytes();
     }
 
     #endregion

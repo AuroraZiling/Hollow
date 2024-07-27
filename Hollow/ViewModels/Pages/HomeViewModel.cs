@@ -10,6 +10,7 @@ using Hollow.Services.ConfigurationService;
 using Hollow.Services.GameService;
 using Hollow.Services.MiHoYoLauncherService;
 using Hollow.Services.NavigationService;
+using Hollow.Views.Pages;
 using Serilog;
 
 namespace Hollow.ViewModels.Pages;
@@ -32,13 +33,15 @@ public partial class HomeViewModel: ViewModelBase, IViewModelBase
     private readonly IConfigurationService _configurationService;
     private readonly IGameService _gameService;
     private readonly HttpClient _httpClient;
+    private readonly INavigationService _navigationService;
 
-    public HomeViewModel(IMiHoYoLauncherService miHoYoLauncherService, HttpClient httpClient, IConfigurationService configurationService, IGameService gameService)
+    public HomeViewModel(IMiHoYoLauncherService miHoYoLauncherService, HttpClient httpClient, IConfigurationService configurationService, IGameService gameService, INavigationService navigationService)
     {
         _miHoYoLauncherService = miHoYoLauncherService;
         _httpClient = httpClient;
         _configurationService = configurationService;
         _gameService = gameService;
+        _navigationService = navigationService;
 
         _ = LoadContents();
         CheckStartGameReady();
@@ -117,6 +120,9 @@ public partial class HomeViewModel: ViewModelBase, IViewModelBase
 
     public void Navigated()
     {
-        CheckStartGameReady();
+        if (_navigationService.CurrentViewName == nameof(Home))
+        {
+            CheckStartGameReady();
+        }
     }
 }

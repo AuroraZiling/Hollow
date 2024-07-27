@@ -56,6 +56,7 @@
                 Name="NavigationTabControl"
                 Padding="0"
                 SelectedIndex="{Binding DisplayPageId, Mode=TwoWay}"
+                SelectionChanged="NavigationTabControl_OnSelectionChanged"
                 TabStripPlacement="Left">
                 <TabItem Classes="GameIcon" HorizontalAlignment="Center">
                     <TabItem.Header>
@@ -96,11 +97,11 @@
                     </TabItem.Header>
                     <pages:Settings Margin="40,40,30,30" />
                 </TabItem>
-                <Interaction.Behaviors>
-                    <EventTriggerBehavior EventName="SelectionChanged" SourceObject="NavigationTabControl">
-                        <InvokeCommandAction Command="{Binding ChangePageCommand}" CommandParameter="{Binding ElementName=NavigationTabControl, Path=SelectedIndex}" />
-                    </EventTriggerBehavior>
-                </Interaction.Behaviors>
+                <!-- <Interaction.Behaviors> -->
+                <!--     <ValueChangedTriggerBehavior Binding="{Binding ElementName=NavigationTabControl, Path=Selection}"> -->
+                <!--         <InvokeCommandAction Command="{Binding ChangePageCommand}" CommandParameter="{Binding ElementName=NavigationTabControl, Path=SelectedIndex}" /> -->
+                <!--     </ValueChangedTriggerBehavior> -->
+                <!-- </Interaction.Behaviors> -->
             </TabControl>
 
 

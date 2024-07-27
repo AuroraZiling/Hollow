@@ -2,12 +2,14 @@ using System;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
+using Hollow.Services.NavigationService;
 using Serilog;
 
 namespace Hollow.Views;
 
 public partial class MainWindow : Window
 {
+    private INavigationService? _navigationService;
     public MainWindow()
     {
         InitializeComponent();
@@ -30,5 +32,17 @@ public partial class MainWindow : Window
         base.OnPointerPressed(e);
         if(e.GetCurrentPoint(this).Position.Y <= 40)
             BeginMoveDrag(e);
+    }
+
+    private void NavigationTabControl_OnSelectionChanged(object? sender, SelectionChangedEventArgs e)
+    {
+        if (NavigationTabControl != null && e.Source is TabControl { Name: "NavigationTabControl" })
+        {
+            _navigationService!.Navigate(NavigationTabControl.SelectedIndex);
+        }
+        else
+        {
+            _navigationService = App.GetService<INavigationService>();
+        }
     }
 }

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Hollow.Abstractions.Models.HttpContrasts;
-using Hollow.Abstractions.Models.HttpContrasts.Hakush;
 using Hollow.Abstractions.Models.HttpContrasts.Hakush.Proceed;
 
 namespace Hollow.Services.MetadataService;

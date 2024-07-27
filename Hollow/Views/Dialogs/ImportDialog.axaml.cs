@@ -1,5 +1,4 @@
 using System;
-using System.Collections.ObjectModel;
 using Avalonia.Controls;
 using Hollow.Abstractions.Models.HttpContrasts.Gacha.Uigf;
 using Hollow.Models.Pages.SignalSearch;

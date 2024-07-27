@@ -1,5 +1,4 @@
 using System;
-using System.Collections.ObjectModel;
 using Avalonia.Controls;
 
 namespace Hollow.Views.Dialogs;

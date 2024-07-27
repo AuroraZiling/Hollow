@@ -72,7 +72,7 @@ public partial class SettingsViewModel : ViewModelBase, IViewModelBase
     #region Game
 
     [ObservableProperty] private string _gameDirectory;
-    [ObservableProperty] private string _gameBiz;
+    [ObservableProperty] private string _gameBiz = Lang.Service_Game_Unknown;
     [ObservableProperty] private string _gameArguments;
     
     [RelayCommand]

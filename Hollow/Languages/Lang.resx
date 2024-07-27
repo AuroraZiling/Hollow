@@ -301,6 +301,36 @@
         <value>Metadata not found, please update manually on the settings page</value>
     </data>
     <data name="Toast_InvalidUigfFile_Message" xml:space="preserve">
-        <value>Invalid UIGF File</value>
+        <value>Invalid UIGF v4.0 File</value>
+    </data>
+    <data name="SignalSearch_Import_RecordFormat" xml:space="preserve">
+        <value>Record Format:</value>
+    </data>
+    <data name="SignalSearch_Import_ExportApp" xml:space="preserve">
+        <value>Export App:</value>
+    </data>
+    <data name="SignalSearch_Import_ExportTime" xml:space="preserve">
+        <value>Export Time:</value>
+    </data>
+    <data name="SignalSearch_Import_SelectUidTip" xml:space="preserve">
+        <value>Select UID(s) to import:</value>
+    </data>
+    <data name="SignalSearch_Import_ChinaServer" xml:space="preserve">
+        <value>China</value>
+    </data>
+    <data name="SignalSearch_Import_GlobalServer" xml:space="preserve">
+        <value>Global</value>
+    </data>
+    <data name="Toast_EmptyUigfNapRecords_Message" xml:space="preserve">
+        <value>Signal Search not found in the file</value>
+    </data>
+    <data name="SignalSearch_Import_FilePickerTitle" xml:space="preserve">
+        <value>Open UIGF v4.0 Json</value>
+    </data>
+    <data name="Toast_Common_Success_Title" xml:space="preserve">
+        <value>Success</value>
+    </data>
+    <data name="Toast_ImportSuccess_Message" xml:space="preserve">
+        <value>{1} profiles have been updated from {0}</value>
     </data>
 </root>

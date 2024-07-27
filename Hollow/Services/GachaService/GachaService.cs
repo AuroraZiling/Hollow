@@ -11,9 +11,11 @@ using Hollow.Abstractions.Models.HttpContrasts;
 using Hollow.Abstractions.Models.HttpContrasts.Gacha;
 using Hollow.Abstractions.Models.HttpContrasts.Gacha.Common;
 using Hollow.Abstractions.Models.HttpContrasts.Gacha.Uigf;
+using Hollow.Abstractions.Models.HttpContrasts.Hakush.Proceed;
 using Hollow.Enums;
 using Hollow.Helpers;
 using Hollow.Languages;
+using Hollow.Models.Pages.SignalSearch;
 using Hollow.Services.ConfigurationService;
 using Hollow.Services.GameService;
 using Serilog;
@@ -23,10 +25,69 @@ namespace Hollow.Services.GachaService;
 public partial class GachaService(IConfigurationService configurationService, HttpClient httpClient, IGameService gameService) : IGachaService
 {
     public Dictionary<string, GachaRecordProfile>? GachaRecordProfileDictionary { get; set; }
+
+    public GachaRecords MergeGachaRecordsFromImport(GachaRecords fileJson, ImportItem[] selectedImportItems, Dictionary<string, ProceedHakushItemModel> itemsMetadata)
+    {
+        var currentGachaProfiles = GachaRecordProfileDictionary ?? new Dictionary<string, GachaRecordProfile>();
+        foreach (var selectedImportItem in selectedImportItems)
+        {
+            var completedGachaItems = CompleteGachaItems(fileJson.Profiles.First(profile => profile.Uid == selectedImportItem.Uid).List, itemsMetadata);
+                    
+            if(currentGachaProfiles.TryGetValue(selectedImportItem.Uid, out var currentGachaProfile))
+            {
+                var mergedList = completedGachaItems
+                    .Concat(currentGachaProfile.List)
+                    .GroupBy(item => item.Id)
+                    .Select(group => group.First())
+                    .OrderByDescending(item => item.Id)
+                    .ToList();
+                
+                currentGachaProfiles.Remove(selectedImportItem.Uid);
+                currentGachaProfiles.Add(selectedImportItem.Uid, new GachaRecordProfile
+                {
+                    Uid = selectedImportItem.Uid,
+                    Timezone = selectedImportItem.I18NTimezone.ToTimeZoneFromUtcPrefix(),
+                    List = mergedList
+                });
+            }
+            else
+            {
+                currentGachaProfiles.Add(selectedImportItem.Uid, new GachaRecordProfile
+                {
+                    Uid = selectedImportItem.Uid,
+                    Timezone = selectedImportItem.I18NTimezone.ToTimeZoneFromUtcPrefix(),
+                    List = completedGachaItems
+                });
+            }
+        }
+        
+        return new GachaRecords
+        {
+            Info =
+            {
+                ExportApp = "Hollow",
+                ExportTimestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString()
+            }, 
+            Profiles = currentGachaProfiles.Values.ToList()
+        };
+    }
+
+    private static List<GachaItem> CompleteGachaItems(List<GachaItem> gachaItems, Dictionary<string, ProceedHakushItemModel> metadata)
+    {
+        foreach (var gachaItem in gachaItems)
+        {
+            var metadataItem = metadata.GetValueOrDefault(gachaItem.ItemId);
+            if (metadataItem is null) continue;
+            
+            gachaItem.Name = metadataItem.ChineseName;
+            gachaItem.RankType = metadataItem.RankType.ToString() ?? throw new ArgumentNullException($"Unknown Character: {gachaItem.Name}");
+            gachaItem.ItemType = gachaItem.ItemType;
+        }
+        return gachaItems;
+    }
     
     public async Task<Dictionary<string, GachaRecordProfile>?> LoadGachaRecordProfileDictionary()
     {
-        //TODO: UIGF 4.0 Schema + Strict Json Validation
         GachaRecords gachaRecords;
         if(!File.Exists(AppInfo.GachaRecordPath))
         {
@@ -52,18 +113,18 @@ public partial class GachaService(IConfigurationService configurationService, Ht
         return GachaRecordProfileDictionary;
     }
     
-    private string GetLatestTime(string uid, string gachaType)
+    private string GetLatestId(string uid, string gachaType)
     {
         if(GachaRecordProfileDictionary is null || !GachaRecordProfileDictionary.TryGetValue(uid, out var record))
         {
             return "0";
         }
-        return record.List.Find(item => item.GachaType == gachaType)?.Time ?? "0";
+        return record.List.Find(item => item.GachaType == gachaType)?.Id ?? "0";
     }
     
-    private static (bool, List<GachaItem>) OmitExistedRecords(string time, List<GachaItem> gachaItems)
+    private static (bool, List<GachaItem>) OmitExistedRecords(string id, List<GachaItem> gachaItems)
     {
-        var endTimeIndex = gachaItems.FindIndex(0, item => item.Time == time);
+        var endTimeIndex = gachaItems.FindIndex(0, item => item.Id == id);
         return endTimeIndex != -1 ? (true, gachaItems[..endTimeIndex]) : (false, gachaItems);
     }
     
@@ -140,7 +201,7 @@ public partial class GachaService(IConfigurationService configurationService, Ht
                 // If UID exists in records, into completion
                 if(GachaRecordProfileDictionary is not null && GachaRecordProfileDictionary.TryGetValue(uid, out var value) && !configurationService.AppConfig.Records.FullUpdate)
                 {
-                    var time = GetLatestTime(uid, gachaType.ToString());
+                    var time = GetLatestId(uid, gachaType.ToString());
                     var omitted = OmitExistedRecords(time, pageDataList);
                     if (omitted.Item1)
                     {
@@ -177,6 +238,8 @@ public partial class GachaService(IConfigurationService configurationService, Ht
         gachaRecords.Profiles.Add(targetProfile);
         
         gachaRecords.Info.ExportTimestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString();
+        gachaRecords.Info.ExportApp = "Hollow";
+        
         progress.Report(new Response<string>(true, $"success {fetchRecordsCount} {newRecordsCount}"));
         Log.Information("[GachaService] Fetched {0} new records", newRecordsCount);
 

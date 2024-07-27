@@ -12,7 +12,10 @@ using CommunityToolkit.Mvvm.Input;
 using Hollow.Abstractions.Models;
 using Hollow.Abstractions.Models.HttpContrasts;
 using Hollow.Abstractions.Models.HttpContrasts.Gacha;
+using Hollow.Abstractions.Models.HttpContrasts.Gacha.Common;
 using Hollow.Abstractions.Models.HttpContrasts.Gacha.Uigf;
+using Hollow.Abstractions.Models.HttpContrasts.Hakush;
+using Hollow.Abstractions.Models.HttpContrasts.Hakush.Proceed;
 using Hollow.Enums;
 using Hollow.Helpers;
 using Hollow.Languages;
@@ -150,7 +153,15 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
         async void SelectedUidListCallback(string[] selectedUidList)
         {
             if (selectedUidList.Length == 0) return;
-            var gachaRecords = new GachaRecords { Info = { ExportTimestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString() }, Profiles = selectedUidList.Select(uid => _gachaProfiles![uid]).ToList() };
+            var gachaRecords = new GachaRecords
+            {
+                Info =
+                {
+                    ExportApp = "Hollow",
+                    ExportTimestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString()
+                }, 
+                Profiles = selectedUidList.Select(uid => _gachaProfiles![uid]).ToList()
+            };
 
             var topLevel = TopLevel.GetTopLevel(App.GetService<MainWindow>());
             var file = await topLevel!.StorageProvider.SaveFilePickerAsync(new FilePickerSaveOptions { SuggestedFileName = $"Hollow_{gachaRecords.Info.ExportTimestamp}.json"});
@@ -185,7 +196,7 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
         var topLevel = TopLevel.GetTopLevel(App.GetService<MainWindow>())!;
         var files = await topLevel.StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
         {
-            Title = "Open Text File",
+            Title = Lang.SignalSearch_Import_FilePickerTitle,
             FileTypeFilter = new[] { new("UIGF v4.0") { Patterns = new[] { "*.json" } }, FilePickerFileTypes.All },
             AllowMultiple = false
         });
@@ -198,6 +209,33 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
             if (!UigfSchemaValidator.Validate(fileContent))
             {
                 await HollowHost.ShowToast(Lang.Toast_Common_Error_Title, Lang.Toast_InvalidUigfFile_Message, NotificationType.Error);
+                return;
+            }
+            
+            var fileJson = JsonSerializer.Deserialize<GachaRecords>(fileContent, HollowJsonSerializer.Options);
+            if (fileJson is null)
+            {
+                await HollowHost.ShowToast(Lang.Toast_Common_Error_Title, Lang.Toast_InvalidUigfFile_Message, NotificationType.Error);
+                return;
+            }
+            
+            if(fileJson.Profiles.Count == 0)
+            {
+                await HollowHost.ShowToast(Lang.Toast_Common_Error_Title, Lang.Toast_EmptyUigfNapRecords_Message, NotificationType.Error);
+                return;
+            }
+            
+            HollowHost.ShowDialog(new ImportDialog(fileJson, SelectedImportItemsCallback));
+            return;
+
+            async void SelectedImportItemsCallback(ImportItem[] selectedImportItems)
+            {
+                if (selectedImportItems.Length == 0) return;
+                var gachaRecords = _gachaService.MergeGachaRecordsFromImport(fileJson, selectedImportItems, _metadataService.ItemsMetadata!);
+                await File.WriteAllTextAsync(AppInfo.GachaRecordPath, JsonSerializer.Serialize(gachaRecords, HollowJsonSerializer.Options));
+                
+                await HollowHost.ShowToast(Lang.Toast_Common_Success_Title, string.Format(Lang.Toast_ImportSuccess_Message, fileJson.Info.ExportApp, selectedImportItems.Length), NotificationType.Success);
+                await LoadGachaRecords();
             }
         }
     }

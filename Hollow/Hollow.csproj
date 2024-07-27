@@ -88,6 +88,10 @@
         <DependentUpon>RecordUrlDialog.axaml</DependentUpon>
         <SubType>Code</SubType>
       </Compile>
+      <Compile Update="Views\Dialogs\ImportDialog.axaml.cs">
+        <DependentUpon>ImportDialog.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
     </ItemGroup>
 
     <ItemGroup>

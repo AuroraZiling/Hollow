@@ -301,6 +301,36 @@
         <value>未找到元数据，请在设置页面手动更新</value>
     </data>
     <data name="Toast_InvalidUigfFile_Message" xml:space="preserve">
-        <value>无效的 UIGF 文件</value>
+        <value>无效的 UIGF v4.0 文件</value>
+    </data>
+    <data name="SignalSearch_Import_RecordFormat" xml:space="preserve">
+        <value>记录格式：</value>
+    </data>
+    <data name="SignalSearch_Import_ExportApp" xml:space="preserve">
+        <value>导出工具：</value>
+    </data>
+    <data name="SignalSearch_Import_ExportTime" xml:space="preserve">
+        <value>导出时间：</value>
+    </data>
+    <data name="SignalSearch_Import_SelectUidTip" xml:space="preserve">
+        <value>选择需要导入的 UID：</value>
+    </data>
+    <data name="SignalSearch_Import_ChinaServer" xml:space="preserve">
+        <value>国服</value>
+    </data>
+    <data name="SignalSearch_Import_GlobalServer" xml:space="preserve">
+        <value>国际服</value>
+    </data>
+    <data name="Toast_EmptyUigfNapRecords_Message" xml:space="preserve">
+        <value>文件中未发现调频记录</value>
+    </data>
+    <data name="SignalSearch_Import_FilePickerTitle" xml:space="preserve">
+        <value>打开符合 UIGF v4.0 的 Json 文件</value>
+    </data>
+    <data name="Toast_Common_Success_Title" xml:space="preserve">
+        <value>成功</value>
+    </data>
+    <data name="Toast_ImportSuccess_Message" xml:space="preserve">
+        <value>已从 {0} 更新了 {1} 个档案</value>
     </data>
 </root>

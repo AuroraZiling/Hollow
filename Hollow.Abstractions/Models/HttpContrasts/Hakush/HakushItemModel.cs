@@ -2,7 +2,7 @@
 
 namespace Hollow.Abstractions.Models.HttpContrasts.Hakush;
 
-public class ItemModel
+public class HakushItemModel
 {
     [JsonPropertyName("rank")]
     public int? RankType { get; set; }

@@ -25,4 +25,9 @@ public static class DateTimeDisplayExtensions
     {
         return offsetHours >= 0 ? $"UTC+{offsetHours}" : $"UTC{offsetHours}";
     }
+    
+    public static int ToTimeZoneFromUtcPrefix(this string utcPrefixTimeZone)
+    {
+        return int.Parse(utcPrefixTimeZone.Replace("UTC", "").Replace("+", ""));
+    }
 }

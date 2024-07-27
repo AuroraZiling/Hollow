@@ -1,0 +1,66 @@
+<UserControl
+    MinWidth="300"
+    x:Class="Hollow.Views.Dialogs.ImportDialog"
+    x:DataType="dialogs:ImportDialogViewModel"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:dialogs="clr-namespace:Hollow.Views.Dialogs"
+    xmlns:languages="clr-namespace:Hollow.Languages"
+    xmlns:signalSearch="clr-namespace:Hollow.Models.Pages.SignalSearch"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <StackPanel Spacing="12">
+        <StackPanel Spacing="5">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{I18N {x:Static languages:LangKeys.SignalSearch_Import_RecordFormat}}" />
+                <TextBlock Margin="10,0,0,0" Text="{Binding RecordFormat}" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{I18N {x:Static languages:LangKeys.SignalSearch_Import_ExportApp}}" />
+                <TextBlock Margin="10,0,0,0" Text="{Binding ExportApplication}" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{I18N {x:Static languages:LangKeys.SignalSearch_Import_ExportTime}}" />
+                <TextBlock Margin="10,0,0,0" Text="{Binding ExportTime}" />
+            </StackPanel>
+        </StackPanel>
+
+        <TextBlock Text="{I18N {x:Static languages:LangKeys.SignalSearch_Import_SelectUidTip}}" />
+        <ListBox
+            ItemsSource="{Binding ImportItems}"
+            SelectedItems="{Binding SelectedImportItems, Mode=TwoWay}"
+            SelectionMode="Multiple, Toggle">
+            <ListBox.ItemTemplate>
+                <DataTemplate x:DataType="signalSearch:ImportItem">
+                    <Grid ColumnDefinitions="2*, *, *">
+                        <TextBlock Grid.Column="0" Text="{Binding Uid}" />
+                        <TextBlock Grid.Column="1" Text="{Binding I18NTimezone}" />
+                        <TextBlock
+                            Grid.Column="2"
+                            IsVisible="{Binding IsChinaServer}"
+                            Text="{I18N {x:Static languages:LangKeys.SignalSearch_Import_ChinaServer}}" />
+                        <TextBlock
+                            Grid.Column="2"
+                            IsVisible="{Binding !IsChinaServer}"
+                            Text="{I18N {x:Static languages:LangKeys.SignalSearch_Import_GlobalServer}}" />
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <Grid ColumnDefinitions="*, 10, *">
+            <Button
+                Command="{Binding CancelCommand}"
+                Content="{I18N {x:Static languages:LangKeys.Dialog_Cancel}}"
+                Grid.Column="0"
+                HorizontalAlignment="Stretch"
+                HorizontalContentAlignment="Center" />
+            <Button
+                Command="{Binding OkCommand}"
+                Content="{I18N {x:Static languages:LangKeys.Dialog_Ok}}"
+                Grid.Column="2"
+                HorizontalAlignment="Stretch"
+                HorizontalContentAlignment="Center" />
+        </Grid>
+    </StackPanel>
+</UserControl>

@@ -546,6 +546,69 @@ namespace Hollow.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to China.
+        /// </summary>
+        internal static string SignalSearch_Import_ChinaServer {
+            get {
+                return ResourceManager.GetString("SignalSearch_Import_ChinaServer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Export App:.
+        /// </summary>
+        internal static string SignalSearch_Import_ExportApp {
+            get {
+                return ResourceManager.GetString("SignalSearch_Import_ExportApp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Export Time:.
+        /// </summary>
+        internal static string SignalSearch_Import_ExportTime {
+            get {
+                return ResourceManager.GetString("SignalSearch_Import_ExportTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open UIGF v4.0 Json.
+        /// </summary>
+        internal static string SignalSearch_Import_FilePickerTitle {
+            get {
+                return ResourceManager.GetString("SignalSearch_Import_FilePickerTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Global.
+        /// </summary>
+        internal static string SignalSearch_Import_GlobalServer {
+            get {
+                return ResourceManager.GetString("SignalSearch_Import_GlobalServer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Record Format:.
+        /// </summary>
+        internal static string SignalSearch_Import_RecordFormat {
+            get {
+                return ResourceManager.GetString("SignalSearch_Import_RecordFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select UID(s) to import:.
+        /// </summary>
+        internal static string SignalSearch_Import_SelectUidTip {
+            get {
+                return ResourceManager.GetString("SignalSearch_Import_SelectUidTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Analyzing.
         /// </summary>
         internal static string SignalSearch_LoadGachaRecords_Analyze {
@@ -807,6 +870,33 @@ namespace Hollow.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Success.
+        /// </summary>
+        internal static string Toast_Common_Success_Title {
+            get {
+                return ResourceManager.GetString("Toast_Common_Success_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Signal Search not found in the file.
+        /// </summary>
+        internal static string Toast_EmptyUigfNapRecords_Message {
+            get {
+                return ResourceManager.GetString("Toast_EmptyUigfNapRecords_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {1} profiles have been updated from {0}.
+        /// </summary>
+        internal static string Toast_ImportSuccess_Message {
+            get {
+                return ResourceManager.GetString("Toast_ImportSuccess_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid AuthKey.
         /// </summary>
         internal static string Toast_InvalidAuthKey_Message {
@@ -834,7 +924,7 @@ namespace Hollow.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Invalid UIGF File.
+        ///   Looks up a localized string similar to Invalid UIGF v4.0 File.
         /// </summary>
         internal static string Toast_InvalidUigfFile_Message {
             get {

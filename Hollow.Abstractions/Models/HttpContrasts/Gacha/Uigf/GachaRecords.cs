@@ -36,7 +36,7 @@ public class GachaRecordsInfo
     public string ExportTimestamp { get; set; } = "";
     
     [JsonPropertyName("export_app")]
-    public string ExportApp { get; } = "Hollow";
+    public string ExportApp { get; set; } = "";
     
     [JsonPropertyName("export_app_version")]
     public string ExportAppVersion { get; set; } = AppInfo.AppVersion;

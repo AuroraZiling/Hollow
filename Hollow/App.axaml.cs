@@ -4,6 +4,7 @@ using System.Net.Http;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
+using Avalonia.Platform.Storage;
 using Hollow.Abstractions.Models;
 using Hollow.Services.ConfigurationService;
 using Hollow.Services.GachaService;
@@ -79,15 +80,18 @@ public class App : Application
         Log.Information("[App] Services Configured");
     }
     
+    public static MainWindow MainWindowInstance { get; private set; } = null!;
+
     public static T GetService<T>() where T : notnull => (_provider ?? throw new InvalidOperationException("Services not Configured")).GetRequiredService<T>();
 
     public override void OnFrameworkInitializationCompleted()
     {
+        MainWindowInstance = GetService<MainWindow>();
+        MainWindowInstance.DataContext = GetService<MainWindowViewModel>();
+        
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
-            var mainWindow = GetService<MainWindow>();
-            mainWindow.DataContext = GetService<MainWindowViewModel>();
-            desktop.MainWindow = mainWindow;
+            desktop.MainWindow = MainWindowInstance;
         }
 
         base.OnFrameworkInitializationCompleted();

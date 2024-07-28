@@ -161,8 +161,7 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
                 Profiles = selectedUidList.Select(uid => _gachaProfiles![uid]).ToList()
             };
 
-            var topLevel = TopLevel.GetTopLevel(App.GetService<MainWindow>());
-            var file = await topLevel!.StorageProvider.SaveFilePickerAsync(new FilePickerSaveOptions { SuggestedFileName = $"Hollow_{gachaRecords.Info.ExportTimestamp}.json"});
+            var file = await App.MainWindowInstance.StorageProvider.SaveFilePickerAsync(new FilePickerSaveOptions { SuggestedFileName = $"Hollow_{gachaRecords.Info.ExportTimestamp}.json"});
             if (file is null) return;
             await using var stream = await file.OpenWriteAsync();
             await using var streamWriter = new StreamWriter(stream);
@@ -179,7 +178,7 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
             SelectedAnalyzedGachaRecords = value;
             IsTimezoneEqual = value.DisplayTimezone == DisplayLocalTimezone;
             SelectedUidTimezone = SelectedAnalyzedGachaRecords.DisplayTimezone;
-            App.GetService<MainWindow>().UpdateLayout();
+            App.MainWindowInstance.UpdateLayout();
         }
     }
 
@@ -191,8 +190,7 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
             await HollowHost.ShowToast(Lang.Toast_Common_Error_Title, Lang.Toast_MetadataNotFound_Message, NotificationType.Error);
         }
         
-        var topLevel = TopLevel.GetTopLevel(App.GetService<MainWindow>())!;
-        var files = await topLevel.StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
+        var files = await App.MainWindowInstance.StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
         {
             Title = Lang.SignalSearch_Import_FilePickerTitle,
             FileTypeFilter = new[] { new("UIGF v4.0") { Patterns = new[] { "*.json" } }, FilePickerFileTypes.All },

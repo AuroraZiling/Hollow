@@ -1,6 +1,7 @@
 ﻿using System;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Hollow.Helpers;
+using Hollow.Views;
 using Hollow.Views.Controls.WebView;
 using Hollow.Views.Pages;
 using Serilog;
@@ -99,11 +100,11 @@ public partial class AnnouncementsViewModel
 
     public void GameAnnouncementWebView_OnNavigationStarting(object? sender, WebViewNavigationStartingEventArgs e)
     {
-        if (!e.Request!.ToString().StartsWith("inner:")) return;
-        
-        PlatformHelper.OpenUrl(e.Request!.ToString()[6..]);
+        var request = e.Request!.ToString();
+        if (!request.StartsWith("inner:")) return;
+        App.MainWindowInstance.Launcher.LaunchUriAsync(new Uri(request[6..]));
         e.Cancel = true;
-        Log.Information("[Announcements] Open inner URL: {Url}", e.Request!.ToString()[6..]);
+        Log.Information("[Announcements] Open inner URL: {Url}", request[6..]);
     }
 
     public async void GameAnnouncementWebView_OnDomContentLoaded(object? sender, WebViewDomContentLoadedEventArgs e)

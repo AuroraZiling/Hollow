@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using Avalonia.Markup.Xaml.MarkupExtensions;
+using Avalonia.Platform.Storage;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Hollow.Abstractions.Models;
@@ -107,11 +109,11 @@ public partial class SettingsViewModel : ViewModelBase, IViewModelBase
     }
     
     [RelayCommand]
-    private void OpenGameDirectory()
+    private async Task OpenGameDirectory()
     {
-        if (!string.IsNullOrWhiteSpace(GameDirectory) && RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+        if (!string.IsNullOrWhiteSpace(GameDirectory))
         {
-            PlatformHelper.OpenFolderInExplorer(GameDirectory);
+            await App.MainWindowInstance.Launcher.LaunchDirectoryInfoAsync(new DirectoryInfo(GameDirectory));
         }
     }
 
@@ -180,12 +182,9 @@ public partial class SettingsViewModel : ViewModelBase, IViewModelBase
     #region Storage
 
     [RelayCommand]
-    private void OpenAppDirectory()
+    private async Task OpenAppDirectory()
     {
-        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-        {
-            PlatformHelper.OpenFolderInExplorer(Environment.CurrentDirectory);
-        }
+        await App.MainWindowInstance.Launcher.LaunchDirectoryInfoAsync(new DirectoryInfo(Environment.CurrentDirectory));
     }
     
     [ObservableProperty] private double _cacheSize;

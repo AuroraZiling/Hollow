@@ -1,4 +1,5 @@
-﻿using Avalonia;
+﻿using System.Runtime.InteropServices;
+using Avalonia;
 using Hollow.Abstractions.Models;
 using Hollow.Views.Controls.WebView;
 using Hollow.Windows.Services;
@@ -9,14 +10,34 @@ namespace Hollow.Windows;
 
 public static class Program
 {
+    [DllImport("kernel32.dll")]
+    public static extern bool AllocConsole();
+    
+    [DllImport("kernel32.dll")]
+    public static extern bool FreeConsole();
+    
+    
     [STAThread]
     public static void Main(string[] args)
     {
+        var showConsole = false;
+        
         //TODO: Platform specific
-        Environment.SetEnvironmentVariable("WEBVIEW2_USER_DATA_FOLDER", AppInfo.CachesDir);
+        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+        {
+            Environment.SetEnvironmentVariable("WEBVIEW2_USER_DATA_FOLDER", AppInfo.CachesDir);
+
+            if(args.Contains("--console"))
+                showConsole = true;
+        }
 
         try
         {
+            if (showConsole)
+            {
+                AllocConsole();
+            }
+            
             App.ConfigureServices(x =>
                 x.AddTransient<IWebViewAdapter, WebView2Adapter>()
             );
@@ -29,11 +50,15 @@ public static class Program
         finally
         {
             Log.CloseAndFlush();
+
+            if (showConsole)
+            {
+                FreeConsole();
+            }
         }
     }
 
     public static AppBuilder BuildAvaloniaApp()
         => AppBuilder.Configure<App>()
-            .UsePlatformDetect()
-            .LogToTrace();
+            .UsePlatformDetect();
 }

@@ -1,6 +1,6 @@
 [package]
 name = "hollow-launcher"
-version = "0.0.1"
+version = "0.0.5"
 edition = "2021"
 build = "build.rs"
 
@@ -10,7 +10,6 @@ path = "src/main.rs"
 windows_subsystem = "windows"
 
 [dependencies]
-clap = { version = "4.5.4", features = ["derive"] }
 
 [build-dependencies]
 winres = "0.1.12"

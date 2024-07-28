@@ -4,6 +4,9 @@ using Hollow.Abstractions.Models.HttpContrasts.Gacha.Common;
 
 namespace Hollow.Abstractions.Models.HttpContrasts.Gacha.Uigf;
 
+/// <summary>
+/// UIGF v4.0 Exported Gacha Records
+/// </summary>
 public class GachaRecords
 {
     [JsonPropertyName("info")]

@@ -9,6 +9,8 @@
         <TieredPGO>true</TieredPGO>
         <TieredCompilationQuickJitForLoops>true</TieredCompilationQuickJitForLoops>
         <ApplicationIcon>Assets\Icons\small_icon.ico</ApplicationIcon>
+        <Configurations>Debug;Release</Configurations>
+        <Platforms>AnyCPU</Platforms>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

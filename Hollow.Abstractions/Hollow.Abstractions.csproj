@@ -5,9 +5,10 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <DebugType>embedded</DebugType>
+        <Configurations>Debug;Release</Configurations>
+        <Platforms>AnyCPU</Platforms>
     </PropertyGroup>
     <ItemGroup>
-      <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.2646-prerelease" />
       <PackageReference Include="System.Text.Json" Version="8.0.4" />
     </ItemGroup>
 

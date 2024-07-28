@@ -1,7 +1,5 @@
 <a href="https://github.com/AuroraZiling/Hollow/blob/main/README-EN.md">Go to English version</a>
 
-
-<br />
 <div align="center">
 <h3 align="center">Hollow</h3>
   <p align="center">

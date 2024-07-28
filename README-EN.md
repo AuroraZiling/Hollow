@@ -1,7 +1,5 @@
 <a href="https://github.com/AuroraZiling/Hollow/blob/main/README.md">查看中文说明</a>
 
-
-<br />
 <div align="center">
 <h3 align="center">Hollow</h3>
   <p align="center">

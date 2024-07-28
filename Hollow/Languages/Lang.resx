@@ -348,4 +348,22 @@
     <data name="SignalSearch_Overview_Unluckiest" xml:space="preserve">
         <value>Unluckiest {0} pulls</value>
     </data>
+    <data name="GameSettings_Screen_Resolution" xml:space="preserve">
+        <value>Resolution:</value>
+    </data>
+    <data name="GameSettings_Screen_ResolutionWidth" xml:space="preserve">
+        <value>Width</value>
+    </data>
+    <data name="GameSettings_Screen_ResolutionHeight" xml:space="preserve">
+        <value>Height</value>
+    </data>
+    <data name="GameSettings_Screen_FullScreen" xml:space="preserve">
+        <value>Full Screen:</value>
+    </data>
+    <data name="GameSettings_Save" xml:space="preserve">
+        <value>Save</value>
+    </data>
+    <data name="GameSettings_Screen_Subtitle" xml:space="preserve">
+        <value>Screen</value>
+    </data>
 </root>

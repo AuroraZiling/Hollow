@@ -3,12 +3,94 @@
     x:Class="Hollow.Views.Pages.GameSettings"
     x:DataType="pages:GameSettingsViewModel"
     xmlns="https://github.com/avaloniaui"
+    xmlns:avalonia="clr-namespace:FluentIcons.Avalonia;assembly=FluentIcons.Avalonia"
+    xmlns:coverages="clr-namespace:Hollow.Views.Controls.Coverages"
     xmlns:languages="clr-namespace:Hollow.Languages"
     xmlns:pages="clr-namespace:Hollow.ViewModels.Pages"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:coverages="clr-namespace:Hollow.Views.Controls.Coverages">
-    <Panel>
-        <TextBlock Classes="PageTitle" Text="{I18N {x:Static languages:LangKeys.GameSettings_Title}}" />
-        <coverages:ProhibitedCoverage Margin="30,50,30,30" Text="{I18N {x:Static languages:LangKeys.Special_ProhibitedCoverage_NotImplemented}}" />
-    </Panel>
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid RowDefinitions="60, *, 60">
+        <TextBlock
+            Classes="PageTitle"
+            Grid.Row="0"
+            Text="{I18N {x:Static languages:LangKeys.GameSettings_Title}}" />
+
+        <StackPanel Grid.Row="1" Spacing="7">
+            <TextBlock Classes="PageSubtitle" Text="{I18N {x:Static languages:LangKeys.GameSettings_Screen_Subtitle}}" />
+            <StackPanel Orientation="Horizontal" Spacing="7">
+                <TextBlock Text="{I18N {x:Static languages:LangKeys.GameSettings_Screen_Resolution}}" VerticalAlignment="Center" />
+                <TextBox
+                    Name="ScreenResolutionWidthTextBox"
+                    Text="{Binding ScreenResolutionWidth, Mode=TwoWay}"
+                    Watermark="{I18N {x:Static languages:LangKeys.GameSettings_Screen_ResolutionWidth}}"
+                    Width="100">
+                    <Interaction.Behaviors>
+                        <EventTriggerBehavior EventName="TextChanged" SourceObject="ScreenResolutionWidthTextBox">
+                            <InvokeCommandAction Command="{Binding SettingsChangedCommand}" />
+                        </EventTriggerBehavior>
+                    </Interaction.Behaviors>
+                </TextBox>
+                <TextBlock
+                    Margin="0,0,0,3"
+                    Text="x"
+                    VerticalAlignment="Center" />
+                <TextBox
+                    Name="ScreenResolutionHeightTextBox"
+                    Text="{Binding ScreenResolutionHeight, Mode=TwoWay}"
+                    Watermark="{I18N {x:Static languages:LangKeys.GameSettings_Screen_ResolutionHeight}}"
+                    Width="100">
+                    <Interaction.Behaviors>
+                        <EventTriggerBehavior EventName="TextChanged" SourceObject="ScreenResolutionHeightTextBox">
+                            <InvokeCommandAction Command="{Binding SettingsChangedCommand}" />
+                        </EventTriggerBehavior>
+                    </Interaction.Behaviors>
+                </TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Spacing="7">
+                <TextBlock Text="{I18N {x:Static languages:LangKeys.GameSettings_Screen_FullScreen}}" VerticalAlignment="Center" />
+                <CheckBox
+                    Command="{Binding SettingsChangedCommand}"
+                    IsChecked="{Binding IsFullScreen, Mode=TwoWay}"
+                    Name="FullScreenCheckBox" />
+            </StackPanel>
+        </StackPanel>
+
+        <Border
+            Background="{StaticResource CoverageBackground}"
+            CornerRadius="25"
+            Grid.Row="2"
+            Margin="0,0,30,0"
+            Padding="13"
+            VerticalAlignment="Bottom">
+            <Button
+                Command="{Binding SaveSettingsCommand}"
+                CornerRadius="15"
+                Foreground="GreenYellow"
+                IsEnabled="{Binding IsSettingsChanged}"
+                Width="100">
+                <StackPanel
+                    HorizontalAlignment="Center"
+                    Orientation="Horizontal"
+                    Spacing="5">
+                    <avalonia:SymbolIcon FontSize="20" Symbol="CheckmarkCircle" />
+                    <TextBlock Text="{I18N {x:Static languages:LangKeys.GameSettings_Save}}" VerticalAlignment="Center" />
+                </StackPanel>
+                <Button.Transitions>
+                    <Transitions>
+                        <BrushTransition Duration="0:0:0.2" Property="Foreground" />
+                    </Transitions>
+                </Button.Transitions>
+                <Button.Styles>
+                    <Style Selector="Button:pointerover /template/ ContentPresenter">
+                        <Setter Property="Foreground" Value="LawnGreen" />
+                    </Style>
+                </Button.Styles>
+            </Button>
+        </Border>
+
+        <coverages:ProhibitedCoverage
+            Grid.Row="1"
+            Grid.RowSpan="2"
+            IsVisible="{Binding !IsGameDirectoryValid}"
+            Text="Game Directory not found" />
+    </Grid>
 </UserControl>

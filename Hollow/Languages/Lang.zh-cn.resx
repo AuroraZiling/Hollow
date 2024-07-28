@@ -348,4 +348,22 @@
     <data name="SignalSearch_Overview_Unluckiest" xml:space="preserve">
         <value>最非 {0} 抽</value>
     </data>
+    <data name="GameSettings_Screen_Resolution" xml:space="preserve">
+        <value>分辨率:</value>
+    </data>
+    <data name="GameSettings_Screen_ResolutionWidth" xml:space="preserve">
+        <value>宽</value>
+    </data>
+    <data name="GameSettings_Screen_ResolutionHeight" xml:space="preserve">
+        <value>高</value>
+    </data>
+    <data name="GameSettings_Screen_FullScreen" xml:space="preserve">
+        <value>全屏:</value>
+    </data>
+    <data name="GameSettings_Save" xml:space="preserve">
+        <value>保存</value>
+    </data>
+    <data name="GameSettings_Screen_Subtitle" xml:space="preserve">
+        <value>窗口</value>
+    </data>
 </root>

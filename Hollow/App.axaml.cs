@@ -11,6 +11,7 @@ using Hollow.Services.GameService;
 using Hollow.Services.MetadataService;
 using Hollow.Services.MiHoYoLauncherService;
 using Hollow.Services.NavigationService;
+using Hollow.Services.RegistryService;
 using Hollow.ViewModels;
 using Hollow.ViewModels.Pages;
 using Hollow.Views;
@@ -70,6 +71,7 @@ public class App : Application
         services.AddSingleton<IGameService, GameService>();
         services.AddSingleton<IGachaService, GachaService>();
         services.AddSingleton<IMetadataService, MetadataService>();
+        services.AddSingleton<IRegistryService, RegistryService>();
         
         customServicesFactory?.Invoke(services);
 

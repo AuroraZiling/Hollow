@@ -123,6 +123,60 @@ namespace Hollow.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Save.
+        /// </summary>
+        internal static string GameSettings_Save {
+            get {
+                return ResourceManager.GetString("GameSettings_Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Full Screen:.
+        /// </summary>
+        internal static string GameSettings_Screen_FullScreen {
+            get {
+                return ResourceManager.GetString("GameSettings_Screen_FullScreen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resolution:.
+        /// </summary>
+        internal static string GameSettings_Screen_Resolution {
+            get {
+                return ResourceManager.GetString("GameSettings_Screen_Resolution", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Height.
+        /// </summary>
+        internal static string GameSettings_Screen_ResolutionHeight {
+            get {
+                return ResourceManager.GetString("GameSettings_Screen_ResolutionHeight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Width.
+        /// </summary>
+        internal static string GameSettings_Screen_ResolutionWidth {
+            get {
+                return ResourceManager.GetString("GameSettings_Screen_ResolutionWidth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Screen.
+        /// </summary>
+        internal static string GameSettings_Screen_Subtitle {
+            get {
+                return ResourceManager.GetString("GameSettings_Screen_Subtitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Game Settings.
         /// </summary>
         internal static string GameSettings_Title {

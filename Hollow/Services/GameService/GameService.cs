@@ -65,12 +65,12 @@ public class GameService(IConfigurationService configurationService): IGameServi
             var process = new Process { StartInfo = { Arguments = gameArguments, UseShellExecute = true, FileName = gameExe, CreateNoWindow = true, Verb = "runas" } };
             process.Start();
             
-            Log.Information("[GameService] Game started");
+            Log.Information($"[GameService] Game started (Arguments: {gameArguments})");
             return true;
         }
-        catch(Win32Exception)
+        catch(Win32Exception e)
         {
-            Log.Error("[GameService] Game start failed");
+            Log.Error(e, "[GameService] Game start failed");
             return false;
         }
     }

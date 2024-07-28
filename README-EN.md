@@ -1,18 +1,18 @@
-<a href="https://github.com/AuroraZiling/Hollow/blob/main/README-EN.md">Go to English version</a>
+<a href="https://github.com/AuroraZiling/Hollow/blob/main/README.md">查看中文说明</a>
 
 
 <br />
 <div align="center">
 <h3 align="center">Hollow</h3>
   <p align="center">
-    《绝区零》工具箱
+    Zenless Zone Zero Toolbox
     <br />
     <br />
-    <a href="https://github.com/AuroraZiling/Hollow?tab=readme-ov-file#screenshots">截图</a>
+    <a href="https://github.com/AuroraZiling/Hollow?tab=readme-ov-file#screenshots">Screenshots</a>
     ·
-    <a href="https://github.com/AuroraZiling/Hollow/issues">Bug 报告</a>
+    <a href="https://github.com/AuroraZiling/Hollow/issues">Bug Report</a>
     ·
-    <a href="https://github.com/AuroraZiling/Hollow/pulls">新功能请求</a>
+    <a href="https://github.com/AuroraZiling/Hollow/pulls">Feature Request</a>
   </p>
 </div>
 
@@ -27,66 +27,66 @@
 
 ---
 
-该项目处于早期开发阶段，存在大量Bug
+Especially for the early development stage, there are a lot of bugs
 
 ---
 
-## 有关 Hollow
+## About Hollow
 
-Hollow 是一个实用的《绝区零》工具箱
+Hollow is a Zenless Zone Zero toolbox
 
-### 计划
-- [x] 启动
-  - [ ] 版本检测 *需要获取最新版本并比较*
-- [ ] 成就
-- [ ] 游戏设置
-- [x] 公告
-- [x] 调频记录
-  - [x] 多账号支持
-  - [x] UIGF 导入
-  - [x] UIGF 导出
-  - [x] 分析
-  - [x] 国际服支持
-- [ ] 情报站
-  - [ ] 代理人
-  - [ ] 邦布
-  - [ ] 音擎
-  - [ ] 驱动盘
-- [ ] 设置
-  - [x] 多语言支持
-  - [x] 启动参数
-  - [x] 存储管理
-  - [ ] 更新
+### Roadmap
+- [x] Game Launch
+  - [ ] Version check *need to get the latest version and compare*
+- [ ] Achievements
+- [ ] Game settings
+- [x] Announcements
+- [x] Signal search
+  - [x] Multi-UID support
+  - [x] UIGF Import
+  - [x] UIGF Export
+  - [x] Analysis
+  - [x] Global server support
+- [ ] Wiki
+  - [ ] Characters
+  - [ ] Bangboo
+  - [ ] Weapon
+  - [ ] Equipment
+- [ ] Settings
+  - [x] I18N
+  - [x] Launch Arguments
+  - [x] Storage Management
+  - [ ] Update
 
-## 截图
+## Screenshots
 
 ![](https://i.ibb.co/jg6fRSx/hollow-home.webp)
 
 ![](https://i.ibb.co/F6NQSmv/hollow-gacha.webp)
 
-## 开始使用
+## Setup
 
-- 在 [Github Release](https://github.com/AuroraZiling/Hollow/releases) 下载最新版本
-  - 如果你没有安装 [.Net 8 桌面运行时](https://dotnet.microsoft.com/download/dotnet/8.0)，请下载 `withRuntime.zip`
-  - 否则，下载 `withoutRuntime.zip` (推荐)
+- Download latest version at [Github Release](https://github.com/AuroraZiling/Hollow/releases)
+  - If you don't have [.Net 8 Desktop Runtime](https://dotnet.microsoft.com/download/dotnet/8.0) installed, download `withRuntime.zip`
+  - Otherwise, download `withoutRuntime.zip` (Recommended)
 
-- 解压缩后运行 `Hollow.exe`
+- Decompress and click to run `Hollow.exe`
 
-## 更多信息
+## More Information
 
-### 技术栈
+### Tech Stacks
 [![.NET Core][.NET Core]][.NET-url][![Avalonia][Avalonia]][Avalonia-url]
 
-### 相关组织
+### Related Organizations
 - [UIGF](https://uigf.org/)
 
-### 参考项目
+### Reference Projects
 - [Scighost/Starward](https://github.com/Scighost/Starward)
 - [kikipoulet/SukiUI](https://github.com/kikipoulet/SukiUI)
 
-### 许可证
+### License
 
-该项目使用 MIT 许可证。查看 `LICENSE` 了解更多信息。
+This project is licensed under the MIT License. See the `LICENSE` file for more information.
 
 [github-downloads-shield]: https://img.shields.io/github/downloads/AuroraZiling/Hollow/total.svg?style=for-the-badge&color=blue
 [github-downloads-url]: https://github.com/AuroraZiling/Hollow/releases

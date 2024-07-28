@@ -7,6 +7,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionFolder", "SolutionFolder", "{7F12BC30-0491-4531-823E-11B7A4A4ABD5}"
 	ProjectSection(SolutionItems) = preProject
 		README.md = README.md
+		README-EN.md = README-EN.md
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hollow.Windows", "Hollow.Windows\Hollow.Windows.csproj", "{B83D0035-224D-475B-9058-1AA3769B808D}"

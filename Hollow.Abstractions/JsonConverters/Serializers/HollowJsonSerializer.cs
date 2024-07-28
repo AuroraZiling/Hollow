@@ -1,7 +1,7 @@
 ﻿using System.Text.Encodings.Web;
 using System.Text.Json;
 
-namespace Hollow.Helpers;
+namespace Hollow.Abstractions.JsonConverters.Serializers;
 
 public class HollowJsonSerializer
 {

@@ -13,7 +13,7 @@ namespace Hollow.Helpers;
 
 
 //TODO: Platform specific
-public static class StorageHelper
+public static class PlatformHelper
 {
     public static async Task<string> OpenFolderPickerForPath()
     {
@@ -59,6 +59,15 @@ public static class StorageHelper
         }catch (IOException e)
         {
             Log.Error(e, "Failed to clear cache file");
+        }
+    }
+    
+    public static void OpenUrl(string url)
+    {
+        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+        {
+            url = url.Replace("&", "^&");
+            Process.Start(new ProcessStartInfo("cmd", $"/c start {url}") { CreateNoWindow = true });
         }
     }
 }

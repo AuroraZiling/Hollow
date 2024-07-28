@@ -1,5 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 using Hollow.Abstractions.JsonConverters;
+using Hollow.Abstractions.JsonConverters.Converters;
 using Hollow.Abstractions.Models.HttpContrasts.Gacha.Common;
 
 namespace Hollow.Abstractions.Models.HttpContrasts.Gacha.Uigf;

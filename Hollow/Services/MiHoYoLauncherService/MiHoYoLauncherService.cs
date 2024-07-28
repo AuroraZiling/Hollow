@@ -1,12 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Hollow.Abstractions.Models.HttpContrasts.MiHoYoLauncher;
 using Hollow.Abstractions.Models.MiHoYoLauncher;
-using Hollow.Models.Pages.Announcement;
-using HtmlHelper = Hollow.Helpers.HtmlHelper;
 
 namespace Hollow.Services.MiHoYoLauncherService;
 
@@ -40,59 +36,5 @@ public class MiHoYoLauncherService(HttpClient httpClient) : IMiHoYoLauncherServi
     {
         var response = await httpClient.GetStringAsync(GameContentUrl);
         return JsonSerializer.Deserialize<ZzzGameContent>(response);
-    }
-    
-    //TODO: UID
-    private const string AnnouncementUrl = "https://announcement-api.mihoyo.com/common/nap_cn/announcement/api/getAnnList?game=nap&game_biz=nap_cn&lang=zh-cn&bundle_id=nap_cn&channel_id=1&platform=pc&region=prod_gf_cn&uid=10000000";
-    private const string AnnouncementContentUrl = "https://announcement-static.mihoyo.com/common/nap_cn/announcement/api/getAnnContent?game=nap&game_biz=nap_cn&lang=zh-cn&bundle_id=nap_cn&platform=pc&region=prod_gf_cn&level=60&uid=10000000";
-
-    public async Task<Dictionary<int, List<AnnouncementModel>>?> GetAnnouncement()
-    {
-        var announcement = JsonSerializer.Deserialize<ZzzAnnouncement>(await httpClient.GetStringAsync(AnnouncementUrl));
-        var announcementContent = JsonSerializer.Deserialize<ZzzAnnouncementContent>(await httpClient.GetStringAsync(AnnouncementContentUrl));
-        
-        if (announcement is null || announcementContent is null)
-        {
-            return null;
-        }
-
-        var announcementResult = new Dictionary<int, List<AnnouncementModel>>
-        {
-            { 3, [] },
-            { 4, [] }
-        };
-        
-        var announcementContentPair = announcementContent.Data.List.ToDictionary(
-            item => item.Id,
-            item => item.Content
-        );
-        var announcementList = announcement.Data.List;
-
-        foreach (var announcementListInType in announcementList)
-        {
-            if(announcementListInType.TypeId != 3 && announcementListInType.TypeId != 4)
-            {
-                continue;
-            }
-            foreach (var announcementItem in announcementListInType.AnnouncementList)
-            {
-                announcementResult[announcementListInType.TypeId].Add(new AnnouncementModel
-                {
-                    Id = announcementItem.Id,
-                    Title = HtmlHelper.RemoveP(announcementItem.Title),
-                    Subtitle = HtmlHelper.RemoveBr(announcementItem.Subtitle),
-                    BannerUrl = announcementItem.BannerUrl,
-                    Content = HtmlHelper.GetHtml(announcementContentPair[announcementItem.Id]),
-                    TagLabel = announcementItem.TagLabel,
-                    TagIconUrl = announcementItem.TagIconUrl,
-                    TagIconHoverUrl = announcementItem.TagIconHoverUrl,
-                    StartTime = announcementItem.StartTime,
-                    EndTime = announcementItem.EndTime,
-                    HasContent = announcementItem.HasContent
-                });
-            }
-        }
-
-        return announcementResult;
     }
 }

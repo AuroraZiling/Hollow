@@ -4,6 +4,7 @@ using System.IO;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Hollow.Abstractions.JsonConverters.Serializers;
 using Hollow.Abstractions.Models;
 using Hollow.Abstractions.Models.HttpContrasts;
 using Hollow.Abstractions.Models.HttpContrasts.Hakush;

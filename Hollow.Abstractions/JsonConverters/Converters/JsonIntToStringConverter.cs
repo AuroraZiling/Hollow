@@ -1,7 +1,7 @@
 ﻿using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Hollow.Abstractions.JsonConverters;
+namespace Hollow.Abstractions.JsonConverters.Converters;
 
 public class JsonIntToStringConverter: JsonConverter<string>
 {

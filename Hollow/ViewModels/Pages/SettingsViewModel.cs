@@ -36,7 +36,7 @@ public partial class SettingsViewModel : ViewModelBase, IViewModelBase
     {
         if (_navigationService.CurrentViewName == nameof(Settings))
         {
-            CacheSize = StorageHelper.GetCacheFolderMegabytes();
+            CacheSize = PlatformHelper.GetCacheFolderMegabytes();
         }
     }
     public SettingsViewModel(IConfigurationService configurationService, INavigationService navigationService, IGameService gameService, IMetadataService metadataService)
@@ -79,7 +79,7 @@ public partial class SettingsViewModel : ViewModelBase, IViewModelBase
     [RelayCommand]
     private async Task BrowseGameDirectory()
     {
-        var directory = await StorageHelper.OpenFolderPickerForPath();
+        var directory = await PlatformHelper.OpenFolderPickerForPath();
         CheckGameDirectory(directory);
     }
 
@@ -111,7 +111,7 @@ public partial class SettingsViewModel : ViewModelBase, IViewModelBase
     {
         if (!string.IsNullOrWhiteSpace(GameDirectory) && RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
         {
-            StorageHelper.OpenFolderInExplorer(GameDirectory);
+            PlatformHelper.OpenFolderInExplorer(GameDirectory);
         }
     }
 
@@ -184,7 +184,7 @@ public partial class SettingsViewModel : ViewModelBase, IViewModelBase
     {
         if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
         {
-            StorageHelper.OpenFolderInExplorer(Environment.CurrentDirectory);
+            PlatformHelper.OpenFolderInExplorer(Environment.CurrentDirectory);
         }
     }
     
@@ -193,9 +193,9 @@ public partial class SettingsViewModel : ViewModelBase, IViewModelBase
     [RelayCommand]
     private void ClearCache()
     {
-        StorageHelper.ClearCacheFolder();
+        PlatformHelper.ClearCacheFolder();
         HollowHost.ShowToast(Lang.Toast_CacheCleared_Title, "", NotificationType.Success);
-        CacheSize = StorageHelper.GetCacheFolderMegabytes();
+        CacheSize = PlatformHelper.GetCacheFolderMegabytes();
     }
 
     #endregion

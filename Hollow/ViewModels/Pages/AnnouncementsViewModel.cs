@@ -99,12 +99,11 @@ public partial class AnnouncementsViewModel
 
     public void GameAnnouncementWebView_OnNavigationStarting(object? sender, WebViewNavigationStartingEventArgs e)
     {
-        if (e.Request!.ToString().StartsWith("inner:"))
-        {
-            HtmlHelper.OpenUrl(e.Request!.ToString()[6..]);
-            e.Cancel = true;
-            Log.Information("[Announcements] Open inner URL: {Url}", e.Request!.ToString()[6..]);
-        }
+        if (!e.Request!.ToString().StartsWith("inner:")) return;
+        
+        PlatformHelper.OpenUrl(e.Request!.ToString()[6..]);
+        e.Cancel = true;
+        Log.Information("[Announcements] Open inner URL: {Url}", e.Request!.ToString()[6..]);
     }
 
     public async void GameAnnouncementWebView_OnDomContentLoaded(object? sender, WebViewDomContentLoadedEventArgs e)

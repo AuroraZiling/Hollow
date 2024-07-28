@@ -10,6 +10,4 @@ public interface IMiHoYoLauncherService
     public Task<ZzzGameInfo?> GetGameInfo();
     public Task<ZzzAllGameBasicInfo?> GetAllGameBasicInfo();
     public Task<ZzzGameContent?> GetGameContent();
-    public Task<Dictionary<int, List<AnnouncementModel>>?> GetAnnouncement();
-
 }

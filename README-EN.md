@@ -70,6 +70,10 @@ Hollow is a Zenless Zone Zero toolbox
 
 - Decompress and click to run `Hollow.exe`
 
+### Arguments
+
+- `--console` Show console
+
 ## More Information
 
 ### Tech Stacks

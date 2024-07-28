@@ -10,11 +10,14 @@ namespace Hollow.Windows;
 
 public static class Program
 {
-    [DllImport("kernel32.dll")]
-    public static extern bool AllocConsole();
     
+#if WINDOWS
     [DllImport("kernel32.dll")]
-    public static extern bool FreeConsole();
+    private static extern bool AllocConsole();
+
+    [DllImport("kernel32.dll")]
+    private static extern bool FreeConsole();
+#endif
     
     
     [STAThread]

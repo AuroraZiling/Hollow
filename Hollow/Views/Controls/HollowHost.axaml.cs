@@ -85,16 +85,6 @@ public class HollowHost : ContentControl
 
 
     // Toasts
-    public static readonly AttachedProperty<ToastLocation> ToastLocationProperty =
-        AvaloniaProperty.RegisterAttached<HollowHost, Window, ToastLocation>("ToastLocation",
-            defaultValue: ToastLocation.BottomRight);
-
-    public static void SetToastLocation(Control element, ToastLocation value) =>
-        element.SetValue(ToastLocationProperty, value);
-
-    public static ToastLocation GetToastLocation(Control element) =>
-        element.GetValue(ToastLocationProperty);
-
     public static readonly AttachedProperty<int> ToastLimitProperty =
         AvaloniaProperty.RegisterAttached<HollowHost, Window, int>("ToastLimit", defaultValue: 5);
 
@@ -133,17 +123,11 @@ public class HollowHost : ContentControl
             throw new InvalidOperationException("HollowHost must be hosted inside a Window");
         ToastsCollection ??= [];
         _maxToasts = GetToastLimit(window);
-        var toastLocation = GetToastLocation(window);
         
         e.NameScope.Get<Border>("PART_DialogBackground").PointerPressed += (_, _) => BackgroundRequestClose(this);
         
         var b = e.NameScope.Get<Border>("PART_DialogBackground");
         b.Loaded += (_, _) => ControlAnimationHelper.MakeOpacityAnimate(ElementComposition.GetElementVisual(b)!, 400); 
-        
-        e.NameScope.Get<ItemsControl>("PART_ToastPresenter").HorizontalAlignment =
-            toastLocation == ToastLocation.BottomLeft
-                ? HorizontalAlignment.Left
-                : HorizontalAlignment.Right;
     }
     
     public static async Task ShowToast(Window window, ToastModel model)
@@ -197,7 +181,7 @@ public class HollowHost : ContentControl
             Dispatcher.UIThread.Invoke(() =>
             {
                 toast.Animate(OpacityProperty, 1d, 0d, TimeSpan.FromMilliseconds(300));
-                toast.Animate(MarginProperty, new Thickness(), new Thickness(0, 50, 0, -50),
+                toast.Animate(MarginProperty, new Thickness(), new Thickness(0, 20, 0, -20),
                     TimeSpan.FromMilliseconds(300));
             });
             await Task.Delay(300);

@@ -15,16 +15,19 @@
     <ControlTheme TargetType="toast:Toast" x:Key="ToastTheme">
         <Setter Property="Template">
             <ControlTemplate>
-                <Panel>
+                <Panel MaxWidth="320">
                     <Border
                         CornerRadius="15"
-                        Margin="40,5,30,7"
+                        Margin="40,0,10,10"
                         Name="PART_ToastCard"
-                        Padding="0"
-                        Width="320">
-                        <Border ClipToBounds="True" CornerRadius="15">
-                            <Panel Background="{TemplateBinding Foreground}">
-                                <Panel Background="{StaticResource CoverageBackground}" />
+                        Padding="0">
+                        <Border
+                            Background="{StaticResource ZzzGrayColor}"
+                            BorderBrush="{TemplateBinding Foreground}"
+                            BorderThickness="2"
+                            ClipToBounds="True"
+                            CornerRadius="15">
+                            <Panel>
                                 <Panel Margin="20,12">
                                     <DockPanel LastChildFill="True">
                                         <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
@@ -61,7 +64,7 @@
                         CornerRadius="25"
                         Height="35"
                         HorizontalAlignment="Left"
-                        Margin="22,0,0,0"
+                        Margin="22,0,0,10"
                         VerticalAlignment="Center"
                         Width="35">
                         <Border ClipToBounds="True" CornerRadius="35">

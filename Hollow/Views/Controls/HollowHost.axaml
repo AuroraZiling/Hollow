@@ -1,7 +1,7 @@
 <ResourceDictionary
     xmlns="https://github.com/avaloniaui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:controls="clr-namespace:Hollow.Views.Controls">
+    xmlns:controls="clr-namespace:Hollow.Views.Controls"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <ControlTheme TargetType="controls:HollowHost" x:Key="HollowHostTheme">
         <Setter Property="Template">
             <ControlTemplate>
@@ -11,9 +11,9 @@
                     </Panel>
 
                     <ItemsControl
-                        HorizontalAlignment="Stretch"
+                        HorizontalAlignment="Right"
                         ItemsSource="{TemplateBinding ToastsCollection}"
-                        Margin="5,5"
+                        Margin="0,0,25,10"
                         Name="PART_ToastPresenter"
                         VerticalAlignment="Bottom">
                         <ItemsControl.ItemsPanel>

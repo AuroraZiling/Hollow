@@ -342,4 +342,10 @@
     <data name="Toast_CacheFailed_Title" xml:space="preserve">
         <value>Failed to clear cache</value>
     </data>
+    <data name="SignalSearch_Overview_Luckiest" xml:space="preserve">
+        <value>Luckiest {0} pulls</value>
+    </data>
+    <data name="SignalSearch_Overview_Unluckiest" xml:space="preserve">
+        <value>Unluckiest {0} pulls</value>
+    </data>
 </root>

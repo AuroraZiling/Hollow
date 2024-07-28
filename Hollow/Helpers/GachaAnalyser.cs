@@ -124,6 +124,14 @@ public static class GachaAnalyser
 
         overviewCardGachaItems = new ObservableCollection<OverviewCardGachaItem>(overviewCardGachaItems.Reverse());
         
+        var unluckiestPulls = 0;
+        var luckiestPulls = 0;
+        if (overviewCardGachaItems.Count > 0)
+        {
+            unluckiestPulls = overviewCardGachaItems.Max(item => item.PollsUsed);
+            luckiestPulls = overviewCardGachaItems.Min(item => item.PollsUsed);
+        }
+        
         // Calculate 10 pulls
         for (var gachaItemIndex = total - 1; gachaItemIndex >= 9; gachaItemIndex--)
         {
@@ -140,7 +148,7 @@ public static class GachaAnalyser
         var totalAverage = Math.Round(total / (double)totalS, 2);
         if (totalS == 0)
         {
-            totalAverage = double.NaN;
+            totalAverage = 0;
         }
         
         var sPercentage = Math.Round(totalS / (double)total * 100, 2);
@@ -169,13 +177,15 @@ public static class GachaAnalyser
                 APercentage = aPercentage,
                 TotalB = totalB,
                 BPercentage = bPercentage,
-                TimeRange = timeRange
+                TimeRange = timeRange,
+                UnluckiestPulls = unluckiestPulls,
+                LuckiestPulls = luckiestPulls
             },
             OverviewCardGachaItems = overviewCardGachaItems,
             Items = analyzedCommonGachaRecordItems
         };
     }
 
-    public static long GetTimestamp(string time)
+    private static long GetTimestamp(string time)
         => (DateTime.Parse(time).ToUniversalTime().Ticks - 621355968000000000) / 10000000;
 }

@@ -7,7 +7,7 @@
     Height="700"
     Icon="avares://Hollow/Assets/Icons/small_icon.png"
     Title="Hollow"
-    Width="1200"
+    Width="1350"
     mc:Ignorable="d"
     x:Class="Hollow.Views.MainWindow"
     x:DataType="vm:MainWindowViewModel"
@@ -37,20 +37,8 @@
                 Blur="20"
                 HorizontalAlignment="Left"
                 Opacity="{Binding NavigationOpacity}"
-                Width="70">
-                <acrylic:Acrylic.Transitions>
-                    <Transitions>
-                        <IntegerTransition Duration="0:0:0.125" Property="Blur" />
-                    </Transitions>
-                </acrylic:Acrylic.Transitions>
-            </acrylic:Acrylic>
-            <acrylic:Acrylic Blur="{Binding Blur}" Opacity="{Binding CoverageOpacity}">
-                <acrylic:Acrylic.Transitions>
-                    <Transitions>
-                        <IntegerTransition Duration="0:0:0.2" Property="Blur" />
-                    </Transitions>
-                </acrylic:Acrylic.Transitions>
-            </acrylic:Acrylic>
+                Width="70" />
+            <acrylic:Acrylic Blur="{Binding Blur}" Opacity="{Binding CoverageOpacity}" />
 
             <TabControl
                 Name="NavigationTabControl"

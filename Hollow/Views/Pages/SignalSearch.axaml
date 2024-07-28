@@ -115,12 +115,14 @@
                         BSingalsPercentage="{Binding SelectedAnalyzedGachaRecords.StandardGachaRecords.BasicInfo.BPercentage}"
                         Grid.Column="0"
                         Header="{I18N {x:Static languages:LangKeys.SignalSearch_StandardChannel}}"
+                        LuckiestPulls="{Binding SelectedAnalyzedGachaRecords.StandardGachaRecords.BasicInfo.LuckiestPulls}"
                         ProgressBars="{Binding SelectedAnalyzedGachaRecords.StandardGachaRecords.OverviewCardGachaItems}"
                         SAverage="{Binding SelectedAnalyzedGachaRecords.StandardGachaRecords.BasicInfo.TotalAverage}"
                         SSingals="{Binding SelectedAnalyzedGachaRecords.StandardGachaRecords.BasicInfo.TotalS}"
                         SSingalsPercentage="{Binding SelectedAnalyzedGachaRecords.StandardGachaRecords.BasicInfo.SPercentage}"
                         TimeRange="{Binding SelectedAnalyzedGachaRecords.StandardGachaRecords.BasicInfo.TimeRange}"
-                        Total="{Binding SelectedAnalyzedGachaRecords.StandardGachaRecords.BasicInfo.Total, UpdateSourceTrigger=PropertyChanged}" />
+                        Total="{Binding SelectedAnalyzedGachaRecords.StandardGachaRecords.BasicInfo.Total, UpdateSourceTrigger=PropertyChanged}"
+                        UnluckiestPulls="{Binding SelectedAnalyzedGachaRecords.StandardGachaRecords.BasicInfo.UnluckiestPulls}" />
                     <signalSearch:SignalSearchOverviewCard
                         ASingals="{Binding SelectedAnalyzedGachaRecords.ExclusiveGachaRecords.BasicInfo.TotalA}"
                         ASingalsPercentage="{Binding SelectedAnalyzedGachaRecords.ExclusiveGachaRecords.BasicInfo.APercentage}"
@@ -128,12 +130,14 @@
                         BSingalsPercentage="{Binding SelectedAnalyzedGachaRecords.ExclusiveGachaRecords.BasicInfo.BPercentage}"
                         Grid.Column="1"
                         Header="{I18N {x:Static languages:LangKeys.SignalSearch_ExclusiveChannel}}"
+                        LuckiestPulls="{Binding SelectedAnalyzedGachaRecords.ExclusiveGachaRecords.BasicInfo.LuckiestPulls}"
                         ProgressBars="{Binding SelectedAnalyzedGachaRecords.ExclusiveGachaRecords.OverviewCardGachaItems}"
                         SAverage="{Binding SelectedAnalyzedGachaRecords.ExclusiveGachaRecords.BasicInfo.TotalAverage}"
                         SSingals="{Binding SelectedAnalyzedGachaRecords.ExclusiveGachaRecords.BasicInfo.TotalS}"
                         SSingalsPercentage="{Binding SelectedAnalyzedGachaRecords.ExclusiveGachaRecords.BasicInfo.SPercentage}"
                         TimeRange="{Binding SelectedAnalyzedGachaRecords.ExclusiveGachaRecords.BasicInfo.TimeRange}"
-                        Total="{Binding SelectedAnalyzedGachaRecords.ExclusiveGachaRecords.BasicInfo.Total}" />
+                        Total="{Binding SelectedAnalyzedGachaRecords.ExclusiveGachaRecords.BasicInfo.Total}"
+                        UnluckiestPulls="{Binding SelectedAnalyzedGachaRecords.ExclusiveGachaRecords.BasicInfo.UnluckiestPulls}" />
                     <signalSearch:SignalSearchOverviewCard
                         ASingals="{Binding SelectedAnalyzedGachaRecords.WEngineGachaRecords.BasicInfo.TotalA}"
                         ASingalsPercentage="{Binding SelectedAnalyzedGachaRecords.WEngineGachaRecords.BasicInfo.APercentage}"
@@ -141,12 +145,14 @@
                         BSingalsPercentage="{Binding SelectedAnalyzedGachaRecords.WEngineGachaRecords.BasicInfo.BPercentage}"
                         Grid.Column="2"
                         Header="{I18N {x:Static languages:LangKeys.SignalSearch_WEngineChannel}}"
+                        LuckiestPulls="{Binding SelectedAnalyzedGachaRecords.WEngineGachaRecords.BasicInfo.LuckiestPulls}"
                         ProgressBars="{Binding SelectedAnalyzedGachaRecords.WEngineGachaRecords.OverviewCardGachaItems}"
                         SAverage="{Binding SelectedAnalyzedGachaRecords.WEngineGachaRecords.BasicInfo.TotalAverage}"
                         SSingals="{Binding SelectedAnalyzedGachaRecords.WEngineGachaRecords.BasicInfo.TotalS}"
                         SSingalsPercentage="{Binding SelectedAnalyzedGachaRecords.WEngineGachaRecords.BasicInfo.SPercentage}"
                         TimeRange="{Binding SelectedAnalyzedGachaRecords.WEngineGachaRecords.BasicInfo.TimeRange}"
-                        Total="{Binding SelectedAnalyzedGachaRecords.WEngineGachaRecords.BasicInfo.Total}" />
+                        Total="{Binding SelectedAnalyzedGachaRecords.WEngineGachaRecords.BasicInfo.Total}"
+                        UnluckiestPulls="{Binding SelectedAnalyzedGachaRecords.WEngineGachaRecords.BasicInfo.UnluckiestPulls}" />
                     <signalSearch:SignalSearchOverviewCard
                         ASingals="{Binding SelectedAnalyzedGachaRecords.BangbooGachaRecords.BasicInfo.TotalA}"
                         ASingalsPercentage="{Binding SelectedAnalyzedGachaRecords.BangbooGachaRecords.BasicInfo.APercentage}"
@@ -154,12 +160,14 @@
                         BSingalsPercentage="{Binding SelectedAnalyzedGachaRecords.BangbooGachaRecords.BasicInfo.BPercentage}"
                         Grid.Column="3"
                         Header="{I18N {x:Static languages:LangKeys.SignalSearch_BangbooChannel}}"
+                        LuckiestPulls="{Binding SelectedAnalyzedGachaRecords.BangbooGachaRecords.BasicInfo.LuckiestPulls}"
                         ProgressBars="{Binding SelectedAnalyzedGachaRecords.BangbooGachaRecords.OverviewCardGachaItems}"
                         SAverage="{Binding SelectedAnalyzedGachaRecords.BangbooGachaRecords.BasicInfo.TotalAverage}"
                         SSingals="{Binding SelectedAnalyzedGachaRecords.BangbooGachaRecords.BasicInfo.TotalS}"
                         SSingalsPercentage="{Binding SelectedAnalyzedGachaRecords.BangbooGachaRecords.BasicInfo.SPercentage}"
                         TimeRange="{Binding SelectedAnalyzedGachaRecords.BangbooGachaRecords.BasicInfo.TimeRange}"
-                        Total="{Binding SelectedAnalyzedGachaRecords.BangbooGachaRecords.BasicInfo.Total}" />
+                        Total="{Binding SelectedAnalyzedGachaRecords.BangbooGachaRecords.BasicInfo.Total}"
+                        UnluckiestPulls="{Binding SelectedAnalyzedGachaRecords.BangbooGachaRecords.BasicInfo.UnluckiestPulls}" />
                 </Grid>
             </TabItem>
 

@@ -27,6 +27,9 @@ public class AnalyzedCommonBasicGachaRecord
     public double BPercentage { get; set; }
     
     public required string TimeRange { get; set; }
+    
+    public int UnluckiestPulls { get; set; }
+    public int LuckiestPulls { get; set; }
 }
 
 public class AnalyzedCommonGachaRecordItem

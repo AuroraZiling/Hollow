@@ -654,11 +654,29 @@ namespace Hollow.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Luckiest {0} pulls.
+        /// </summary>
+        internal static string SignalSearch_Overview_Luckiest {
+            get {
+                return ResourceManager.GetString("SignalSearch_Overview_Luckiest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Overview.
         /// </summary>
         internal static string SignalSearch_Overview_Title {
             get {
                 return ResourceManager.GetString("SignalSearch_Overview_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unluckiest {0} pulls.
+        /// </summary>
+        internal static string SignalSearch_Overview_Unluckiest {
+            get {
+                return ResourceManager.GetString("SignalSearch_Overview_Unluckiest", resourceCulture);
             }
         }
         

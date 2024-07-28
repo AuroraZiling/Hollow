@@ -32,7 +32,7 @@
         <HyperlinkButton
             Classes="PointerOverProhibited"
             HorizontalAlignment="Left"
-            Margin="30,270,0,0"
+            Margin="60,270,0,0"
             NavigateUri="{Binding VersionNewsUrl}"
             Padding="0"
             VerticalAlignment="Top"
@@ -43,7 +43,7 @@
         <!--  Start Game  -->
         <StackPanel
             HorizontalAlignment="Right"
-            Margin="0,0,30,50"
+            Margin="0,0,30,30"
             VerticalAlignment="Bottom">
 
             <home:StartGameNoticeButton
@@ -65,7 +65,7 @@
             CornerRadius="10"
             Height="320"
             HorizontalAlignment="Left"
-            Margin="30,0,0,50"
+            Margin="60,0,0,30"
             VerticalAlignment="Bottom"
             Width="400">
             <Border.Background>

@@ -38,5 +38,5 @@
 
     <Color x:Key="SignalSearchSColor">Orange</Color>
     <Color x:Key="SignalSearchAColor">MediumPurple</Color>
-    <Color x:Key="SignalSearchBColor">RoyalBlue</Color>
+    <Color x:Key="SignalSearchBColor">CornflowerBlue</Color>
 </ResourceDictionary>

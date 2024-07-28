@@ -97,6 +97,24 @@ public class SignalSearchOverviewCard : UserControl
         set => SetValue(BSingalsPercentageProperty, value);
     }
     
+    public static readonly StyledProperty<int> LuckiestPullsProperty =
+        AvaloniaProperty.Register<SignalSearchOverviewCard, int>(nameof(LuckiestPulls));
+
+    public int LuckiestPulls
+    {
+        get => GetValue(LuckiestPullsProperty);
+        set => SetValue(LuckiestPullsProperty, value);
+    }
+    
+    public static readonly StyledProperty<int> UnluckiestPullsProperty =
+        AvaloniaProperty.Register<SignalSearchOverviewCard, int>(nameof(UnluckiestPulls));
+
+    public int UnluckiestPulls
+    {
+        get => GetValue(UnluckiestPullsProperty);
+        set => SetValue(UnluckiestPullsProperty, value);
+    }
+    
     public static readonly StyledProperty<ObservableCollection<OverviewCardGachaItem>> ProgressBarsProperty =
         AvaloniaProperty.Register<SignalSearchOverviewCard, ObservableCollection<OverviewCardGachaItem>>(nameof(ProgressBars));
 

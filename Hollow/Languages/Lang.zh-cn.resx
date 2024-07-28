@@ -342,4 +342,10 @@
     <data name="Toast_CacheFailed_Title" xml:space="preserve">
         <value>缓存清除失败</value>
     </data>
+    <data name="SignalSearch_Overview_Luckiest" xml:space="preserve">
+        <value>最欧 {0} 抽</value>
+    </data>
+    <data name="SignalSearch_Overview_Unluckiest" xml:space="preserve">
+        <value>最非 {0} 抽</value>
+    </data>
 </root>

@@ -22,13 +22,7 @@
                     Name="ScreenResolutionWidthTextBox"
                     Text="{Binding ScreenResolutionWidth, Mode=TwoWay}"
                     Watermark="{I18N {x:Static languages:LangKeys.GameSettings_Screen_ResolutionWidth}}"
-                    Width="100">
-                    <Interaction.Behaviors>
-                        <EventTriggerBehavior EventName="TextChanged" SourceObject="ScreenResolutionWidthTextBox">
-                            <InvokeCommandAction Command="{Binding SettingsChangedCommand}" />
-                        </EventTriggerBehavior>
-                    </Interaction.Behaviors>
-                </TextBox>
+                    Width="100" />
                 <TextBlock
                     Margin="0,0,0,3"
                     Text="x"
@@ -37,20 +31,11 @@
                     Name="ScreenResolutionHeightTextBox"
                     Text="{Binding ScreenResolutionHeight, Mode=TwoWay}"
                     Watermark="{I18N {x:Static languages:LangKeys.GameSettings_Screen_ResolutionHeight}}"
-                    Width="100">
-                    <Interaction.Behaviors>
-                        <EventTriggerBehavior EventName="TextChanged" SourceObject="ScreenResolutionHeightTextBox">
-                            <InvokeCommandAction Command="{Binding SettingsChangedCommand}" />
-                        </EventTriggerBehavior>
-                    </Interaction.Behaviors>
-                </TextBox>
+                    Width="100" />
             </StackPanel>
             <StackPanel Orientation="Horizontal" Spacing="7">
                 <TextBlock Text="{I18N {x:Static languages:LangKeys.GameSettings_Screen_FullScreen}}" VerticalAlignment="Center" />
-                <CheckBox
-                    Command="{Binding SettingsChangedCommand}"
-                    IsChecked="{Binding IsFullScreen, Mode=TwoWay}"
-                    Name="FullScreenCheckBox" />
+                <CheckBox IsChecked="{Binding IsFullScreen, Mode=TwoWay}" Name="FullScreenCheckBox" />
             </StackPanel>
         </StackPanel>
 

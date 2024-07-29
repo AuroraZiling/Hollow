@@ -21,6 +21,7 @@ public partial class GameSettingsViewModel : ViewModelBase, IViewModelBase
     
     [ObservableProperty]
     private bool _isGameDirectoryValid;
+
     
     [RelayCommand]
     private void SettingsChanged() => IsSettingsChanged = true;
@@ -53,10 +54,16 @@ public partial class GameSettingsViewModel : ViewModelBase, IViewModelBase
 
     [ObservableProperty]
     private string _screenResolutionWidth = "";
+    partial void OnScreenResolutionWidthChanged(string value) => SettingsChanged();
+    
     [ObservableProperty]
     private string _screenResolutionHeight = "";
+    partial void OnScreenResolutionHeightChanged(string value) => SettingsChanged();
+
     [ObservableProperty]
     private bool _isFullScreen;
+    partial void OnIsFullScreenChanged(bool value) => SettingsChanged();
+
 
     private readonly IGameService _gameService;
     private readonly IConfigurationService _configurationService;

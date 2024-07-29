@@ -1,8 +1,8 @@
 ﻿<ResourceDictionary
     xmlns="https://github.com/avaloniaui"
     xmlns:avalonia="clr-namespace:FluentIcons.Avalonia;assembly=FluentIcons.Avalonia"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:coverages="clr-namespace:Hollow.Views.Controls.Coverages">
+    xmlns:coverages="clr-namespace:Hollow.Views.Controls.Coverages"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <ControlTheme TargetType="coverages:ProhibitedCoverage" x:Key="ProhibitedCoverageTheme">
         <Setter Property="Template">
             <ControlTemplate>
@@ -12,10 +12,10 @@
                         Spacing="10"
                         VerticalAlignment="Center">
                         <avalonia:SymbolIcon
-                            FontSize="24"
+                            FontSize="28"
                             HorizontalAlignment="Center"
                             Symbol="Warning" />
-                        <TextBlock FontFamily="18" Text="{TemplateBinding Text}" />
+                        <TextBlock FontSize="18" Text="{TemplateBinding Text}" />
                     </StackPanel>
                 </Border>
             </ControlTemplate>

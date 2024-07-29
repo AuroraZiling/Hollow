@@ -37,7 +37,7 @@ Hollow is a Zenless Zone Zero toolbox
 - [x] Game Launch
   - [ ] Version check *need to get the latest version and compare*
 - [ ] Achievements
-- [ ] Game settings
+- [x] Game settings
 - [x] Announcements
 - [x] Signal search
   - [x] Multi-UID support

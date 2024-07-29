@@ -366,4 +366,22 @@
     <data name="GameSettings_Screen_Subtitle" xml:space="preserve">
         <value>窗口</value>
     </data>
+    <data name="Toast_GameSettingsScreen_ResolutionTooSmall_Message" xml:space="preserve">
+        <value>长或宽太小了</value>
+    </data>
+    <data name="Toast_GameSettingsScreen_ResolutionTooLarge_Message" xml:space="preserve">
+        <value>长或宽太大了</value>
+    </data>
+    <data name="Toast_GameSettingsScreen_ResolutionNotNumber_Message" xml:space="preserve">
+        <value>长或宽不是数字</value>
+    </data>
+    <data name="Toast_Common_Saved_Title" xml:space="preserve">
+        <value>已保存</value>
+    </data>
+    <data name="Coverage_GameDirectoryNotFound" xml:space="preserve">
+        <value>未指定游戏路径</value>
+    </data>
+    <data name="Coverage_PlatformNotSupported" xml:space="preserve">
+        <value>平台不支持</value>
+    </data>
 </root>

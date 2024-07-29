@@ -96,6 +96,24 @@ namespace Hollow.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Game Directory Not Found.
+        /// </summary>
+        internal static string Coverage_GameDirectoryNotFound {
+            get {
+                return ResourceManager.GetString("Coverage_GameDirectoryNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Platform Not Supported.
+        /// </summary>
+        internal static string Coverage_PlatformNotSupported {
+            get {
+                return ResourceManager.GetString("Coverage_PlatformNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
         internal static string Dialog_Cancel {
@@ -969,6 +987,15 @@ namespace Hollow.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Saved.
+        /// </summary>
+        internal static string Toast_Common_Saved_Title {
+            get {
+                return ResourceManager.GetString("Toast_Common_Saved_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Success.
         /// </summary>
         internal static string Toast_Common_Success_Title {
@@ -983,6 +1010,33 @@ namespace Hollow.Languages {
         internal static string Toast_EmptyUigfNapRecords_Message {
             get {
                 return ResourceManager.GetString("Toast_EmptyUigfNapRecords_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Height or width is not number.
+        /// </summary>
+        internal static string Toast_GameSettingsScreen_ResolutionNotNumber_Message {
+            get {
+                return ResourceManager.GetString("Toast_GameSettingsScreen_ResolutionNotNumber_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Height or width is too large.
+        /// </summary>
+        internal static string Toast_GameSettingsScreen_ResolutionTooLarge_Message {
+            get {
+                return ResourceManager.GetString("Toast_GameSettingsScreen_ResolutionTooLarge_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Height or width is too small.
+        /// </summary>
+        internal static string Toast_GameSettingsScreen_ResolutionTooSmall_Message {
+            get {
+                return ResourceManager.GetString("Toast_GameSettingsScreen_ResolutionTooSmall_Message", resourceCulture);
             }
         }
         

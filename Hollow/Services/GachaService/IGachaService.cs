@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Hollow.Abstractions.Models;
 using Hollow.Abstractions.Models.HttpContrasts;
 using Hollow.Abstractions.Models.HttpContrasts.Gacha;
 using Hollow.Abstractions.Models.HttpContrasts.Gacha.Uigf;

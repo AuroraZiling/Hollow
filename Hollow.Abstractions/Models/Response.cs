@@ -1,4 +1,4 @@
-﻿namespace Hollow.Abstractions.Models.HttpContrasts;
+﻿namespace Hollow.Abstractions.Models;
 
 public struct Response<T>(bool isSuccess, string message = "")
 {

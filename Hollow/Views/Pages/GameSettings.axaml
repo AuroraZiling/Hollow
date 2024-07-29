@@ -91,6 +91,13 @@
             Grid.Row="1"
             Grid.RowSpan="2"
             IsVisible="{Binding !IsGameDirectoryValid}"
-            Text="Game Directory not found" />
+            Text="{I18N {x:Static languages:LangKeys.Coverage_GameDirectoryNotFound}}" />
+
+        <coverages:ProhibitedCoverage
+            Grid.Row="1"
+            Grid.RowSpan="2"
+            IsVisible="{OnPlatform Windows=false,
+                                   Default=true}"
+            Text="{I18N {x:Static languages:LangKeys.Coverage_PlatformNotSupported}}" />
     </Grid>
 </UserControl>

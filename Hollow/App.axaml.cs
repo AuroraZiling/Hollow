@@ -1,6 +1,8 @@
 using System;
 using System.IO;
 using System.Net.Http;
+using AsyncImageLoader;
+using AsyncImageLoader.Loaders;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
@@ -34,6 +36,8 @@ public class App : Application
             .CreateLogger();
         
         Log.Information("[App] Hollow is starting");
+
+        ImageLoader.AsyncImageLoader = new DiskCachedWebImageLoader(AppInfo.CachesDir);
         
         AvaloniaXamlLoader.Load(this);
     }

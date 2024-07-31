@@ -154,29 +154,26 @@
                     Background="{StaticResource CoverageBackground}"
                     CornerRadius="10"
                     Padding="12">
-                    <StackPanel Spacing="5">
-                        <TextBlock HorizontalAlignment="Right">
+                    <StackPanel Spacing="10">
+                        <TextBlock>
                             <TextBlock.Text>
                                 <I18N Key="{x:Static languages:LangKeys.Settings_About_Version}">
                                     <Binding Path="AppVersion" />
                                 </I18N>
                             </TextBlock.Text>
                         </TextBlock>
-                        <TextBlock HorizontalAlignment="Right" Text="Copyright (c) 2024 Mccree Lee" />
+                        <TextBlock Text="Copyright (c) 2024 Mccree Lee" />
                         <HyperlinkButton
                             Classes="Default"
                             Content="{I18N {x:Static languages:LangKeys.Settings_About_GithubRepo}}"
-                            HorizontalAlignment="Right"
                             NavigateUri="https://github.com/AuroraZiling/Hollow" />
                         <HyperlinkButton
                             Classes="Default"
                             Content="{I18N {x:Static languages:LangKeys.Settings_About_IssueReport}}"
-                            HorizontalAlignment="Right"
                             NavigateUri="https://github.com/AuroraZiling/Hollow/issues" />
                         <HyperlinkButton
                             Classes="Default"
                             Content="{I18N {x:Static languages:LangKeys.Settings_About_Privacy}}"
-                            HorizontalAlignment="Right"
                             NavigateUri="https://github.com/AuroraZiling/Hollow/privacy.txt" />
                     </StackPanel>
                 </Border>

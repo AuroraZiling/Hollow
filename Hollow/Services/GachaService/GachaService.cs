@@ -152,7 +152,7 @@ public partial class GachaService(IConfigurationService configurationService, Ht
             "prod_gf_us" => -5,
             "prod_gf_jp" => 9,
             "prod_gf_eu" => 1,
-            _ => throw new ArgumentOutOfRangeException(nameof(gachaUrlData.Region), gachaUrlData.Region, null)
+            _ => 8
         };
         var gachaLogUrl = gameServer switch
         {

@@ -15,7 +15,7 @@
     <ControlTheme TargetType="toast:Toast" x:Key="ToastTheme">
         <Setter Property="Template">
             <ControlTemplate>
-                <Panel MaxWidth="320">
+                <Panel MaxWidth="360">
                     <Border
                         CornerRadius="15"
                         Margin="40,0,10,10"

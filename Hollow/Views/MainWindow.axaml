@@ -4,7 +4,7 @@
     ExtendClientAreaTitleBarHeightHint="-1"
     ExtendClientAreaToDecorationsHint="True"
     FontFamily="avares://Hollow/Assets/Fonts/#MiSans"
-    Height="700"
+    Height="750"
     Icon="avares://Hollow/Assets/Icons/small_icon.png"
     Title="Hollow"
     Width="1350"
@@ -80,7 +80,7 @@
                 <TabItem
                     BorderBrush="White"
                     Classes="Navigation"
-                    Margin="10,330,0,0">
+                    Margin="10,380,0,0">
                     <TabItem.Header>
                         <avalonia:SymbolIcon FontSize="35" Symbol="Settings" />
                     </TabItem.Header>

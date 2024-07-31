@@ -25,7 +25,7 @@
 
 ---
 
-Especially for the early development stage, there are a lot of bugs
+Especially for the early development stage, there are some bugs
 
 ---
 

@@ -16,6 +16,22 @@ namespace Hollow.Services.MetadataService;
 public class MetadataService(HttpClient httpClient): IMetadataService
 {
     public Dictionary<string, ProceedHakushItemModel>? ItemsMetadata { get; set; }
+    private const string ItemMetadataIconBaseUrl = "https://api.hakush.in/zzz/UI";
+
+    private static string ProcessIconUrl(string iconUrl, string itemType)
+    {
+        if (string.IsNullOrEmpty(iconUrl))
+        {
+            return "";
+        }
+        return itemType switch
+        {
+            "代理人" => $"{ItemMetadataIconBaseUrl}/IconRoleSelect{iconUrl[8..]}.webp",
+            "音擎" or "邦布" => $"{ItemMetadataIconBaseUrl}/{iconUrl.Split('/')[^1][..^4]}.webp",
+            _ => iconUrl
+        };
+    }
+    
     public async Task LoadItemMetadata(IProgress<Response<string>> progress, bool force = false)
     {
         var urls = new Dictionary<string, string> {
@@ -58,7 +74,9 @@ public class MetadataService(HttpClient httpClient): IMetadataService
                             EnglishName = value.EnglishName,
                             GachaType = value.GachaType,
                             RankType = value.RankType,
-                            ItemType = url.Key
+                            ItemType = url.Key,
+                            Icon = ProcessIconUrl(value.Icon, url.Key),
+                            IsCompleted = value.Icon != "" && value.ChineseName != "..." && value.EnglishName != "..." && value is { GachaType: not null, RankType: not null }
                         };
                     }
                 }

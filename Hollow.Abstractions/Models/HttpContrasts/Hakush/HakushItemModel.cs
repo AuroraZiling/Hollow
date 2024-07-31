@@ -4,6 +4,8 @@ namespace Hollow.Abstractions.Models.HttpContrasts.Hakush;
 
 public class HakushItemModel
 {
+    [JsonPropertyName("icon")]
+    public string Icon { get; set; } = "";
     [JsonPropertyName("rank")]
     public int? RankType { get; set; }
     [JsonPropertyName("type")]

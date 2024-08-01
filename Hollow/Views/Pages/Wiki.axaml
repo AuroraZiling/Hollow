@@ -8,6 +8,31 @@
     xmlns:pages="clr-namespace:Hollow.ViewModels.Pages"
     xmlns:wiki="clr-namespace:Hollow.Models.Wiki"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <UserControl.Styles>
+        <Style Selector="ListBoxItem">
+            <Setter Property="CornerRadius" Value="10" />
+            <Setter Property="Width" Value="100" />
+            <Setter Property="Height" Value="125" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Margin" Value="0, 0, 3, 3" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="2" />
+            <Setter Property="Transitions">
+                <Setter.Value>
+                    <Transitions>
+                        <BrushTransition Duration="0:0:0.2" Property="BorderBrush" />
+                    </Transitions>
+                </Setter.Value>
+            </Setter>
+            <Style Selector="^:selected">
+                <Setter Property="BorderBrush" Value="{StaticResource ZzzIconBorderPointerOverColor}" />
+            </Style>
+            <Style Selector="^:pointerover">
+                <Setter Property="BorderBrush" Value="{StaticResource ZzzIconBorderPointerOverColor}" />
+            </Style>
+        </Style>
+    </UserControl.Styles>
+
     <Grid RowDefinitions="40, *">
         <TextBlock Classes="PageTitle" Text="{I18N {x:Static languages:LangKeys.Wiki_Title}}" />
         <TabControl Grid.Row="1" Margin="0,15,0,0">
@@ -24,30 +49,6 @@
                                 <WrapPanel />
                             </ItemsPanelTemplate>
                         </ListBox.ItemsPanel>
-                        <ListBox.Styles>
-                            <Style Selector="ListBoxItem">
-                                <Setter Property="CornerRadius" Value="10" />
-                                <Setter Property="Width" Value="100" />
-                                <Setter Property="Height" Value="125" />
-                                <Setter Property="Padding" Value="0" />
-                                <Setter Property="Margin" Value="0, 0, 3, 3" />
-                                <Setter Property="BorderBrush" Value="Transparent" />
-                                <Setter Property="BorderThickness" Value="2" />
-                                <Setter Property="Transitions">
-                                    <Setter.Value>
-                                        <Transitions>
-                                            <BrushTransition Duration="0:0:0.2" Property="BorderBrush" />
-                                        </Transitions>
-                                    </Setter.Value>
-                                </Setter>
-                                <Style Selector="^:selected">
-                                    <Setter Property="BorderBrush" Value="{StaticResource ZzzIconBorderPointerOverColor}" />
-                                </Style>
-                                <Style Selector="^:pointerover">
-                                    <Setter Property="BorderBrush" Value="{StaticResource ZzzIconBorderPointerOverColor}" />
-                                </Style>
-                            </Style>
-                        </ListBox.Styles>
                         <ListBox.ItemTemplate>
                             <DataTemplate DataType="wiki:WikiCharacterItemModel">
                                 <Border ClipToBounds="True" CornerRadius="10">
@@ -95,30 +96,6 @@
                                 <WrapPanel />
                             </ItemsPanelTemplate>
                         </ListBox.ItemsPanel>
-                        <ListBox.Styles>
-                            <Style Selector="ListBoxItem">
-                                <Setter Property="CornerRadius" Value="10" />
-                                <Setter Property="Width" Value="100" />
-                                <Setter Property="Height" Value="135" />
-                                <Setter Property="Padding" Value="0" />
-                                <Setter Property="Margin" Value="0, 0, 3, 3" />
-                                <Setter Property="BorderBrush" Value="Transparent" />
-                                <Setter Property="BorderThickness" Value="2" />
-                                <Setter Property="Transitions">
-                                    <Setter.Value>
-                                        <Transitions>
-                                            <BrushTransition Duration="0:0:0.2" Property="BorderBrush" />
-                                        </Transitions>
-                                    </Setter.Value>
-                                </Setter>
-                                <Style Selector="^:selected">
-                                    <Setter Property="BorderBrush" Value="{StaticResource ZzzIconBorderPointerOverColor}" />
-                                </Style>
-                                <Style Selector="^:pointerover">
-                                    <Setter Property="BorderBrush" Value="{StaticResource ZzzIconBorderPointerOverColor}" />
-                                </Style>
-                            </Style>
-                        </ListBox.Styles>
                         <ListBox.ItemTemplate>
                             <DataTemplate DataType="wiki:WikiWeaponItemModel">
                                 <Border ClipToBounds="True" CornerRadius="10">
@@ -127,7 +104,10 @@
                                         <Panel Background="{StaticResource ZzzARankBackgroundBrush}" IsVisible="{Binding IsARankType}" />
                                         <Panel Background="{StaticResource ZzzSRankBackgroundBrush}" IsVisible="{Binding IsSRankType}" />
                                         <StackPanel VerticalAlignment="Bottom">
-                                            <Image Height="90" asyncImageLoader:ImageLoader.Source="{Binding AvatarUrl}" />
+                                            <Image
+                                                Height="80"
+                                                Margin="0,0,0,-10"
+                                                asyncImageLoader:ImageLoader.Source="{Binding AvatarUrl}" />
                                             <Border
                                                 Background="{StaticResource CoverageBackground}"
                                                 Height="40"
@@ -168,30 +148,6 @@
                                 <WrapPanel />
                             </ItemsPanelTemplate>
                         </ListBox.ItemsPanel>
-                        <ListBox.Styles>
-                            <Style Selector="ListBoxItem">
-                                <Setter Property="CornerRadius" Value="10" />
-                                <Setter Property="Width" Value="100" />
-                                <Setter Property="Height" Value="145" />
-                                <Setter Property="Padding" Value="0" />
-                                <Setter Property="Margin" Value="0, 0, 3, 3" />
-                                <Setter Property="BorderBrush" Value="Transparent" />
-                                <Setter Property="BorderThickness" Value="2" />
-                                <Setter Property="Transitions">
-                                    <Setter.Value>
-                                        <Transitions>
-                                            <BrushTransition Duration="0:0:0.2" Property="BorderBrush" />
-                                        </Transitions>
-                                    </Setter.Value>
-                                </Setter>
-                                <Style Selector="^:selected">
-                                    <Setter Property="BorderBrush" Value="{StaticResource ZzzIconBorderPointerOverColor}" />
-                                </Style>
-                                <Style Selector="^:pointerover">
-                                    <Setter Property="BorderBrush" Value="{StaticResource ZzzIconBorderPointerOverColor}" />
-                                </Style>
-                            </Style>
-                        </ListBox.Styles>
                         <ListBox.ItemTemplate>
                             <DataTemplate DataType="wiki:WikiBangbooItemModel">
                                 <Border ClipToBounds="True" CornerRadius="10">
@@ -200,7 +156,10 @@
                                         <Panel Background="{StaticResource ZzzARankBackgroundBrush}" IsVisible="{Binding IsARankType}" />
                                         <Panel Background="{StaticResource ZzzSRankBackgroundBrush}" IsVisible="{Binding IsSRankType}" />
                                         <StackPanel VerticalAlignment="Bottom">
-                                            <Image Height="110" asyncImageLoader:ImageLoader.Source="{Binding AvatarUrl}" />
+                                            <Image
+                                                Height="110"
+                                                Margin="0,-5,0,-10"
+                                                asyncImageLoader:ImageLoader.Source="{Binding AvatarUrl}" />
                                             <Border Background="{StaticResource CoverageBackground}" Height="30">
                                                 <TextBlock HorizontalAlignment="Center" Text="{Binding Name}" />
                                             </Border>
@@ -226,30 +185,6 @@
                                 <WrapPanel />
                             </ItemsPanelTemplate>
                         </ListBox.ItemsPanel>
-                        <ListBox.Styles>
-                            <Style Selector="ListBoxItem">
-                                <Setter Property="CornerRadius" Value="10" />
-                                <Setter Property="Width" Value="100" />
-                                <Setter Property="Height" Value="145" />
-                                <Setter Property="Padding" Value="0" />
-                                <Setter Property="Margin" Value="0, 0, 3, 3" />
-                                <Setter Property="BorderBrush" Value="Transparent" />
-                                <Setter Property="BorderThickness" Value="2" />
-                                <Setter Property="Transitions">
-                                    <Setter.Value>
-                                        <Transitions>
-                                            <BrushTransition Duration="0:0:0.2" Property="BorderBrush" />
-                                        </Transitions>
-                                    </Setter.Value>
-                                </Setter>
-                                <Style Selector="^:selected">
-                                    <Setter Property="BorderBrush" Value="{StaticResource ZzzIconBorderPointerOverColor}" />
-                                </Style>
-                                <Style Selector="^:pointerover">
-                                    <Setter Property="BorderBrush" Value="{StaticResource ZzzIconBorderPointerOverColor}" />
-                                </Style>
-                            </Style>
-                        </ListBox.Styles>
                         <ListBox.ItemTemplate>
                             <DataTemplate DataType="wiki:WikiEquipmentItemModel">
                                 <Border ClipToBounds="True" CornerRadius="10">
@@ -257,7 +192,7 @@
                                         <StackPanel VerticalAlignment="Bottom">
                                             <Image
                                                 Height="110"
-                                                Margin="10,0"
+                                                Margin="10,-10,10,-10"
                                                 asyncImageLoader:ImageLoader.Source="{Binding AvatarUrl}" />
                                             <Border Background="{StaticResource CoverageBackground}" Height="30">
                                                 <TextBlock HorizontalAlignment="Center" Text="{Binding Name}" />

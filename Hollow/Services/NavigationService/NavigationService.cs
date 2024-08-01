@@ -1,4 +1,5 @@
 ﻿using System;
+using Hollow.Views.Pages;
 
 namespace Hollow.Services.NavigationService;
 
@@ -14,12 +15,12 @@ public class NavigationService: INavigationService
         CurrentViewId = destination;
         CurrentViewName = destination switch
         {
-            0 => "Home",
-            1 => "Announcements",
-            2 => "GameSettings",
-            3 => "SignalSearch",
-            4 => "Screenshots",
-            5 => "Settings",
+            0 => nameof(Home),
+            1 => nameof(Announcements),
+            2 => nameof(GameSettings),
+            3 => nameof(SignalSearch),
+            4 => nameof(Wiki),
+            5 => nameof(Settings),
             _ => throw new ArgumentException("Invalid destination")
         };
         CurrentViewChanged?.Invoke();

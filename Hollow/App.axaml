@@ -32,6 +32,7 @@
         <FluentTheme DensityStyle="Normal" />
         <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml" />
 
+        <StyleInclude Source="Styles/Border.axaml" />
         <StyleInclude Source="Styles/Button.axaml" />
         <StyleInclude Source="Styles/RadioButton.axaml" />
         <StyleInclude Source="Styles/TextBlock.axaml" />

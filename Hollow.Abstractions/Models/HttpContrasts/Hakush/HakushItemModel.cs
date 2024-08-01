@@ -21,9 +21,12 @@ public class HakushItemModel
     public string EquipmentDetailedDescription { get; set; } = "";
     
     // Character Specific Fields
-    public string CharacterTypeIconUrl { get; set; } = "";  // 1: Attack, 2: Stun, 3: Anomaly, 4: Support, 5: Defense
+    [JsonPropertyName("element")]
+    public int? CharacterElement { get; set; }
+    public string CharacterElementIconRes { get; set; } = "";  // 200: Physical, 201: Fire, 202: Ice, 203: Electric, 205: Ether
     
     // Proceed Fields
     public bool IsCompleted { get; set; }
     public HakushItemType ItemType { get; set; } = HakushItemType.Unknown;
+    public string TypeIconRes { get; set; } = "";  // 1: Attack, 2: Stun, 3: Anomaly, 4: Support, 5: Defense
 }

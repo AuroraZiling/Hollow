@@ -79,20 +79,32 @@ public class MetadataService(HttpClient httpClient): IMetadataService
                                 RankType = value.RankType,
                                 ItemType = url.Key,
                                 Icon = ProcessIconUrl(value.Icon, url.Key),
-                                IsCompleted = value.Icon != "" && value.ChineseName != "..." && value.EnglishName != "..." && value is { ItemPropertyType: not null, RankType: not null }
+                                TypeIconRes = value.ItemPropertyType switch
+                                {
+                                    1 => "avares://Hollow/Assets/Zzz/Character/Type/IconAttack.webp",
+                                    2 => "avares://Hollow/Assets/Zzz/Character/Type/IconStun.webp",
+                                    3 => "avares://Hollow/Assets/Zzz/Character/Type/IconAnomaly.webp",
+                                    4 => "avares://Hollow/Assets/Zzz/Character/Type/IconSupport.webp",
+                                    5 => "avares://Hollow/Assets/Zzz/Character/Type/IconDefense.webp",
+                                    _ => ""
+                                },
+                                IsCompleted = value.Icon != "" && value.ChineseName != "..." && value.EnglishName != "..." && value is { ItemPropertyType: not null, RankType: not null },
                             };
-
+                            
+                            itemModel.IsCompleted = itemModel.IsCompleted && itemModel.TypeIconRes != "";
+                            
                             if (url.Key == HakushItemType.Character && itemModel.IsCompleted)
                             {
-                                itemModel.CharacterTypeIconUrl = value.ItemPropertyType switch
+                                itemModel.CharacterElementIconRes = value.CharacterElement switch
                                 {
-                                    1 => $"{ItemMetadataIconBaseUrl}/IconAttack.webp",
-                                    2 => $"{ItemMetadataIconBaseUrl}/IconStun.webp",
-                                    3 => $"{ItemMetadataIconBaseUrl}/IconAnomaly.webp",
-                                    4 => $"{ItemMetadataIconBaseUrl}/IconSupport.webp",
-                                    5 => $"{ItemMetadataIconBaseUrl}/IconDefense.webp",
+                                    200 => "avares://Hollow/Assets/Zzz/Character/Element/IconPhysical.webp",
+                                    201 => "avares://Hollow/Assets/Zzz/Character/Element/IconFire.webp",
+                                    202 => "avares://Hollow/Assets/Zzz/Character/Element/IconIce.webp",
+                                    203 => "avares://Hollow/Assets/Zzz/Character/Element/IconElectric.webp",
+                                    205 => "avares://Hollow/Assets/Zzz/Character/Element/IconEther.webp",
                                     _ => ""
                                 };
+                                itemModel.IsCompleted = itemModel.IsCompleted && itemModel.CharacterElementIconRes != "";
                             }
 
                             items[key] = itemModel;

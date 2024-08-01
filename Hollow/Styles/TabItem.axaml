@@ -265,4 +265,54 @@
             <Setter Property="Opacity" Value="1" />
         </Style>
     </Style>
+
+    <Style Selector="TabItem.Wiki">
+        <Setter Property="Foreground" Value="LightGray" />
+        <Setter Property="Margin" Value="0, 0, 20, 0" />
+        <Setter Property="Template">
+            <ControlTemplate>
+                <StackPanel>
+                    <TextBlock
+                        FontFamily="{StaticResource MediumFont}"
+                        FontSize="22"
+                        Foreground="{TemplateBinding Foreground}"
+                        Text="{TemplateBinding Header}" />
+                    <Border
+                        Background="{StaticResource ZzzSecondaryColor}"
+                        CornerRadius="2"
+                        Height="3"
+                        Margin="7,2,7,0"
+                        Opacity="0">
+                        <Border.Transitions>
+                            <Transitions>
+                                <DoubleTransition Duration="0:0:0.1" Property="Opacity" />
+                            </Transitions>
+                        </Border.Transitions>
+                    </Border>
+                </StackPanel>
+            </ControlTemplate>
+        </Setter>
+
+        <Setter Property="Transitions">
+            <Transitions>
+                <BrushTransition Duration="0:0:0.1" Property="Foreground" />
+            </Transitions>
+        </Setter>
+
+        <Style Selector="^:pointerover">
+            <Setter Property="Foreground">
+                <SolidColorBrush Color="White" />
+            </Setter>
+        </Style>
+
+        <Style Selector="^[IsSelected=True]">
+            <Setter Property="Foreground">
+                <SolidColorBrush Color="White" />
+            </Setter>
+            <Setter Property="Opacity" Value="1" />
+        </Style>
+        <Style Selector="^[IsSelected=True] /template/ Border">
+            <Setter Property="Opacity" Value="1" />
+        </Style>
+    </Style>
 </Styles>

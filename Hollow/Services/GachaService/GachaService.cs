@@ -8,11 +8,10 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Hollow.Abstractions.JsonConverters.Serializers;
 using Hollow.Abstractions.Models;
-using Hollow.Abstractions.Models.HttpContrasts;
 using Hollow.Abstractions.Models.HttpContrasts.Gacha;
 using Hollow.Abstractions.Models.HttpContrasts.Gacha.Common;
 using Hollow.Abstractions.Models.HttpContrasts.Gacha.Uigf;
-using Hollow.Abstractions.Models.HttpContrasts.Hakush.Proceed;
+using Hollow.Abstractions.Models.HttpContrasts.Hakush;
 using Hollow.Enums;
 using Hollow.Helpers;
 using Hollow.Languages;
@@ -27,7 +26,7 @@ public partial class GachaService(IConfigurationService configurationService, Ht
 {
     public Dictionary<string, GachaRecordProfile>? GachaRecordProfileDictionary { get; set; }
 
-    public GachaRecords MergeGachaRecordsFromImport(GachaRecords fileJson, ImportItem[] selectedImportItems, Dictionary<string, ProceedHakushItemModel> itemsMetadata)
+    public GachaRecords MergeGachaRecordsFromImport(GachaRecords fileJson, ImportItem[] selectedImportItems, Dictionary<string, HakushItemModel> itemsMetadata)
     {
         var currentGachaProfiles = GachaRecordProfileDictionary ?? new Dictionary<string, GachaRecordProfile>();
         foreach (var selectedImportItem in selectedImportItems)
@@ -73,7 +72,7 @@ public partial class GachaService(IConfigurationService configurationService, Ht
         };
     }
 
-    private static List<GachaItem> CompleteGachaItems(List<GachaItem> gachaItems, Dictionary<string, ProceedHakushItemModel> metadata)
+    private static List<GachaItem> CompleteGachaItems(List<GachaItem> gachaItems, Dictionary<string, HakushItemModel> metadata)
     {
         foreach (var gachaItem in gachaItems)
         {

@@ -1156,5 +1156,50 @@ namespace Hollow.Languages {
                 return ResourceManager.GetString("Toast_WebCachesNotFound_Message", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bangboo.
+        /// </summary>
+        internal static string Wiki_Bangboo {
+            get {
+                return ResourceManager.GetString("Wiki_Bangboo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Agents.
+        /// </summary>
+        internal static string Wiki_Character {
+            get {
+                return ResourceManager.GetString("Wiki_Character", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Drive Disc.
+        /// </summary>
+        internal static string Wiki_Equipment {
+            get {
+                return ResourceManager.GetString("Wiki_Equipment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wiki.
+        /// </summary>
+        internal static string Wiki_Title {
+            get {
+                return ResourceManager.GetString("Wiki_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to W-Engines.
+        /// </summary>
+        internal static string Wiki_Weapon {
+            get {
+                return ResourceManager.GetString("Wiki_Weapon", resourceCulture);
+            }
+        }
     }
 }

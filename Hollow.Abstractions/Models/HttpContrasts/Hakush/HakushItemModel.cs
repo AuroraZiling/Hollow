@@ -10,7 +10,7 @@ public class HakushItemModel
     [JsonPropertyName("rank")]
     public int? RankType { get; set; }
     [JsonPropertyName("type")]
-    public int? GachaType { get; set; }
+    public int? ItemPropertyType { get; set; }
     [JsonPropertyName("EN")]
     public string EnglishName { get; set; } = "";
     [JsonPropertyName("CHS")]
@@ -19,6 +19,9 @@ public class HakushItemModel
     // Equipment Specific Fields
     public string EquipmentDescription { get; set; } = "";
     public string EquipmentDetailedDescription { get; set; } = "";
+    
+    // Character Specific Fields
+    public string CharacterTypeIconUrl { get; set; } = "";  // 1: Attack, 2: Stun, 3: Anomaly, 4: Support, 5: Defense
     
     // Proceed Fields
     public bool IsCompleted { get; set; }

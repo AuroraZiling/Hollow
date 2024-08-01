@@ -3,14 +3,75 @@
     x:Class="Hollow.Views.Pages.Wiki"
     x:DataType="pages:WikiViewModel"
     xmlns="https://github.com/avaloniaui"
+    xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
+    xmlns:languages="clr-namespace:Hollow.Languages"
     xmlns:pages="clr-namespace:Hollow.ViewModels.Pages"
+    xmlns:wiki="clr-namespace:Hollow.Models.Wiki"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Grid RowDefinitions="40, *">
-        <TextBlock Classes="PageTitle" Text="Wiki" />
+        <TextBlock Classes="PageTitle" Text="{I18N {x:Static languages:LangKeys.Wiki_Title}}" />
         <TabControl Grid.Row="1" Margin="0,15,0,0">
-            <TabItem Classes="Wiki" Header="111" />
-            <TabItem Classes="Wiki" Header="111" />
-            <TabItem Classes="Wiki" Header="111" />
+            <TabItem Classes="Wiki" Header="{I18N {x:Static languages:LangKeys.Wiki_Character}}">
+                <Grid ColumnDefinitions="0.4*, *" Margin="-10,0,0,0">
+                    <ListBox
+                        Background="Transparent"
+                        Classes="WikiList"
+                        Grid.Column="0"
+                        ItemsSource="{Binding WikiItems}">
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel />
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                        <ListBox.Styles>
+                            <Style Selector="ListBoxItem">
+                                <Setter Property="CornerRadius" Value="10" />
+                                <Setter Property="Width" Value="100" />
+                                <Setter Property="Height" Value="125" />
+                                <Setter Property="Padding" Value="0" />
+                                <Setter Property="Margin" Value="3" />
+                                <Setter Property="BorderBrush" Value="Transparent" />
+                                <Setter Property="BorderThickness" Value="2" />
+                                <Setter Property="Transitions">
+                                    <Setter.Value>
+                                        <Transitions>
+                                            <BrushTransition Duration="0:0:0.2" Property="BorderBrush" />
+                                        </Transitions>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style Selector="^:selected">
+                                    <Setter Property="BorderBrush" Value="{StaticResource ZzzIconBorderPointerOverColor}" />
+                                </Style>
+                                <Style Selector="^:pointerover">
+                                    <Setter Property="BorderBrush" Value="{StaticResource ZzzIconBorderPointerOverColor}" />
+                                </Style>
+                            </Style>
+                        </ListBox.Styles>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate DataType="wiki:WikiItemModel">
+                                <Border
+                                    Background="{StaticResource ZzzARankBackgroundBrush}"
+                                    Classes="WikiItemBorder"
+                                    Classes.ARankType="{Binding IsARankType}"
+                                    Classes.BRankType="{Binding IsBRankType}"
+                                    Classes.SRankType="{Binding IsSRankType}"
+                                    ClipToBounds="True"
+                                    CornerRadius="10">
+                                    <StackPanel>
+                                        <Image Height="95" asyncImageLoader:ImageLoader.Source="{Binding AvatarUrl}" />
+                                        <Border Background="{StaticResource CoverageBackground}" Height="30">
+                                            <TextBlock HorizontalAlignment="Center" Text="{Binding Name}" />
+                                        </Border>
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
+            </TabItem>
+            <TabItem Classes="Wiki" Header="{I18N {x:Static languages:LangKeys.Wiki_Weapon}}" />
+            <TabItem Classes="Wiki" Header="{I18N {x:Static languages:LangKeys.Wiki_Bangboo}}" />
+            <TabItem Classes="Wiki" Header="{I18N {x:Static languages:LangKeys.Wiki_Equipment}}" />
         </TabControl>
     </Grid>
 </UserControl>

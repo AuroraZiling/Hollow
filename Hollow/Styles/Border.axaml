@@ -1,0 +1,13 @@
+﻿<Styles xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style Selector="Border.WikiItemBorder">
+        <Style Selector="Border.WikiItemBorder.BRankType">
+            <Setter Property="Background" Value="{StaticResource ZzzBRankBackgroundBrush}" />
+        </Style>
+        <Style Selector="Border.WikiItemBorder.ARankType">
+            <Setter Property="Background" Value="{StaticResource ZzzARankBackgroundBrush}" />
+        </Style>
+        <Style Selector="Border.WikiItemBorder.SRankType">
+            <Setter Property="Background" Value="{StaticResource ZzzSRankBackgroundBrush}" />
+        </Style>
+    </Style>
+</Styles>

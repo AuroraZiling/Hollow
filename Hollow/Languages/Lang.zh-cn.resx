@@ -384,4 +384,19 @@
     <data name="Coverage_PlatformNotSupported" xml:space="preserve">
         <value>平台不支持</value>
     </data>
+    <data name="Wiki_Character" xml:space="preserve">
+        <value>代理人</value>
+    </data>
+    <data name="Wiki_Weapon" xml:space="preserve">
+        <value>武器</value>
+    </data>
+    <data name="Wiki_Bangboo" xml:space="preserve">
+        <value>邦布</value>
+    </data>
+    <data name="Wiki_Equipment" xml:space="preserve">
+        <value>驱动盘</value>
+    </data>
+    <data name="Wiki_Title" xml:space="preserve">
+        <value>情报站</value>
+    </data>
 </root>

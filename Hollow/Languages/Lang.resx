@@ -384,4 +384,19 @@
     <data name="Coverage_PlatformNotSupported" xml:space="preserve">
         <value>Platform Not Supported</value>
     </data>
+    <data name="Wiki_Character" xml:space="preserve">
+        <value>Agents</value>
+    </data>
+    <data name="Wiki_Weapon" xml:space="preserve">
+        <value>W-Engines</value>
+    </data>
+    <data name="Wiki_Bangboo" xml:space="preserve">
+        <value>Bangboo</value>
+    </data>
+    <data name="Wiki_Equipment" xml:space="preserve">
+        <value>Drive Disc</value>
+    </data>
+    <data name="Wiki_Title" xml:space="preserve">
+        <value>Wiki</value>
+    </data>
 </root>

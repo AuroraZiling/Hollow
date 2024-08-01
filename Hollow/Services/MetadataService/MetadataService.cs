@@ -71,16 +71,31 @@ public class MetadataService(HttpClient httpClient): IMetadataService
                     
                         foreach (var (key, value) in itemsInType)
                         {
-                            items[key] = new HakushItemModel
+                            var itemModel = new HakushItemModel
                             {
                                 ChineseName = value.ChineseName,
                                 EnglishName = value.EnglishName,
-                                GachaType = value.GachaType,
+                                ItemPropertyType = value.ItemPropertyType,
                                 RankType = value.RankType,
                                 ItemType = url.Key,
                                 Icon = ProcessIconUrl(value.Icon, url.Key),
-                                IsCompleted = value.Icon != "" && value.ChineseName != "..." && value.EnglishName != "..." && value is { GachaType: not null, RankType: not null }
+                                IsCompleted = value.Icon != "" && value.ChineseName != "..." && value.EnglishName != "..." && value is { ItemPropertyType: not null, RankType: not null }
                             };
+
+                            if (url.Key == HakushItemType.Character && itemModel.IsCompleted)
+                            {
+                                itemModel.CharacterTypeIconUrl = value.ItemPropertyType switch
+                                {
+                                    1 => $"{ItemMetadataIconBaseUrl}/IconAttack.webp",
+                                    2 => $"{ItemMetadataIconBaseUrl}/IconStun.webp",
+                                    3 => $"{ItemMetadataIconBaseUrl}/IconAnomaly.webp",
+                                    4 => $"{ItemMetadataIconBaseUrl}/IconSupport.webp",
+                                    5 => $"{ItemMetadataIconBaseUrl}/IconDefense.webp",
+                                    _ => ""
+                                };
+                            }
+
+                            items[key] = itemModel;
                         }
                     }
                     else
@@ -92,7 +107,7 @@ public class MetadataService(HttpClient httpClient): IMetadataService
                             {
                                 ChineseName = value.ChineseSimplified.Name,
                                 EnglishName = value.English.Name,
-                                GachaType = -1,
+                                ItemPropertyType = -1,
                                 RankType = -1,
                                 ItemType = url.Key,
                                 Icon = ProcessIconUrl(value.Icon, url.Key),

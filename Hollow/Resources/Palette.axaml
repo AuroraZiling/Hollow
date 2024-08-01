@@ -29,6 +29,7 @@
     <Color x:Key="ZzzSecondaryDarkColor">#92B900</Color>
     <Color x:Key="ZzzBlackColor">#171717</Color>
     <Color x:Key="ZzzGrayColor">#313131</Color>
+    <Color x:Key="ZzzIconBorderPointerOverColor">#FFDE00</Color>
 
     <SolidColorBrush Color="{StaticResource ZzzPrimaryColor}" x:Key="ZzzPrimaryColorBrush" />
     <SolidColorBrush Color="{StaticResource ZzzSecondaryColor}" x:Key="ZzzSecondaryColorBrush" />
@@ -39,4 +40,17 @@
     <Color x:Key="SignalSearchSColor">Orange</Color>
     <Color x:Key="SignalSearchAColor">MediumPurple</Color>
     <Color x:Key="SignalSearchBColor">CornflowerBlue</Color>
+
+    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0" x:Key="ZzzSRankBackgroundBrush">
+        <GradientStop Color="#945c2c" Offset="0" />
+        <GradientStop Color="#b27330" Offset="1" />
+    </LinearGradientBrush>
+    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0" x:Key="ZzzARankBackgroundBrush">
+        <GradientStop Color="#5e5789" Offset="0" />
+        <GradientStop Color="#9c75b7" Offset="1" />
+    </LinearGradientBrush>
+    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0" x:Key="ZzzBRankBackgroundBrush">
+        <GradientStop Color="#567496" Offset="0" />
+        <GradientStop Color="#5392b8" Offset="1" />
+    </LinearGradientBrush>
 </ResourceDictionary>

@@ -7,3 +7,5 @@ DefWindowProc
 DestroyWindow
 GetWindowLong
 SetLayeredWindowAttributes
+AllocConsole
+FreeConsole

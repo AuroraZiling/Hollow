@@ -1,4 +1,4 @@
-﻿using System.Runtime.InteropServices;
+﻿using Windows.Win32;
 using Avalonia;
 using Hollow.Abstractions.Models;
 using Hollow.Views.Controls.WebView;
@@ -10,35 +10,22 @@ namespace Hollow.Windows;
 
 public static class Program
 {
-    
-#if WINDOWS
-    [DllImport("kernel32.dll")]
-    private static extern bool AllocConsole();
-
-    [DllImport("kernel32.dll")]
-    private static extern bool FreeConsole();
-#endif
-    
-    
     [STAThread]
     public static void Main(string[] args)
     {
         var showConsole = false;
         
         //TODO: Platform specific
-        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-        {
-            Environment.SetEnvironmentVariable("WEBVIEW2_USER_DATA_FOLDER", AppInfo.CachesDir);
+        Environment.SetEnvironmentVariable("WEBVIEW2_USER_DATA_FOLDER", AppInfo.CachesDir);
 
-            if(args.Contains("--console"))
-                showConsole = true;
-        }
+        if(args.Contains("--console"))
+            showConsole = true;
 
         try
         {
             if (showConsole)
             {
-                AllocConsole();
+                PInvoke.AllocConsole();
             }
             
             App.ConfigureServices(x =>
@@ -56,7 +43,7 @@ public static class Program
 
             if (showConsole)
             {
-                FreeConsole();
+                PInvoke.FreeConsole();
             }
         }
     }

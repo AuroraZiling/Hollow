@@ -10,6 +10,10 @@
     <SolidColorBrush
         Color="Black"
         Opacity="0.8"
+        x:Key="WikiLoadingCoverageBackground" />
+    <SolidColorBrush
+        Color="Black"
+        Opacity="0.8"
         x:Key="ToastBackground" />
     <SolidColorBrush
         Color="White"

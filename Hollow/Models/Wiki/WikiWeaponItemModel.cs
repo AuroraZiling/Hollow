@@ -4,6 +4,7 @@ namespace Hollow.Models.Wiki;
 
 public class WikiWeaponItemModel
 {
+    public required string Id { get; set; }
     public required string AvatarUrl { get; set; }
     public required string Name { get; set; }
     public required Bitmap TypeIconResBitmap { get; set; } 

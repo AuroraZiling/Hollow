@@ -32,6 +32,8 @@
         <FluentTheme DensityStyle="Normal" />
         <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml" />
 
+        <StyleInclude Source="avares://Hollow/Views/Controls/ProgressRing/ProgressRing.axaml" />
+
         <StyleInclude Source="Styles/Border.axaml" />
         <StyleInclude Source="Styles/Button.axaml" />
         <StyleInclude Source="Styles/RadioButton.axaml" />

@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Net.Http;
+using System.Text.Json;
+using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
 using Hollow.Abstractions.Enums.Hakush;
+using Hollow.Abstractions.JsonConverters.Serializers;
+using Hollow.Abstractions.Models.HttpContrasts.Hakush;
 using Hollow.Enums;
 using Hollow.Helpers;
 using Hollow.Languages;
@@ -17,33 +21,92 @@ namespace Hollow.ViewModels.Pages;
 
 public partial class WikiViewModel : ViewModelBase, IViewModelBase
 {
+    [ObservableProperty] private double _loadingCoverageOpacity;
+    [ObservableProperty] private bool _loadingCoverageVisible;
+    [ObservableProperty] private string _loadingCoverageMessage;
+    
+    private void ShowCoverage(string message)
+    {
+        LoadingCoverageMessage = message;
+        LoadingCoverageOpacity = 1;
+        LoadingCoverageVisible = true;
+    }
+    
+    private void HideCoverage()
+    {
+        LoadingCoverageMessage = "";
+        LoadingCoverageOpacity = 0;
+        LoadingCoverageVisible = false;
+    }
+    
+    #region Character
+    
+    private const string CharacterDetailApiUrl = "https://api.hakush.in/zzz/data/zh/character";
+    
+    [ObservableProperty] private ObservableCollection<WikiCharacterItemModel> _wikiCharacterItems = [];
+    [ObservableProperty] private WikiCharacterItemModel? _selectedCharacterItem;
+    [ObservableProperty] private HakushCharacterModel? _selectedCharacterDetailItem;
+
+    partial void OnSelectedCharacterItemChanged(WikiCharacterItemModel? value)
+    {
+        if (value is null) return;
+        Task.Run(async () =>
+        {
+            ShowCoverage(string.Format(Lang.Wiki_LoadingCoverage_FetchDataMessage, value.Name));
+            SelectedCharacterDetailItem = await LoadCharacterInfo(value.Id);
+            HideCoverage();
+        });
+    }
+
+    private async Task<HakushCharacterModel?> LoadCharacterInfo(string selectedCharacterId)
+    {
+        var response = await _httpClient.GetStringAsync($"{CharacterDetailApiUrl}/{selectedCharacterId}.json");
+        return JsonSerializer.Deserialize<HakushCharacterModel>(response, HollowJsonSerializer.Options);
+    }
+    
+    #endregion
+    
+    
     [ObservableProperty]
-    private ObservableCollection<WikiCharacterItemModel> _wikiCharacterItems = new();
+    private ObservableCollection<WikiWeaponItemModel> _wikiWeaponItems = [];
     [ObservableProperty]
-    private ObservableCollection<WikiWeaponItemModel> _wikiWeaponItems = new();
+    private WikiWeaponItemModel? _selectedWeaponItem;
+    
     [ObservableProperty]
-    private ObservableCollection<WikiBangbooItemModel> _wikiBangbooItems = new();
+    private ObservableCollection<WikiBangbooItemModel> _wikiBangbooItems = [];
     [ObservableProperty]
-    private ObservableCollection<WikiEquipmentItemModel> _wikiEquipmentItems = new();
+    private WikiBangbooItemModel? _selectedBangbooItem;
+    
+    [ObservableProperty]
+    private ObservableCollection<WikiEquipmentItemModel> _wikiEquipmentItems = [];
+    [ObservableProperty]
+    private WikiEquipmentItemModel? _selectedEquipmentItem;
 
     private readonly IMetadataService _metadataService;
     private readonly INavigationService _navigationService;
-    public WikiViewModel(IMetadataService metadataService, INavigationService navigationService)
+    private readonly HttpClient _httpClient;
+    public WikiViewModel(IMetadataService metadataService, INavigationService navigationService, HttpClient httpClient)
     {
         _metadataService = metadataService;
         _navigationService = navigationService;
-        
+        _httpClient = httpClient;
+
         _navigationService.CurrentViewChanged += Navigated;
     }
 
     private void LoadWiki()
     {
+        WikiCharacterItems.Clear();
+        WikiWeaponItems.Clear();
+        WikiBangbooItems.Clear();
+        WikiEquipmentItems.Clear();
         foreach (var itemPair in _metadataService.ItemsMetadata!)
         {
             if (itemPair.Value is { ItemType: HakushItemType.Character, IsCompleted: true })
             {
                 WikiCharacterItems.Add(new WikiCharacterItemModel
                 {
+                    Id = itemPair.Key,
                     AvatarUrl = itemPair.Value.Icon,
                     Name = itemPair.Value.ChineseName,
                     TypeIconResBitmap = ImageHelper.LoadFromResource(new Uri(itemPair.Value.TypeIconRes)),
@@ -56,6 +119,7 @@ public partial class WikiViewModel : ViewModelBase, IViewModelBase
             {
                 WikiWeaponItems.Add(new WikiWeaponItemModel
                 {
+                    Id = itemPair.Key,
                     AvatarUrl = itemPair.Value.Icon,
                     Name = itemPair.Value.ChineseName,
                     TypeIconResBitmap = ImageHelper.LoadFromResource(new Uri(itemPair.Value.TypeIconRes)),
@@ -68,6 +132,7 @@ public partial class WikiViewModel : ViewModelBase, IViewModelBase
             {
                 WikiBangbooItems.Add(new WikiBangbooItemModel
                 {
+                    Id = itemPair.Key,
                     AvatarUrl = itemPair.Value.Icon,
                     Name = itemPair.Value.ChineseName,
                     IsBRankType = itemPair.Value.RankType == 2,
@@ -79,6 +144,7 @@ public partial class WikiViewModel : ViewModelBase, IViewModelBase
             {
                 WikiEquipmentItems.Add(new WikiEquipmentItemModel
                 {
+                    Id = itemPair.Key,
                     AvatarUrl = itemPair.Value.Icon,
                     Name = itemPair.Value.ChineseName
                 });

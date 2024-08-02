@@ -2,6 +2,7 @@
 
 public class WikiBangbooItemModel
 {
+    public required string Id { get; set; }
     public required string AvatarUrl { get; set; }
     public required string Name { get; set; }
     public bool IsBRankType { get; set; }

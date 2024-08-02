@@ -1176,11 +1176,38 @@ namespace Hollow.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &amp;lt;&amp;lt;&amp;lt; 选择代理人.
+        /// </summary>
+        internal static string Wiki_Character_Select {
+            get {
+                return ResourceManager.GetString("Wiki_Character_Select", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Drive Disc.
         /// </summary>
         internal static string Wiki_Equipment {
             get {
                 return ResourceManager.GetString("Wiki_Equipment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fetching.
+        /// </summary>
+        internal static string Wiki_LoadingCoverage_DefaultMessage {
+            get {
+                return ResourceManager.GetString("Wiki_LoadingCoverage_DefaultMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fetching {0}.
+        /// </summary>
+        internal static string Wiki_LoadingCoverage_FetchDataMessage {
+            get {
+                return ResourceManager.GetString("Wiki_LoadingCoverage_FetchDataMessage", resourceCulture);
             }
         }
         

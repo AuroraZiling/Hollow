@@ -399,4 +399,13 @@
     <data name="Wiki_Title" xml:space="preserve">
         <value>Wiki</value>
     </data>
+    <data name="Wiki_Character_Select" xml:space="preserve">
+        <value>&amp;lt;&amp;lt;&amp;lt; 选择代理人</value>
+    </data>
+    <data name="Wiki_LoadingCoverage_DefaultMessage" xml:space="preserve">
+        <value>Fetching</value>
+    </data>
+    <data name="Wiki_LoadingCoverage_FetchDataMessage" xml:space="preserve">
+        <value>Fetching {0}</value>
+    </data>
 </root>

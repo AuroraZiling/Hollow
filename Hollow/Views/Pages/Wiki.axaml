@@ -3,9 +3,11 @@
     x:Class="Hollow.Views.Pages.Wiki"
     x:DataType="pages:WikiViewModel"
     xmlns="https://github.com/avaloniaui"
+    xmlns:acrylic="clr-namespace:Hollow.Views.Controls.Acrylic"
     xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
     xmlns:languages="clr-namespace:Hollow.Languages"
     xmlns:pages="clr-namespace:Hollow.ViewModels.Pages"
+    xmlns:progressRing="clr-namespace:Hollow.Views.Controls.ProgressRing"
     xmlns:wiki="clr-namespace:Hollow.Models.Wiki"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <UserControl.Styles>
@@ -43,7 +45,8 @@
                         Background="Transparent"
                         Classes="WikiList"
                         Grid.Column="0"
-                        ItemsSource="{Binding WikiCharacterItems}">
+                        ItemsSource="{Binding WikiCharacterItems}"
+                        SelectedItem="{Binding SelectedCharacterItem, Mode=TwoWay}">
                         <ListBox.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <WrapPanel />
@@ -80,6 +83,19 @@
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
+                    <TextBlock
+                        FontSize="42"
+                        Grid.Column="1"
+                        HorizontalAlignment="Center"
+                        IsVisible="{Binding SelectedCharacterItem, Converter={x:Static ObjectConverters.IsNull}}"
+                        Text="{I18N {x:Static languages:LangKeys.Wiki_Character_Select}}"
+                        VerticalAlignment="Center" />
+                    <ScrollViewer Grid.Column="1">
+                        <StackPanel>
+                            <TextBlock Text="{Binding SelectedCharacterItem.Name}" />
+                            <TextBlock Text="{Binding SelectedCharacterDetailItem.Rarity}" />
+                        </StackPanel>
+                    </ScrollViewer>
                 </Grid>
             </TabItem>
 
@@ -206,5 +222,39 @@
                 </Grid>
             </TabItem>
         </TabControl>
+
+        <Border
+            Background="{StaticResource WikiLoadingCoverageBackground}"
+            CornerRadius="10"
+            Grid.Row="1"
+            IsVisible="{Binding LoadingCoverageVisible}"
+            Margin="0,10,0,0"
+            Opacity="{Binding LoadingCoverageOpacity}">
+            <Border.Transitions>
+                <Transitions>
+                    <DoubleTransition Duration="0:0:0.2" Property="Opacity" />
+                </Transitions>
+            </Border.Transitions>
+            <StackPanel
+                HorizontalAlignment="Center"
+                Orientation="Horizontal"
+                Spacing="20"
+                VerticalAlignment="Center">
+                <progressRing:ProgressRing
+                    Background="Transparent"
+                    BorderThickness="10"
+                    Height="80"
+                    IsIndeterminate="True"
+                    Width="80" />
+                <StackPanel VerticalAlignment="Center">
+                    <TextBlock FontSize="48" Text="Loading..." />
+                    <TextBlock
+                        FontSize="20"
+                        IsVisible="{Binding LoadingCoverageMessage, Converter={x:Static StringConverters.IsNullOrEmpty}}"
+                        Text="{I18N {x:Static languages:LangKeys.Wiki_LoadingCoverage_DefaultMessage}}" />
+                    <TextBlock FontSize="20" Text="{Binding LoadingCoverageMessage}" />
+                </StackPanel>
+            </StackPanel>
+        </Border>
     </Grid>
 </UserControl>

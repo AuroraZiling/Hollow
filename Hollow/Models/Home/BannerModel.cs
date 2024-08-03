@@ -1,6 +1,6 @@
 ﻿using Avalonia.Media.Imaging;
 
-namespace Hollow.Models.Pages.Home;
+namespace Hollow.Models.Home;
 
 public class BannerModel
 {

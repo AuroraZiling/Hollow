@@ -1,6 +1,5 @@
 ﻿using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
-using Avalonia.Platform;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Hollow.Abstractions.Models;
@@ -11,6 +10,7 @@ using Hollow.Services.GameService;
 using Hollow.Services.NavigationService;
 using Hollow.Views.Controls;
 using Hollow.Views.Pages;
+// ReSharper disable UnusedParameterInPartialMethod
 
 namespace Hollow.ViewModels.Pages;
 

@@ -15,7 +15,7 @@ using Hollow.Abstractions.Models.HttpContrasts.Hakush;
 using Hollow.Enums;
 using Hollow.Helpers;
 using Hollow.Languages;
-using Hollow.Models.Pages.SignalSearch;
+using Hollow.Models.SignalSearch;
 using Hollow.Services.ConfigurationService;
 using Hollow.Services.GameService;
 using Serilog;

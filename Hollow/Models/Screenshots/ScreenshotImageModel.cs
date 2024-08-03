@@ -1,4 +1,4 @@
-﻿namespace Hollow.Models.Pages.Screenshots;
+﻿namespace Hollow.Models.Screenshots;
 
 public class ScreenshotImageModel
 {

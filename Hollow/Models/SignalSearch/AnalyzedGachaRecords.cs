@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-namespace Hollow.Models.Pages.SignalSearch;
+namespace Hollow.Models.SignalSearch;
 
 public class AnalyzedGachaRecordProfile
 {

@@ -6,7 +6,7 @@ using Hollow.Abstractions.Models.HttpContrasts.Gacha;
 using Hollow.Abstractions.Models.HttpContrasts.Gacha.Uigf;
 using Hollow.Abstractions.Models.HttpContrasts.Hakush;
 using Hollow.Enums;
-using Hollow.Models.Pages.SignalSearch;
+using Hollow.Models.SignalSearch;
 
 namespace Hollow.Services.GachaService;
 

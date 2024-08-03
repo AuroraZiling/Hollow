@@ -1,7 +1,7 @@
 using System;
 using Avalonia.Controls;
 using Hollow.Abstractions.Models.HttpContrasts.Gacha.Uigf;
-using Hollow.Models.Pages.SignalSearch;
+using Hollow.Models.SignalSearch;
 
 namespace Hollow.Views.Dialogs;
 

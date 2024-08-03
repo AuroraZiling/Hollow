@@ -5,7 +5,7 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:dialogs="clr-namespace:Hollow.Views.Dialogs"
     xmlns:languages="clr-namespace:Hollow.Languages"
-    xmlns:signalSearch="clr-namespace:Hollow.Models.Pages.SignalSearch"
+    xmlns:signalSearch1="clr-namespace:Hollow.Models.SignalSearch"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <StackPanel Spacing="12">
         <StackPanel Spacing="5">
@@ -31,7 +31,7 @@
             SelectedItems="{Binding SelectedImportItems, Mode=TwoWay}"
             SelectionMode="Multiple, Toggle">
             <ListBox.ItemTemplate>
-                <DataTemplate x:DataType="signalSearch:ImportItem">
+                <DataTemplate x:DataType="signalSearch1:ImportItem">
                     <Grid ColumnDefinitions="2*, *, *">
                         <TextBlock Grid.Column="0" Text="{Binding Uid}" />
                         <TextBlock Grid.Column="1" Text="{Binding I18NTimezone}" />

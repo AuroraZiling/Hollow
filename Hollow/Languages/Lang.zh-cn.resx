@@ -400,12 +400,15 @@
         <value>情报站</value>
     </data>
     <data name="Wiki_Character_Select" xml:space="preserve">
-        <value>&amp;lt;&amp;lt;&amp;lt; Select an agent</value>
+        <value>&lt;&lt;&lt; Select an agent</value>
     </data>
     <data name="Wiki_LoadingCoverage_DefaultMessage" xml:space="preserve">
         <value>正在获取数据</value>
     </data>
     <data name="Wiki_LoadingCoverage_FetchDataMessage" xml:space="preserve">
         <value>正在获取 {0}</value>
+    </data>
+    <data name="Toast_WikiItemLoadFailed_Message" xml:space="preserve">
+        <value>无法加载有关 {0} 的信息</value>
     </data>
 </root>

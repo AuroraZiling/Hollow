@@ -8,7 +8,7 @@
     xmlns:languages="clr-namespace:Hollow.Languages"
     xmlns:pages="clr-namespace:Hollow.ViewModels.Pages"
     xmlns:signalSearch="clr-namespace:Hollow.Views.Controls.SignalSearch"
-    xmlns:signalSearchModel="clr-namespace:Hollow.Models.Pages.SignalSearch"
+    xmlns:signalSearch1="clr-namespace:Hollow.Models.SignalSearch"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <UserControl.Resources>
         <converters:RankTypeToFormattedConverter x:Key="RankTypeToFormattedConverter" />
@@ -200,7 +200,7 @@
                             Width="1.5*" />
                         <DataGridTemplateColumn Header="{I18N {x:Static languages:LangKeys.SignalSearch_Detailed_SingleOrConsecutive}}" Width="1.5*">
                             <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate DataType="signalSearchModel:AnalyzedCommonGachaRecordItem">
+                                <DataTemplate DataType="signalSearch1:AnalyzedCommonGachaRecordItem">
                                     <Panel Margin="10,0,0,0" VerticalAlignment="Center">
                                         <TextBlock IsVisible="{Binding IsSinglePoll}" Text="{I18N {x:Static languages:LangKeys.SignalSearch_Detailed_SingleOrConsecutive_Single}}" />
                                         <TextBlock IsVisible="{Binding !IsSinglePoll}">
@@ -251,7 +251,7 @@
                             Width="1.5*" />
                         <DataGridTemplateColumn Header="{I18N {x:Static languages:LangKeys.SignalSearch_Detailed_SingleOrConsecutive}}" Width="1.5*">
                             <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate DataType="signalSearchModel:AnalyzedCommonGachaRecordItem">
+                                <DataTemplate DataType="signalSearch1:AnalyzedCommonGachaRecordItem">
                                     <Panel Margin="10,0,0,0" VerticalAlignment="Center">
                                         <TextBlock IsVisible="{Binding IsSinglePoll}" Text="{I18N {x:Static languages:LangKeys.SignalSearch_Detailed_SingleOrConsecutive_Single}}" />
                                         <TextBlock IsVisible="{Binding !IsSinglePoll}">
@@ -302,7 +302,7 @@
                             Width="1.5*" />
                         <DataGridTemplateColumn Header="{I18N {x:Static languages:LangKeys.SignalSearch_Detailed_SingleOrConsecutive}}" Width="1.5*">
                             <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate DataType="signalSearchModel:AnalyzedCommonGachaRecordItem">
+                                <DataTemplate DataType="signalSearch1:AnalyzedCommonGachaRecordItem">
                                     <Panel Margin="10,0,0,0" VerticalAlignment="Center">
                                         <TextBlock IsVisible="{Binding IsSinglePoll}" Text="{I18N {x:Static languages:LangKeys.SignalSearch_Detailed_SingleOrConsecutive_Single}}" />
                                         <TextBlock IsVisible="{Binding !IsSinglePoll}">
@@ -353,7 +353,7 @@
                             Width="1.5*" />
                         <DataGridTemplateColumn Header="{I18N {x:Static languages:LangKeys.SignalSearch_Detailed_SingleOrConsecutive}}" Width="1.5*">
                             <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate DataType="signalSearchModel:AnalyzedCommonGachaRecordItem">
+                                <DataTemplate DataType="signalSearch1:AnalyzedCommonGachaRecordItem">
                                     <Panel Margin="10,0,0,0" VerticalAlignment="Center">
                                         <TextBlock IsVisible="{Binding IsSinglePoll}" Text="{I18N {x:Static languages:LangKeys.SignalSearch_Detailed_SingleOrConsecutive_Single}}" />
                                         <TextBlock IsVisible="{Binding !IsSinglePoll}">

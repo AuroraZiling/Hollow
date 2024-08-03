@@ -1,4 +1,4 @@
-﻿namespace Hollow.Models.Pages.Announcement;
+﻿namespace Hollow.Models.Announcement;
 
 public class AnnouncementModel
 {

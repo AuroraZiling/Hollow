@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using Hollow.Abstractions.Models.HttpContrasts.Gacha.Common;
 using Hollow.Abstractions.Models.HttpContrasts.Gacha.Uigf;
-using Hollow.Models.Pages.SignalSearch;
+using Hollow.Models.SignalSearch;
 
 namespace Hollow.Helpers;
 

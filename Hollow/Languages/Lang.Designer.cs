@@ -1158,6 +1158,15 @@ namespace Hollow.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed to load info about {0}.
+        /// </summary>
+        internal static string Toast_WikiItemLoadFailed_Message {
+            get {
+                return ResourceManager.GetString("Toast_WikiItemLoadFailed_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bangboo.
         /// </summary>
         internal static string Wiki_Bangboo {
@@ -1176,7 +1185,7 @@ namespace Hollow.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &amp;lt;&amp;lt;&amp;lt; 选择代理人.
+        ///   Looks up a localized string similar to &lt;&lt;&lt; 选择代理人.
         /// </summary>
         internal static string Wiki_Character_Select {
             get {

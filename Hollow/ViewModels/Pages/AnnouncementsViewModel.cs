@@ -1,7 +1,5 @@
 ﻿using System;
 using CommunityToolkit.Mvvm.ComponentModel;
-using Hollow.Helpers;
-using Hollow.Views;
 using Hollow.Views.Controls.WebView;
 using Hollow.Views.Pages;
 using Serilog;

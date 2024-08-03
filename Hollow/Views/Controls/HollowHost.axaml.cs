@@ -7,7 +7,6 @@ using Avalonia.Collections;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Controls.Templates;
-using Avalonia.Layout;
 using Avalonia.LogicalTree;
 using Avalonia.Rendering.Composition;
 using Avalonia.Threading;

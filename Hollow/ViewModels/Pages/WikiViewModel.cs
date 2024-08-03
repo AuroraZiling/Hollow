@@ -21,9 +21,11 @@ namespace Hollow.ViewModels.Pages;
 
 public partial class WikiViewModel : ViewModelBase, IViewModelBase
 {
+    #region Loading Coverage
+    
     [ObservableProperty] private double _loadingCoverageOpacity;
     [ObservableProperty] private bool _loadingCoverageVisible;
-    [ObservableProperty] private string _loadingCoverageMessage;
+    [ObservableProperty] private string _loadingCoverageMessage = Lang.Wiki_LoadingCoverage_DefaultMessage;
     
     private void ShowCoverage(string message)
     {
@@ -38,6 +40,7 @@ public partial class WikiViewModel : ViewModelBase, IViewModelBase
         LoadingCoverageOpacity = 0;
         LoadingCoverageVisible = false;
     }
+    #endregion
     
     #region Character
     
@@ -46,6 +49,7 @@ public partial class WikiViewModel : ViewModelBase, IViewModelBase
     [ObservableProperty] private ObservableCollection<WikiCharacterItemModel> _wikiCharacterItems = [];
     [ObservableProperty] private WikiCharacterItemModel? _selectedCharacterItem;
     [ObservableProperty] private HakushCharacterModel? _selectedCharacterDetailItem;
+    [ObservableProperty] private bool _isCharacterItemLoading;
 
     partial void OnSelectedCharacterItemChanged(WikiCharacterItemModel? value)
     {
@@ -54,6 +58,11 @@ public partial class WikiViewModel : ViewModelBase, IViewModelBase
         {
             ShowCoverage(string.Format(Lang.Wiki_LoadingCoverage_FetchDataMessage, value.Name));
             SelectedCharacterDetailItem = await LoadCharacterInfo(value.Id);
+            if (SelectedCharacterDetailItem is null)
+            {
+                await HollowHost.ShowToast(Lang.Toast_Common_Error_Title, string.Format(Lang.Toast_WikiItemLoadFailed_Message, value.Name), NotificationType.Error);
+            }
+            while (IsCharacterItemLoading) await Task.Delay(200);
             HideCoverage();
         });
     }
@@ -61,7 +70,10 @@ public partial class WikiViewModel : ViewModelBase, IViewModelBase
     private async Task<HakushCharacterModel?> LoadCharacterInfo(string selectedCharacterId)
     {
         var response = await _httpClient.GetStringAsync($"{CharacterDetailApiUrl}/{selectedCharacterId}.json");
-        return JsonSerializer.Deserialize<HakushCharacterModel>(response, HollowJsonSerializer.Options);
+        var data = JsonSerializer.Deserialize<HakushCharacterModel>(response, HollowJsonSerializer.Options);
+        if (data is null) return null;
+        data.Icon = $"{MetadataService.ItemMetadataIconBaseUrl}/{data.Icon}.webp";
+        return data;
     }
     
     #endregion
@@ -164,6 +176,8 @@ public partial class WikiViewModel : ViewModelBase, IViewModelBase
             HollowHost.ShowToast(Lang.Toast_Common_Error_Title, Lang.Toast_MetadataNotFound_Message, NotificationType.Error);
             return;
         }
+
+        LoadingCoverageMessage = Lang.Wiki_LoadingCoverage_DefaultMessage;
         LoadWiki();
     }
 }

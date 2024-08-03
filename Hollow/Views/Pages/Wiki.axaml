@@ -3,7 +3,6 @@
     x:Class="Hollow.Views.Pages.Wiki"
     x:DataType="pages:WikiViewModel"
     xmlns="https://github.com/avaloniaui"
-    xmlns:acrylic="clr-namespace:Hollow.Views.Controls.Acrylic"
     xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
     xmlns:languages="clr-namespace:Hollow.Languages"
     xmlns:pages="clr-namespace:Hollow.ViewModels.Pages"
@@ -90,10 +89,20 @@
                         IsVisible="{Binding SelectedCharacterItem, Converter={x:Static ObjectConverters.IsNull}}"
                         Text="{I18N {x:Static languages:LangKeys.Wiki_Character_Select}}"
                         VerticalAlignment="Center" />
-                    <ScrollViewer Grid.Column="1">
+                    <ScrollViewer Grid.Column="1" IsVisible="{Binding SelectedCharacterItem, Converter={x:Static ObjectConverters.IsNotNull}}">
                         <StackPanel>
-                            <TextBlock Text="{Binding SelectedCharacterItem.Name}" />
-                            <TextBlock Text="{Binding SelectedCharacterDetailItem.Rarity}" />
+                            <Panel Height="570">
+                                <Image
+                                    HorizontalAlignment="Left"
+                                    asyncImageLoader:ImageLoader.IsLoading="{Binding IsCharacterItemLoading}"
+                                    asyncImageLoader:ImageLoader.Source="{Binding SelectedCharacterDetailItem.Icon}" />
+                                <Border
+                                    Background="{StaticResource CoverageBackground}"
+                                    CornerRadius="10"
+                                    Height="160"
+                                    Margin="0,50,10,0"
+                                    VerticalAlignment="Center" />
+                            </Panel>
                         </StackPanel>
                     </ScrollViewer>
                 </Grid>

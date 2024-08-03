@@ -2,7 +2,7 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:languages="clr-namespace:Hollow.Languages"
     xmlns:signalSearch="clr-namespace:Hollow.Views.Controls.SignalSearch"
-    xmlns:signalSearchModels="clr-namespace:Hollow.Models.Pages.SignalSearch"
+    xmlns:signalSearch1="clr-namespace:Hollow.Models.SignalSearch"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <ControlTheme TargetType="signalSearch:SignalSearchOverviewCard" x:Key="SignalSearchOverviewCardTheme">
         <Setter Property="Template">
@@ -149,7 +149,7 @@
                                 </Style>
                             </ItemsControl.Styles>
                             <ItemsControl.ItemTemplate>
-                                <DataTemplate DataType="signalSearchModels:OverviewCardGachaItem">
+                                <DataTemplate DataType="signalSearch1:OverviewCardGachaItem">
                                     <Border Padding="0,3,0,3">
                                         <Panel>
                                             <ProgressBar

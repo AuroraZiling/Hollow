@@ -5,7 +5,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Hollow.Abstractions.Models.HttpContrasts.MiHoYoLauncher;
 using Hollow.Helpers;
-using Hollow.Models.Pages.Home;
+using Hollow.Models.Home;
 using Hollow.Services.ConfigurationService;
 using Hollow.Services.GameService;
 using Hollow.Services.MiHoYoLauncherService;

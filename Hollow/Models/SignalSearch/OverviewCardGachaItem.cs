@@ -1,4 +1,4 @@
-﻿namespace Hollow.Models.Pages.SignalSearch;
+﻿namespace Hollow.Models.SignalSearch;
 
 public class OverviewCardGachaItem
 {

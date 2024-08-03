@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using Avalonia;
 using Avalonia.Controls;
-using Hollow.Models.Pages.SignalSearch;
+using Hollow.Models.SignalSearch;
 
 namespace Hollow.Views.Controls.SignalSearch;
 

@@ -15,7 +15,7 @@ namespace Hollow.Services.MetadataService;
 public class MetadataService(HttpClient httpClient): IMetadataService
 {
     public Dictionary<string, HakushItemModel>? ItemsMetadata { get; set; }
-    private const string ItemMetadataIconBaseUrl = "https://api.hakush.in/zzz/UI";
+    public const string ItemMetadataIconBaseUrl = "https://api.hakush.in/zzz/UI";
 
     private static string ProcessIconUrl(string iconUrl, HakushItemType itemType)
     {

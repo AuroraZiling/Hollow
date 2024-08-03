@@ -400,12 +400,15 @@
         <value>Wiki</value>
     </data>
     <data name="Wiki_Character_Select" xml:space="preserve">
-        <value>&amp;lt;&amp;lt;&amp;lt; 选择代理人</value>
+        <value>&lt;&lt;&lt; 选择代理人</value>
     </data>
     <data name="Wiki_LoadingCoverage_DefaultMessage" xml:space="preserve">
         <value>Fetching</value>
     </data>
     <data name="Wiki_LoadingCoverage_FetchDataMessage" xml:space="preserve">
         <value>Fetching {0}</value>
+    </data>
+    <data name="Toast_WikiItemLoadFailed_Message" xml:space="preserve">
+        <value>Failed to load info about {0}</value>
     </data>
 </root>

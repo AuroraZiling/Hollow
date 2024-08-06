@@ -49,7 +49,7 @@ public partial class AnnouncementsViewModel
                 homeClose[0].remove();
             }
     
-            // 重写所有 uniwebview URL 方案
+            // Rewrite all uniwebview://open_url
             function rewriteUniWebViewUrls() {
                 document.querySelectorAll('a[href]').forEach(link => {
                     const href = link.getAttribute('href');

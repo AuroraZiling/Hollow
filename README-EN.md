@@ -35,7 +35,6 @@ Hollow is a Zenless Zone Zero toolbox
 
 ### Roadmap
 - [x] Game Launch
-  - [ ] Version check *need to get the latest version and compare*
 - [ ] Achievements
 - [x] Game settings
 - [x] Announcements

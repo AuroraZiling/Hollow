@@ -101,7 +101,11 @@
                                     CornerRadius="10"
                                     Height="160"
                                     Margin="0,50,10,0"
-                                    VerticalAlignment="Center" />
+                                    VerticalAlignment="Center">
+                                    <Panel>
+                                        <TextBlock Text="{Binding SelectedCharacterDetailItem.Name}" />
+                                    </Panel>
+                                </Border>
                             </Panel>
                         </StackPanel>
                     </ScrollViewer>

@@ -56,12 +56,16 @@ public static class GachaAnalyser
 
     private static AnalyzedCommonGachaRecord FromGachaItems(List<GachaItem> gachaItems, TimeZoneAdjuster timezoneAdjuster)
     {
-        // Prepare analyzed gacha record items
-        var analyzedCommonGachaRecordItems = new List<AnalyzedCommonGachaRecordItem>();
+        // Converting original gacha items to analyzed gacha items
+        var sortedAnalyzedCommonGachaRecordItems = new SortedSet<AnalyzedCommonGachaRecordItem>(
+            Comparer<AnalyzedCommonGachaRecordItem>
+                .Create((x, y) => string.Compare(y.Id, x.Id, StringComparison.Ordinal))  // Descending order by Id
+        );
+        
         foreach (var gachaItem in gachaItems)
         {
             var adjustedTime = timezoneAdjuster.ConvertToLocalTimeZone(gachaItem.Time);
-            analyzedCommonGachaRecordItems.Add(new AnalyzedCommonGachaRecordItem
+            sortedAnalyzedCommonGachaRecordItems.Add(new AnalyzedCommonGachaRecordItem
             {
                 Id = gachaItem.Id,
                 ItemId = gachaItem.ItemId,
@@ -70,28 +74,22 @@ public static class GachaAnalyser
                 RankType = gachaItem.RankType,
                 Time = adjustedTime,
                 Timestamp = GetTimestamp(adjustedTime),
-                
-                IsSinglePoll = true, // Not initialized yet
-                NthPull = 0, // Not initialized yet
-                NthGuaranteePull = 0, // Not initialized yet
             });
         }
 
-        analyzedCommonGachaRecordItems = analyzedCommonGachaRecordItems.OrderByDescending(item => item.Timestamp).ToList();
+        var analyzedCommonGachaRecordItems = sortedAnalyzedCommonGachaRecordItems.ToList();
         
-        // Analyze
+        // Analyze Total, TotalS, TotalA, TotalB, PollsUsed
         var total = analyzedCommonGachaRecordItems.Count;
         var totalS = 0;
         var totalA = 0;
         var totalB = 0;
-        var overviewCardGachaItems = new ObservableCollection<OverviewCardGachaItem>();
+        var overviewCardGachaItems = new List<OverviewCardGachaItem>();
 
-        // Calculate 1st
         var guaranteeCounter = 0;
         for (var gachaItemIndex = total - 1; gachaItemIndex >= 0; gachaItemIndex--)
         {
-            guaranteeCounter++;
-            analyzedCommonGachaRecordItems[gachaItemIndex].NthGuaranteePull = guaranteeCounter;
+            analyzedCommonGachaRecordItems[gachaItemIndex].NthGuaranteePull = ++guaranteeCounter;
             
             switch (analyzedCommonGachaRecordItems[gachaItemIndex].RankType)
             {
@@ -122,8 +120,9 @@ public static class GachaAnalyser
             });
         }
 
-        overviewCardGachaItems = new ObservableCollection<OverviewCardGachaItem>(overviewCardGachaItems.Reverse());
+        overviewCardGachaItems.Reverse();
         
+        // Calculate Unluckiest and Luckiest
         var unluckiestPulls = 0;
         var luckiestPulls = 0;
         if (overviewCardGachaItems.Count > 0)
@@ -132,7 +131,7 @@ public static class GachaAnalyser
             luckiestPulls = overviewCardGachaItems.Min(item => item.PollsUsed);
         }
         
-        // Calculate 10 pulls
+        // Calculate nth pull in a consecutive 10 pulls
         for (var gachaItemIndex = total - 1; gachaItemIndex >= 9; gachaItemIndex--)
         {
             if (analyzedCommonGachaRecordItems[gachaItemIndex].Timestamp !=
@@ -145,6 +144,7 @@ public static class GachaAnalyser
             gachaItemIndex -= 9;
         }
         
+        // Calculate TotalAverage, SPercentage, APercentage, BPercentage
         var totalAverage = Math.Round(total / (double)totalS, 2);
         if (totalS == 0)
         {
@@ -159,6 +159,7 @@ public static class GachaAnalyser
             sPercentage = aPercentage = bPercentage = 0;
         }
             
+        // Calculate TimeRange
         var timeRange = "Unknown";
         if (total > 0)
         {
@@ -181,7 +182,7 @@ public static class GachaAnalyser
                 UnluckiestPulls = unluckiestPulls,
                 LuckiestPulls = luckiestPulls
             },
-            OverviewCardGachaItems = overviewCardGachaItems,
+            OverviewCardGachaItems = new ObservableCollection<OverviewCardGachaItem>(overviewCardGachaItems),
             Items = analyzedCommonGachaRecordItems
         };
     }

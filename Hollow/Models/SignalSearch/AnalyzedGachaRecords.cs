@@ -44,9 +44,9 @@ public class AnalyzedCommonGachaRecordItem
     
     // Additional
     public required long Timestamp { get; set; }
-    public required bool IsSinglePoll { get; set; }
-    public required int NthPull { get; set; } // If IsSinglePull is true, this should be 0
-    public required int NthGuaranteePull { get; set; }
+    public bool IsSinglePoll { get; set; } = true;
+    public int NthPull { get; set; }  // If IsSinglePull is true, this should be 0
+    public int NthGuaranteePull { get; set; }
 }
 
 public class AnalyzedCommonGachaRecord

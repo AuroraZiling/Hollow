@@ -26,6 +26,13 @@ public partial class GachaService(IConfigurationService configurationService, Ht
 {
     public Dictionary<string, GachaRecordProfile>? GachaRecordProfileDictionary { get; set; }
 
+    /// <summary>
+    /// Import & Merge Gacha Records from UIGF v4.0 File
+    /// </summary>
+    /// <param name="fileJson">Original deserialized UIGF v4.0 Json, including multiple UIDs</param>
+    /// <param name="selectedImportItems">UIDs selected to be imported</param>
+    /// <param name="itemsMetadata">Completing missing data from metadata</param>
+    /// <returns>Completed merged gacha records</returns>
     public GachaRecords MergeGachaRecordsFromImport(GachaRecords fileJson, ImportItem[] selectedImportItems, Dictionary<string, HakushItemModel> itemsMetadata)
     {
         var currentGachaProfiles = GachaRecordProfileDictionary ?? new Dictionary<string, GachaRecordProfile>();
@@ -33,7 +40,7 @@ public partial class GachaService(IConfigurationService configurationService, Ht
         {
             var completedGachaItems = CompleteGachaItems(fileJson.Profiles.First(profile => profile.Uid == selectedImportItem.Uid).List, itemsMetadata);
                     
-            if(currentGachaProfiles.TryGetValue(selectedImportItem.Uid, out var currentGachaProfile))
+            if(currentGachaProfiles.TryGetValue(selectedImportItem.Uid, out var currentGachaProfile))  // If UID exists in records, into completion
             {
                 var mergedList = completedGachaItems
                     .Concat(currentGachaProfile.List)
@@ -41,16 +48,15 @@ public partial class GachaService(IConfigurationService configurationService, Ht
                     .Select(group => group.First())
                     .OrderByDescending(item => item.Id)
                     .ToList();
-                
-                currentGachaProfiles.Remove(selectedImportItem.Uid);
-                currentGachaProfiles.Add(selectedImportItem.Uid, new GachaRecordProfile
+
+                currentGachaProfiles[selectedImportItem.Uid] = new GachaRecordProfile
                 {
                     Uid = selectedImportItem.Uid,
                     Timezone = selectedImportItem.I18NTimezone.ToTimeZoneFromUtcPrefix(),
                     List = mergedList
-                });
+                };
             }
-            else
+            else  // UID not exists in records, add new
             {
                 currentGachaProfiles.Add(selectedImportItem.Uid, new GachaRecordProfile
                 {
@@ -312,7 +318,7 @@ public partial class GachaService(IConfigurationService configurationService, Ht
         }
     }
 
-    private Response<GachaUrlData> GetGachaUrlDataFromFile(string dataPath, GameServer gameServer)
+    private static Response<GachaUrlData> GetGachaUrlDataFromFile(string dataPath, GameServer gameServer)
     {
         using var fileStream = File.Open(dataPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite | FileShare.Delete);
         using var reader = new StreamReader(fileStream);

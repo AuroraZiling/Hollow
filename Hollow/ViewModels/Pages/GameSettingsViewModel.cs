@@ -41,13 +41,9 @@ public partial class GameSettingsViewModel : ViewModelBase, IViewModelBase
     private bool ValidateSettings()
     {
         var screenResponse = ValidateScreenRegistry();
-        if (!screenResponse.IsSuccess)
-        {
-            HollowHost.ShowToast(Lang.Toast_Common_Error_Title, screenResponse.Message, NotificationType.Error);
-            return false;
-        }
-
-        return true;
+        if (screenResponse.IsSuccess) return true;
+        HollowHost.ShowToast(Lang.Toast_Common_Error_Title, screenResponse.Message, NotificationType.Error);
+        return false;
     }
     
     #region Screen

@@ -1,9 +1,10 @@
 using System;
+using Avalonia.Controls.Notifications;
 using Hollow.Enums;
 
 namespace Hollow.Views.Controls.Toast;
 
-public readonly record struct ToastModel(string Title, string Content, NotificationType Type = NotificationType.Info, TimeSpan? Lifetime = null, Action? OnClicked = null, string? ActionButtonContent = null,Action? ActionButton= null)
+public readonly record struct ToastModel(string Title, string Content, NotificationType Type = NotificationType.Information, TimeSpan? Lifetime = null, Action? OnClicked = null, string? ActionButtonContent = null,Action? ActionButton= null)
 {
     public string Title { get; } = Title;
     public string Content { get; } = Content;

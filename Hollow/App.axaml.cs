@@ -5,6 +5,7 @@ using AsyncImageLoader;
 using AsyncImageLoader.Loaders;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
+using Avalonia.Controls.Notifications;
 using Avalonia.Markup.Xaml;
 using Hollow.Abstractions.Models;
 using Hollow.Services.ConfigurationService;
@@ -16,6 +17,7 @@ using Hollow.Services.NavigationService;
 using Hollow.ViewModels;
 using Hollow.ViewModels.Pages;
 using Hollow.Views;
+using Hollow.Views.Controls;
 using Hollow.Views.Pages;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
@@ -94,6 +96,8 @@ public class App : Application
         {
             desktop.MainWindow = MainWindowInstance;
         }
+        
+        HollowHost.NotificationManager = new WindowNotificationManager(MainWindowInstance) { MaxItems = 5, Position = NotificationPosition.BottomRight};
 
         base.OnFrameworkInitializationCompleted();
     }

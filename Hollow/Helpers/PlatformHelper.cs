@@ -21,7 +21,7 @@ public static class PlatformHelper
     private static long GetDirectorySize(string folderPath)
     {
         var directory = new DirectoryInfo(folderPath);
-        return directory.EnumerateFiles("*", SearchOption.AllDirectories).Sum(fi => fi.Length);
+        return directory.EnumerateFiles("*", SearchOption.AllDirectories).Sum(fileInfo => fileInfo.Length);
     }
     
     private static double ConvertBytesToMegabytes(long bytes)

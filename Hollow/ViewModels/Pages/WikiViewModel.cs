@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Avalonia.Controls.Notifications;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Hollow.Abstractions.Enums.Hakush;
 using Hollow.Abstractions.JsonConverters.Serializers;

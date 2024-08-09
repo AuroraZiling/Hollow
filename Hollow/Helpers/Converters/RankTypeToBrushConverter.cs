@@ -8,8 +8,6 @@ namespace Hollow.Helpers.Converters;
 
 public class RankTypeToBrushConverter : IValueConverter
 {
-    public static readonly RankTypeToBrushConverter Instance = new();
-
     public object Convert(object? value, Type targetType, object? parameter, 
         CultureInfo culture)
     {

@@ -5,14 +5,12 @@ namespace Hollow.Helpers;
 
 public static class UigfSchemaValidator
 {
+    private static JsonSchema Schema { get; } = JsonSchema.FromText(SchemaJson);
+    
     public static bool Validate(string json)
-    {
-        var jsonNode = JsonNode.Parse(json);
-        var schema = JsonSchema.FromText(Schema);
-        return schema.Evaluate(jsonNode).IsValid;
-    }
+        => Schema.Evaluate(JsonNode.Parse(json)).IsValid;
 
-    private const string Schema =
+    private const string SchemaJson =
         """
         {
             "$schema": "https://json-schema.org/draft/2020-12/schema",

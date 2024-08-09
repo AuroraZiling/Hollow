@@ -4,6 +4,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Avalonia.Controls.Notifications;
 using Avalonia.Markup.Xaml.MarkupExtensions;
 using Avalonia.Platform.Storage;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -19,7 +20,6 @@ using Hollow.Services.NavigationService;
 using Hollow.Views.Controls;
 using Hollow.Views.Pages;
 using Serilog;
-using NotificationType = Hollow.Enums.NotificationType;
 
 namespace Hollow.ViewModels.Pages;
 

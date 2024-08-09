@@ -6,10 +6,7 @@ namespace Hollow.Helpers;
 public static class BitmapOperations
 {
     public static Bitmap Convert(Stream stream, int height)
-    {
-        var image = new Bitmap(stream);
-        return Decode(image, height);
-    }
+        => Decode(new Bitmap(stream), height);
     
     public static Bitmap Decode(Bitmap bitmap, int height)
     {

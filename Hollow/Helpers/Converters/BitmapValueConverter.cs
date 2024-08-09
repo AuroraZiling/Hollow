@@ -7,8 +7,6 @@ namespace Hollow.Helpers.Converters;
 
 public class BitmapValueConverter : IValueConverter
 {
-    public static BitmapValueConverter Instance = new();
-
     public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
         if (value is string fileName && targetType == typeof(Bitmap))

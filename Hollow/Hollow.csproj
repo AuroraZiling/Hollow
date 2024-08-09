@@ -22,14 +22,14 @@
     <ItemGroup>
         <PackageReference Include="Antelcat.I18N.Avalonia" Version="1.0.3" />
         <PackageReference Include="AsyncImageLoader.Avalonia" Version="3.2.1" />
-        <PackageReference Include="Avalonia" Version="11.1.1" />
-        <PackageReference Include="Avalonia.Controls.DataGrid" Version="11.1.1" />
-        <PackageReference Include="Avalonia.Desktop" Version="11.1.1" />
-        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.1.1" />
-        <PackageReference Include="Avalonia.Themes.Fluent" Version="11.1.1" />
+        <PackageReference Include="Avalonia" Version="11.1.2" />
+        <PackageReference Include="Avalonia.Controls.DataGrid" Version="11.1.2" />
+        <PackageReference Include="Avalonia.Desktop" Version="11.1.2" />
+        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.1.2" />
+        <PackageReference Include="Avalonia.Themes.Fluent" Version="11.1.2" />
         <PackageReference Include="Avalonia.Xaml.Behaviors" Version="11.1.0" />
         <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
-        <PackageReference Include="FluentIcons.Avalonia" Version="1.1.249" />
+        <PackageReference Include="FluentIcons.Avalonia" Version="1.1.250" />
         <PackageReference Include="JsonSchema.Net" Version="7.1.2" />
         <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
         <PackageReference Include="Serilog" Version="4.0.1" />

@@ -1,6 +1,8 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Avalonia.Controls.Notifications;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Hollow.Abstractions.Models.HttpContrasts.MiHoYoLauncher;
@@ -10,6 +12,7 @@ using Hollow.Services.ConfigurationService;
 using Hollow.Services.GameService;
 using Hollow.Services.MiHoYoLauncherService;
 using Hollow.Services.NavigationService;
+using Hollow.Views.Controls;
 using Hollow.Views.Pages;
 using Serilog;
 
@@ -45,7 +48,7 @@ public partial class HomeViewModel: ViewModelBase, IViewModelBase
 
         _ = LoadContents();
         CheckStartGameReady();
-
+        
         MainWindowViewModel.NavigatedToHome += Navigated;
     }
 

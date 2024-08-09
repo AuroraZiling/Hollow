@@ -1,8 +1,11 @@
 using System;
+using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.Notifications;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 using Hollow.Services.NavigationService;
+using Hollow.Views.Controls;
 using Serilog;
 
 namespace Hollow.Views;

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Collections;
 using Avalonia.Controls;
+using Avalonia.Controls.Notifications;
 using Avalonia.Controls.Primitives;
 using Avalonia.Controls.Templates;
 using Avalonia.LogicalTree;
@@ -12,7 +13,6 @@ using Avalonia.Rendering.Composition;
 using Avalonia.Threading;
 using Hollow.Helpers;
 using Hollow.Views.Controls.Toast;
-using NotificationType = Hollow.Enums.NotificationType;
 
 namespace Hollow.Views.Controls;
 
@@ -156,20 +156,20 @@ public class HollowHost : ContentControl
     public static Task ShowToast(ToastModel model) => 
         ShowToast(_mainWindow!, model);
 
-    public static Task ShowToast(string title, string content = "", NotificationType? type = NotificationType.Info, TimeSpan? duration = null, Action? onClicked = null) =>
+    public static Task ShowToast(string title, string? content, NotificationType? type, TimeSpan? duration = null, Action? onClicked = null) =>
         ShowToast(new ToastModel(
             title,
-            content,
-            type ?? NotificationType.Info,
+            content ?? "",
+            type ?? NotificationType.Information,
             duration ?? TimeSpan.FromSeconds(4),
             onClicked));
 
-    public static Task ShowToast(Window window, string title, string content = "", NotificationType? type = NotificationType.Info, TimeSpan? duration = null,
+    public static Task ShowToast(Window window, string title, string? content, NotificationType? type, TimeSpan? duration = null,
         Action? onClicked = null) =>
         ShowToast(window, new ToastModel(
             title,
-            content,
-            type ?? NotificationType.Info,
+            content ?? "",
+            type ?? NotificationType.Information,
             duration ?? TimeSpan.FromSeconds(4),
             onClicked));
 
@@ -200,6 +200,16 @@ public class HollowHost : ContentControl
     }
 
     public static void ClearAllToasts() => ClearAllToasts(_mainWindow!);
+
+    #region New Toasts
+
+    public static WindowNotificationManager NotificationManager { get; set; } = null!;
+    public static void ShowAvaloniaToast(string title, string message, NotificationType notificationType, TimeSpan? timeSpan = null, Action? onClick = null, Action? onClose = null)
+    {
+        NotificationManager.Show(new Notification(title, message, notificationType, timeSpan, onClick, onClose));
+    }
+
+    #endregion
 
     protected override void OnDetachedFromLogicalTree(LogicalTreeAttachmentEventArgs e)
     {

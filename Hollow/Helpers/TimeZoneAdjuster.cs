@@ -22,12 +22,8 @@ public class TimeZoneAdjuster(int knownTimeZoneOffsetHours)
 public static class DateTimeDisplayExtensions
 {
     public static string ToUtcPrefixTimeZone(this int offsetHours)
-    {
-        return offsetHours >= 0 ? $"UTC+{offsetHours}" : $"UTC{offsetHours}";
-    }
+        => offsetHours >= 0 ? $"UTC+{offsetHours}" : $"UTC{offsetHours}";
     
     public static int ToTimeZoneFromUtcPrefix(this string utcPrefixTimeZone)
-    {
-        return int.Parse(utcPrefixTimeZone.Replace("UTC", "").Replace("+", ""));
-    }
+        => int.Parse(utcPrefixTimeZone.Replace("UTC", "").Replace("+", ""));
 }

@@ -80,7 +80,7 @@
                     <Panel>
                         <Carousel ItemsSource="{Binding Banners}" Name="Banners">
                             <Carousel.PageTransition>
-                                <PageSlide Duration="0:0:0.3" Orientation="Horizontal" />
+                                <CrossFade Duration="0:0:0.3" />
                             </Carousel.PageTransition>
                             <Carousel.ItemTemplate>
                                 <DataTemplate>

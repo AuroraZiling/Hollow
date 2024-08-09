@@ -2,6 +2,7 @@ using System;
 using System.Timers;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.Notifications;
 using Avalonia.Controls.Primitives;
 using Avalonia.Input;
 using Avalonia.Interactivity;
@@ -121,7 +122,7 @@ public class Toast : ContentControl
         }
         Icon = model.Type switch
         {
-            NotificationType.Info => Symbol.Info,
+            NotificationType.Information => Symbol.Info,
             NotificationType.Success => Symbol.CheckmarkCircle,
             NotificationType.Warning => Symbol.Warning,
             NotificationType.Error => Symbol.ErrorCircle,
@@ -129,7 +130,7 @@ public class Toast : ContentControl
         };
         Foreground = model.Type switch
         {
-            NotificationType.Info => NotificationColor.InfoIconForeground,
+            NotificationType.Information => NotificationColor.InfoIconForeground,
             NotificationType.Success => NotificationColor.SuccessIconForeground,
             NotificationType.Warning => NotificationColor.WarningIconForeground,
             NotificationType.Error => NotificationColor.ErrorIconForeground,

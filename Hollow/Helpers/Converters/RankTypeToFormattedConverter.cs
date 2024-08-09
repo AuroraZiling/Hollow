@@ -7,8 +7,6 @@ namespace Hollow.Helpers.Converters;
 
 public class RankTypeToFormattedConverter: IValueConverter
 {
-    public static readonly RankTypeToFormattedConverter Instance = new();
-
     public object Convert(object? value, Type targetType, object? parameter, 
         CultureInfo culture)
     {

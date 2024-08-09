@@ -10,19 +10,6 @@
                         <ContentPresenter Content="{TemplateBinding Content}" />
                     </Panel>
 
-                    <ItemsControl
-                        HorizontalAlignment="Right"
-                        ItemsSource="{TemplateBinding ToastsCollection}"
-                        Margin="0,0,25,10"
-                        Name="PART_ToastPresenter"
-                        VerticalAlignment="Bottom">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <DockPanel LastChildFill="True" VerticalAlignment="Bottom" />
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                    </ItemsControl>
-
                     <Border
                         Background="#131313"
                         HorizontalAlignment="Stretch"

@@ -21,7 +21,6 @@
                 <ResourceInclude Source="Views/Controls/HollowHost.axaml" />
                 <ResourceInclude Source="Views/Controls/Coverages/ProhibitedCoverage.axaml" />
                 <ResourceInclude Source="Views/Controls/Coverages/LoadingCoverage.axaml" />
-                <ResourceInclude Source="Views/Controls/Toast/Toast.axaml" />
                 <ResourceInclude Source="Views/Controls/SignalSearch/SignalSearchOverviewCard.axaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

@@ -123,6 +123,5 @@
       <AdditionalFiles Include="Views\Controls\Home\StartGameNoticeButton.axaml" />
       <AdditionalFiles Include="Views\Controls\Screenshots\ScreenshotImage.axaml" />
       <AdditionalFiles Include="Views\Controls\SignalSearch\SignalSearchOverviewCard.axaml" />
-      <AdditionalFiles Include="Views\Controls\Toast\Toast.axaml" />
     </ItemGroup>
 </Project>

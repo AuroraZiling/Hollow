@@ -1,6 +1,4 @@
-﻿using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Controls.Notifications;
+﻿using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Hollow.ViewModels.Pages;
 

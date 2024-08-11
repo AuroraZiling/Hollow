@@ -13,7 +13,6 @@ using Hollow.Abstractions.JsonConverters.Serializers;
 using Hollow.Abstractions.Models;
 using Hollow.Abstractions.Models.HttpContrasts.Gacha;
 using Hollow.Abstractions.Models.HttpContrasts.Gacha.Uigf;
-using Hollow.Enums;
 using Hollow.Helpers;
 using Hollow.Languages;
 using Hollow.Models.SignalSearch;
@@ -185,7 +184,7 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
     {
         if(_metadataService.ItemsMetadata is null)
         {
-            await HollowHost.ShowToast(Lang.Toast_Common_Error_Title, Lang.Toast_MetadataNotFound_Message, NotificationType.Error);
+            HollowHost.ShowToast(Lang.Toast_Common_Error_Title, Lang.Toast_MetadataNotFound_Message, NotificationType.Error);
         }
         
         var files = await App.MainWindowInstance.StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
@@ -202,20 +201,20 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
             var fileContent = await streamReader.ReadToEndAsync();
             if (!UigfSchemaValidator.Validate(fileContent))
             {
-                await HollowHost.ShowToast(Lang.Toast_Common_Error_Title, Lang.Toast_InvalidUigfFile_Message, NotificationType.Error);
+                HollowHost.ShowToast(Lang.Toast_Common_Error_Title, Lang.Toast_InvalidUigfFile_Message, NotificationType.Error);
                 return;
             }
             
             var fileJson = JsonSerializer.Deserialize<GachaRecords>(fileContent, HollowJsonSerializer.Options);
             if (fileJson is null)
             {
-                await HollowHost.ShowToast(Lang.Toast_Common_Error_Title, Lang.Toast_InvalidUigfFile_Message, NotificationType.Error);
+                HollowHost.ShowToast(Lang.Toast_Common_Error_Title, Lang.Toast_InvalidUigfFile_Message, NotificationType.Error);
                 return;
             }
             
             if(fileJson.Profiles.Count == 0)
             {
-                await HollowHost.ShowToast(Lang.Toast_Common_Error_Title, Lang.Toast_EmptyUigfNapRecords_Message, NotificationType.Error);
+                HollowHost.ShowToast(Lang.Toast_Common_Error_Title, Lang.Toast_EmptyUigfNapRecords_Message, NotificationType.Error);
                 return;
             }
             
@@ -228,7 +227,7 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
                 var gachaRecords = _gachaService.MergeGachaRecordsFromImport(fileJson, selectedImportItems, _metadataService.ItemsMetadata!);
                 await File.WriteAllTextAsync(AppInfo.GachaRecordPath, JsonSerializer.Serialize(gachaRecords, HollowJsonSerializer.Options));
                 
-                await HollowHost.ShowToast(Lang.Toast_Common_Success_Title, string.Format(Lang.Toast_ImportSuccess_Message, fileJson.Info.ExportApp, selectedImportItems.Length), NotificationType.Success);
+                HollowHost.ShowToast(Lang.Toast_Common_Success_Title, string.Format(Lang.Toast_ImportSuccess_Message, fileJson.Info.ExportApp, selectedImportItems.Length), NotificationType.Success);
                 await LoadGachaRecords();
             }
         }
@@ -247,7 +246,7 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
             
             if (!authKey.IsSuccess)
             {
-                await HollowHost.ShowToast(Lang.SignalSearch_Update_GetRecordsFailed, authKey.Message, NotificationType.Error);
+                HollowHost.ShowToast(Lang.SignalSearch_Update_GetRecordsFailed, authKey.Message, NotificationType.Error);
                 return;
             }
             await UpdateRecords(authKey.Data);
@@ -260,7 +259,7 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
         var authKey = _gachaService.GetGachaUrlData();
         if (!authKey.IsSuccess)
         {
-            await HollowHost.ShowToast(Lang.SignalSearch_Update_GetRecordsFailed, authKey.Message, NotificationType.Error);
+            HollowHost.ShowToast(Lang.SignalSearch_Update_GetRecordsFailed, authKey.Message, NotificationType.Error);
             return;
         }
         await UpdateRecords(authKey.Data);
@@ -270,7 +269,7 @@ public partial class SignalSearchViewModel : ViewModelBase, IViewModelBase
     {
         if (!await _gachaService.IsAuthKeyValid(gachaUrlData.AuthKey))
         {
-            await HollowHost.ShowToast(Lang.Toast_Common_Error_Title, Lang.Toast_InvalidAuthKey_Message, NotificationType.Error);
+            HollowHost.ShowToast(Lang.Toast_Common_Error_Title, Lang.Toast_InvalidAuthKey_Message, NotificationType.Error);
             return;
         }
         

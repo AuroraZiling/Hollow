@@ -6,7 +6,6 @@ using Avalonia.Platform;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Hollow.Abstractions.Models;
-using Hollow.Enums;
 using Hollow.Helpers;
 using Hollow.Languages;
 using Hollow.Services.MetadataService;

@@ -9,7 +9,6 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using Hollow.Abstractions.Enums.Hakush;
 using Hollow.Abstractions.JsonConverters.Serializers;
 using Hollow.Abstractions.Models.HttpContrasts.Hakush;
-using Hollow.Enums;
 using Hollow.Helpers;
 using Hollow.Languages;
 using Hollow.Models.Wiki;
@@ -61,7 +60,7 @@ public partial class WikiViewModel : ViewModelBase, IViewModelBase
             SelectedCharacterDetailItem = await LoadCharacterInfo(value.Id);
             if (SelectedCharacterDetailItem is null)
             {
-                await HollowHost.ShowToast(Lang.Toast_Common_Error_Title, string.Format(Lang.Toast_WikiItemLoadFailed_Message, value.Name), NotificationType.Error);
+                HollowHost.ShowToast(Lang.Toast_Common_Error_Title, string.Format(Lang.Toast_WikiItemLoadFailed_Message, value.Name), NotificationType.Error);
             }
             while (IsCharacterItemLoading) await Task.Delay(200);
             HideCoverage();

@@ -4,7 +4,6 @@ using Avalonia.Controls.Notifications;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Hollow.Abstractions.Models;
-using Hollow.Enums;
 using Hollow.Languages;
 using Hollow.Services.ConfigurationService;
 using Hollow.Services.GameService;

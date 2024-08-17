@@ -29,8 +29,8 @@ public class GameService(IConfigurationService configurationService): IGameServi
                 GameVersion = configIniFile.First(line => line.StartsWith("game_version=")).Split("=")[1];
                 GameBiz = configIniFile.First(line => line.StartsWith("cps=")).Split("=")[1] switch
                 {
-                    "hyp_mihoyo" => GameServer.China,
-                    "hyp_hoyoverse" => GameServer.Global,
+                    "mihoyo" => GameServer.China,
+                    "hoyoverse" => GameServer.Global,
                     _ => throw new ArgumentOutOfRangeException()
                 };
                 Log.Information("[GameService] Game directory validated ({path})", directoryPath);

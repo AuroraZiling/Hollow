@@ -26,7 +26,8 @@ public class MetadataService(HttpClient httpClient): IMetadataService
         return itemType switch
         {
             HakushItemType.Character => $"{ItemMetadataIconBaseUrl}/IconRoleSelect{iconUrl[8..]}.webp",
-            HakushItemType.Weapon or HakushItemType.Bangboo or HakushItemType.Equipment => $"{ItemMetadataIconBaseUrl}/{iconUrl.Split('/')[^1][..^4]}.webp",
+            HakushItemType.Weapon => $"{ItemMetadataIconBaseUrl}/{iconUrl}.webp",
+            HakushItemType.Bangboo or HakushItemType.Equipment => $"{ItemMetadataIconBaseUrl}/{iconUrl.Split('/')[^1][..^4]}.webp",
             _ => iconUrl
         };
     }

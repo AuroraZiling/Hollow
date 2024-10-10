@@ -6,9 +6,9 @@ $ErrorActionPreference = "Stop";
 
 Write-Output "Start building launcher...";
 
-cd hollow-launcher;
+Set-Location hollow-launcher;
 xmake;
-cd ..;
+Set-Location ..;
 
 Write-Output "Start building withRuntime...";
 

@@ -399,5 +399,13 @@ FodyWeavers.xsd
 .idea
 
 # Build
-build/
+/.xmake
+/build
 /hollow-launcher/target
+
+#Launcher
+/hollow-launcher/build
+/hollow-launcher/.xmake
+/hollow-launcher/.vscode
+/hollow-launcher/compile_commands.json
+/hollow-launcher/.cache

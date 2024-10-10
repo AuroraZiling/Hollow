@@ -60,7 +60,7 @@
                                         <StackPanel>
                                             <Panel>
                                                 <Image Height="95" asyncImageLoader:ImageLoader.Source="{Binding AvatarUrl}" />
-                                                <Image
+                                                <Image  
                                                     Height="18"
                                                     HorizontalAlignment="Right"
                                                     Margin="0,2,2,0"

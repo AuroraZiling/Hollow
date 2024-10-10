@@ -4,10 +4,10 @@
     ExtendClientAreaTitleBarHeightHint="-1"
     ExtendClientAreaToDecorationsHint="True"
     FontFamily="avares://Hollow/Assets/Fonts/#MiSans"
-    Height="750"
+    d:Height="750"
     Icon="avares://Hollow/Assets/Icons/small_icon.png"
     Title="Hollow"
-    Width="1350"
+    d:Width="1350"
     mc:Ignorable="d"
     x:Class="Hollow.Views.MainWindow"
     x:DataType="vm:MainWindowViewModel"
@@ -76,11 +76,12 @@
                     </TabItem.Header>
                     <pages:Wiki Margin="40,40,30,30" />
                 </TabItem>
-
+                
                 <TabItem
                     BorderBrush="White"
                     Classes="Navigation"
-                    Margin="10,380,0,0">
+                    VerticalAlignment="Bottom"
+                    Margin="10,0,0,0">
                     <TabItem.Header>
                         <avalonia:SymbolIcon FontSize="35" Symbol="Settings" />
                     </TabItem.Header>

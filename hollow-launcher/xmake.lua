@@ -6,6 +6,8 @@ target("HollowLauncher")
     set_languages("cxx20")
     add_files("src/main.cpp")
     add_files("HollowLauncher.rc")
-    -- add_rules("win.sdk.application")
-    -- add_ldflags("/SUBSYSTEM:WINDOWS")
+    if is_os("windows") then 
+        add_cxflags("/utf-8")
+        add_rules("win.sdk.application")
+    end
 target_end()

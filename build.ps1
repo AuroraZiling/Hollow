@@ -6,7 +6,9 @@ $ErrorActionPreference = "Stop";
 
 Write-Output "Start building launcher...";
 
-cargo build --manifest-path .\hollow-launcher\Cargo.toml -r
+cd hollow-launcher;
+xmake;
+cd ..;
 
 Write-Output "Start building withRuntime...";
 
@@ -20,7 +22,7 @@ Remove-Item -Path ./build/$Version/Hollow_withRuntime/hollow_app/Microsoft.Web.W
 Remove-Item -Path ./build/$Version/Hollow_withRuntime/hollow_app/Microsoft.Web.WebView2.Wpf.dll
 Remove-Item -Path ./build/$Version/Hollow_withRuntime/hollow_app/Microsoft.Web.WebView2.Wpf.xml
 
-Copy-Item -Path ".\hollow-launcher\target\release\Hollow.exe" -Destination ".\build\$Version\Hollow_withRuntime\Hollow.exe"
+Copy-Item -Path ".\hollow-launcher\build\windows\x64\release\HollowLauncher.exe" -Destination ".\build\$Version\Hollow_withRuntime\Hollow.exe"
 
 Write-Output "Start building withoutRuntime...";
 
@@ -34,7 +36,7 @@ Remove-Item -Path ./build/$Version/Hollow_withoutRuntime/hollow_app/Microsoft.We
 Remove-Item -Path ./build/$Version/Hollow_withoutRuntime/hollow_app/Microsoft.Web.WebView2.Wpf.dll
 Remove-Item -Path ./build/$Version/Hollow_withoutRuntime/hollow_app/Microsoft.Web.WebView2.Wpf.xml
 
-Copy-Item -Path ".\hollow-launcher\target\release\Hollow.exe" -Destination ".\build\$Version\Hollow_withoutRuntime\Hollow.exe"
+Copy-Item -Path ".\hollow-launcher\build\windows\x64\release\HollowLauncher.exe" -Destination ".\build\$Version\Hollow_withoutRuntime\Hollow.exe"
 
 Write-Output "Build Finished";
 

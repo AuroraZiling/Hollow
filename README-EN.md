@@ -25,7 +25,7 @@
 
 ---
 
-Especially for the early development stage, there are some bugs
+Hollow is not under active development
 
 ---
 

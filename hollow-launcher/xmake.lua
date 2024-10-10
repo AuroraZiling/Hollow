@@ -1,10 +1,11 @@
+add_rules("mode.release", "mode.debug")
+add_rules("plugin.compile_commands.autoupdate", {outputdir = "./"})
+
 target("HollowLauncher")
     set_kind("binary")
     set_languages("cxx20")
     add_files("src/main.cpp")
     add_files("HollowLauncher.rc")
-
-    if is_plat("windows") then
-        add_defines("_WINDOWS")
-    end
+    -- add_rules("win.sdk.application")
+    -- add_ldflags("/SUBSYSTEM:WINDOWS")
 target_end()

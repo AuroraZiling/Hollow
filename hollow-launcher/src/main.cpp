@@ -1,57 +1,63 @@
 #include <cstdlib>
 #include <filesystem>
-#include <iostream>
 #include <string>
 #include <vector>
 #include <windows.h>
 
-namespace fs = std::filesystem;
-
 void panic_then_pause(const std::string &msg)
 {
-    std::cerr << msg << std::endl;
-    system("pause");
+    std::string command = "cmd.exe /c echo " + msg + " && pause";
+    system(command.c_str());
     exit(1);
 }
 
 int main(int argc, char *argv[])
 {
-    // Get Hollow App Directory
-    fs::path working_path = fs::current_path();
-    fs::path root_directory = working_path / "hollow_app";
+    std::vector<std::string> args(argv, argv + argc);
 
-    if (!fs::exists(root_directory))
+    // 获取当前工作目录
+    std::filesystem::path working_path = std::filesystem::current_path();
+    std::filesystem::path root_directory = working_path / "hollow_app";
+
+    // 检查 hollow_app 目录是否存在
+    if (!std::filesystem::exists(root_directory))
     {
         panic_then_pause(root_directory.string() + " does not exist");
     }
-    else if (!fs::is_directory(root_directory))
+    else if (!std::filesystem::is_directory(root_directory))
     {
         panic_then_pause(root_directory.string() + " is not a directory");
     }
 
-    fs::path executable = root_directory / "Hollow.Windows.exe";
-    if (!fs::exists(executable))
+    // 查找可执行文件
+    std::filesystem::path executable = root_directory / "Hollow.Windows.exe";
+    if (!std::filesystem::exists(executable))
     {
         panic_then_pause(executable.string() + " not found");
     }
 
-    // Prepare command line to execute
-    std::vector<std::string> args;
-    for (int i = 1; i < argc; ++i)
+    // 设置执行命令
+    STARTUPINFO si = {sizeof(si)};
+    PROCESS_INFORMATION pi;
+    std::string command = executable.string();
+
+    if (argc > 1)
     {
-        args.push_back(argv[i]);
+        for (int i = 1; i < argc; ++i)
+        {
+            command += " " + args[i];
+        }
     }
 
-    // Construct command
-    std::string command = "\"" + executable.string() + "\"";
-    for (const auto &arg : args)
+    if (!CreateProcess(NULL, const_cast<char *>(command.c_str()), NULL, NULL, FALSE, 0, NULL,
+                       root_directory.string().c_str(), &si, &pi))
     {
-        command += " \"" + arg + "\"";
+        panic_then_pause("Failed to start process");
     }
 
-    // Change directory and run the command
-    std::string change_dir_command = "cd /d " + root_directory.string() + " && " + command;
-    system(change_dir_command.c_str());
+    // 关闭进程句柄
+    CloseHandle(pi.hProcess);
+    CloseHandle(pi.hThread);
 
     return 0;
 }

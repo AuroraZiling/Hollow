@@ -8,6 +8,8 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Controls.Notifications;
 using Avalonia.Markup.Xaml;
 using Hollow.Abstractions.Models;
+using Hollow.Extensions;
+using Hollow.Services;
 using Hollow.Services.ConfigurationService;
 using Hollow.Services.GachaService;
 using Hollow.Services.GameService;
@@ -51,31 +53,9 @@ public class App : Application
         services.AddSingleton<MainWindow>();
         services.AddSingleton<MainWindowViewModel>();
         
-        services.AddSingleton<Home>();
-        services.AddSingleton<HomeViewModel>();
-        
-        services.AddSingleton<Announcements>();
-        services.AddSingleton<AnnouncementsViewModel>();
-        
-        services.AddSingleton<GameSettings>();
-        services.AddSingleton<GameSettingsViewModel>();
-        
-        services.AddSingleton<SignalSearch>();
-        services.AddSingleton<SignalSearchViewModel>();
-        
-        services.AddSingleton<Wiki>();
-        services.AddSingleton<WikiViewModel>();
-        
-        services.AddSingleton<Settings>();
-        services.AddSingleton<SettingsViewModel>();
-
-        services.AddSingleton<HttpClient>();
-        services.AddSingleton<INavigationService, NavigationService>();
-        services.AddSingleton<IMiHoYoLauncherService, MiHoYoLauncherService>();
-        services.AddSingleton<IConfigurationService, ConfigurationService>();
-        services.AddSingleton<IGameService, GameService>();
-        services.AddSingleton<IGachaService, GachaService>();
-        services.AddSingleton<IMetadataService, MetadataService>();
+        services.AddHollowViews();
+        services.AddHollowViewModels();
+        services.AddHollowServices();
         
         customServicesFactory?.Invoke(services);
 

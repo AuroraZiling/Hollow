@@ -1,10 +1,6 @@
 ﻿using System.Net.Http;
-using Hollow.Services.ConfigurationService;
-using Hollow.Services.GachaService;
-using Hollow.Services.GameService;
-using Hollow.Services.MetadataService;
-using Hollow.Services.MiHoYoLauncherService;
-using Hollow.Services.NavigationService;
+using Hollow.Abstractions.Services;
+using Hollow.Services;
 using Hollow.ViewModels.Pages;
 using Hollow.Views.Pages;
 using Microsoft.Extensions.DependencyInjection;

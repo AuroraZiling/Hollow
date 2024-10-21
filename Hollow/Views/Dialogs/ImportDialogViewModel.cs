@@ -4,8 +4,8 @@ using System.Linq;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Hollow.Abstractions.Models.HttpContrasts.Gacha.Uigf;
+using Hollow.Abstractions.Models.SignalSearch;
 using Hollow.Helpers;
-using Hollow.Models.SignalSearch;
 using Hollow.Views.Controls;
 
 namespace Hollow.Views.Dialogs;

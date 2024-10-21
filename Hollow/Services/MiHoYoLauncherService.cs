@@ -3,8 +3,9 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Hollow.Abstractions.Models.HttpContrasts.MiHoYoLauncher;
 using Hollow.Abstractions.Models.MiHoYoLauncher;
+using Hollow.Abstractions.Services;
 
-namespace Hollow.Services.MiHoYoLauncherService;
+namespace Hollow.Services;
 
 public class MiHoYoLauncherService(HttpClient httpClient) : IMiHoYoLauncherService
 {

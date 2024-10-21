@@ -1,6 +1,5 @@
 using System;
 using System.IO;
-using System.Net.Http;
 using AsyncImageLoader;
 using AsyncImageLoader.Loaders;
 using Avalonia;
@@ -9,18 +8,9 @@ using Avalonia.Controls.Notifications;
 using Avalonia.Markup.Xaml;
 using Hollow.Abstractions.Models;
 using Hollow.Extensions;
-using Hollow.Services;
-using Hollow.Services.ConfigurationService;
-using Hollow.Services.GachaService;
-using Hollow.Services.GameService;
-using Hollow.Services.MetadataService;
-using Hollow.Services.MiHoYoLauncherService;
-using Hollow.Services.NavigationService;
 using Hollow.ViewModels;
-using Hollow.ViewModels.Pages;
 using Hollow.Views;
 using Hollow.Views.Controls;
-using Hollow.Views.Pages;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 

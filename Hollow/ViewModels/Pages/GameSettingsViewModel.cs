@@ -4,10 +4,8 @@ using Avalonia.Controls.Notifications;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Hollow.Abstractions.Models;
+using Hollow.Abstractions.Services;
 using Hollow.Languages;
-using Hollow.Services.ConfigurationService;
-using Hollow.Services.GameService;
-using Hollow.Services.NavigationService;
 using Hollow.Views.Controls;
 using Hollow.Views.Pages;
 // ReSharper disable UnusedParameterInPartialMethod

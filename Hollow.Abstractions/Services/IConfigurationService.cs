@@ -1,6 +1,6 @@
 ﻿using Hollow.Abstractions.Models.Configs;
 
-namespace Hollow.Services.ConfigurationService;
+namespace Hollow.Abstractions.Services;
 
 public interface IConfigurationService
 {

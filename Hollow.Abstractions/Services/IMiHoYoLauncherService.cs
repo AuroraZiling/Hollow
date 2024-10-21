@@ -1,7 +1,6 @@
-﻿using System.Threading.Tasks;
-using Hollow.Abstractions.Models.HttpContrasts.MiHoYoLauncher;
+﻿using Hollow.Abstractions.Models.HttpContrasts.MiHoYoLauncher;
 
-namespace Hollow.Services.MiHoYoLauncherService;
+namespace Hollow.Abstractions.Services;
 
 public interface IMiHoYoLauncherService
 {

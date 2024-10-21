@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using Hollow.Abstractions.Enums;
 using Hollow.Abstractions.Models;
 using Hollow.Abstractions.Models.HttpContrasts.Gacha;
 using Hollow.Abstractions.Models.HttpContrasts.Gacha.Uigf;
 using Hollow.Abstractions.Models.HttpContrasts.Hakush;
-using Hollow.Enums;
-using Hollow.Models.SignalSearch;
+using Hollow.Abstractions.Models.SignalSearch;
 
-namespace Hollow.Services.GachaService;
+namespace Hollow.Abstractions.Services;
 
 public interface IGachaService
 {

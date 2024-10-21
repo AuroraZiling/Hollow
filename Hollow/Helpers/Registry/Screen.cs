@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Runtime.Versioning;
-using Hollow.Enums;
+using Hollow.Abstractions.Enums;
 
 namespace Hollow.Helpers.Registry;
 

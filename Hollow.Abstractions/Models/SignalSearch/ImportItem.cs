@@ -1,4 +1,4 @@
-﻿namespace Hollow.Models.SignalSearch;
+﻿namespace Hollow.Abstractions.Models.SignalSearch;
 
 public class ImportItem
 {

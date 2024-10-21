@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Hollow.Services.NavigationService;
+﻿namespace Hollow.Abstractions.Services;
 
 public interface INavigationService
 {

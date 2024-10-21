@@ -1,7 +1,8 @@
 ﻿using System;
+using Hollow.Abstractions.Services;
 using Hollow.Views.Pages;
 
-namespace Hollow.Services.NavigationService;
+namespace Hollow.Services;
 
 public class NavigationService: INavigationService
 {

@@ -1,13 +1,7 @@
-﻿using Hollow.Languages;
+﻿using Hollow.Abstractions.Enums;
+using Hollow.Languages;
 
-namespace Hollow.Enums;
-
-public enum GameServer
-{
-    Unknown,
-    China,
-    Global
-}
+namespace Hollow.Extensions;
 
 public static class GameServerExtensions
 {

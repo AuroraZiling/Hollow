@@ -6,11 +6,9 @@ using Avalonia.Platform;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Hollow.Abstractions.Models;
+using Hollow.Abstractions.Services;
 using Hollow.Helpers;
 using Hollow.Languages;
-using Hollow.Services.MetadataService;
-using Hollow.Services.MiHoYoLauncherService;
-using Hollow.Services.NavigationService;
 using Hollow.Views.Controls;
 using Serilog;
 

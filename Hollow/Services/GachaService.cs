@@ -6,21 +6,20 @@ using System.Net.Http;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Hollow.Abstractions.Enums;
 using Hollow.Abstractions.JsonConverters.Serializers;
 using Hollow.Abstractions.Models;
 using Hollow.Abstractions.Models.HttpContrasts.Gacha;
 using Hollow.Abstractions.Models.HttpContrasts.Gacha.Common;
 using Hollow.Abstractions.Models.HttpContrasts.Gacha.Uigf;
 using Hollow.Abstractions.Models.HttpContrasts.Hakush;
-using Hollow.Enums;
+using Hollow.Abstractions.Models.SignalSearch;
+using Hollow.Abstractions.Services;
 using Hollow.Helpers;
 using Hollow.Languages;
-using Hollow.Models.SignalSearch;
-using Hollow.Services.ConfigurationService;
-using Hollow.Services.GameService;
 using Serilog;
 
-namespace Hollow.Services.GachaService;
+namespace Hollow.Services;
 
 public partial class GachaService(IConfigurationService configurationService, HttpClient httpClient, IGameService gameService) : IGachaService
 {

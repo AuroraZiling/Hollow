@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Hollow.Abstractions.Models;
+﻿using Hollow.Abstractions.Models;
 using Hollow.Abstractions.Models.HttpContrasts.Hakush;
 
-namespace Hollow.Services.MetadataService;
+namespace Hollow.Abstractions.Services;
 
 public interface IMetadataService
 {

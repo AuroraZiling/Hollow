@@ -9,11 +9,11 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using Hollow.Abstractions.Enums.Hakush;
 using Hollow.Abstractions.JsonConverters.Serializers;
 using Hollow.Abstractions.Models.HttpContrasts.Hakush;
+using Hollow.Abstractions.Services;
 using Hollow.Helpers;
 using Hollow.Languages;
 using Hollow.Models.Wiki;
-using Hollow.Services.MetadataService;
-using Hollow.Services.NavigationService;
+using Hollow.Services;
 using Hollow.Views.Controls;
 using Hollow.Views.Pages;
 

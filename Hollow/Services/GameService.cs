@@ -3,12 +3,12 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using Hollow.Enums;
+using Hollow.Abstractions.Enums;
+using Hollow.Abstractions.Services;
 using Hollow.Languages;
-using Hollow.Services.ConfigurationService;
 using Serilog;
 
-namespace Hollow.Services.GameService;
+namespace Hollow.Services;
 
 public class GameService(IConfigurationService configurationService): IGameService
 {

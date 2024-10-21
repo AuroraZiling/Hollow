@@ -1,6 +1,6 @@
-﻿using Hollow.Enums;
+﻿using Hollow.Abstractions.Enums;
 
-namespace Hollow.Services.GameService;
+namespace Hollow.Abstractions.Services;
 
 public interface IGameService
 {

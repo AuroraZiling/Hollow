@@ -2,7 +2,7 @@ using System;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
-using Hollow.Services.NavigationService;
+using Hollow.Abstractions.Services;
 using Serilog;
 
 namespace Hollow.Views;

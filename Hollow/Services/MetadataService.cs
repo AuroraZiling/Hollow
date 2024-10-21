@@ -9,8 +9,9 @@ using Hollow.Abstractions.JsonConverters.Serializers;
 using Hollow.Abstractions.Models;
 using Hollow.Abstractions.Models.HttpContrasts.Hakush;
 using Hollow.Abstractions.Models.HttpContrasts.Hakush.Intermediate;
+using Hollow.Abstractions.Services;
 
-namespace Hollow.Services.MetadataService;
+namespace Hollow.Services;
 
 public class MetadataService(HttpClient httpClient): IMetadataService
 {

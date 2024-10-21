@@ -147,14 +147,14 @@
             Padding="10">
             <StackPanel Spacing="7">
                 <Image
-                    Height="160"
+                    Height="150"
                     Source="avares://Hollow/Assets/Icons/logo.png"
-                    Width="160" />
+                    Width="150" />
                 <Border
                     Background="{StaticResource CoverageBackground}"
                     CornerRadius="10"
                     Padding="12">
-                    <StackPanel Spacing="10">
+                    <StackPanel Spacing="7">
                         <TextBlock>
                             <TextBlock.Text>
                                 <I18N Key="{x:Static languages:LangKeys.Settings_About_Version}">
@@ -162,7 +162,7 @@
                                 </I18N>
                             </TextBlock.Text>
                         </TextBlock>
-                        <TextBlock Text="Copyright (c) 2024 Mccree Lee" />
+                        <TextBlock Text="Copyright (c) 2024 McCree Lee" />
                         <HyperlinkButton
                             Classes="Default"
                             Content="{I18N {x:Static languages:LangKeys.Settings_About_GithubRepo}}"
@@ -184,7 +184,7 @@
                     Padding="12">
                     <StackPanel
                         Margin="0,10,0,0"
-                        Spacing="10"
+                        Spacing="7"
                         TextElement.FontSize="14">
                         <Image Height="30" Source="avares://Hollow/Assets/Icons/uigf.png" />
                         <TextBlock HorizontalAlignment="Center" Text="{I18N {x:Static languages:LangKeys.Settings_Uigf_Member}}" />

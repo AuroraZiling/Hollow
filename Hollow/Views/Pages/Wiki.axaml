@@ -39,7 +39,7 @@
         <TabControl Grid.Row="1" Margin="0,15,0,0">
             <!--  Wiki - Character  -->
             <TabItem Classes="Wiki" Header="{I18N {x:Static languages:LangKeys.Wiki_Character}}">
-                <Grid ColumnDefinitions="0.37*, *" Margin="-10,0,0,0">
+                <Grid ColumnDefinitions="320, *" Margin="-10,0,0,0">
                     <ListBox
                         Background="Transparent"
                         Classes="WikiList"
@@ -114,7 +114,7 @@
 
             <!--  Wiki - Weapon  -->
             <TabItem Classes="Wiki" Header="{I18N {x:Static languages:LangKeys.Wiki_Weapon}}">
-                <Grid ColumnDefinitions="0.37*, *" Margin="-10,0,0,0">
+                <Grid ColumnDefinitions="320, *" Margin="-10,0,0,0">
                     <ListBox
                         Background="Transparent"
                         Classes="WikiList"
@@ -166,7 +166,7 @@
 
             <!--  Wiki - Bangboo  -->
             <TabItem Classes="Wiki" Header="{I18N {x:Static languages:LangKeys.Wiki_Bangboo}}">
-                <Grid ColumnDefinitions="0.37*, *" Margin="-10,0,0,0">
+                <Grid ColumnDefinitions="320, *" Margin="-10,0,0,0">
                     <ListBox
                         Background="Transparent"
                         Classes="WikiList"
@@ -203,7 +203,7 @@
 
             <!--  Wiki - Equipment  -->
             <TabItem Classes="Wiki" Header="{I18N {x:Static languages:LangKeys.Wiki_Equipment}}">
-                <Grid ColumnDefinitions="0.37*, *" Margin="-10,0,0,0">
+                <Grid ColumnDefinitions="320, *" Margin="-10,0,0,0">
                     <ListBox
                         Background="Transparent"
                         Classes="WikiList"

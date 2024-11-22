@@ -32,7 +32,7 @@
         <HyperlinkButton
             Classes="PointerOverProhibited"
             HorizontalAlignment="Left"
-            Margin="60,300,0,0"
+            Margin="60,280,0,0"
             NavigateUri="{Binding VersionNewsUrl}"
             Padding="0"
             VerticalAlignment="Top"
@@ -63,7 +63,7 @@
         <!--  Banner  -->
         <Border
             CornerRadius="10"
-            Height="320"
+            Height="330"
             HorizontalAlignment="Left"
             Margin="60,0,0,30"
             VerticalAlignment="Bottom"

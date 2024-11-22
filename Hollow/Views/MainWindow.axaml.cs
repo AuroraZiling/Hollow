@@ -13,6 +13,13 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
+        WindowSizeAdjustment();
+    }
+
+    private void WindowSizeAdjustment()
+    {
+        Width = Screens.Primary!.Bounds.Width * 0.4;
+        Height = Width / 16.0f / 9.0f;
     }
 
     private void MinimizeButton_OnClick(object? _1, RoutedEventArgs _2)

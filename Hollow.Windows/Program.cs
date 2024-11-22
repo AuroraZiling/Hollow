@@ -53,6 +53,6 @@ public static class Program
             .UsePlatformDetect()
             .With(new Win32PlatformOptions
             {
-                RenderingMode = [Win32RenderingMode.Vulkan]
+                RenderingMode = [Win32RenderingMode.AngleEgl]
             });
 }

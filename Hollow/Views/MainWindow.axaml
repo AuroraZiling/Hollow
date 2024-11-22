@@ -8,6 +8,8 @@
     Icon="avares://Hollow/Assets/Icons/small_icon.png"
     Title="Hollow"
     d:Width="1350"
+    MinWidth="800"
+    MaxWidth="1400"
     mc:Ignorable="d"
     x:Class="Hollow.Views.MainWindow"
     x:DataType="vm:MainWindowViewModel"
